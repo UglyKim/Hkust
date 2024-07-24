@@ -3,11 +3,11 @@ package com.hkust.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum DoorType {
+public enum DoorTypeEnum {
 
     PROBE("探头");
 
-    String name;
+    private String name;
 
     public String getName() {
         return name;

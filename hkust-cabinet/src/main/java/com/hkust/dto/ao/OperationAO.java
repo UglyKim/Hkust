@@ -1,7 +1,6 @@
 package com.hkust.dto.ao;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.hkust.enums.EventType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 

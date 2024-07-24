@@ -1,8 +1,9 @@
 package com.hkust.controller.cabinet;
 
+import cn.hutool.core.util.StrUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.OperationAO;
-import com.hkust.enums.EventType;
+import com.hkust.enums.EventTypeEnum;
 import com.hkust.service.OperateService;
 import com.hkust.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,6 +32,7 @@ public class OptSynController {
     @Operation(summary = "操作日志同步", description = "操作日志同步")
     @PostMapping("/event/add")
     public ApiResponse eventSynUpload(@RequestBody OperationAO operationAO) {
+        log.info("received operation_info:{}", StrUtil.toString(operationAO));
         return oprationService.optSynchronize(operationAO);
     }
 
@@ -41,15 +43,15 @@ public class OptSynController {
             @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "multipart/form-data",
                     schema = @Schema(type = "string", format = "binary")))
                     MultipartFile file) {
-        log.info("file size:{}bytes", file.getSize());
+        log.info("file size:{} bytes", file.getSize());
         return videoService.videoUpload(file);
     }
 
     @Operation(summary = "操作类型", description = "操作类型")
     @PostMapping("/event/type")
     public ApiResponse getEventType() {
-        Map<String, String> eventTypeMap = Arrays.asList(EventType.values()).stream().collect(
-                Collectors.toMap(EventType::getCode, EventType::getOpt));
+        Map<String, String> eventTypeMap = Arrays.asList(EventTypeEnum.values()).stream().collect(
+                Collectors.toMap(EventTypeEnum::getCode, EventTypeEnum::getOpt));
         return ApiResponse.success(eventTypeMap);
     }
 

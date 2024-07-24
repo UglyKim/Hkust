@@ -1,7 +1,5 @@
 package com.hkust.dto.vo;
 
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import com.hkust.enums.DoorType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

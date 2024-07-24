@@ -3,7 +3,7 @@ package com.hkust.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum ReagentsOptType {
+public enum ReagentsOptTypeEnum {
 
     GET("取"),
     RETURN("还");

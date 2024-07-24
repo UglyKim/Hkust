@@ -3,7 +3,7 @@ package com.hkust.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum OpenMode {
+public enum OpenModeEnum {
 
     Single("1", "单人模式"),
     Double("2", "双人模式"),
@@ -29,9 +29,9 @@ public enum OpenMode {
     }
 
     public static String fromCode(String code) {
-        for (OpenMode openMode : OpenMode.values()) {
-            if (openMode.getCode().equals(code)) {
-                return openMode.getDescription();
+        for (OpenModeEnum openModeEnum : OpenModeEnum.values()) {
+            if (openModeEnum.getCode().equals(code)) {
+                return openModeEnum.getDescription();
             }
         }
         throw new IllegalArgumentException("No enum constant with code " + code);

@@ -3,7 +3,7 @@ package com.hkust.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum EventType {
+public enum EventTypeEnum {
 
     OPEN("1", "开柜门"),
     CLOSE("2", "关柜门"),
@@ -30,9 +30,9 @@ public enum EventType {
     }
 
     public static String fromCode(String code) {
-        for (EventType eventType : EventType.values()) {
-            if (eventType.getCode().equals(code)) {
-                return eventType.getOpt();
+        for (EventTypeEnum eventTypeEnum : EventTypeEnum.values()) {
+            if (eventTypeEnum.getCode().equals(code)) {
+                return eventTypeEnum.getOpt();
             }
         }
         throw new IllegalArgumentException("No enum constant with code " + code);

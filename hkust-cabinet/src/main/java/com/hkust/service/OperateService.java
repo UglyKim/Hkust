@@ -30,7 +30,7 @@ public class OperateService {
     private Event getEvent(OperationAO operationAO) {
         Event event = new Event();
         event.setEventId(UUIDUtils.generateUUIDWithoutHyphens());
-        event.setEventType(operationAO.getEventType().getCode());
+        event.setEventType(operationAO.getEventTypeCode());
         event.setCabinetId(operationAO.getCabinetId());
         event.setOptDate(DateUtils.getCurrentDate());
         return event;
