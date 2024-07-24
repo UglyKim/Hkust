@@ -1,5 +1,6 @@
 package com.hkust.structmapper;
 
+import com.hkust.dto.ao.UserInfoAO;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
 import org.mapstruct.Mapper;
@@ -14,5 +15,7 @@ public interface UserStructMapper {
     //    @Mapping(target = "", source = "accountNonExpired")
     UserVO toVO(User user);
 
-    UserVO toVO(org.springframework.security.core.userdetails.User user);
+//    UserVO toVO(org.springframework.security.core.userdetails.User user);
+
+    User UserAOToUser(UserInfoAO userInfoAO);
 }

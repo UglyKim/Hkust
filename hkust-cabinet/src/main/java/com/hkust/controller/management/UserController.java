@@ -1,23 +1,18 @@
 package com.hkust.controller.management;
 
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
-import com.hkust.constant.ReturnCode;
+import cn.hutool.core.util.StrUtil;
 import com.hkust.dto.ApiResponse;
+import com.hkust.dto.PageResponse;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
-import com.hkust.mapper.UserMapper;
 import com.hkust.service.UserService;
-import com.hkust.dto.ao.UserInfo;
+import com.hkust.dto.ao.UserInfoAO;
 import com.hkust.structmapper.UserStructMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,14 +40,27 @@ public class UserController {
                 return ApiResponse.success(userVO);
             }
         }
-        return null;
+        throw new NullPointerException();
+    }
+
+    @Operation(summary = "用户列表")
+    @PostMapping("/list")
+    public ApiResponse<PageResponse> updateUser() {
+        return userService.getAllUser();
     }
 
     @Operation(summary = "新增用户")
     @PostMapping("/add")
-    public ApiResponse addUser(@RequestBody UserInfo userInfo) {
+    public ApiResponse addUser(@RequestBody UserInfoAO userInfoAO) {
+        log.info("Received user_info:{}", StrUtil.toString(userInfoAO));
+        return userService.addUser(userInfoAO);
+    }
 
-        return null;
+    @Operation(summary = "修改用户")
+    @PostMapping("/update")
+    public ApiResponse updateUser(@RequestBody UserInfoAO userInfoAO) {
+        log.info("Received user_info:{}", StrUtil.toString(userInfoAO));
+        return userService.updateUser(userInfoAO);
     }
 
     @Autowired

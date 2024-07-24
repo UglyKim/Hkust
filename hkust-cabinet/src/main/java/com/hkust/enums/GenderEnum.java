@@ -3,7 +3,7 @@ package com.hkust.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum SexEnum {
+public enum GenderEnum {
     M("男"),
     F("女");
 
