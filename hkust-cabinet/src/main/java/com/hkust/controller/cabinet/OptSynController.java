@@ -2,6 +2,7 @@ package com.hkust.controller.cabinet;
 
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.OperationAO;
+import com.hkust.enums.EventType;
 import com.hkust.service.OperateService;
 import com.hkust.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,13 +11,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Tag(name = "操作日志同步&录像上传")
-//@RestController
-@Controller
+@RestController
 @RequestMapping("/api/v1/")
 @Slf4j
 public class OptSynController {
@@ -27,7 +30,6 @@ public class OptSynController {
 
     @Operation(summary = "操作日志同步", description = "操作日志同步")
     @PostMapping("/event/add")
-    @ResponseBody
     public ApiResponse eventSynUpload(@RequestBody OperationAO operationAO) {
         return oprationService.optSynchronize(operationAO);
     }
@@ -41,6 +43,14 @@ public class OptSynController {
                     MultipartFile file) {
         log.info("file size:{}bytes", file.getSize());
         return videoService.videoUpload(file);
+    }
+
+    @Operation(summary = "操作类型", description = "操作类型")
+    @PostMapping("/event/type")
+    public ApiResponse getEventType() {
+        Map<String, String> eventTypeMap = Arrays.asList(EventType.values()).stream().collect(
+                Collectors.toMap(EventType::getCode, EventType::getOpt));
+        return ApiResponse.success(eventTypeMap);
     }
 
     @Autowired

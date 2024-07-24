@@ -28,4 +28,13 @@ public enum EventType {
     public void setOpt(String opt) {
         this.opt = opt;
     }
+
+    public static String fromCode(String code) {
+        for (EventType eventType : EventType.values()) {
+            if (eventType.getCode().equals(code)) {
+                return eventType.getOpt();
+            }
+        }
+        throw new IllegalArgumentException("No enum constant with code " + code);
+    }
 }
