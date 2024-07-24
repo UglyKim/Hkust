@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-@JsonPropertyOrder({"code", "message", "description", "data"})
+@JsonPropertyOrder({"code", "message", "data"})
 public class ApiResponse<T> implements Serializable {
 
     @Schema(description = "响应码 00:成功，其他:失败", required = true)
@@ -22,8 +22,6 @@ public class ApiResponse<T> implements Serializable {
     @Schema
     private T data;
 
-    @Schema
-    private String description;
 
     /**
      * 成功
@@ -32,19 +30,19 @@ public class ApiResponse<T> implements Serializable {
      * @return
      */
     public static <T> ApiResponse success() {
-        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), null, null);
+        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), null);
     }
 
     public static <T> ApiResponse success(T data) {
-        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), data, null);
+        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), data);
     }
 
     public static <T> ApiResponse failed(ReturnCode returnCode) {
-        return new ApiResponse<T>(returnCode.getCode(), returnCode.getMessage(), null, null);
+        return new ApiResponse<T>(returnCode.getCode(), returnCode.getMessage(), null);
     }
 
     public static <T> ApiResponse failed(String msg) {
-        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), msg, null, null);
+        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), msg, null);
     }
 
     @Override

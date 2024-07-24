@@ -2,8 +2,11 @@ package com.hkust.controller.cabinet;
 
 import cn.hutool.core.util.StrUtil;
 import com.hkust.dto.ApiResponse;
+import com.hkust.dto.PageResponse;
+import com.hkust.dto.ao.EventQueryAO;
 import com.hkust.dto.ao.OperationAO;
 import com.hkust.enums.EventTypeEnum;
+import com.hkust.service.EventService;
 import com.hkust.service.OperateService;
 import com.hkust.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,6 +31,8 @@ public class OptSynController {
     private VideoService videoService;
 
     private OperateService oprationService;
+
+    private EventService eventService;
 
     @Operation(summary = "操作日志同步", description = "操作日志同步")
     @PostMapping("/event/add")
@@ -55,6 +60,13 @@ public class OptSynController {
         return ApiResponse.success(eventTypeMap);
     }
 
+    @Operation(summary = "操作列表", description = "操作列表")
+    @PostMapping("/event/list")
+    public ApiResponse<PageResponse> getEventList(EventQueryAO eventQueryAO) {
+        log.info("received event_query_info:{}", StrUtil.toString(eventQueryAO));
+        return eventService.getEventList(eventQueryAO);
+    }
+
     @Autowired
     public void setVideoService(VideoService videoService) {
         this.videoService = videoService;
@@ -63,5 +75,10 @@ public class OptSynController {
     @Autowired
     public void setOprationService(OperateService oprationService) {
         this.oprationService = oprationService;
+    }
+
+    @Autowired
+    public void setEventService(EventService eventService) {
+        this.eventService = eventService;
     }
 }

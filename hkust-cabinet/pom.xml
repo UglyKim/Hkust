@@ -61,6 +61,11 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.1</version> <!-- 使用最新版本 -->
         </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.5</version>
+        </dependency>
         <!--引入mysql-->
         <dependency>
             <groupId>mysql</groupId>
