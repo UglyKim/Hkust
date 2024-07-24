@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hkust.mapper.UserMapper">
+    <!-- 自定义 SQL 查询 -->
+    <select id="selectAll" resultType="com.hkust.entity.User">
+        SELECT * FROM hkust_user
+    </select>
+    <select id="selectByUserName" parameterType="java.lang.String" resultType="com.hkust.entity.User">
+        SELECT * FROM hkust_user
+        WHERE user_name = #{username}
+    </select>
+</mapper>
