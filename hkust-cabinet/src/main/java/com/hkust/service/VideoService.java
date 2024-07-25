@@ -56,8 +56,8 @@ public class VideoService extends ServiceImpl<VideoMapper, Video> {
     private void insertVideo() {
         Video video = new Video();
         video.setVideoId(UUIDUtils.generateUUIDWithoutHyphens());
-        video.setCreateDate(DateUtils.getCurrentDate());
-        video.setUpdateDate(DateUtils.getCurrentDate());
+        video.setCreateDate(DateUtils.getCurrentDateTime());
+        video.setUpdateDate(DateUtils.getCurrentDateTime());
         // TODO: 需要设置
         video.setUrl("");
         videoMapper.insert(video);

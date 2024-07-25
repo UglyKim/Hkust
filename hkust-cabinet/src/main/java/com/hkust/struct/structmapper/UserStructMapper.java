@@ -12,9 +12,10 @@ public interface UserStructMapper {
     UserStructMapper INSTANCE = Mappers.getMapper(UserStructMapper.class);
 
     //    @Mapping(target = "", source = "accountNonExpired")
-    UserVO toVO(User user);
+    UserVO UserToUserVO(User user);
 
-//    UserVO toVO(org.springframework.security.core.userdetails.User user);
+//    UserVO toVO(User user);
 
     User UserAOToUser(UserInfoAO userInfoAO);
+
 }

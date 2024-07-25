@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @TableName("hkust_video")
@@ -18,10 +17,10 @@ public class Video {
     private String url;
 
     @TableField("create_date")
-    private LocalDate createDate;
+    private LocalDateTime createDate;
 
     @TableField("update_date")
-    private LocalDate updateDate;
+    private LocalDateTime updateDate;
 
     private String remark;
 }

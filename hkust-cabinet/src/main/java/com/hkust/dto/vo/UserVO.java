@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -52,6 +53,6 @@ public class UserVO {
     private String enabled;
 
     @Schema(description = "创建时间")
-    private LocalTime createTime;
+    private LocalDateTime createTime;
 
 }

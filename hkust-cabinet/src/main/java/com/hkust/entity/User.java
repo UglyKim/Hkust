@@ -6,16 +6,13 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.hkust.enums.GenderEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collection;
 
 @Data
 @TableName("hkust_user")
-@AllArgsConstructor
-public class User implements UserDetails {
+public class User {
 
     @TableId("user_id")
     private String userId;
@@ -49,46 +46,9 @@ public class User implements UserDetails {
 
     private GenderEnum gender;
 
-    @TableField("is_enable")
-    private String enabled;
+    private Boolean enabled;
 
     @TableField("create_time")
-    private LocalTime createTime;
+    private LocalDateTime createTime;
 
-    private Collection<? extends GrantedAuthority> authorities;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

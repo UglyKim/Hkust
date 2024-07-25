@@ -13,7 +13,8 @@ jwt:
   tokenHeader: X-Token
   tokenHead: Bearer
   secret: hkustcabinetsecret7a8e18ad75bf457b9aa2714806a1bbe9 #JWT加解密使用的密钥
-  expiration: 300000
+#  expiration: 300000
+  expiration: 30000000
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   configuration:
