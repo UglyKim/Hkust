@@ -5,7 +5,7 @@ import com.hkust.HkustBaseTest;
 import com.hkust.dto.vo.CabinetVO;
 import com.hkust.entity.Cabinet;
 import com.hkust.mapper.CabinetMapper;
-import com.hkust.structmapper.CabinetStructMapper;
+import com.hkust.struct.structmapper.CabinetStructMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

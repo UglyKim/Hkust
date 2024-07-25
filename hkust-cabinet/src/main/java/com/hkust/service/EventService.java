@@ -9,7 +9,7 @@ import com.hkust.dto.ao.EventQueryAO;
 import com.hkust.dto.vo.EventVO;
 import com.hkust.entity.Event;
 import com.hkust.mapper.EventMapper;
-import com.hkust.structmapper.EventStructMapper;
+import com.hkust.struct.structmapper.EventStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

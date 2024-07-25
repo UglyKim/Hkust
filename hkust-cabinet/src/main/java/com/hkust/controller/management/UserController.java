@@ -3,11 +3,12 @@ package com.hkust.controller.management;
 import cn.hutool.core.util.StrUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
+import com.hkust.dto.ao.UserAlterInfoAO;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
 import com.hkust.service.UserService;
 import com.hkust.dto.ao.UserInfoAO;
-import com.hkust.structmapper.UserStructMapper;
+import com.hkust.struct.structmapper.UserStructMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -58,9 +59,9 @@ public class UserController {
 
     @Operation(summary = "修改用户")
     @PostMapping("/update")
-    public ApiResponse updateUser(@RequestBody UserInfoAO userInfoAO) {
-        log.info("Received user_info:{}", StrUtil.toString(userInfoAO));
-        return userService.updateUser(userInfoAO);
+    public ApiResponse updateUser(@RequestBody UserAlterInfoAO userAlterInfoAO) {
+        log.info("Received user_info:{}", StrUtil.toString(userAlterInfoAO));
+        return userService.updateUser(userAlterInfoAO);
     }
 
     @Autowired

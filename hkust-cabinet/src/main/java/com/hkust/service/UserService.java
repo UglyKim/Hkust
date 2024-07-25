@@ -3,10 +3,11 @@ package com.hkust.service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
+import com.hkust.dto.ao.UserAlterInfoAO;
 import com.hkust.dto.ao.UserInfoAO;
 import com.hkust.entity.User;
 import com.hkust.mapper.UserMapper;
-import com.hkust.structmapper.UserStructMapper;
+import com.hkust.struct.structmapper.UserStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,8 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         return ApiResponse.success();
     }
 
-    public ApiResponse updateUser(UserInfoAO userInfoAO) {
+    public ApiResponse updateUser(UserAlterInfoAO userAlterInfoAO) {
+
 
         return null;
     }

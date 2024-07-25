@@ -1,13 +1,12 @@
 package com.hkust.service;
 
-import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.CabinetAO;
 import com.hkust.dto.vo.CabinetVO;
 import com.hkust.entity.Cabinet;
 import com.hkust.mapper.CabinetMapper;
-import com.hkust.structmapper.CabinetStructMapper;
+import com.hkust.struct.structmapper.CabinetStructMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

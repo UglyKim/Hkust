@@ -15,10 +15,13 @@ public class Reagents {
     @TableId("reagents_id")
     private String reagentsId;
 
+    @TableField("door_id")
+    private String doorId;
+
     private String barcode;
 
-    @TableField("cabinetNo")
-    private String cabinet_no;
+    @TableField("cabinet_id")
+    private String cabinetId;
 
     private String name;
 

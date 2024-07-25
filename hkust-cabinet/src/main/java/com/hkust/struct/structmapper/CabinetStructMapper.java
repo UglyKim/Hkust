@@ -1,11 +1,9 @@
-package com.hkust.structmapper;
+package com.hkust.struct.structmapper;
 
 import com.hkust.dto.ao.CabinetAO;
 import com.hkust.dto.vo.CabinetVO;
 import com.hkust.entity.Cabinet;
-import com.hkust.mapper.UserMapper;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
