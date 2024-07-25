@@ -3,7 +3,6 @@ package com.hkust.security.jwt;
 import com.hkust.security.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,7 +45,7 @@ public class JwtFilter extends OncePerRequestFilter {
             } catch (IllegalArgumentException e) {
                 log.error("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                log.error("JWT Token has expired");
+//                log.error("JWT Token has expired");
             }
         } else {
             log.warn("JWT Token does not begin with Bearer String");

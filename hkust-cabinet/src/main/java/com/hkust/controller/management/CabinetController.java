@@ -32,16 +32,14 @@ public class CabinetController {
     @Operation(summary = "柜子详细信息", description = "柜子详细信息")
     @PostMapping("/detail")
     public ApiResponse<CabinetVO> getCabinetInfo() {
-        CabinetVO cabinetVO = cabinetService.getAllCabinets();
-        Assert.notNull(cabinetVO, "Cabinets list should not be null");
-        return ApiResponse.success(cabinetVO);
+        return cabinetService.getAllCabinets();
     }
 
     @Deprecated
     @Operation(summary = "柜子列表", description = "柜子列表")
     @PostMapping("/list")
     public ApiResponse getCabinetList() {
-        return ApiResponse.success();
+        return cabinetService.getAllCabinets();
     }
 
     @Operation(summary = "添加柜子", description = "添加柜子")

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @TableName("hkust_cabinet")
 public class Cabinet {
@@ -15,20 +17,20 @@ public class Cabinet {
     private String name;
 
     private String location;
-    
+
     private String mac;
 
     @TableField("cabinet_addr")
     private String cabinetAddr;
-    
-    private String stat;
-    
+
+    private Boolean stat;
+
     @TableField("open_mode")
     private String openMode;
-    
+
     @TableField("create_time")
-    private String createTime;
-    
+    private LocalDateTime createTime;
+
     private String remark;
 
 }

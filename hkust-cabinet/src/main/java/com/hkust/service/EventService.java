@@ -1,5 +1,7 @@
 package com.hkust.service;
 
+import cn.hutool.core.util.ObjUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,6 +10,7 @@ import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.EventQueryAO;
 import com.hkust.dto.vo.EventVO;
 import com.hkust.entity.Event;
+import com.hkust.enums.EventTypeEnum;
 import com.hkust.mapper.EventMapper;
 import com.hkust.struct.structmapper.EventStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +25,15 @@ public class EventService {
     private EventMapper eventMapper;
 
     public ApiResponse<PageResponse> getEventList(EventQueryAO eventQueryAO) {
-        Page<Event> page = new Page<>(eventQueryAO.getPageNum(), 20);
+        int pageNum = 1;
+        if (ObjUtil.isNotEmpty(eventQueryAO.getPageNum())) {
+            pageNum = eventQueryAO.getPageNum();
+        }
+        Page<Event> page = new Page<>(pageNum, 20);
         QueryWrapper<Event> queryWrapper = new QueryWrapper<>();
         // TODO: 查询条件
+        queryWrapper.eq("type", EventTypeEnum.GET.name()).or().eq("type", EventTypeEnum.RETURN.name()).orderByDesc("opt_date");
+
 //        if (eventName != null && !eventName.isEmpty()) {
 //            queryWrapper.like("event_name", eventName);
 //        }

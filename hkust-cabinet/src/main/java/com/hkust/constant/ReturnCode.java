@@ -10,7 +10,8 @@ public enum ReturnCode {
     FILE_IS_EMPTY("11", "请选择正确的操作录像"),
     FILE_NOT_MP4("12", "录像格式不正确"),
     FILE_UPLOAD_FAILED("13", "文件上传失败"),
-    AUTH_FAILED("99","认证失败，请重新登陆!");
+    NOT_NULL("14", "空"),
+    AUTH_FAILED("99", "认证失败，请重新登陆!");
 
 
     private final String code;

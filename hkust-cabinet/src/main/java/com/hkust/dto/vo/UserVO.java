@@ -40,14 +40,11 @@ public class UserVO {
     @Schema(description = "状态")
     private String stat;
 
-//    @Schema(description = "是否启用")
-//    private String password;
-
     @Schema(description = "邮箱")
     private String email;
 
     @Schema(description = "性别")
-    private GenderEnum gender;
+    private String gender;
 
     @Schema(description = "是否启用")
     private String enabled;

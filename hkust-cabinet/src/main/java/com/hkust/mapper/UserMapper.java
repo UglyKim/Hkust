@@ -12,4 +12,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectAll();
 
     User selectByUserName(String userName);
+
+    User selectByStudentId(String studentId);
 }

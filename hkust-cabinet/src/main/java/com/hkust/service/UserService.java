@@ -13,6 +13,7 @@ import com.hkust.dto.ao.UserInfoAO;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
 import com.hkust.enums.EnableEnum;
+import com.hkust.enums.GenderEnum;
 import com.hkust.mapper.UserMapper;
 import com.hkust.struct.structmapper.UserStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,15 @@ public class UserService {
     }
 
     public ApiResponse updateUser(UserAlterInfoAO userAlterInfoAO) {
+
+        // 查询学生是否存在
+        User user = userMapper.selectByStudentId(userAlterInfoAO.getStudentId());
+        if (ObjectUtil.isEmpty(user)) {
+            throw new NullPointerException("查询学生不存在!");
+        }
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
+        chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
+
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getAddress())) {
             chainWrapper.set("address", userAlterInfoAO.getAddress());
         }
@@ -68,7 +77,7 @@ public class UserService {
             chainWrapper.set("email", userAlterInfoAO.getEmail());
         }
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getUsername())) {
-            chainWrapper.set("username", userAlterInfoAO.getUsername());
+            chainWrapper.set("user_name", userAlterInfoAO.getUsername());
         }
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getGender())) {
             chainWrapper.set("gender", userAlterInfoAO.getGender());
@@ -81,6 +90,9 @@ public class UserService {
         }
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPhone())) {
             chainWrapper.set("phone", userAlterInfoAO.getPhone());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPassword())) {
+            chainWrapper.set("password", BCryptPasswordEncoder.encode(userAlterInfoAO.getPassword()));
         }
         chainWrapper.update();
         return ApiResponse.success();
@@ -101,6 +113,11 @@ public class UserService {
         for (User user : userList) {
             UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
             userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getDesc() : EnableEnum.NO.getDesc());
+            if (user.getGender().equals(GenderEnum.F.name())) {
+                userVO.setGender(GenderEnum.F.getDescription());
+            } else {
+                userVO.setGender(GenderEnum.M.getDescription());
+            }
             userVOList.add(userVO);
         }
         PageResponse pageResponse = new PageResponse<UserVO>((int) num, (int) size, userIPage.getTotal(), userVOList);

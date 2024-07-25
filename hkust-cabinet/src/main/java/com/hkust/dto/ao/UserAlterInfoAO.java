@@ -12,7 +12,7 @@ public class UserAlterInfoAO {
 
     private static final long serialVersionUID = 987876583005150707L;
 
-    @Schema(description = "学号")
+    @Schema(required = true, description = "学号")
     private String studentId;
 
     @Schema(description = "用户名")
