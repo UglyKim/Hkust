@@ -63,12 +63,12 @@ public class UserService {
     public ApiResponse updateUser(UserAlterInfoAO userAlterInfoAO) {
 
         // 查询学生是否存在
-        User user = userMapper.selectByStudentId(userAlterInfoAO.getStudentId());
+        User user = userMapper.selectByUserName(userAlterInfoAO.getUsername());
         if (ObjectUtil.isEmpty(user)) {
-            throw new NullPointerException("查询学生不存在!");
+            throw new NullPointerException("学生不存在!");
         }
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
-        chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
+        chainWrapper.eq("user_name", userAlterInfoAO.getUsername());
 
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getAddress())) {
             chainWrapper.set("address", userAlterInfoAO.getAddress());

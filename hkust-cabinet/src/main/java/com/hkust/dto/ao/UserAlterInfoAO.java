@@ -7,15 +7,12 @@ import lombok.Getter;
 
 
 @Getter
-@JsonPropertyOrder({"studentId", "username", "password", "realName"})
+@JsonPropertyOrder({"username", "password", "realName"})
 public class UserAlterInfoAO {
 
     private static final long serialVersionUID = 987876583005150707L;
 
-    @Schema(required = true, description = "学号")
-    private String studentId;
-
-    @Schema(description = "用户名")
+    @Schema(description = "学员号")
     private String username;
 
     @Schema(description = "密码")

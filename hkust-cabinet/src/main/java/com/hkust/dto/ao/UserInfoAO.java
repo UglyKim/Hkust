@@ -8,15 +8,12 @@ import lombok.Getter;
 import java.time.LocalTime;
 
 @Getter
-@JsonPropertyOrder({"username", "phone", "email"})
+@JsonPropertyOrder({"username", "phone", "realName"})
 public class UserInfoAO {
 
     private static final long serialVersionUID = 987468583005150707L;
 
-    @Schema(required = true, description = "学号")
-    private String studentId;
-
-    @Schema(required = true, description = "用户名")
+    @Schema(required = true, description = "学员号")
     private String username;
 
     @Schema(required = true, description = "密码")

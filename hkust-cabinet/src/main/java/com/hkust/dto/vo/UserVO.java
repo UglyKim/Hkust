@@ -13,13 +13,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class UserVO {
 
-    @Schema(required = true, description = "用户ID")
-    private String userId;
-
-    @Schema(required = true, description = "学号")
-    private String studentId;
-
-    @Schema(required = true, description = "用户名")
+    @Schema(required = true, description = "学员号")
     private String username;
 
     @Schema(required = true, description = "真实姓名")

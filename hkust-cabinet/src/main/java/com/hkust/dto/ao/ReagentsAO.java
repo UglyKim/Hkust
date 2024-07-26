@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @JsonPropertyOrder({"barcode", "cabinetId", "doorId", "name"})
 public class ReagentsAO {
 
+    private static final long serialVersionUID = 983368583005150707L;
+
     @Schema(required = true, description = "条形码")
     private String barcode;
 

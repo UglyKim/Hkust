@@ -10,7 +10,7 @@ import java.io.Serializable;
 @JsonPropertyOrder({"cabinetId", "eventType"})
 public class OperationAO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 983368583005150333L;
 
     @Schema(required = true, description = "操作类型")
     private String eventTypeCode;

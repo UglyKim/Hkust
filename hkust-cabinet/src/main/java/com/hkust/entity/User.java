@@ -17,9 +17,6 @@ public class User {
     @TableId("user_id")
     private String userId;
 
-    @TableField("student_id")
-    private String studentId;
-
     @TableField("user_name")
     private String username;
 
