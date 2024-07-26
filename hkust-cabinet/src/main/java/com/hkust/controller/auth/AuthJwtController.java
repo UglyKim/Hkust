@@ -1,11 +1,15 @@
 package com.hkust.controller.auth;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
-import com.hkust.dto.ao.LoginInfo;
+import com.hkust.dto.ao.LoginInfoAO;
+import com.hkust.security.CustomUserDetails;
 import com.hkust.security.CustomUserDetailsService;
 import com.hkust.security.dto.JwtRequest;
 import com.hkust.security.dto.JwtResponse;
 import com.hkust.security.jwt.JwtTokenUtil;
+import com.nimbusds.jose.proc.SecurityContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.plugin.liveconnect.SecurityContextHelper;
 
 @Tag(name = "认证")
 @RestController
@@ -33,20 +39,18 @@ public class AuthJwtController {
 
     @Operation(summary = "登陆认证")
     @PostMapping("/auth/login")
-    public ApiResponse createAuthenticationToken(@RequestBody LoginInfo loginInfo) throws Exception {
-        log.info("Received authentication request for username: {}", loginInfo.getStudentId());
+    public ApiResponse createAuthenticationToken(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
+        log.info("Received authentication login_info: {}", JSONUtil.toJsonPrettyStr(loginInfoAO));
 
-        try {
+       /* try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginInfo.getStudentId(), loginInfo.getPassword())
+                    new UsernamePasswordAuthenticationToken(loginInfoAO.getStudentId(), loginInfoAO.getPassword())
             );
         } catch (Exception e) {
-            log.error("Authentication failed for username: {}", loginInfo.getStudentId(), e);
+            log.error("Authentication failed for username: {}", loginInfoAO.getStudentId(), e);
             throw new Exception("Invalid username or password", e);
-        }
-
-
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginInfo.getStudentId());
+        }*/
+        CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(loginInfoAO.getStudentId());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ApiResponse.success(jwt);
     }
@@ -72,7 +76,7 @@ public class AuthJwtController {
             log.error("Authentication failed for username: {}", authenticationRequest.getUsername(), e);
             throw new Exception("Invalid username or password", e);
         }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(jwt));
     }

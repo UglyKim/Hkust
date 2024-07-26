@@ -1,15 +1,13 @@
 package com.hkust.security;
 
+import com.hkust.entity.User;
 import com.hkust.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 @Slf4j
@@ -21,10 +19,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String studentId) throws UsernameNotFoundException {
 
-        com.hkust.entity.User user = userMapper.selectByStudentId(studentId);
+        User user = userMapper.selectByStudentId(studentId);
         log.info("selected user_name:{}", user.getUsername());
         if (user.getStudentId().equals(studentId)) {
-            return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+            return new CustomUserDetails(user);
         } else {
             throw new UsernameNotFoundException("User not found with student_id: " + studentId);
         }
@@ -42,13 +40,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 //    @Override
     public UserDetails loadUserByUsername_123(String username) throws UsernameNotFoundException {
 
-        com.hkust.entity.User user = userMapper.selectByUserName(username);
-        log.info("selected user_name:{}", user.getUsername());
-        if (user.getUsername().equals(username)) {
-            return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
-        } else {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
+//        com.hkust.entity.User user = userMapper.selectByUserName(username);
+//        log.info("selected user_name:{}", user.getUsername());
+//        if (user.getUsername().equals(username)) {
+//            return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+//        } else {
+//            throw new UsernameNotFoundException("User not found with username: " + username);
+//        }
+        return null;
     }
 
     /**

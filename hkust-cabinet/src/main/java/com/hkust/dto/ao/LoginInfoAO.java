@@ -7,8 +7,8 @@ import lombok.Getter;
 import java.io.Serializable;
 
 @Getter
-@JsonPropertyOrder({"username", "password"})
-public class LoginInfo implements Serializable {
+@JsonPropertyOrder({"studentId", "password"})
+public class LoginInfoAO implements Serializable {
 
     private static final long serialVersionUID = 5926468583005150707L;
 

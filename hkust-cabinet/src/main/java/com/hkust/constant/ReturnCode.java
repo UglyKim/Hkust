@@ -6,12 +6,12 @@ import lombok.Getter;
 public enum ReturnCode {
 
     SUCCESS("00", "成功"),
-    BAD_CREDENTIAL("", "用户名密码错误"),
+    BAD_CREDENTIAL("98", "用户名密码错误"),
     FILE_IS_EMPTY("11", "请选择正确的操作录像"),
     FILE_NOT_MP4("12", "录像格式不正确"),
     FILE_UPLOAD_FAILED("13", "文件上传失败"),
     NOT_NULL("14", "空"),
-    AUTH_FAILED("99", "认证失败，请重新登陆!");
+    AUTH_FAILED("99", "令牌缺失或令牌格式不正确");
 
 
     private final String code;

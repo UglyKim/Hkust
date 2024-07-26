@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -55,10 +54,9 @@ public class SecurityConfig {
                                         .antMatchers(
                                                 "/v3/api-docs/**",
                                                 "/swagger-ui/**",
-                                                "/api/v1/manage/user/login",
-                                                "/api/v1/auth/authenticate",
-                                                "/api/v1/auth/login",
-                                                "/swagger-ui/index.html"
+//                                                "/api/v1/manage/user/login",
+//                                                "/api/v1/auth/authenticate",
+                                                "/api/v1/auth/login"
                                         ).permitAll()
                                         .anyRequest().authenticated()
                                         .and()
@@ -67,7 +65,7 @@ public class SecurityConfig {
                                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                                         .and()
                                         .formLogin()
-                                        .passwordParameter("studentId")
+                                        .usernameParameter("studentId")
                                         .permitAll();
 
                             } catch (Exception e) {
@@ -75,16 +73,7 @@ public class SecurityConfig {
                             }
                         }
                 );
-//                .httpBasic();
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-//                .formLogin(formLogin ->
-//                        formLogin
-//                                .loginPage("/login")
-//                                .permitAll()
-//                )
-//                .logout(logout ->
-//                        logout.permitAll()
-//                )
         return http.build();
     }
 
