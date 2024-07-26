@@ -34,19 +34,19 @@ public class AuthJwtController {
     @Operation(summary = "登陆认证")
     @PostMapping("/auth/login")
     public ApiResponse createAuthenticationToken(@RequestBody LoginInfo loginInfo) throws Exception {
-        log.info("Received authentication request for username: {}", loginInfo.getUsername());
+        log.info("Received authentication request for username: {}", loginInfo.getStudentId());
 
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginInfo.getUsername(), loginInfo.getPassword())
+                    new UsernamePasswordAuthenticationToken(loginInfo.getStudentId(), loginInfo.getPassword())
             );
         } catch (Exception e) {
-            log.error("Authentication failed for username: {}", loginInfo.getUsername(), e);
+            log.error("Authentication failed for username: {}", loginInfo.getStudentId(), e);
             throw new Exception("Invalid username or password", e);
         }
 
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginInfo.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginInfo.getStudentId());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ApiResponse.success(jwt);
     }
@@ -76,14 +76,6 @@ public class AuthJwtController {
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
-
-//    private void authenticate(String username, String password) throws Exception {
-//        try {
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//        } catch (AuthenticationException e) {
-//            throw new Exception("INVALID_CREDENTIALS", e);
-//        }
-//    }
 
     @Autowired
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {

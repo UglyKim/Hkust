@@ -12,7 +12,7 @@ public class UserAlterInfoAO {
 
     private static final long serialVersionUID = 987876583005150707L;
 
-    @Schema(description = "学员号")
+    @Schema(description = "用户明")
     private String username;
 
     @Schema(description = "密码")

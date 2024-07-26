@@ -12,8 +12,11 @@ public class LoginInfo implements Serializable {
 
     private static final long serialVersionUID = 5926468583005150707L;
 
-    @Schema(required = true, description = "用户名")
-    private String username;
+//    @Schema(required = true, description = "用户名")
+//    private String username
+
+    @Schema(required = true, description = "学员号")
+    private String studentId;;
 
     @Schema(required = true, description = "密码")
     private String password;

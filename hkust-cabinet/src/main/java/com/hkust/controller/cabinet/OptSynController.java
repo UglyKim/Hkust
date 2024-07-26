@@ -30,7 +30,7 @@ public class OptSynController {
 
     private VideoService videoService;
 
-    private OperateService oprationService;
+    private OperateService operateService;
 
     private EventService eventService;
 
@@ -38,7 +38,7 @@ public class OptSynController {
     @PostMapping("/event/add")
     public ApiResponse eventSynUpload(@RequestBody OperationAO operationAO) {
         log.info("received operation_info:{}", StrUtil.toString(operationAO));
-        return oprationService.optSynchronize(operationAO);
+        return operateService.optSynchronize(operationAO);
     }
 
     @Operation(summary = "操作录像上传", description = "操作录像上传")
@@ -73,8 +73,8 @@ public class OptSynController {
     }
 
     @Autowired
-    public void setOprationService(OperateService oprationService) {
-        this.oprationService = oprationService;
+    public void setOperateService(OperateService operateService) {
+        this.operateService = operateService;
     }
 
     @Autowired

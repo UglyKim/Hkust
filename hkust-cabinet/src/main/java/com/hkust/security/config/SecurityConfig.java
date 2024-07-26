@@ -65,7 +65,11 @@ public class SecurityConfig {
                                         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                                         .and()
                                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                                        ;
+                                        .and()
+                                        .formLogin()
+                                        .passwordParameter("studentId")
+                                        .permitAll();
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

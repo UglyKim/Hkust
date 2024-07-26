@@ -24,6 +24,11 @@ public class EventService {
 
     private EventMapper eventMapper;
 
+    /**
+     * 指查询存取记录
+     * @param eventQueryAO
+     * @return
+     */
     public ApiResponse<PageResponse> getEventList(EventQueryAO eventQueryAO) {
         int pageNum = 1;
         if (ObjUtil.isNotEmpty(eventQueryAO.getPageNum())) {
@@ -42,6 +47,31 @@ public class EventService {
         List<EventVO> eventVOList = new ArrayList<>();
         for (Event event : eventList) {
             EventVO eventVO = EventStructMapper.INSTANCE.toVO(event);
+            eventVOList.add(eventVO);
+        }
+
+        PageResponse pageResponse = new PageResponse<EventVO>(eventQueryAO.getPageNum(), 20, eventIPage.getTotal(), eventVOList);
+        return ApiResponse.success(pageResponse);
+    }
+
+    /**
+     * 查询所有记录
+     * @param eventQueryAO
+     * @return
+     */
+    public ApiResponse<PageResponse> getAllEventList(EventQueryAO eventQueryAO) {
+        int pageNum = 1;
+        if (ObjUtil.isNotEmpty(eventQueryAO.getPageNum())) {
+            pageNum = eventQueryAO.getPageNum();
+        }
+        Page<Event> page = new Page<>(pageNum, 20);
+        QueryWrapper<Event> queryWrapper = new QueryWrapper<>();
+        IPage<Event> eventIPage = eventMapper.selectPage(page, queryWrapper);
+        List<Event> eventList = eventIPage.getRecords();
+        List<EventVO> eventVOList = new ArrayList<>();
+        for (Event event : eventList) {
+            EventVO eventVO = EventStructMapper.INSTANCE.toVO(event);
+//            eventVO.setUserName();
             eventVOList.add(eventVO);
         }
 

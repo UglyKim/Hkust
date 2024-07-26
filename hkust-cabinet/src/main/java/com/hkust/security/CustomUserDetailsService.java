@@ -19,7 +19,28 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserMapper userMapper;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String studentId) throws UsernameNotFoundException {
+
+        com.hkust.entity.User user = userMapper.selectByStudentId(studentId);
+        log.info("selected user_name:{}", user.getUsername());
+        if (user.getStudentId().equals(studentId)) {
+            return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+        } else {
+            throw new UsernameNotFoundException("User not found with student_id: " + studentId);
+        }
+    }
+
+
+    /**
+     * 使用username
+     *
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Deprecated
+//    @Override
+    public UserDetails loadUserByUsername_123(String username) throws UsernameNotFoundException {
 
         com.hkust.entity.User user = userMapper.selectByUserName(username);
         log.info("selected user_name:{}", user.getUsername());
@@ -29,6 +50,24 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
     }
+
+    /**
+     * 使用username
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     *//*
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        com.hkust.entity.User user = userMapper.selectByUserName(username);
+        log.info("selected user_name:{}", user.getUsername());
+        if (user.getUsername().equals(username)) {
+            return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+        } else {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+    }*/
 
     // 不接数据库的代码块
        /* PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
