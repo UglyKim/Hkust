@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class EventVO {
 
+    private static final long serialVersionUID = 976811253003330109L;
+
     @Schema(required = true, description = "学员号")
     private String userName;
 

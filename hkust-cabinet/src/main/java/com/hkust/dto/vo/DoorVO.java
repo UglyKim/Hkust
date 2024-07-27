@@ -9,6 +9,8 @@ import lombok.Data;
 //@JsonIncludeProperties({"cabinetId", "cabinetName", "location", "cabinetAddr"})
 public class DoorVO {
 
+    private static final long serialVersionUID = 3344558583003330109L;
+
     @Schema(required = true, description = "柜门ID")
     private String doorId;
 

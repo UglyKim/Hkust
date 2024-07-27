@@ -13,6 +13,8 @@ import java.io.Serializable;
 @JsonIncludeProperties({"cabinetId", "name", "location", "cabinetAddr", "openMode"})
 public class CabinetVO implements Serializable {
 
+    private static final long serialVersionUID = 345433583003330109L;
+
     @Schema(required = true, description = "智能柜编号")
     private String cabinetId;
 

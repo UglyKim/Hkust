@@ -35,7 +35,7 @@ public class CabinetDoorController {
         return cabinetDoorService.getDoorList(cabinetId);
     }
 
-    @Hidden
+    //    @Hidden
     @Operation(summary = "柜门详细信息", description = "柜门详细信息")
     @PostMapping("/door/detail")
     public ApiResponse getDoorInfo(@RequestParam String doorId) {
@@ -48,6 +48,14 @@ public class CabinetDoorController {
     public ApiResponse addDoor(@RequestBody CabinetDoorAO cabinetDoorAO) {
         log.info("received cabinet_door info:{}", JSONUtil.toJsonPrettyStr(cabinetDoorAO));
         return cabinetDoorService.addCabinetDoor(cabinetDoorAO);
+    }
+
+    @Operation(summary = "柜门更新", description = "柜门更新")
+    @PostMapping("/door/update")
+    public ApiResponse updateDoor(@RequestBody CabinetDoorAO cabinetDoorAO) {
+        log.info("received update door info:{}", JSONUtil.toJsonPrettyStr(cabinetDoorAO));
+        return cabinetDoorService.updateCabinetDoor(cabinetDoorAO);
+
     }
 
     @Operation(summary = "柜门类型", description = "柜门类型")

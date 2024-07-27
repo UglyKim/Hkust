@@ -13,6 +13,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class UserVO {
 
+    private static final long serialVersionUID = 3456098765433330109L;
+
     @Schema(required = true, description = "学员号")
     private String username;
 

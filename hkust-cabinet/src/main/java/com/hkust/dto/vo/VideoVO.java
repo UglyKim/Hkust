@@ -10,6 +10,8 @@ import lombok.Data;
 @JsonIncludeProperties({"videoId", "videoUrl"})
 public class VideoVO {
 
+    private static final long serialVersionUID = 7766868583003330109L;
+
     @Schema(required = true, description = "录像编号")
     private String videoId;
 

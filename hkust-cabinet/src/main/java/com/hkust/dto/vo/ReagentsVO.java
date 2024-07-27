@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ReagentsVO {
 
+    private static final long serialVersionUID = 3450876583003330109L;
+
     @Schema(required = true, description = "试剂ID")
     private String reagentsId;
 

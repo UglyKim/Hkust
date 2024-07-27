@@ -1,19 +1,20 @@
-package com.hkust.dto.ao;
+package com.hkust.dto.vo;
 
-import com.hkust.enums.DoorTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-public class CabinetDoorAO {
+@Data
+@AllArgsConstructor
+public class CabinetDoorVO {
 
-    private static final long serialVersionUID = 8926468583003330109L;
+    private static final long serialVersionUID = 3456468583003330109L;
 
     @Schema(required = true, description = "智能柜ID")
     private String cabinetId;
 
-    @Schema(description = "柜门ID")
-    private String doorId;
+    @Schema(required = true, description = "柜门ID")
+    private String cabinetDoorId;
 
     @Schema(required = true, description = "柜门类型")
     private String type;
@@ -27,13 +28,13 @@ public class CabinetDoorAO {
     @Schema(description = "状态")
     private String stat;
 
-    @Schema(description = "在柜总数量")
+    @Schema(required = true, description = "在柜总数量")
     private int reagentsQty;
 
-    @Schema(description = "在柜数量")
+    @Schema(required = true, description = "在柜数量")
     private int inQty;
 
-    @Schema(description = "离柜数量")
+    @Schema(required = true, description = "离柜数量")
     private int outQty;
 
     @Schema(description = "地址")
