@@ -1,7 +1,6 @@
 package com.hkust.controller.management;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.toolkit.Assert;
+import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.CabinetAO;
 import com.hkust.dto.vo.CabinetVO;
@@ -12,10 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -31,21 +27,21 @@ public class CabinetController {
 
     @Operation(summary = "柜子详细信息", description = "柜子详细信息")
     @PostMapping("/detail")
-    public ApiResponse<CabinetVO> getCabinetInfo() {
-        return cabinetService.getAllCabinets();
+    public ApiResponse<CabinetVO> getCabinetInfo(@RequestParam String cabinetId) {
+        log.info("received cabinet ID:{}", cabinetId);
+        return cabinetService.getCabinetDetails(cabinetId);
     }
 
-    @Deprecated
     @Operation(summary = "柜子列表", description = "柜子列表")
     @PostMapping("/list")
     public ApiResponse getCabinetList() {
-        return cabinetService.getAllCabinets();
+        return cabinetService.getCabinetList();
     }
 
     @Operation(summary = "添加柜子", description = "添加柜子")
     @PostMapping("/add")
     public ApiResponse addCabinet(@RequestBody CabinetAO cabinetAO) {
-        log.info("received add cabinet_info:{}", StrUtil.toString(cabinetAO));
+        log.info("received add cabinet_info:{}", JSONUtil.toJsonPrettyStr(cabinetAO));
         return cabinetService.addCabinet(cabinetAO);
     }
 
@@ -53,7 +49,7 @@ public class CabinetController {
     @PostMapping("/open-mode")
     public ApiResponse getOpenMode() {
         Map<String, String> openModeMap = Arrays.asList(OpenModeEnum.values()).stream().collect(
-                Collectors.toMap(OpenModeEnum::getCode, OpenModeEnum::getDescription));
+                Collectors.toMap(OpenModeEnum::getCode, OpenModeEnum::getDesc));
         return ApiResponse.success(openModeMap);
     }
 
@@ -65,11 +61,17 @@ public class CabinetController {
         return ApiResponse.success(cabinetStatMap);
     }
 
+    @Operation(summary = "智能柜更新", description = "智能柜更新")
+    @PostMapping("/update")
+    public ApiResponse updateCabinet(@RequestBody CabinetAO cabinetAO) {
+        log.info("received add cabinet_info:{}", JSONUtil.toJsonPrettyStr(cabinetAO));
+        return cabinetService.updateCabinet(cabinetAO);
+    }
+
     @Deprecated
-    @Operation(summary = "删除柜子", description = "删除柜子")
+    @Operation(summary = "删除智能柜", description = "删除智能柜")
     @PostMapping("/delete")
     public ApiResponse delCabinet() {
-
         return ApiResponse.success();
     }
 

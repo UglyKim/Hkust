@@ -46,7 +46,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .authorizeRequests().anyRequest().permitAll() // 允许所有请求
+                .and().csrf().disable(); // 禁用 CSRF 保护
+
+        return http.build();
+/*        http.csrf().disable()
                 .authorizeRequests(authorizeRequests ->
                         {
                             try {
@@ -74,7 +79,7 @@ public class SecurityConfig {
                         }
                 );
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+        return http.build();*/
     }
 
 

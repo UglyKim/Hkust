@@ -1,6 +1,5 @@
 package com.hkust.controller.auth;
 
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.LoginInfoAO;
@@ -9,7 +8,6 @@ import com.hkust.security.CustomUserDetailsService;
 import com.hkust.security.dto.JwtRequest;
 import com.hkust.security.dto.JwtResponse;
 import com.hkust.security.jwt.JwtTokenUtil;
-import com.nimbusds.jose.proc.SecurityContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.plugin.liveconnect.SecurityContextHelper;
 
 @Tag(name = "认证")
 @RestController

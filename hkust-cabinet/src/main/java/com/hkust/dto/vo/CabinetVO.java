@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-@JsonIncludeProperties({"cabinetId", "cabinetName", "location", "cabinetAddr"})
+@JsonIncludeProperties({"cabinetId", "name", "location", "cabinetAddr", "openMode"})
 public class CabinetVO implements Serializable {
 
     @Schema(required = true, description = "智能柜编号")

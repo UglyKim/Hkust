@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
     private UserMapper userMapper;
 
     @Override
@@ -49,13 +48,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 //        }
         return null;
     }
-
-    /**
-     * 使用username
-     * @param username
-     * @return
-     * @throws UsernameNotFoundException
-     *//*
+/**
+ *
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -77,4 +71,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }*/
+    @Autowired
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 }

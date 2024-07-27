@@ -11,8 +11,10 @@ public enum ReturnCode {
     FILE_NOT_MP4("12", "录像格式不正确"),
     FILE_UPLOAD_FAILED("13", "文件上传失败"),
     NOT_NULL("14", "空"),
-    AUTH_FAILED("99", "令牌缺失或令牌格式不正确");
-
+    AUTH_FAILED("99", "令牌缺失或令牌格式不正确"),
+    CABINET_ID_NOT_NULL("21", "请输入智能柜ID"),
+    CABINET_IS_NULL("22", "智能柜不存在"),
+    DB_UPDATE_ERROR("31", "更新数据失败");
 
     private final String code;
 
