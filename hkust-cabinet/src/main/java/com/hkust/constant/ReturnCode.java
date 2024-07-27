@@ -14,7 +14,9 @@ public enum ReturnCode {
     AUTH_FAILED("99", "令牌缺失或令牌格式不正确"),
     CABINET_ID_NOT_NULL("21", "请输入智能柜ID"),
     CABINET_IS_NULL("22", "智能柜不存在"),
-    DB_UPDATE_ERROR("31", "更新数据失败");
+
+    DB_UPDATE_ERROR("31", "更新数据失败"),
+    DB_INSERT_ERROR("32", "新增数据失败");
 
     private final String code;
 

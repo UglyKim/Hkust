@@ -3,10 +3,10 @@ package com.hkust.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum CabinetStatEnum {
+public enum StatEnum {
 
-    normal("1", "正常"),
-    fault("2", "故障");
+    NORMAL("1", "正常"),
+    FAULT("2", "故障");
 
     private String code;
 
@@ -29,9 +29,9 @@ public enum CabinetStatEnum {
     }
 
     public static String fromCode(String code) {
-        for (CabinetStatEnum cabinetStatEnum : CabinetStatEnum.values()) {
-            if (cabinetStatEnum.getCode().equals(code)) {
-                return cabinetStatEnum.getName();
+        for (StatEnum statEnum : StatEnum.values()) {
+            if (statEnum.getCode().equals(code)) {
+                return statEnum.getName();
             }
         }
         throw new IllegalArgumentException("No enum constant with code " + code);

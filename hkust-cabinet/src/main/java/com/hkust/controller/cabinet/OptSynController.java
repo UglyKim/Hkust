@@ -1,6 +1,8 @@
 package com.hkust.controller.cabinet;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.EventQueryAO;
@@ -37,7 +39,7 @@ public class OptSynController {
     @Operation(summary = "操作日志同步", description = "操作日志同步")
     @PostMapping("/event/add")
     public ApiResponse eventSynUpload(@RequestBody OperationAO operationAO) {
-        log.info("received operation_info:{}", StrUtil.toString(operationAO));
+        log.info("received operation_info:{}", JSONUtil.toJsonPrettyStr(operationAO));
         return operateService.optSynchronize(operationAO);
     }
 
@@ -63,7 +65,7 @@ public class OptSynController {
     @Operation(summary = "操作列表", description = "操作列表")
     @PostMapping("/event/list")
     public ApiResponse<PageResponse> getEventList(EventQueryAO eventQueryAO) {
-        log.info("received event_query_info:{}", StrUtil.toString(eventQueryAO));
+        log.info("received event_query_info:{}", JSONUtil.toJsonPrettyStr(eventQueryAO));
         return eventService.getEventList(eventQueryAO);
     }
 

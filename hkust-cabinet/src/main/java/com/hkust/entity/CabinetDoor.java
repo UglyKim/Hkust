@@ -24,13 +24,13 @@ public class CabinetDoor {
     private String stat;
 
     @TableField("reagents_qty")
-    private String reagentsQty;
+    private int reagentsQty;
 
     @TableField("in_qty")
-    private String inQty;
+    private int inQty;
 
     @TableField("out_qty")
-    private String outQty;
+    private int outQty;
 
     private String location;
 

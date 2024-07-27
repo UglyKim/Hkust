@@ -6,7 +6,6 @@ import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.UserAlterInfoAO;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
-import com.hkust.enums.CabinetStatEnum;
 import com.hkust.enums.EnableEnum;
 import com.hkust.service.UserService;
 import com.hkust.dto.ao.UserInfoAO;

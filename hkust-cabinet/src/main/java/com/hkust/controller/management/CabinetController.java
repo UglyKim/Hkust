@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.CabinetAO;
 import com.hkust.dto.vo.CabinetVO;
-import com.hkust.enums.CabinetStatEnum;
+import com.hkust.enums.StatEnum;
 import com.hkust.enums.OpenModeEnum;
 import com.hkust.service.CabinetService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,8 +56,8 @@ public class CabinetController {
     @Operation(summary = "智能柜状态", description = "智能柜状态")
     @PostMapping("/stat")
     public ApiResponse getCabinetStat() {
-        Map<String, String> cabinetStatMap = Arrays.asList(CabinetStatEnum.values()).stream().collect(
-                Collectors.toMap(CabinetStatEnum::getCode, CabinetStatEnum::getName));
+        Map<String, String> cabinetStatMap = Arrays.asList(StatEnum.values()).stream().collect(
+                Collectors.toMap(StatEnum::getCode, StatEnum::getName));
         return ApiResponse.success(cabinetStatMap);
     }
 
