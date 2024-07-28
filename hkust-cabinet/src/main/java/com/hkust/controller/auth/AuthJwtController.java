@@ -1,6 +1,7 @@
 package com.hkust.controller.auth;
 
 import cn.hutool.json.JSONUtil;
+import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.LoginInfoAO;
 import com.hkust.security.CustomUserDetails;
@@ -46,6 +47,9 @@ public class AuthJwtController {
             throw new Exception("Invalid username or password", e);
         }*/
         CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(loginInfoAO.getStudentId());
+        if (!userDetails.isEnabled()) {
+            return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
+        }
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ApiResponse.success(jwt);
     }

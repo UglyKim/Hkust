@@ -6,6 +6,9 @@ import lombok.Getter;
 public enum ReturnCode {
 
     SUCCESS("00", "成功"),
+    USER_IS_DISABLE("99", "黑名单用户"),
+    USER_IS_NULL("97", "用户不存在"),
+
     BAD_CREDENTIAL("98", "用户名密码错误"),
     FILE_IS_EMPTY("11", "请选择正确的操作录像"),
     FILE_NOT_MP4("12", "录像格式不正确"),
@@ -23,7 +26,8 @@ public enum ReturnCode {
     DB_INSERT_ERROR("32", "新增数据失败"),
 
     REAGENTS_EXPIRED("50", "试剂已到期"),
-    REAGENTS_DELETE_FAILED("51", "试剂删除失败");
+    REAGENTS_DELETE_FAILED("51", "试剂删除失败"),
+    REAGENTS_IS_NULL("52", "试剂不存在");
 
     private final String code;
 

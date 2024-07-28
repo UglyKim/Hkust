@@ -7,6 +7,7 @@ import com.hkust.dto.vo.CabinetVO;
 import com.hkust.enums.StatEnum;
 import com.hkust.enums.OpenModeEnum;
 import com.hkust.service.CabinetService;
+import com.hkust.utils.EnumToJsonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -45,22 +46,6 @@ public class CabinetController {
         return cabinetService.addCabinet(cabinetAO);
     }
 
-    @Operation(summary = "柜门开启模式", description = "柜门开启模式")
-    @PostMapping("/open-mode")
-    public ApiResponse getOpenMode() {
-        Map<String, String> openModeMap = Arrays.asList(OpenModeEnum.values()).stream().collect(
-                Collectors.toMap(OpenModeEnum::getCode, OpenModeEnum::getDesc));
-        return ApiResponse.success(openModeMap);
-    }
-
-    @Operation(summary = "智能柜状态", description = "智能柜状态")
-    @PostMapping("/stat")
-    public ApiResponse getCabinetStat() {
-        Map<String, String> cabinetStatMap = Arrays.asList(StatEnum.values()).stream().collect(
-                Collectors.toMap(StatEnum::getCode, StatEnum::getName));
-        return ApiResponse.success(cabinetStatMap);
-    }
-
     @Operation(summary = "智能柜更新", description = "智能柜更新")
     @PostMapping("/update")
     public ApiResponse updateCabinet(@RequestBody CabinetAO cabinetAO) {
@@ -73,6 +58,18 @@ public class CabinetController {
     @PostMapping("/delete")
     public ApiResponse delCabinet() {
         return ApiResponse.success();
+    }
+
+    @Operation(summary = "智能柜状态", description = "智能柜状态")
+    @PostMapping("/stat")
+    public ApiResponse getCabinetStat() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(StatEnum.class));
+    }
+
+    @Operation(summary = "柜门开启模式", description = "柜门开启模式")
+    @PostMapping("/open-mode")
+    public ApiResponse getOpenMode() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OpenModeEnum.class));
     }
 
     @Autowired

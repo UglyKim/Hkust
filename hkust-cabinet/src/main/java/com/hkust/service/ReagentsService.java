@@ -3,28 +3,34 @@ package com.hkust.service;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.ReagentsAO;
+import com.hkust.dto.ao.ReturnReagentsAO;
 import com.hkust.dto.vo.ReagentsOptVO;
 import com.hkust.dto.vo.ReagentsVO;
-import com.hkust.entity.Cabinet;
-import com.hkust.entity.CabinetDoor;
-import com.hkust.entity.Reagents;
-import com.hkust.entity.ReagentsRecord;
+import com.hkust.dto.vo.TakeReagentsVO;
+import com.hkust.entity.*;
+import com.hkust.enums.ReagentsOptTypeEnum;
 import com.hkust.mapper.CabinetDoorMapper;
 import com.hkust.mapper.CabinetMapper;
 import com.hkust.mapper.ReagentsMapper;
 import com.hkust.mapper.ReagentsRecordMapper;
+import com.hkust.security.CustomUserDetails;
 import com.hkust.struct.structmapper.ReagentsRecordStructMapper;
 import com.hkust.struct.structmapper.ReagentsStructMapper;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +44,6 @@ public class ReagentsService {
     private CabinetDoorMapper cabinetDoorMapper;
 
     private CabinetMapper cabinetMapper;
-    private QueryWrapper<Reagents> queryWrapper;
 
     public ApiResponse<PageResponse> getReagentsList(String cabinetId) {
 
@@ -115,6 +120,69 @@ public class ReagentsService {
         return ApiResponse.success();
     }
 
+    public ApiResponse takeReagents(String barCode) {
+        // 获取操作人员名字
+        String realName = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+        if (ObjectUtil.isEmpty(user)) {
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
+        }
+        realName = user.getRealName();
+        Reagents reagents = reagentsMapper.selectByBarCode(barCode);
+        if (ObjectUtil.isEmpty(reagents)) {
+            return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
+        }
+
+        LocalDateTime takeTime = DateUtils.getCurrentDateTime();
+        // 添加操作记录到数据库
+        this.insertRecord(user.getStudentId(), reagents, takeTime);
+
+        //组装返回
+        TakeReagentsVO takeReagentsVO = new TakeReagentsVO();
+        takeReagentsVO.setRealName(realName);
+        takeReagentsVO.setTakeTime(takeTime);
+        return ApiResponse.success(takeReagentsVO);
+    }
+
+
+    public ApiResponse returnReagents(ReturnReagentsAO returnReagentsAO) {
+        Reagents reagents = reagentsMapper.selectByBarCode(returnReagentsAO.getBarCode());
+        if (ObjectUtil.isEmpty(reagents)) {
+            return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
+        }
+        // 更新试剂信息
+        reagents.setUpdateDate(DateUtils.getCurrentDateTime());
+        reagents.setReagentWeight(returnReagentsAO.getReagentWeight());
+        reagents.setBottleWeight(returnReagentsAO.getBottleWeight());
+        String studentId = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+        if (ObjectUtil.isEmpty(user)) {
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
+        }
+        studentId = user.getStudentId();
+        reagents.setOperator(studentId);
+        reagentsMapper.updateById(reagents);
+
+        // 添加操作记录
+        this.insertRecord(studentId, reagents, DateUtils.getCurrentDateTime());
+
+        return ApiResponse.success();
+    }
+
+    private void insertRecord(String studentId, Reagents reagents, LocalDateTime takeTime) {
+        // 添加操作记录到数据库
+        ReagentsRecord reagentsRecord = new ReagentsRecord();
+        reagentsRecord.setRecordId(UUIDUtils.generateUUIDWithoutHyphens());
+        reagentsRecord.setType(ReagentsOptTypeEnum.TAKE.getCode());
+        reagentsRecord.setDoorId(reagents.getDoorId());
+        reagentsRecord.setOptTime(takeTime);
+        reagentsRecord.setOptStudentId(studentId);
+        reagentsRecord.setBarCode(reagents.getBarCode());
+        reagentsRecordMapper.insert(reagentsRecord);
+    }
+
     @Autowired
     public void setReagentsMapper(ReagentsMapper reagentsMapper) {
         this.reagentsMapper = reagentsMapper;
@@ -123,6 +191,10 @@ public class ReagentsService {
     @Autowired
     public void setReagentsRecordMapper(ReagentsRecordMapper reagentsRecordMapper) {
         this.reagentsRecordMapper = reagentsRecordMapper;
+    }
+
+    private void getStudentId() {
+
     }
 
     @Autowired

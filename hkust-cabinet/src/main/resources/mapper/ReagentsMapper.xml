@@ -6,4 +6,9 @@
         FROM hkust_reagents
         where cabinet_id = # {cabinet_id} and door_id = #{door_id};
     </select>
+    <select id="selectByBarCode" resultType="com.hkust.entity.Reagents">
+        SELECT *
+        FROM hkust_reagents
+        where cabinet_id = # {barcode} and door_id = #{barCode};
+    </select>
 </mapper>

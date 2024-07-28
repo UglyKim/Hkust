@@ -10,14 +10,14 @@ public enum OpenModeEnum {
     Other("3", "一管一用式");
 
     private String code;
-    private String desc;
+    private String name;
 
-    public String getDesc() {
-        return desc;
+    public String getName() {
+        return name;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCode() {
@@ -31,7 +31,7 @@ public enum OpenModeEnum {
     public static String fromCode(String code) {
         for (OpenModeEnum openModeEnum : OpenModeEnum.values()) {
             if (openModeEnum.getCode().equals(code)) {
-                return openModeEnum.getDesc();
+                return openModeEnum.getName();
             }
         }
         throw new IllegalArgumentException("No enum constant with code " + code);

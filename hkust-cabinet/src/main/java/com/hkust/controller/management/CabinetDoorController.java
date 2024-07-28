@@ -1,24 +1,19 @@
 package com.hkust.controller.management;
 
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.CabinetDoorAO;
 import com.hkust.dto.vo.DoorVO;
 import com.hkust.enums.DoorTypeEnum;
 import com.hkust.service.CabinetDoorService;
-import io.swagger.v3.oas.annotations.Hidden;
+import com.hkust.utils.EnumToJsonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Tag(name = "柜门信息")
 @RestController
@@ -61,9 +56,7 @@ public class CabinetDoorController {
     @Operation(summary = "柜门类型", description = "柜门类型")
     @PostMapping("/door/type")
     public ApiResponse getDoorTypeList() {
-        Map<String, String> doorTypeMap = Arrays.asList(DoorTypeEnum.values()).stream().collect(
-                Collectors.toMap(DoorTypeEnum::getCode, DoorTypeEnum::getName));
-        return ApiResponse.success(doorTypeMap);
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(DoorTypeEnum.class));
     }
 
     @Autowired

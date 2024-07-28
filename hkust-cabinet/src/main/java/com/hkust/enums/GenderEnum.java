@@ -7,13 +7,17 @@ public enum GenderEnum {
     M("男"),
     F("女");
 
-    private String description;
+    private String name;
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+//    public String getCode(GenderEnum e) {
+//        return e.name();
+//    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

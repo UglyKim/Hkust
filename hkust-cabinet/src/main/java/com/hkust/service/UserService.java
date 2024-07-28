@@ -112,11 +112,11 @@ public class UserService {
         List<UserVO> userVOList = new ArrayList<>();
         for (User user : userList) {
             UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
-            userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getDesc() : EnableEnum.NO.getDesc());
+            userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getName() : EnableEnum.NO.getName());
             if (user.getGender().equals(GenderEnum.F.name())) {
-                userVO.setGender(GenderEnum.F.getDescription());
+                userVO.setGender(GenderEnum.F.getName());
             } else {
-                userVO.setGender(GenderEnum.M.getDescription());
+                userVO.setGender(GenderEnum.M.getName());
             }
             userVOList.add(userVO);
         }

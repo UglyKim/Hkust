@@ -5,16 +5,26 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum ReagentsOptTypeEnum {
 
-    GET("取"),
-    RETURN("还");
+    TAKE("1", "取"),
+    RETURN("2", "还");
 
-    private String desc;
+    private String code;
 
-    public String getDesc() {
-        return desc;
+    private String name;
+
+    public String getCode() {
+        return code;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

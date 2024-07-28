@@ -1,7 +1,5 @@
 package com.hkust.controller.cabinet;
 
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
@@ -11,6 +9,7 @@ import com.hkust.enums.EventTypeEnum;
 import com.hkust.service.EventService;
 import com.hkust.service.OperateService;
 import com.hkust.service.VideoService;
+import com.hkust.utils.EnumToJsonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -54,19 +53,17 @@ public class OptSynController {
         return videoService.videoUpload(file);
     }
 
-    @Operation(summary = "操作类型", description = "操作类型")
-    @PostMapping("/event/type")
-    public ApiResponse getEventType() {
-        Map<String, String> eventTypeMap = Arrays.asList(EventTypeEnum.values()).stream().collect(
-                Collectors.toMap(EventTypeEnum::getCode, EventTypeEnum::getOpt));
-        return ApiResponse.success(eventTypeMap);
-    }
-
     @Operation(summary = "操作列表", description = "操作列表")
     @PostMapping("/event/list")
     public ApiResponse<PageResponse> getEventList(EventQueryAO eventQueryAO) {
         log.info("received event_query_info:{}", JSONUtil.toJsonPrettyStr(eventQueryAO));
         return eventService.getEventList(eventQueryAO);
+    }
+
+    @Operation(summary = "操作类型", description = "操作类型")
+    @PostMapping("/event/type")
+    public ApiResponse getEventType() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(EventTypeEnum.class));
     }
 
     @Autowired

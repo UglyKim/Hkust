@@ -7,9 +7,11 @@ import com.hkust.dto.ao.UserAlterInfoAO;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
 import com.hkust.enums.EnableEnum;
+import com.hkust.enums.GenderEnum;
 import com.hkust.service.UserService;
 import com.hkust.dto.ao.UserInfoAO;
 import com.hkust.struct.structmapper.UserStructMapper;
+import com.hkust.utils.EnumToJsonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -73,9 +75,13 @@ public class UserController {
     @Operation(summary = "用户是否启用", description = "用户是否启用")
     @PostMapping("/enabled")
     public ApiResponse getUserEnabled() {
-        Map<String, String> UserEnabledEnum = Arrays.asList(EnableEnum.values()).stream().collect(
-                Collectors.toMap(EnableEnum::getCode, EnableEnum::getDesc));
-        return ApiResponse.success(UserEnabledEnum);
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(EnableEnum.class));
+    }
+
+    @Operation(summary = "性别", description = "性别")
+    @PostMapping("/gender")
+    public ApiResponse getGender() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonArray(GenderEnum.class));
     }
 
     @Autowired

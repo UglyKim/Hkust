@@ -4,6 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.ReagentsAO;
+import com.hkust.dto.ao.ReturnReagentsAO;
 import com.hkust.service.ReagentsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,9 +42,23 @@ public class ReagentsController {
         return reagentsService.getReagentsRecordList(doorId);
     }
 
-    @Operation(summary = "删除试剂")
+    @Operation(summary = "取试剂")
+    @PostMapping("/take")
+    public ApiResponse<PageResponse> takeReagents(@RequestParam String barCode) {
+        log.info("received barcode:{}", barCode);
+        return reagentsService.takeReagents(barCode);
+    }
+
+    @Operation(summary = "还试剂")
     @PostMapping("/delete")
-    public ApiResponse<PageResponse> deleteReagents(@RequestParam String barCode) {
+    public ApiResponse<PageResponse> returnReagents(@RequestBody ReturnReagentsAO returnReagentsAO) {
+        log.info("received return reagents:{}", returnReagentsAO);
+        return reagentsService.returnReagents(returnReagentsAO);
+    }
+
+    @Operation(summary = "归还试剂")
+    @PostMapping("/return")
+    public ApiResponse<PageResponse> delReagents(@RequestParam String barCode) {
         log.info("received barCode:{}", barCode);
         return reagentsService.delReagents(barCode);
     }

@@ -11,7 +11,7 @@ public enum EventTypeEnum {
     RETURN("4", "归还试剂");
 
     private String code;
-    private String opt;
+    private String name;
 
     public String getCode() {
         return code;
@@ -21,18 +21,18 @@ public enum EventTypeEnum {
         this.code = code;
     }
 
-    public String getOpt() {
-        return opt;
+    public String getName() {
+        return name;
     }
 
-    public void setOpt(String opt) {
-        this.opt = opt;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static String fromCode(String code) {
         for (EventTypeEnum eventTypeEnum : EventTypeEnum.values()) {
             if (eventTypeEnum.getCode().equals(code)) {
-                return eventTypeEnum.getOpt();
+                return eventTypeEnum.getName();
             }
         }
         throw new IllegalArgumentException("No enum constant with code " + code);

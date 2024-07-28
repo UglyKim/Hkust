@@ -6,25 +6,26 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @TableName("hkust_reagents_record")
 public class ReagentsRecord {
-    
+
     @TableId("record_id")
-    private String record_id;
+    private String recordId;
 
-    @TableField("reagentsId")
-    private String reagents_id;
+    @TableField("barcode")
+    private String barCode;
 
-    @TableField("doorId")
-    private String door_id;
+    @TableField("door_id")
+    private String doorId;
 
     private String type;
 
-    @TableField("opt_user_id")
-    private String optUserId;
+    @TableField("opt_student_id")
+    private String optStudentId;
 
-    @TableField("optTime")
-    private LocalDate opt_time;
+    @TableField("opt_time")
+    private LocalDateTime optTime;
 }

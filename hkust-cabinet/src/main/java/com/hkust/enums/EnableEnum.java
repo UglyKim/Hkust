@@ -10,7 +10,7 @@ public enum EnableEnum {
 
     private String code;
 
-    private String desc;
+    private String name;
 
     public String getCode() {
         return code;
@@ -20,18 +20,18 @@ public enum EnableEnum {
         this.code = code;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getName() {
+        return name;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static String fromCode(String code) {
         for (EnableEnum enableEnum : EnableEnum.values()) {
             if (enableEnum.getCode().equals(code)) {
-                return enableEnum.getDesc();
+                return enableEnum.getName();
             }
         }
         throw new IllegalArgumentException("No enum constant with code " + code);
