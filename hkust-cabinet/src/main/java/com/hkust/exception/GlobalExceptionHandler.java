@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,5 +23,10 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FOUND)
     public ResponseEntity<ApiResponse> handleClientError1(NullPointerException ex) {
         return new ResponseEntity<>(ApiResponse.failed(ReturnCode.AUTH_FAILED), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        return new ResponseEntity<>("Invalid input: " + ex.getBindingResult().getAllErrors().get(0).getDefaultMessage(), HttpStatus.BAD_REQUEST);
     }
 }

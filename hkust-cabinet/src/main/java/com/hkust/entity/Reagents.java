@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @TableName("hkust_reagents")
@@ -18,7 +18,8 @@ public class Reagents {
     @TableField("door_id")
     private String doorId;
 
-    private String barcode;
+    @TableField("barcode")
+    private String barCode;
 
     @TableField("cabinet_id")
     private String cabinetId;
@@ -37,14 +38,14 @@ public class Reagents {
     private LocalDate expireDate;
 
     @TableField("is_expire")
-    private String isExpire;
+    private Boolean isExpire;
 
     private String operator;
     @TableField("add_date")
-    private LocalDate addDate;
+    private LocalDateTime addDate;
 
     @TableField("update_date")
-    private Local updateDate;
+    private LocalDateTime updateDate;
 
     private String remark;
 

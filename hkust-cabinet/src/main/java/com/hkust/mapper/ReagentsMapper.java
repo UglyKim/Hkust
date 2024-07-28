@@ -6,4 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ReagentsMapper extends BaseMapper<Reagents> {
+
+
+    Reagents selectByCabinetIdAndDoorId(String cabinetId, String doorId);
 }

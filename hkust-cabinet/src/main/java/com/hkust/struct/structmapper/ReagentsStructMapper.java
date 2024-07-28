@@ -7,11 +7,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface ResponseStructMapper {
+public interface ReagentsStructMapper {
 
-    ResponseStructMapper INSTANCE = Mappers.getMapper(ResponseStructMapper.class);
+    ReagentsStructMapper INSTANCE = Mappers.getMapper(ReagentsStructMapper.class);
 
-    ReagentsVO toVO(Reagents reagents);
+    ReagentsVO toReagentsVO(Reagents reagents);
 
-    Reagents toAO(ReagentsAO reagentsAO);
+    Reagents toReagents(ReagentsAO reagentsAO);
 }

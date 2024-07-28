@@ -20,7 +20,9 @@ public enum ReturnCode {
     CABINET_DOOR_IS_NULL("24", "柜门不存在"),
 
     DB_UPDATE_ERROR("31", "更新数据失败"),
-    DB_INSERT_ERROR("32", "新增数据失败");
+    DB_INSERT_ERROR("32", "新增数据失败"),
+
+    REAGENTS_EXPIRED("50", "试剂已到期");
 
     private final String code;
 
