@@ -17,10 +17,10 @@ public class EnumToJsonUtils {
     /**
      * example ：
      * [
-     * {
-     * "code": "1",
-     * "name": "开柜门"
-     * }
+     *  {
+     *      "code": "1",
+     *      "name": "开柜门"
+     *  }
      * ]
      *
      * @param enumClass
@@ -48,8 +48,8 @@ public class EnumToJsonUtils {
     /**
      * example ：
      * {
-     * "1": "正常",
-     * "2": "故障"
+     *      "1": "正常",
+     *      "2": "故障"
      * }
      *
      * @param enumClass
