@@ -104,6 +104,17 @@ public class ReagentsService {
         return ApiResponse.success();
     }
 
+    public ApiResponse delReagents(String barCode) {
+        QueryWrapper<Reagents> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("barcode", barCode);
+        try {
+            reagentsMapper.delete(queryWrapper);
+        } catch (Exception e) {
+            return ApiResponse.failed(ReturnCode.REAGENTS_DELETE_FAILED);
+        }
+        return ApiResponse.success();
+    }
+
     @Autowired
     public void setReagentsMapper(ReagentsMapper reagentsMapper) {
         this.reagentsMapper = reagentsMapper;

@@ -22,7 +22,8 @@ public enum ReturnCode {
     DB_UPDATE_ERROR("31", "更新数据失败"),
     DB_INSERT_ERROR("32", "新增数据失败"),
 
-    REAGENTS_EXPIRED("50", "试剂已到期");
+    REAGENTS_EXPIRED("50", "试剂已到期"),
+    REAGENTS_DELETE_FAILED("51", "试剂删除失败");
 
     private final String code;
 

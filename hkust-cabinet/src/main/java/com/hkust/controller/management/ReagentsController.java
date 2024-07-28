@@ -43,9 +43,9 @@ public class ReagentsController {
 
     @Operation(summary = "删除试剂")
     @PostMapping("/delete")
-    public ApiResponse<PageResponse> deleteReagents(@RequestParam String doorId) {
-        log.info("received door_id:{}", doorId);
-        return reagentsService.getReagentsRecordList(doorId);
+    public ApiResponse<PageResponse> deleteReagents(@RequestParam String barCode) {
+        log.info("received barCode:{}", barCode);
+        return reagentsService.delReagents(barCode);
     }
 
     @Autowired
