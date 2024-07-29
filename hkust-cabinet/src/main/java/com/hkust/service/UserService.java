@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.UserAlterInfoAO;
@@ -15,8 +16,11 @@ import com.hkust.entity.User;
 import com.hkust.enums.EnableEnum;
 import com.hkust.enums.GenderEnum;
 import com.hkust.mapper.UserMapper;
+import com.hkust.security.CustomUserDetails;
 import com.hkust.struct.structmapper.UserStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +41,14 @@ public class UserService {
         return users;
     }
 
-    public User getUserByUserName(String userName) {
-        User user = userMapper.selectByUserName(userName);
-        return user;
+    public ApiResponse getUserInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+        if (ObjectUtil.isEmpty(user)) {
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
+        }
+        UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
+        return ApiResponse.success(userVO);
     }
 
     public ApiResponse addUser(UserInfoAO userInfoAO) {

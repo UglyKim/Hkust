@@ -33,22 +33,9 @@ public class UserController {
     private UserService userService;
 
     @Operation(summary = "获取用户信息")
-    @GetMapping("/info")
+    @PostMapping("/info")
     public ApiResponse getUserInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof User) {
-                User user = (User) principal;
-                UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
-                return ApiResponse.success(userVO);
-            } else {
-                User user = userService.getUserByUserName(((org.springframework.security.core.userdetails.User) principal).getUsername());
-                UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
-                return ApiResponse.success(userVO);
-            }
-        }
-        throw new NullPointerException();
+        return userService.getUserInfo();
     }
 
     @Operation(summary = "用户列表")

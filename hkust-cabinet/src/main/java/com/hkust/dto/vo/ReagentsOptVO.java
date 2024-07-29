@@ -10,6 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class ReagentsOptVO {
 
+
+    private static final long serialVersionUID = 976811098787630109L;
+
     @Schema(required = true, description = "柜门ID")
     private String doorId;
 

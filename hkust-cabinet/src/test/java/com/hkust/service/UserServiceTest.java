@@ -27,12 +27,4 @@ class UserServiceTest extends HkustBaseTest {
         Assert.notNull(users, "Users list should not be null");
     }
 
-    @Test
-    void getUserByUserName() {
-        User user = userService.getUserByUserName(USER_NAME);
-        Assert.notNull(user, "User should not be null");
-        assertEquals("root", USER_NAME);
-        log.info(user.getUsername());
-        log.info(user.getPassword());
-    }
 }

@@ -16,4 +16,10 @@
         FROM hkust_user
         WHERE student_id = #{student_id}
     </select>
+    <select id="selectByStudentIdAndPasswd" parameterType="map" resultType="com.hkust.entity.User">
+        SELECT *
+        FROM hkust_user
+        WHERE student_id = #{studentId}
+          AND password = #{password}
+    </select>
 </mapper>

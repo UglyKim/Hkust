@@ -1,9 +1,12 @@
 package com.hkust.controller.auth;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.LoginInfoAO;
+import com.hkust.entity.User;
+import com.hkust.mapper.UserMapper;
 import com.hkust.security.CustomUserDetails;
 import com.hkust.security.CustomUserDetailsService;
 import com.hkust.security.dto.JwtRequest;
@@ -16,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,15 +32,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthJwtController {
 
+    private UserMapper userMapper;
+
     private AuthenticationManager authenticationManager;
 
     private JwtTokenUtil jwtTokenUtil;
 
     private CustomUserDetailsService userDetailsService;
 
+    private PasswordEncoder BCryptPasswordEncoder;
+
     @Operation(summary = "登陆认证")
     @PostMapping("/auth/login")
-    public ApiResponse createAuthenticationToken(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
+    public ApiResponse userAuthentication(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
         log.info("Received authentication login_info: {}", JSONUtil.toJsonPrettyStr(loginInfoAO));
 
        /* try {
@@ -47,11 +56,28 @@ public class AuthJwtController {
             throw new Exception("Invalid username or password", e);
         }*/
         CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(loginInfoAO.getStudentId());
+
+        if (!BCryptPasswordEncoder.matches(loginInfoAO.getPassword(), userDetails.getUser().getPassword())) {
+            return ApiResponse.failed(ReturnCode.PASSWD_MISMATCH);
+        }
+
         if (!userDetails.isEnabled()) {
             return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
         }
+        return ApiResponse.success(jwtTokenUtil.generateToken(userDetails));
+
+        /*PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        userMapper.selectByStudentId(loginInfoAO.)
+        User user = userMapper.selectByStudentIdAndPasswd(loginInfoAO.getStudentId(), BCryptPasswordEncoder.encode(loginInfoAO.getPassword()));
+        if (ObjectUtil.isEmpty(user)) {
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
+        }
+        if (!user.getEnabled()) {
+            return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
+        }
+        CustomUserDetails userDetails = new CustomUserDetails(user);
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        return ApiResponse.success(jwt);
+        return ApiResponse.success(jwt);*/
     }
 
     /**
@@ -93,5 +119,15 @@ public class AuthJwtController {
     @Autowired
     public void setUserDetailsService(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
+    }
+
+    @Autowired
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    @Autowired
+    public void setBCryptPasswordEncoder(PasswordEncoder BCryptPasswordEncoder) {
+        this.BCryptPasswordEncoder = BCryptPasswordEncoder;
     }
 }
