@@ -1,5 +1,6 @@
 package com.hkust.security;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.hkust.entity.User;
 import com.hkust.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String studentId) throws UsernameNotFoundException {
 
         User user = userMapper.selectByStudentId(studentId);
-        log.info("selected user_name:{}", user.getUsername());
+        if (ObjectUtil.isEmpty(user)) {
+            throw new UsernameNotFoundException("user is null!");
+        }
         if (user.getStudentId().equals(studentId)) {
             return new CustomUserDetails(user);
         } else {
@@ -48,19 +51,19 @@ public class CustomUserDetailsService implements UserDetailsService {
 //        }
         return null;
     }
-/**
- *
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        com.hkust.entity.User user = userMapper.selectByUserName(username);
-        log.info("selected user_name:{}", user.getUsername());
-        if (user.getUsername().equals(username)) {
-            return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
-        } else {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
-    }*/
+    /**
+     * @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+     * <p>
+     * com.hkust.entity.User user = userMapper.selectByUserName(username);
+     * log.info("selected user_name:{}", user.getUsername());
+     * if (user.getUsername().equals(username)) {
+     * return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+     * } else {
+     * throw new UsernameNotFoundException("User not found with username: " + username);
+     * }
+     * }
+     */
 
     // 不接数据库的代码块
        /* PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

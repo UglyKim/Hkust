@@ -48,6 +48,7 @@ public class UserService {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
+        userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getCode() : EnableEnum.NO.getCode());
         return ApiResponse.success(userVO);
     }
 
