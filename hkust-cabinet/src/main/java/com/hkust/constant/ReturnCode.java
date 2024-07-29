@@ -25,10 +25,15 @@ public enum ReturnCode {
 
     DB_UPDATE_ERROR("31", "更新数据失败"),
     DB_INSERT_ERROR("32", "新增数据失败"),
+    DB_ERROR("33", "数据库操作失败"),
+    SYSTEM_ERROR("100", "系统错误!"),
 
     REAGENTS_EXPIRED("50", "试剂已到期"),
     REAGENTS_DELETE_FAILED("51", "试剂删除失败"),
-    REAGENTS_IS_NULL("52", "试剂不存在");
+    REAGENTS_IS_NULL("52", "试剂不存在"),
+    REAGENTS_OUT("53", "试剂不在柜"),
+    REAGENTS_RECORD_FAILED("54", "试剂操作记录插入失败"),
+    REAGENTS_DOOR_MISMATCH("55", "请归还至指定柜子");
 
     private final String code;
 

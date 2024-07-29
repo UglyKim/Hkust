@@ -3,18 +3,18 @@ package com.hkust.service;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.ReagentsAO;
 import com.hkust.dto.ao.ReturnReagentsAO;
+import com.hkust.dto.vo.InOutEnum;
 import com.hkust.dto.vo.ReagentsOptVO;
 import com.hkust.dto.vo.ReagentsVO;
-import com.hkust.dto.vo.TakeReagentsVO;
+import com.hkust.dto.vo.OptReagentsVO;
 import com.hkust.entity.*;
-import com.hkust.enums.ReagentsOptTypeEnum;
+import com.hkust.enums.EventTypeEnum;
 import com.hkust.mapper.CabinetDoorMapper;
 import com.hkust.mapper.CabinetMapper;
 import com.hkust.mapper.ReagentsMapper;
@@ -27,7 +27,6 @@ import com.hkust.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -45,11 +44,13 @@ public class ReagentsService {
 
     private CabinetMapper cabinetMapper;
 
-    public ApiResponse<PageResponse> getReagentsList(String cabinetId) {
+    public ApiResponse<PageResponse> getReagentsList(String doorId) {
 
         Page<Reagents> page = new Page<>(1, 20);
 
         QueryWrapper<Reagents> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("door_id", doorId).eq("in_out", InOutEnum.IN.getCode());
+
         IPage<Reagents> reagentsIPage = reagentsMapper.selectPage(page, queryWrapper);
         List<Reagents> reagentList = reagentsIPage.getRecords();
         List<ReagentsVO> reagentsVOList = new ArrayList<>();
@@ -100,6 +101,7 @@ public class ReagentsService {
         reagents.setAddDate(DateUtils.getCurrentDateTime());
         reagents.setUpdateDate(DateUtils.getCurrentDateTime());
         reagents.setIsExpire(false);
+        reagents.setInOut(InOutEnum.IN.getCode());
         try {
             reagentsMapper.insert(reagents);
             return ApiResponse.success();
@@ -133,24 +135,37 @@ public class ReagentsService {
         if (ObjectUtil.isEmpty(reagents)) {
             return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
         }
+        if (reagents.getInOut().equals(InOutEnum.OUT.getCode())) {
+            return ApiResponse.failed(ReturnCode.REAGENTS_OUT);
+        }
 
         LocalDateTime takeTime = DateUtils.getCurrentDateTime();
         // 添加操作记录到数据库
-        this.insertRecord(user.getStudentId(), reagents, takeTime, ReagentsOptTypeEnum.TAKE);
+        this.insertRecord(user.getStudentId(), reagents, takeTime, EventTypeEnum.TAKE);
+
+        // 更新试剂状态为离柜
+        reagents.setInOut(InOutEnum.OUT.getCode());
+        reagentsMapper.updateById(reagents);
 
         //组装返回
-        TakeReagentsVO takeReagentsVO = new TakeReagentsVO();
-        takeReagentsVO.setRealName(realName);
-        takeReagentsVO.setTakeTime(takeTime);
-        return ApiResponse.success(takeReagentsVO);
+        OptReagentsVO optReagentsVO = new OptReagentsVO();
+        optReagentsVO.setRealName(realName);
+        optReagentsVO.setTakeTime(takeTime);
+        optReagentsVO.setOptType(EventTypeEnum.TAKE.getName());
+        return ApiResponse.success(optReagentsVO);
     }
 
 
     public ApiResponse returnReagents(ReturnReagentsAO returnReagentsAO) {
+
         Reagents reagents = reagentsMapper.selectByBarCode(returnReagentsAO.getBarCode());
         if (ObjectUtil.isEmpty(reagents)) {
             return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
         }
+        if (!returnReagentsAO.getDoorId().equals(reagents.getDoorId())) {
+            return ApiResponse.failed(ReturnCode.REAGENTS_DOOR_MISMATCH);
+        }
+
         // 更新试剂信息
         reagents.setUpdateDate(DateUtils.getCurrentDateTime());
         reagents.setReagentWeight(returnReagentsAO.getReagentWeight());
@@ -163,19 +178,25 @@ public class ReagentsService {
         }
         studentId = user.getStudentId();
         reagents.setOperator(studentId);
+        reagents.setInOut(InOutEnum.IN.getCode());
         reagentsMapper.updateById(reagents);
 
         // 添加操作记录
-        this.insertRecord(studentId, reagents, DateUtils.getCurrentDateTime(), ReagentsOptTypeEnum.RETURN);
+        this.insertRecord(studentId, reagents, DateUtils.getCurrentDateTime(), EventTypeEnum.RETURN);
 
-        return ApiResponse.success();
+        OptReagentsVO optReagentsVO = new OptReagentsVO();
+        optReagentsVO.setRealName(user.getRealName());
+        optReagentsVO.setTakeTime(DateUtils.getCurrentDateTime());
+        optReagentsVO.setOptType(EventTypeEnum.TAKE.getName());
+
+        return ApiResponse.success(optReagentsVO);
     }
 
-    private void insertRecord(String studentId, Reagents reagents, LocalDateTime takeTime, ReagentsOptTypeEnum optTypeEnum) {
+    private void insertRecord(String studentId, Reagents reagents, LocalDateTime takeTime, EventTypeEnum eventTypeEnum) {
         // 添加操作记录到数据库
         ReagentsRecord reagentsRecord = new ReagentsRecord();
         reagentsRecord.setRecordId(UUIDUtils.generateUUIDWithoutHyphens());
-        reagentsRecord.setType(optTypeEnum.getCode());
+        reagentsRecord.setType(eventTypeEnum.getCode());
         reagentsRecord.setDoorId(reagents.getDoorId());
         reagentsRecord.setOptTime(takeTime);
         reagentsRecord.setOptStudentId(studentId);

@@ -18,20 +18,23 @@ public class ReturnReagentsAO {
     private String doorId;
 
     @Schema(required = true, description = "瓶身重量")
+    @NotNull
     private String bottleWeight;
 
     @Schema(required = true, description = "试剂重量")
+    @NotNull
     private String reagentWeight;
 
-    @Schema(required = true, description = "到期日")
-    @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    private LocalDate expireDate;
+//    @Schema(required = true, description = "到期日")
+//    @NotNull
+//    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+//    private LocalDate expireDate;
 
     @Schema(description = "备注")
     private String remark;
 
     @Schema(required = true, description = "条形码")
+    @NotNull
     private String barCode;
 
 }

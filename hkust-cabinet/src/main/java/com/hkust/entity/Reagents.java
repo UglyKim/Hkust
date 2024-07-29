@@ -47,6 +47,9 @@ public class Reagents {
     @TableField("update_date")
     private LocalDateTime updateDate;
 
+    @TableField("in_out")
+    private String inOut;
+
     private String remark;
 
 

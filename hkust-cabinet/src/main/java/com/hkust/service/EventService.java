@@ -26,36 +26,39 @@ public class EventService {
 
     /**
      * 指查询存取记录
+     *
      * @param eventQueryAO
      * @return
      */
     public ApiResponse<PageResponse> getEventList(EventQueryAO eventQueryAO) {
-        int pageNum = 1;
-        if (ObjUtil.isNotEmpty(eventQueryAO.getPageNum())) {
-            pageNum = eventQueryAO.getPageNum();
-        }
-        Page<Event> page = new Page<>(pageNum, 20);
-        QueryWrapper<Event> queryWrapper = new QueryWrapper<>();
-        // TODO: 查询条件
-        queryWrapper.eq("type", EventTypeEnum.GET.name()).or().eq("type", EventTypeEnum.RETURN.name()).orderByDesc("opt_date");
-
-//        if (eventName != null && !eventName.isEmpty()) {
-//            queryWrapper.like("event_name", eventName);
+//        int pageNum = 1;
+//        if (ObjUtil.isNotEmpty(eventQueryAO.getPageNum())) {
+//            pageNum = eventQueryAO.getPageNum();
 //        }
-        IPage<Event> eventIPage = eventMapper.selectPage(page, queryWrapper);
-        List<Event> eventList = eventIPage.getRecords();
-        List<EventVO> eventVOList = new ArrayList<>();
-        for (Event event : eventList) {
-            EventVO eventVO = EventStructMapper.INSTANCE.toVO(event);
-            eventVOList.add(eventVO);
-        }
-
-        PageResponse pageResponse = new PageResponse<EventVO>(eventQueryAO.getPageNum(), 20, eventIPage.getTotal(), eventVOList);
-        return ApiResponse.success(pageResponse);
+//        Page<Event> page = new Page<>(pageNum, 20);
+//        QueryWrapper<Event> queryWrapper = new QueryWrapper<>();
+//        // TODO: 查询条件
+//        queryWrapper.eq("type", EventTypeEnum.GET.name()).or().eq("type", EventTypeEnum.RETURN.name()).orderByDesc("opt_date");
+//
+////        if (eventName != null && !eventName.isEmpty()) {
+////            queryWrapper.like("event_name", eventName);
+////        }
+//        IPage<Event> eventIPage = eventMapper.selectPage(page, queryWrapper);
+//        List<Event> eventList = eventIPage.getRecords();
+//        List<EventVO> eventVOList = new ArrayList<>();
+//        for (Event event : eventList) {
+//            EventVO eventVO = EventStructMapper.INSTANCE.toVO(event);
+//            eventVOList.add(eventVO);
+//        }
+//
+//        PageResponse pageResponse = new PageResponse<EventVO>(eventQueryAO.getPageNum(), 20, eventIPage.getTotal(), eventVOList);
+//        return ApiResponse.success(pageResponse);
+        return null;
     }
 
     /**
      * 查询所有记录
+     *
      * @param eventQueryAO
      * @return
      */

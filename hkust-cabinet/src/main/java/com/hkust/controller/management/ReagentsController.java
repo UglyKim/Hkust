@@ -5,7 +5,9 @@ import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.ReagentsAO;
 import com.hkust.dto.ao.ReturnReagentsAO;
+import com.hkust.dto.vo.InOutEnum;
 import com.hkust.service.ReagentsService;
+import com.hkust.utils.EnumToJsonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +32,9 @@ public class ReagentsController {
 
     @Operation(summary = "试剂列表")
     @PostMapping("/list")
-    public ApiResponse<PageResponse> getReagentsList(@RequestParam String cabinetId) {
-        log.info("received cabinet_id is:{}", cabinetId);
-        return reagentsService.getReagentsList(cabinetId);
+    public ApiResponse<PageResponse> getReagentsList(@RequestParam String doorId) {
+        log.info("received doorId is:{}", doorId);
+        return reagentsService.getReagentsList(doorId);
     }
 
     @Operation(summary = "试剂存取记录")
@@ -44,23 +46,29 @@ public class ReagentsController {
 
     @Operation(summary = "取试剂")
     @PostMapping("/take")
-    public ApiResponse<PageResponse> takeReagents(@RequestParam String barCode) {
+    public ApiResponse takeReagents(@RequestParam String barCode) {
         log.info("received barcode:{}", barCode);
         return reagentsService.takeReagents(barCode);
     }
 
     @Operation(summary = "还试剂")
-    @PostMapping("/delete")
-    public ApiResponse<PageResponse> returnReagents(@RequestBody ReturnReagentsAO returnReagentsAO) {
+    @PostMapping("/return")
+    public ApiResponse returnReagents(@RequestBody ReturnReagentsAO returnReagentsAO) {
         log.info("received return reagents:{}", returnReagentsAO);
         return reagentsService.returnReagents(returnReagentsAO);
     }
 
-    @Operation(summary = "归还试剂")
-    @PostMapping("/return")
-    public ApiResponse<PageResponse> delReagents(@RequestParam String barCode) {
+    @Operation(summary = "删除试剂")
+    @PostMapping("/delete")
+    public ApiResponse delReagents(@RequestParam String barCode) {
         log.info("received barCode:{}", barCode);
         return reagentsService.delReagents(barCode);
+    }
+
+    @Operation(summary = "是否在柜 0:在柜 1:离柜")
+    @PostMapping("/inout")
+    public ApiResponse getGender() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(InOutEnum.class));
     }
 
     @Autowired

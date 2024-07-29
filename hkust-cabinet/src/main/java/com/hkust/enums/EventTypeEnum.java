@@ -7,7 +7,7 @@ public enum EventTypeEnum {
 
     OPEN("1", "开柜门"),
     CLOSE("2", "关柜门"),
-    GET("3", "取试剂"),
+    TAKE("3", "取试剂"),
     RETURN("4", "归还试剂");
 
     private String code;

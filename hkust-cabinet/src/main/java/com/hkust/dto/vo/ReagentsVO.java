@@ -19,7 +19,7 @@ public class ReagentsVO {
     private String reagentsId;
 
     @Schema(required = true, description = "条形码")
-    private String barcode;
+    private String barCode;
 
     @Schema(required = true, description = "智能柜ID")
     private String cabinetNo;
