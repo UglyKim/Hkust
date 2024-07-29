@@ -22,7 +22,7 @@ public class CabinetLogController {
 
     private EventService eventService;
 
-    @Operation(summary = "日志列表", description = "日志列表")
+    @Operation(summary = "日志列表")
     @PostMapping("/list")
     public ApiResponse getLogList(@RequestBody EventQueryAO eventQueryAO) {
         log.info("received event_query_info:{}", StrUtil.toString(eventQueryAO));

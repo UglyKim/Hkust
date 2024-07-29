@@ -136,7 +136,7 @@ public class ReagentsService {
 
         LocalDateTime takeTime = DateUtils.getCurrentDateTime();
         // 添加操作记录到数据库
-        this.insertRecord(user.getStudentId(), reagents, takeTime);
+        this.insertRecord(user.getStudentId(), reagents, takeTime, ReagentsOptTypeEnum.TAKE);
 
         //组装返回
         TakeReagentsVO takeReagentsVO = new TakeReagentsVO();
@@ -166,16 +166,16 @@ public class ReagentsService {
         reagentsMapper.updateById(reagents);
 
         // 添加操作记录
-        this.insertRecord(studentId, reagents, DateUtils.getCurrentDateTime());
+        this.insertRecord(studentId, reagents, DateUtils.getCurrentDateTime(), ReagentsOptTypeEnum.RETURN);
 
         return ApiResponse.success();
     }
 
-    private void insertRecord(String studentId, Reagents reagents, LocalDateTime takeTime) {
+    private void insertRecord(String studentId, Reagents reagents, LocalDateTime takeTime, ReagentsOptTypeEnum optTypeEnum) {
         // 添加操作记录到数据库
         ReagentsRecord reagentsRecord = new ReagentsRecord();
         reagentsRecord.setRecordId(UUIDUtils.generateUUIDWithoutHyphens());
-        reagentsRecord.setType(ReagentsOptTypeEnum.TAKE.getCode());
+        reagentsRecord.setType(optTypeEnum.getCode());
         reagentsRecord.setDoorId(reagents.getDoorId());
         reagentsRecord.setOptTime(takeTime);
         reagentsRecord.setOptStudentId(studentId);

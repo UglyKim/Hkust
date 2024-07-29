@@ -72,13 +72,13 @@ public class UserController {
         return userService.updateUser(userAlterInfoAO);
     }
 
-    @Operation(summary = "用户是否启用", description = "用户是否启用")
+    @Operation(summary = "用户是否启用")
     @PostMapping("/enabled")
     public ApiResponse getUserEnabled() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(EnableEnum.class));
     }
 
-    @Operation(summary = "性别", description = "性别")
+    @Operation(summary = "性别")
     @PostMapping("/gender")
     public ApiResponse getGender() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonArray(GenderEnum.class));
