@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 public enum StatEnum {
 
     NORMAL("1", "正常"),
-    FAULT("2", "故障");
+    FAULT("0", "故障");
 
     private String code;
 

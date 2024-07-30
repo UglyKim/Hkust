@@ -43,13 +43,14 @@ public class OptSynController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "multipart/form-data",
                     schema = @Schema(type = "string", format = "binary"))))
     @PostMapping("/video/upload")
-    public ApiResponse handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
         log.info("Received  file: {}", file.getOriginalFilename());
-        if (file.isEmpty()) {
-            log.error("File is empty");
-            return ApiResponse.failed(ReturnCode.FILE_IS_NULL);
-        }
-        return videoService.videoUpload(file);
+        return null;
+//        if (file.isEmpty()) {
+//            log.error("File is empty");
+//            return ApiResponse.failed(ReturnCode.FILE_IS_NULL);
+//        }
+//        return videoService.videoUpload(file);
     }
 
     @Operation(summary = "操作列表")

@@ -3,6 +3,7 @@ package com.hkust.controller.management;
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.CabinetAO;
+import com.hkust.dto.vo.CabinetDetailVO;
 import com.hkust.dto.vo.CabinetVO;
 import com.hkust.enums.OpenModeEnum;
 import com.hkust.enums.StatEnum;
@@ -24,7 +25,7 @@ public class CabinetController {
 
     @Operation(summary = "柜子详细信息")
     @PostMapping("/detail")
-    public ApiResponse<CabinetVO> getCabinetInfo(@RequestParam String cabinetId) {
+    public ApiResponse<CabinetDetailVO> getCabinetInfo(@RequestParam String cabinetId) {
         log.info("received cabinet ID:{}", cabinetId);
         return cabinetService.getCabinetDetails(cabinetId);
     }
@@ -68,6 +69,7 @@ public class CabinetController {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OpenModeEnum.class));
     }
 
+    @Deprecated
     @Operation(summary = "统计")
     @PostMapping("/statistics")
     public ApiResponse reagentStatistics() {

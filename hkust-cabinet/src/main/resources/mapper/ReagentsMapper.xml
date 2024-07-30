@@ -11,4 +11,40 @@
         FROM hkust_reagents
         where barcode = #{barcode};
     </select>
+
+    <select id="selectCntByCabinet" parameterType="java.lang.String" resultType="int">
+        select count(*)
+        from hkust_reagents
+        where cabinet_id = #{cabinetId}
+    </select>
+    <select id="selectCntByInCabinet" parameterType="java.lang.String" resultType="int">
+        select count(*)
+        from hkust_reagents
+        where in_out = '0'
+          and cabinet_id = #{cabinetId};
+    </select>
+    <select id="selectCntByOutCabinet" parameterType="java.lang.String" resultType="int">
+        select count(*)
+        from hkust_reagents
+        where in_out = '1'
+          and cabinet_id = #{cabinetId};
+    </select>
+
+    <select id="selectCntByCabinetDoor" parameterType="java.lang.String" resultType="int">
+        select count(*)
+        from hkust_reagents
+        where door_id = #{doorId}
+    </select>
+    <select id="selectCntByInCabinetDoor" parameterType="java.lang.String" resultType="int">
+        select count(*)
+        from hkust_reagents
+        where in_out = '1'
+          and door_id = #{doorId};
+    </select>
+    <select id="selectCntByOutCabinetDoor" parameterType="java.lang.String" resultType="int">
+        select count(*)
+        from hkust_reagents
+        where in_out = '0'
+          and door_id = #{doorId};
+    </select>
 </mapper>

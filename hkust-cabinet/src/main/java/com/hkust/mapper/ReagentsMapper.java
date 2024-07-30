@@ -11,4 +11,16 @@ public interface ReagentsMapper extends BaseMapper<Reagents> {
     Reagents selectByCabinetIdAndDoorId(String cabinetId, String doorId);
 
     Reagents selectByBarCode(String barCode);
+
+    int selectCntByCabinet(String cabinetId);
+
+    int selectCntByInCabinet(String cabinetId);
+
+    int selectCntByOutCabinet(String cabinetId);
+
+    int selectCntByCabinetDoor(String doorId);
+
+    int selectCntByInCabinetDoor(String doorId);
+
+    int selectCntByOutCabinetDoor(String doorId);
 }
