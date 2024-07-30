@@ -18,6 +18,9 @@ public class ReagentsRecord {
     @TableField("barcode")
     private String barCode;
 
+    @TableField("cabinet_id")
+    private String cabinetId;
+
     @TableField("door_id")
     private String doorId;
 

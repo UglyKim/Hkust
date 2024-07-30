@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Getter
 @JsonPropertyOrder({"cabinetId", "location", "cabinetAddr"})
-public class CabinetAO {
+public class CabinetAO implements Serializable {
 
     private static final long serialVersionUID = 5926468583003330707L;
 

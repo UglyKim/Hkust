@@ -3,10 +3,11 @@ package com.hkust.dto.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class OptReagentsVO {
+public class OptReagentsVO implements Serializable {
 
     private static final long serialVersionUID = 3450800000003909090L;
 

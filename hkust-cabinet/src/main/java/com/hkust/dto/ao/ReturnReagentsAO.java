@@ -5,11 +5,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
 @Schema(description = "归还试剂")
-public class ReturnReagentsAO {
+public class ReturnReagentsAO implements Serializable {
 
     private static final long serialVersionUID = 198765483005150333L;
 

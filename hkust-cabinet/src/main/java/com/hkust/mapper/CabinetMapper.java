@@ -9,5 +9,7 @@ import java.util.List;
 @Mapper
 public interface CabinetMapper extends BaseMapper<Cabinet> {
 
+    Cabinet selectByDoorId(String doorId);
+
     List<Cabinet> selectAll();
 }

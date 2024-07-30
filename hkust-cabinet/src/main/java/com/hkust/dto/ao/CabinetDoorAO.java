@@ -4,8 +4,10 @@ import com.hkust.enums.DoorTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Getter
-public class CabinetDoorAO {
+public class CabinetDoorAO implements Serializable {
 
     private static final long serialVersionUID = 8926468583003330109L;
 

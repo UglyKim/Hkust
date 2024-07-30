@@ -6,11 +6,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalTime;
 
 @Getter
 @JsonPropertyOrder({"username", "phone", "realName"})
-public class UserInfoAO {
+public class UserInfoAO implements Serializable {
 
     private static final long serialVersionUID = 987468583005150707L;
 

@@ -4,9 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Getter
-public class ReagentsQueryAO {
+public class ReagentsQueryAO implements Serializable {
 
     private static final long serialVersionUID = 8926400009876330109L;
 

@@ -6,10 +6,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
-public class ReagentsAO {
+public class ReagentsAO implements Serializable {
 
     private static final long serialVersionUID = 983368583005150707L;
 

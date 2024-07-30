@@ -4,10 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 //@JsonIncludeProperties({"cabinetId", "cabinetName", "location", "cabinetAddr"})
-public class DoorVO {
+public class DoorVO implements Serializable {
 
     private static final long serialVersionUID = 3344558583003330109L;
 

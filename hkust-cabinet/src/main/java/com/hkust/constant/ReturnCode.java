@@ -34,8 +34,9 @@ public enum ReturnCode {
     REAGENTS_OUT("53", "试剂不在柜"),
     REAGENTS_IN("56", "试剂已在柜"),
     REAGENTS_RECORD_FAILED("54", "试剂操作记录插入失败"),
-    REAGENTS_DOOR_MISMATCH("55", "请归还至指定柜子");
+    REAGENTS_DOOR_MISMATCH("55", "请归还至指定柜子"),
 
+    FILE_IS_NULL("61", "空录像");
     private final String code;
 
     private final String message;

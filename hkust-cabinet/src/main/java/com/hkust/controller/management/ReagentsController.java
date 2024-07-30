@@ -3,6 +3,7 @@ package com.hkust.controller.management;
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
+import com.hkust.dto.ao.AccessReagentsAO;
 import com.hkust.dto.ao.ReagentsAO;
 import com.hkust.dto.ao.ReturnReagentsAO;
 import com.hkust.dto.ao.query.ReagentsQueryAO;
@@ -47,9 +48,9 @@ public class ReagentsController {
 
     @Operation(summary = "试剂存取记录")
     @PostMapping("/access/list")
-    public ApiResponse<PageResponse> accessReagentsList(@RequestParam String doorId) {
-        log.info("received door_id:{}", doorId);
-        return reagentsService.getReagentsRecordList(doorId);
+    public ApiResponse<PageResponse> accessReagentsList(@RequestBody AccessReagentsAO accessReagentsAO) {
+        log.info("received access reagents record:{}", JSONUtil.toJsonPrettyStr(accessReagentsAO));
+        return reagentsService.getReagentsRecordList(accessReagentsAO);
     }
 
     @Operation(summary = "取试剂")

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
+import com.hkust.dto.ao.AccessReagentsAO;
 import com.hkust.dto.ao.ReagentsAO;
 import com.hkust.dto.ao.ReturnReagentsAO;
 import com.hkust.dto.ao.query.ReagentsQueryAO;
@@ -16,10 +17,8 @@ import com.hkust.dto.vo.ReagentsVO;
 import com.hkust.dto.vo.OptReagentsVO;
 import com.hkust.entity.*;
 import com.hkust.enums.EventTypeEnum;
-import com.hkust.mapper.CabinetDoorMapper;
-import com.hkust.mapper.CabinetMapper;
-import com.hkust.mapper.ReagentsMapper;
-import com.hkust.mapper.ReagentsRecordMapper;
+import com.hkust.enums.StatEnum;
+import com.hkust.mapper.*;
 import com.hkust.security.CustomUserDetails;
 import com.hkust.struct.structmapper.ReagentsRecordStructMapper;
 import com.hkust.struct.structmapper.ReagentsStructMapper;
@@ -47,6 +46,8 @@ public class ReagentsService {
     private CabinetDoorMapper cabinetDoorMapper;
 
     private CabinetMapper cabinetMapper;
+
+    private UserMapper userMapper;
 
     public ApiResponse<PageResponse> getReagentsList(ReagentsQueryAO reagentsQueryAO) {
 
@@ -80,24 +81,32 @@ public class ReagentsService {
         return ApiResponse.success(pageResponse);
     }
 
-    public ApiResponse<PageResponse> getReagentsRecordList(String cabinetId) {
-        Cabinet cabinet = cabinetMapper.selectById(cabinetId);
-        if (ObjectUtil.isEmpty(cabinet)) {
-            return ApiResponse.failed(ReturnCode.CABINET_IS_NULL);
+    public ApiResponse<PageResponse> getReagentsRecordList(AccessReagentsAO accessReagentsAO) {
+        CabinetDoor cabinetDoor = cabinetDoorMapper.selectById(accessReagentsAO.getDoorId());
+        if (ObjectUtil.isEmpty(cabinetDoor)) {
+            return ApiResponse.failed(ReturnCode.CABINET_DOOR_IS_NULL);
         }
-        Page<ReagentsRecord> page = new Page<>(1, 20);
+
+        Page<ReagentsRecord> page = new Page<>(accessReagentsAO.getPageNum(), accessReagentsAO.getPageSize());
 
         QueryWrapper<ReagentsRecord> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("cabinet_id", cabinet);
+        if (ObjectUtil.isNotEmpty(accessReagentsAO.getCabinetId())) {
+            queryWrapper.eq("cabinet_id", accessReagentsAO.getCabinetId());
+        }
+        if (ObjectUtil.isNotEmpty(accessReagentsAO.getDoorId())) {
+            queryWrapper.eq("door_id", accessReagentsAO.getDoorId());
+        }
         IPage<ReagentsRecord> reagentsRecordIPage = reagentsRecordMapper.selectPage(page, queryWrapper);
         List<ReagentsRecord> reagentsRecordList = reagentsRecordIPage.getRecords();
 
         List<ReagentsOptVO> reagentsOptVOList = new ArrayList<>();
         for (ReagentsRecord reagentsRecord : reagentsRecordList) {
             ReagentsOptVO reagentsOptVO = ReagentsRecordStructMapper.INSTANCE.toVO(reagentsRecord);
+            User user = userMapper.selectByStudentId(reagentsRecord.getOptStudentId());
+            reagentsOptVO.setOptUserName(user.getRealName());
             reagentsOptVOList.add(reagentsOptVO);
         }
-        PageResponse pageResponse = new PageResponse(1, 20, reagentsRecordIPage.getTotal(), reagentsRecordList);
+        PageResponse pageResponse = new PageResponse(accessReagentsAO.getPageNum(), accessReagentsAO.getPageSize(), reagentsRecordIPage.getTotal(), reagentsRecordList);
         return ApiResponse.success(pageResponse);
     }
 
@@ -161,7 +170,7 @@ public class ReagentsService {
 
         LocalDateTime takeTime = DateUtils.getCurrentDateTime();
         // 添加操作记录到数据库
-        this.insertRecord(user.getStudentId(), reagents, takeTime, EventTypeEnum.TAKE);
+        this.insertRecord(user.getStudentId(), reagents, takeTime, EventTypeEnum.TAKE, reagents.getCabinetId());
 
         // 更新试剂状态为离柜
         reagents.setInOut(InOutEnum.OUT.getCode());
@@ -216,7 +225,7 @@ public class ReagentsService {
         reagentsMapper.updateById(reagents);
 
         // 添加操作记录
-        this.insertRecord(studentId, reagents, DateUtils.getCurrentDateTime(), EventTypeEnum.RETURN);
+        this.insertRecord(studentId, reagents, DateUtils.getCurrentDateTime(), EventTypeEnum.RETURN, returnReagentsAO.getDoorId());
 
         OptReagentsVO optReagentsVO = new OptReagentsVO();
         optReagentsVO.setRealName(user.getRealName());
@@ -226,7 +235,7 @@ public class ReagentsService {
         return ApiResponse.success(optReagentsVO);
     }
 
-    private void insertRecord(String studentId, Reagents reagents, LocalDateTime takeTime, EventTypeEnum eventTypeEnum) {
+    private void insertRecord(String studentId, Reagents reagents, LocalDateTime takeTime, EventTypeEnum eventTypeEnum, String cabinetId) {
         // 添加操作记录到数据库
         ReagentsRecord reagentsRecord = new ReagentsRecord();
         reagentsRecord.setRecordId(UUIDUtils.generateUUIDWithoutHyphens());
@@ -235,6 +244,7 @@ public class ReagentsService {
         reagentsRecord.setOptTime(takeTime);
         reagentsRecord.setOptStudentId(studentId);
         reagentsRecord.setBarCode(reagents.getBarCode());
+        reagentsRecord.setCabinetId(cabinetId);
         reagentsRecordMapper.insert(reagentsRecord);
     }
 
@@ -260,5 +270,10 @@ public class ReagentsService {
     @Autowired
     public void setCabinetMapper(CabinetMapper cabinetMapper) {
         this.cabinetMapper = cabinetMapper;
+    }
+
+    @Autowired
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 }

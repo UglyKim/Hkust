@@ -7,11 +7,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class EventVO {
+public class EventVO implements Serializable {
 
     private static final long serialVersionUID = 976811253003330109L;
 

@@ -2,9 +2,11 @@ package com.hkust.dto.vo;
 
 import lombok.AllArgsConstructor;
 
+import java.io.Serializable;
+
 
 @AllArgsConstructor
-public enum InOutEnum {
+public enum InOutEnum implements Serializable {
 
     IN("0", "在柜"),
     OUT("1", "离柜");

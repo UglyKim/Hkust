@@ -7,11 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.cglib.core.Local;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class ReagentsVO {
+public class ReagentsVO implements Serializable {
 
     private static final long serialVersionUID = 3450876583003330109L;
 

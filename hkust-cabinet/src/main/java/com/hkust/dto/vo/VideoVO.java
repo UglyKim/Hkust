@@ -5,10 +5,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @JsonIncludeProperties({"videoId", "videoUrl"})
-public class VideoVO {
+public class VideoVO implements Serializable {
 
     private static final long serialVersionUID = 7766868583003330109L;
 

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hkust.mapper.CabinetMapper">
-    <select id="selectAll"  resultType="com.hkust.entity.Cabinet">
-        SELECT * FROM hkust_cabinet;
+    <select id="selectAll" resultType="com.hkust.entity.Cabinet">
+        SELECT *
+        FROM hkust_cabinet;
+    </select>
+    <select id="selectByDoorId" parameterType="java.lang.String" resultType="com.hkust.entity.Cabinet">
+        SELECT *
+        FROM hkust_cabinet
+        where door_id = #{doorId};
     </select>
 </mapper>
