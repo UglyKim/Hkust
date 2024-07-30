@@ -34,8 +34,9 @@ public class UserController {
 
     @Operation(summary = "获取用户信息")
     @PostMapping("/info")
-    public ApiResponse getUserInfo() {
-        return userService.getUserInfo();
+    public ApiResponse getUserInfo(@RequestParam String studentId) {
+        log.info("received student_id is:{}", studentId);
+        return userService.getUserInfo(studentId);
     }
 
     @Operation(summary = "用户列表")

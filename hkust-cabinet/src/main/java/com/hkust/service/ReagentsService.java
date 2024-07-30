@@ -9,6 +9,7 @@ import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.ReagentsAO;
 import com.hkust.dto.ao.ReturnReagentsAO;
+import com.hkust.dto.ao.query.ReagentsQueryAO;
 import com.hkust.dto.vo.InOutEnum;
 import com.hkust.dto.vo.ReagentsOptVO;
 import com.hkust.dto.vo.ReagentsVO;
@@ -29,6 +30,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,12 +48,26 @@ public class ReagentsService {
 
     private CabinetMapper cabinetMapper;
 
-    public ApiResponse<PageResponse> getReagentsList(String doorId) {
+    public ApiResponse<PageResponse> getReagentsList(ReagentsQueryAO reagentsQueryAO) {
 
         Page<Reagents> page = new Page<>(1, 20);
 
         QueryWrapper<Reagents> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("door_id", doorId).eq("in_out", InOutEnum.IN.getCode());
+        queryWrapper.eq("cabinet_id", reagentsQueryAO.getCabinetId());
+        queryWrapper.eq("door_id", reagentsQueryAO.getDoorId());
+        queryWrapper.eq("in_out", InOutEnum.IN.getCode());
+
+
+        if (ObjectUtil.isNotEmpty(reagentsQueryAO.getReagentsName())) {
+            queryWrapper.eq("name", reagentsQueryAO.getReagentsName());
+        }
+        if (ObjectUtil.isNotEmpty(reagentsQueryAO.getDueDays())) {
+            LocalDate expire_date = DateUtils.getCurrentDate().plusDays(Integer.valueOf(reagentsQueryAO.getDueDays()));
+            queryWrapper.le("expire_date", expire_date);
+        }
+        if (ObjectUtil.isNotEmpty(reagentsQueryAO.getRemainingPercent())) {
+            queryWrapper.le("remaining_percent", reagentsQueryAO.getRemainingPercent());
+        }
 
         IPage<Reagents> reagentsIPage = reagentsMapper.selectPage(page, queryWrapper);
         List<Reagents> reagentList = reagentsIPage.getRecords();
@@ -102,6 +120,8 @@ public class ReagentsService {
         reagents.setUpdateDate(DateUtils.getCurrentDateTime());
         reagents.setIsExpire(false);
         reagents.setInOut(InOutEnum.IN.getCode());
+        reagents.setOriginalWeight(reagentsAO.getReagentWeight());
+        reagents.setRemainingPercent(100);
         try {
             reagentsMapper.insert(reagents);
             return ApiResponse.success();
@@ -165,6 +185,9 @@ public class ReagentsService {
         if (!returnReagentsAO.getDoorId().equals(reagents.getDoorId())) {
             return ApiResponse.failed(ReturnCode.REAGENTS_DOOR_MISMATCH);
         }
+        if (!reagents.getInOut().equals(InOutEnum.OUT.getCode())) {
+            return ApiResponse.failed(ReturnCode.REAGENTS_IN);
+        }
 
         // 更新试剂信息
         reagents.setUpdateDate(DateUtils.getCurrentDateTime());
@@ -179,6 +202,17 @@ public class ReagentsService {
         studentId = user.getStudentId();
         reagents.setOperator(studentId);
         reagents.setInOut(InOutEnum.IN.getCode());
+
+        // 处理百分比
+        double old = Double.parseDouble(reagents.getOriginalWeight());
+        double current = Double.parseDouble(returnReagentsAO.getReagentWeight());
+        BigDecimal remainingPercent = new BigDecimal(current / old);
+        remainingPercent = remainingPercent.setScale(2, RoundingMode.HALF_UP);
+        // 定义一个 BigDecimal 对象表示 100
+        BigDecimal hundred = new BigDecimal("100");
+        remainingPercent = remainingPercent.multiply(hundred);
+        reagents.setRemainingPercent(remainingPercent.intValue());
+
         reagentsMapper.updateById(reagents);
 
         // 添加操作记录

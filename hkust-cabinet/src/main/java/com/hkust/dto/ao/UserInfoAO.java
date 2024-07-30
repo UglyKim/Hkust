@@ -5,6 +5,7 @@ import com.hkust.enums.GenderEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Getter
@@ -13,8 +14,9 @@ public class UserInfoAO {
 
     private static final long serialVersionUID = 987468583005150707L;
 
-//    @Schema(required = true, description = "学员号")
-//    private String studentId;
+    @Schema(required = true, description = "学员号")
+    @NotNull
+    private String studentId;
 
     @Schema(required = true, description = "用户名")
     private String username;

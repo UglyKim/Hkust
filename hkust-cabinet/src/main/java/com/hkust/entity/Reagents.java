@@ -50,6 +50,12 @@ public class Reagents {
     @TableField("in_out")
     private String inOut;
 
+    @TableField("remaining_percent")
+    private int remainingPercent;
+
+    @TableField("original_weight")
+    private String originalWeight;
+
     private String remark;
 
 

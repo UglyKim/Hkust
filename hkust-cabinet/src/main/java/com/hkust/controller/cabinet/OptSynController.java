@@ -35,7 +35,7 @@ public class OptSynController {
 
     private EventService eventService;
 
-    @Operation(summary = "操作日志同步", description = "操作日志同步")
+    @Operation(summary = "操作日志同步", description = "不包含试剂存取操作")
     @PostMapping("/event/add")
     public ApiResponse eventSynUpload(@RequestBody OperationAO operationAO) {
         log.info("received operation_info:{}", JSONUtil.toJsonPrettyStr(operationAO));

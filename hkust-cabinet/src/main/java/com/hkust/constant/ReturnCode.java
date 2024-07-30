@@ -32,6 +32,7 @@ public enum ReturnCode {
     REAGENTS_DELETE_FAILED("51", "试剂删除失败"),
     REAGENTS_IS_NULL("52", "试剂不存在"),
     REAGENTS_OUT("53", "试剂不在柜"),
+    REAGENTS_IN("56", "试剂已在柜"),
     REAGENTS_RECORD_FAILED("54", "试剂操作记录插入失败"),
     REAGENTS_DOOR_MISMATCH("55", "请归还至指定柜子");
 

@@ -23,12 +23,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.ok(ApiResponse.failed(ReturnCode.USER_IS_NULL));
     }
 
-    @ExceptionHandler(SQLException.class)
-    public ResponseEntity<?> handleValidationExceptions(SQLException ex) {
-        return ResponseEntity.ok(ApiResponse.failed(ReturnCode.DB_ERROR));
-    }
-
-//    @ExceptionHandler(InvalidDefinitionException.class)
+//    @ExceptionHandler(SQLException.class)
+//    public ResponseEntity<?> handleValidationExceptions(SQLException ex) {
+//        return ResponseEntity.ok(ApiResponse.failed(ReturnCode.DB_ERROR));
+//    }
+//
+////    @ExceptionHandler(InvalidDefinitionException.class)
 //    public ResponseEntity<?> handleValidationExceptions(InvalidDefinitionException ex) {
 //        return ResponseEntity.ok(ApiResponse.failed(ReturnCode.SYSTEM_ERROR));
 //    }

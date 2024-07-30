@@ -13,10 +13,13 @@ public class OperationAO implements Serializable {
     private static final long serialVersionUID = 983368583005150333L;
 
     @Schema(required = true, description = "操作类型")
-    private String eventTypeCode;
+    private String eventType;
 
     @Schema(required = true, description = "智能柜ID")
     private String cabinetId;
+
+    @Schema(required = true, description = "智能柜柜门ID")
+    private String doorId;
 
     @Schema(description = "描述")
     private String content;

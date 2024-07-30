@@ -5,6 +5,8 @@ import com.hkust.enums.GenderEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
+
 
 @Getter
 @JsonPropertyOrder({"username", "password", "realName"})
@@ -12,7 +14,11 @@ public class UserAlterInfoAO {
 
     private static final long serialVersionUID = 987876583005150707L;
 
-    @Schema(description = "用户明")
+    @Schema(required = true, description = "学员号")
+    @NotNull
+    private String studentId;
+
+    @Schema(description = "用户名")
     private String username;
 
     @Schema(description = "密码")

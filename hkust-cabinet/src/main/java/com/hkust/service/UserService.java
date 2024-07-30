@@ -18,6 +18,7 @@ import com.hkust.enums.GenderEnum;
 import com.hkust.mapper.UserMapper;
 import com.hkust.security.CustomUserDetails;
 import com.hkust.struct.structmapper.UserStructMapper;
+import com.hkust.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,9 +42,8 @@ public class UserService {
         return users;
     }
 
-    public ApiResponse getUserInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+    public ApiResponse getUserInfo(String studentId) {
+        User user = userMapper.selectByStudentId(studentId);
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
@@ -73,12 +73,13 @@ public class UserService {
     public ApiResponse updateUser(UserAlterInfoAO userAlterInfoAO) {
 
         // 查询学生是否存在
-        User user = userMapper.selectByUserName(userAlterInfoAO.getUsername());
+        User user = userMapper.selectByStudentId(userAlterInfoAO.getStudentId());
         if (ObjectUtil.isEmpty(user)) {
             throw new NullPointerException("学生不存在!");
         }
+        user.setUpdateTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
-        chainWrapper.eq("user_name", userAlterInfoAO.getUsername());
+        chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
 
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getAddress())) {
             chainWrapper.set("address", userAlterInfoAO.getAddress());

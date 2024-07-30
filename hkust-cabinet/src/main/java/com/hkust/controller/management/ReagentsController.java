@@ -5,6 +5,7 @@ import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.ReagentsAO;
 import com.hkust.dto.ao.ReturnReagentsAO;
+import com.hkust.dto.ao.query.ReagentsQueryAO;
 import com.hkust.dto.vo.InOutEnum;
 import com.hkust.service.ReagentsService;
 import com.hkust.utils.EnumToJsonUtils;
@@ -29,12 +30,19 @@ public class ReagentsController {
         return reagentsService.addReagents(reagentsAO);
     }
 
-
     @Operation(summary = "试剂列表")
     @PostMapping("/list")
-    public ApiResponse<PageResponse> getReagentsList(@RequestParam String doorId) {
+    public ApiResponse<PageResponse> getReagentsList(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+        log.info("received ReagentsQueryAO is:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
+        return reagentsService.getReagentsList(reagentsQueryAO);
+    }
+
+    @Deprecated
+    @Operation(summary = "试剂列表-条件查询")
+    @PostMapping("/list/condition")
+    public ApiResponse<PageResponse> getReagentsListByCondition(@RequestParam String doorId) {
         log.info("received doorId is:{}", doorId);
-        return reagentsService.getReagentsList(doorId);
+        return null;
     }
 
     @Operation(summary = "试剂存取记录")
