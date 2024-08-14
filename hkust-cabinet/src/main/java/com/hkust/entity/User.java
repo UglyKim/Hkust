@@ -37,8 +37,8 @@ public class User {
     @TableField("fixed_tel")
     private String fixedTel;
 
-    @TableField("stat")
-    private String stat;
+//    @TableField("stat")
+//    private String stat;
 
     private String password;
 

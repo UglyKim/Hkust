@@ -11,6 +11,7 @@ import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.UserAlterInfoAO;
 import com.hkust.dto.ao.UserInfoAO;
+import com.hkust.dto.ao.query.UserQueryAO;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
 import com.hkust.enums.EnableEnum;
@@ -53,8 +54,11 @@ public class UserService {
     }
 
     public ApiResponse addUser(UserInfoAO userInfoAO) {
-
-        User user = UserStructMapper.INSTANCE.UserAOToUser(userInfoAO);
+        User user = userMapper.selectByStudentId(userInfoAO.getStudentId());
+        if (ObjectUtil.isNotEmpty(user)) {
+            return ApiResponse.failed(ReturnCode.USER_ALREADY_EXISTS);
+        }
+        user = UserStructMapper.INSTANCE.UserAOToUser(userInfoAO);
         try {
             user.setEnabled(true);
             LocalDateTime now = LocalDateTime.now();
@@ -109,15 +113,18 @@ public class UserService {
         return ApiResponse.success();
     }
 
-    public ApiResponse<PageResponse> getAllUser(String pageNum, String pageSize) {
-        long num = Long.valueOf(pageNum);
-        if (StrUtil.isEmpty(pageNum)) {
-            num = 1;
-        }
-        long size = Long.valueOf(pageSize);
+    public ApiResponse<PageResponse> getAllUser(UserQueryAO userQueryAO) {
+        long num = Long.valueOf(userQueryAO.getPageNum());
+        long size = Long.valueOf(userQueryAO.getPageSize());
         Page<User> page = new Page<User>(num, size);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-
+        if (ObjectUtil.isNotEmpty(userQueryAO.getStudentId())) {
+            queryWrapper.like("student_id", userQueryAO.getStudentId());
+        }
+        if (ObjectUtil.isNotEmpty(userQueryAO.getRealName())) {
+            queryWrapper.like("real_name", userQueryAO.getRealName());
+        }
+        queryWrapper.eq("enabled", true);
         IPage<User> userIPage = userMapper.selectPage(page, queryWrapper);
         List<User> userList = userIPage.getRecords();
         List<UserVO> userVOList = new ArrayList<>();

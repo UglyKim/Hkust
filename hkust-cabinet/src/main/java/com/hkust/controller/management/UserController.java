@@ -1,9 +1,11 @@
 package com.hkust.controller.management;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.UserAlterInfoAO;
+import com.hkust.dto.ao.query.UserQueryAO;
 import com.hkust.dto.vo.UserVO;
 import com.hkust.entity.User;
 import com.hkust.enums.EnableEnum;
@@ -41,15 +43,15 @@ public class UserController {
 
     @Operation(summary = "用户列表")
     @PostMapping("/list")
-    public ApiResponse<PageResponse> updateUser(String pageNum, @RequestParam String pageSize) {
-        log.info("page_num:{} ,page_size:{}", pageNum, pageSize);
-        return userService.getAllUser(pageNum, pageSize);
+    public ApiResponse<PageResponse> getAllUser(@RequestBody UserQueryAO userQueryAO) {
+        log.info("received user query info:{}", JSONUtil.toJsonPrettyStr(userQueryAO));
+        return userService.getAllUser(userQueryAO);
     }
 
     @Operation(summary = "新增用户")
     @PostMapping("/add")
     public ApiResponse addUser(@RequestBody UserInfoAO userInfoAO) {
-        log.info("Received user_info:{}", StrUtil.toString(userInfoAO));
+        log.info("Received user_info:{}", JSONUtil.toJsonPrettyStr(userInfoAO));
         return userService.addUser(userInfoAO);
     }
 

@@ -54,10 +54,12 @@ public class ReagentsService {
         Page<Reagents> page = new Page<>(1, 20);
 
         QueryWrapper<Reagents> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("cabinet_id", reagentsQueryAO.getCabinetId());
-        queryWrapper.eq("door_id", reagentsQueryAO.getDoorId());
-        queryWrapper.eq("in_out", InOutEnum.IN.getCode());
 
+        queryWrapper.eq("cabinet_id", reagentsQueryAO.getCabinetId());
+        queryWrapper.eq("in_out", InOutEnum.IN.getCode());
+        if(ObjectUtil.isNotEmpty(reagentsQueryAO.getDoorId())){
+            queryWrapper.eq("door_id", reagentsQueryAO.getDoorId());
+        }
 
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getReagentsName())) {
             queryWrapper.eq("name", reagentsQueryAO.getReagentsName());
