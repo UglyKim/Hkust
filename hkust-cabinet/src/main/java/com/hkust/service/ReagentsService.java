@@ -51,18 +51,18 @@ public class ReagentsService {
 
     public ApiResponse<PageResponse> getReagentsList(ReagentsQueryAO reagentsQueryAO) {
 
-        Page<Reagents> page = new Page<>(1, 20);
+        Page<Reagents> page = new Page<>(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize());
 
         QueryWrapper<Reagents> queryWrapper = new QueryWrapper<>();
 
         queryWrapper.eq("cabinet_id", reagentsQueryAO.getCabinetId());
         queryWrapper.eq("in_out", InOutEnum.IN.getCode());
-        if(ObjectUtil.isNotEmpty(reagentsQueryAO.getDoorId())){
+        if (ObjectUtil.isNotEmpty(reagentsQueryAO.getDoorId())) {
             queryWrapper.eq("door_id", reagentsQueryAO.getDoorId());
         }
 
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getReagentsName())) {
-            queryWrapper.eq("name", reagentsQueryAO.getReagentsName());
+            queryWrapper.like("name", reagentsQueryAO.getReagentsName());
         }
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getDueDays())) {
             LocalDate expire_date = DateUtils.getCurrentDate().plusDays(Integer.valueOf(reagentsQueryAO.getDueDays()));
@@ -79,7 +79,7 @@ public class ReagentsService {
             ReagentsVO reagentsVO = ReagentsStructMapper.INSTANCE.toReagentsVO(reagents);
             reagentsVOList.add(reagentsVO);
         }
-        PageResponse pageResponse = new PageResponse(1, 20, reagentsIPage.getTotal(), reagentsVOList);
+        PageResponse pageResponse = new PageResponse(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize(), reagentsIPage.getTotal(), reagentsVOList);
         return ApiResponse.success(pageResponse);
     }
 

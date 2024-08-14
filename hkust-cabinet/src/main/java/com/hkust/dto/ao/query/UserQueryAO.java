@@ -6,9 +6,12 @@ import lombok.Getter;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Getter
-public class UserQueryAO {
+public class UserQueryAO implements Serializable {
+
+    private static final long serialVersionUID = 8926331009009330109L;
 
     @Schema(required = true, description = "页码")
     @NotNull
