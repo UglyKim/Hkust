@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "用户")
 @RestController
-@RequestMapping("/api/v1/manage/user")
+@RequestMapping("/v1")
 @Slf4j
 public class UserController {
 
@@ -36,20 +36,19 @@ public class UserController {
 
     @Operation(summary = "获取用户信息")
     @PostMapping("/info")
-    public ApiResponse getUserInfo(@RequestParam String studentId) {
-        log.info("received student_id is:{}", studentId);
-        return userService.getUserInfo(studentId);
+    public ApiResponse getUserInfo() {
+        return userService.getUserInfo();
     }
 
     @Operation(summary = "用户列表")
-    @PostMapping("/list")
+    @PostMapping("/admin/list")
     public ApiResponse<PageResponse> getAllUser(@RequestBody UserQueryAO userQueryAO) {
         log.info("received user query info:{}", JSONUtil.toJsonPrettyStr(userQueryAO));
         return userService.getAllUser(userQueryAO);
     }
 
     @Operation(summary = "新增用户")
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public ApiResponse addUser(@RequestBody UserInfoAO userInfoAO) {
         log.info("Received user_info:{}", JSONUtil.toJsonPrettyStr(userInfoAO));
         return userService.addUser(userInfoAO);

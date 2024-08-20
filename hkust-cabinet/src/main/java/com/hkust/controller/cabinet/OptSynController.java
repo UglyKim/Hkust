@@ -11,6 +11,7 @@ import com.hkust.service.EventService;
 import com.hkust.service.OperateService;
 import com.hkust.service.VideoService;
 import com.hkust.utils.EnumToJsonUtils;
+import com.hkust.utils.UUIDUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

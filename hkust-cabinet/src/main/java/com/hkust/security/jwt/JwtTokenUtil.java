@@ -15,12 +15,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 @Component
 @Slf4j
 public class JwtTokenUtil {
-
     @Value("${jwt.secret}")
     private String secret;
 
@@ -29,7 +30,10 @@ public class JwtTokenUtil {
 
     public String generateToken(CustomUserDetails userDetails) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecretKey secretKey = Keys.hmacShaKeyFor(Base64.getUrlDecoder().decode(secret));
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("version", userDetails.getUser().getVersion());
         String token = Jwts.builder()
+                .setClaims(claims)
                 .setSubject(userDetails.getUser().getStudentId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
@@ -41,7 +45,13 @@ public class JwtTokenUtil {
 
     public Boolean validateToken(String token, CustomUserDetails userDetails) {
         final String studentId = getUsernameFromToken(token);
-        return studentId.equals(userDetails.getUser().getStudentId()) && !isTokenExpired(token);
+        final int version = extractVersion(token);
+        return studentId.equals(userDetails.getUser().getStudentId()) && !isTokenExpired(token) && userDetails.getUser().getVersion() == version;
+    }
+
+    private int extractVersion(String token) {
+        Claims claims = getAllClaimsFromToken(token);
+        return (int) claims.get("version");
     }
 
     public String getUsernameFromToken(String token) {

@@ -31,4 +31,6 @@ public class Event {
 
     @TableField("opt_date")
     private LocalDateTime optDate;
+
+    private String channel;
 }

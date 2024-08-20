@@ -9,15 +9,17 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @TableName("hkust_user")
 public class User {
 
-    @TableId("user_id")
+
+    @TableField("user_id")
     private String userId;
 
-    @TableField("student_id")
+    @TableId("student_id")
     private String studentId;
 
     @TableField("user_name")
@@ -54,4 +56,7 @@ public class User {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
+    private int version;
+
+    private String add_ch;
 }

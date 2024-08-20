@@ -46,4 +46,7 @@ public class UserInfoAO implements Serializable {
     @Schema(required = true, description = "性别")
     private GenderEnum gender;
 
+    @Schema(required = true, description = "渠道 MC:管理控制台 SC:智能终端")
+    private String addCh;
+
 }

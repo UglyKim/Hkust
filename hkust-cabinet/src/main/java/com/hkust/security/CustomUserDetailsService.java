@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
@@ -18,18 +20,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String studentId) throws UsernameNotFoundException {
-
         User user = userMapper.selectByStudentId(studentId);
-        if (ObjectUtil.isEmpty(user)) {
+        List<String> roles = userMapper.selectRolesByStudentId(studentId);
+        if (ObjectUtil.isEmpty(user) || ObjectUtil.isEmpty(roles)) {
             throw new UsernameNotFoundException("user is null!");
         }
         if (user.getStudentId().equals(studentId)) {
-            return new CustomUserDetails(user);
+            return new CustomUserDetails(user, roles);
         } else {
             throw new UsernameNotFoundException("User not found with student_id: " + studentId);
         }
     }
-
 
     /**
      * 使用username

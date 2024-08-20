@@ -1,7 +1,6 @@
 package com.hkust.service;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
@@ -18,6 +17,7 @@ import com.hkust.enums.EnableEnum;
 import com.hkust.enums.GenderEnum;
 import com.hkust.mapper.UserMapper;
 import com.hkust.security.CustomUserDetails;
+import com.hkust.security.SecurityUtils;
 import com.hkust.struct.structmapper.UserStructMapper;
 import com.hkust.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +43,13 @@ public class UserService {
         return users;
     }
 
-    public ApiResponse getUserInfo(String studentId) {
-        User user = userMapper.selectByStudentId(studentId);
+    public ApiResponse getUserInfo() {
+
+        User user = SecurityUtils.getCurrentUser();
+        if (ObjectUtil.isEmpty(user)) {
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
+        }
+        user = userMapper.selectByStudentId(user.getStudentId());
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
@@ -93,6 +98,9 @@ public class UserService {
         }
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getUsername())) {
             chainWrapper.set("user_name", userAlterInfoAO.getUsername());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getRealName())) {
+            chainWrapper.set("real_name", userAlterInfoAO.getRealName());
         }
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getGender())) {
             chainWrapper.set("gender", userAlterInfoAO.getGender());

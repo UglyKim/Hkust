@@ -5,10 +5,12 @@ import com.hkust.security.jwt.JwtAuthenticationEntryPoint;
 import com.hkust.security.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.annotation.Jsr250Voter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,11 +59,10 @@ public class SecurityConfig {
                         {
                             try {
                                 authorizeRequests
+                                        .antMatchers("/v1/admin/**").hasRole("admin")
                                         .antMatchers(
                                                 "/v3/api-docs/**",
                                                 "/swagger-ui/**",
-//                                                "/api/v1/manage/user/login",
-//                                                "/api/v1/auth/authenticate",
                                                 "/api/v1/auth/login"
                                         ).permitAll()
                                         .anyRequest().authenticated()
@@ -83,20 +84,8 @@ public class SecurityConfig {
         return http.build();
     }
 
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password(passwordEncoder().encode("password"))
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public GrantedAuthorityDefaults grantedAuthorityDefaults() {
+        return new GrantedAuthorityDefaults("");
+    }
 }
