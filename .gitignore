@@ -7,4 +7,8 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 /.idea/
-/hkust-cabinet/target/
+/hkust-sc/target/
+/hkust-mc/target/
+/hkust-auth/target/
+/hkust-common/target/
+/hkust-data/target/
