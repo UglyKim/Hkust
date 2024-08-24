@@ -9,7 +9,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>hkust-cabinet</module>
+        <module>hkust-sc</module>
+        <module>hkust-mc</module>
+        <module>hkust-data</module>
+        <module>hkust-auth</module>
+        <module>hkust-common</module>
     </modules>
 
     <properties>
@@ -22,11 +26,13 @@
     </properties>
 
     <repositories>
+<!--        <repository>-->
+<!--            <id>central</id>-->
+<!--            <url>https://repo.maven.apache.org/maven2</url>-->
+<!--        </repository>-->
         <repository>
             <id>aliyun</id>
             <name>aliyun</name>
-            <!--            <url>https://maven.aliyun.com/repository/public</url>-->
-<!--            <url>https://repo.maven.apache.org/maven2</url>-->
             <url>https://repo.hutool.cn/maven</url>
             <releases>
                 <enabled>true</enabled>
