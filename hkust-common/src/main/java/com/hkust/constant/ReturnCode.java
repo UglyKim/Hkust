@@ -38,6 +38,8 @@ public enum ReturnCode {
     REAGENTS_DOOR_MISMATCH("55", "请归还至指定柜子"),
 
     FILE_IS_NULL("61", "空录像");
+
+
     private final String code;
 
     private final String message;
