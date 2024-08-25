@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "用户")
 @RestController
-@RequestMapping("/v1/mc")
+@RequestMapping("/v1/sc")
 @Slf4j
 public class UserController {
 
@@ -39,12 +39,13 @@ public class UserController {
     }
 
     @Operation(summary = "用户列表")
-    @PostMapping("/admin/list")
+    @PostMapping("/admin/list/")
     public ApiResponse<PageResponse> getAllUser(@RequestBody UserQueryAO userQueryAO) {
         log.info("received user query info:{}", JSONUtil.toJsonPrettyStr(userQueryAO));
         return userService.getAllUser(userQueryAO);
     }
 
+    @Deprecated
     @Operation(summary = "新增用户")
     @PostMapping("/admin/add")
     public ApiResponse addUser(@RequestBody UserInfoAO userInfoAO) {

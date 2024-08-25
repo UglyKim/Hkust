@@ -73,6 +73,16 @@ public class UserService {
         return ApiResponse.success(userVO);
     }
 
+    public ApiResponse getUserInfo(String studentId) {
+        User user = userMapper.selectByStudentId(studentId);
+        if (ObjectUtil.isEmpty(user)) {
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
+        }
+        UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
+        userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getCode() : EnableEnum.NO.getCode());
+        return ApiResponse.success(userVO);
+    }
+
     public ApiResponse addUser(UserInfoAO userInfoAO) {
         User user = userMapper.selectByStudentId(userInfoAO.getStudentId());
         if (ObjectUtil.isNotEmpty(user)) {
