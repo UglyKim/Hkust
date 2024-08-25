@@ -15,8 +15,7 @@ public class UserAlterInfoAO implements Serializable {
 
     private static final long serialVersionUID = 987876583005150707L;
 
-    @Schema(required = true, description = "学员号")
-    @NotNull
+    @Schema(required = true, description = "学员号-管理员修改其他学院信息，需要必须传，否则修改管理员信息")
     private String studentId;
 
     @Schema(description = "用户名")

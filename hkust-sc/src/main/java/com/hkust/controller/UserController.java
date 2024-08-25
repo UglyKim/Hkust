@@ -31,7 +31,7 @@ public class UserController {
         return userService.getUserInfo();
     }
 
-    @Operation(summary = "获取用户信息")
+    @Operation(summary = "管理员登陆-查看其他学员个人基本信息")
     @PostMapping("/admin/info")
     public ApiResponse getUserInfoById(@RequestParam String studentId) {
         log.info("received studentId is:{}", studentId);
@@ -53,11 +53,18 @@ public class UserController {
         return userService.addUser(userInfoAO);
     }
 
-    @Operation(summary = "修改用户")
+    @Operation(summary = "修改管理员信息")
     @PostMapping("/update")
     public ApiResponse updateUser(@RequestBody UserAlterInfoAO userAlterInfoAO) {
         log.info("Received user_info:{}", StrUtil.toString(userAlterInfoAO));
         return userService.updateUser(userAlterInfoAO);
+    }
+
+    @Operation(summary = "管理员修改学员信息")
+    @PostMapping("/admin/update")
+    public ApiResponse updateUserById(@RequestBody UserAlterInfoAO userAlterInfoAO) {
+        log.info("Received user_info:{}", StrUtil.toString(userAlterInfoAO));
+        return userService.updateUserById(userAlterInfoAO);
     }
 
     @Operation(summary = "用户是否启用")

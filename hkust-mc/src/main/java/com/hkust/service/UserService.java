@@ -104,7 +104,58 @@ public class UserService {
         return ApiResponse.success();
     }
 
+    /**
+     * 修改管理员信息
+     * @param userAlterInfoAO
+     * @return
+     */
     public ApiResponse updateUser(UserAlterInfoAO userAlterInfoAO) {
+        String studentId = SecurityUtils.getCurrentUser().getStudentId();
+        User user = userMapper.selectByStudentId(studentId);
+        if (ObjectUtil.isEmpty(user)) {
+            throw new NullPointerException("学生不存在!");
+        }
+        user.setUpdateTime(DateUtils.getCurrentDateTime());
+        UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
+        chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
+
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getAddress())) {
+            chainWrapper.set("address", userAlterInfoAO.getAddress());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getEmail())) {
+            chainWrapper.set("email", userAlterInfoAO.getEmail());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getUsername())) {
+            chainWrapper.set("user_name", userAlterInfoAO.getUsername());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getRealName())) {
+            chainWrapper.set("real_name", userAlterInfoAO.getRealName());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getGender())) {
+            chainWrapper.set("gender", userAlterInfoAO.getGender());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getOfficeLocation())) {
+            chainWrapper.set("office_location", userAlterInfoAO.getOfficeLocation());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getFixedTel())) {
+            chainWrapper.set("fixed_tel", userAlterInfoAO.getFixedTel());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPhone())) {
+            chainWrapper.set("phone", userAlterInfoAO.getPhone());
+        }
+        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPassword())) {
+            chainWrapper.set("password", BCryptPasswordEncoder.encode(userAlterInfoAO.getPassword()));
+        }
+        chainWrapper.update();
+        return ApiResponse.success();
+    }
+
+    /**
+     * 管理员修改学院信息
+     * @param userAlterInfoAO
+     * @return
+     */
+    public ApiResponse updateUserById(UserAlterInfoAO userAlterInfoAO) {
 
         // 查询学生是否存在
         User user = userMapper.selectByStudentId(userAlterInfoAO.getStudentId());
