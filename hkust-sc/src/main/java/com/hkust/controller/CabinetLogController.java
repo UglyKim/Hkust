@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "日志")
 @RestController
-@RequestMapping("/api/v1/log")
+@RequestMapping("/v1/log")
 @Slf4j
 public class CabinetLogController {
 

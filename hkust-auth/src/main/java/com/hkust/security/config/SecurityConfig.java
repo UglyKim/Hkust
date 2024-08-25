@@ -58,7 +58,8 @@ public class SecurityConfig {
                         {
                             try {
                                 authorizeRequests
-                                        .antMatchers("/v1/admin/**").hasRole("admin")
+                                        .antMatchers("/v1/sc/admin/*").hasRole("admin")
+                                        .antMatchers("/v1/sc/*").hasAnyRole("admin", "student")
                                         .antMatchers(
                                                 "/v3/api-docs/**",
                                                 "/swagger-ui/**",

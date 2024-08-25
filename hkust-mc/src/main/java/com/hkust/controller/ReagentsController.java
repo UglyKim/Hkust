@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "试剂")
 @RestController
-@RequestMapping("/api/v1/reagents")
+@RequestMapping("/v1/reagents")
 @Slf4j
 public class ReagentsController {
 

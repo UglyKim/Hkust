@@ -17,7 +17,7 @@ import java.util.List;
 
 @Tag(name = "柜门信息")
 @RestController
-@RequestMapping("/api/v1/cabinet")
+@RequestMapping("/v1/cabinet")
 @Slf4j
 public class CabinetDoorController {
 
