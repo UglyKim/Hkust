@@ -151,7 +151,7 @@ public class UserService {
     }
 
     /**
-     * 管理员修改学院信息
+     * 管理员修改学员信息
      * @param userAlterInfoAO
      * @return
      */
