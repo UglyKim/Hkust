@@ -1,6 +1,7 @@
 package com.hkust.security;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.hkust.entity.Role;
 import com.hkust.entity.User;
 import com.hkust.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -20,13 +22,24 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String studentId) throws UsernameNotFoundException {
-        User user = userMapper.selectByStudentId(studentId);
-        List<String> roles = userMapper.selectRolesByStudentId(studentId);
-        if (ObjectUtil.isEmpty(user) || ObjectUtil.isEmpty(roles)) {
+//        User user = userMapper.selectByStudentId(studentId);
+        User user = userMapper.selectUserDetailByStudentId(studentId);
+        if (ObjectUtil.isEmpty(user)) {
             throw new UsernameNotFoundException("user is null!");
         }
+        if (ObjectUtil.isEmpty(user.getRoles())) {
+            throw new UsernameNotFoundException("role is null!");
+        }
+//        Collection<GrantedAuthority> authorities = user.getRoles().stream()
+//                .flatMap(role -> role.getPermissions().stream())
+//                .map(Permission -> new SimpleGrantedAuthority(Permission.getPermissionName()))
+//                .collect(Collectors.toList());
+
+//        roles.stream().flatMap(role->role)
+
+        CustomUserDetails customUserDetails = new CustomUserDetails(user);
         if (user.getStudentId().equals(studentId)) {
-            return new CustomUserDetails(user, roles);
+            return customUserDetails;
         } else {
             throw new UsernameNotFoundException("User not found with student_id: " + studentId);
         }
@@ -41,7 +54,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Deprecated
 //    @Override
-    public UserDetails loadUserByUsername_123(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername_bak(String username) throws UsernameNotFoundException {
 
 //        com.hkust.entity.User user = userMapper.selectByUserName(username);
 //        log.info("selected user_name:{}", user.getUsername());

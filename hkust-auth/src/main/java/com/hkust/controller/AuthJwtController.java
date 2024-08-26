@@ -9,6 +9,7 @@ import com.hkust.constant.ReturnCode;
 import com.hkust.dto.AuthResponseVO;
 import com.hkust.dto.LoginInfoAO;
 import com.hkust.entity.Event;
+import com.hkust.entity.Role;
 import com.hkust.entity.User;
 import com.hkust.entity.UserExts;
 import com.hkust.enums.EventTypeEnum;
@@ -31,7 +32,9 @@ import com.hkust.security.CustomUserDetails;
 import com.hkust.security.CustomUserDetailsService;
 import com.hkust.security.jwt.JwtTokenUtil;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Tag(name = "认证")
 @RestController
@@ -66,17 +69,18 @@ public class AuthJwtController {
         if (!userDetails.isEnabled()) {
             return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
         }
-        List<String> roles = userMapper.selectRolesByStudentId(loginInfoAO.getStudentId());
-        if (ObjectUtil.isEmpty(roles)) {
-            return ApiResponse.failed("未分配角色");
-        }
-        userDetails.setRoles(roles);
+//        List<String> roles = userMapper.selectRolesByStudentId(loginInfoAO.getStudentId());
+//        if (ObjectUtil.isEmpty(roles)) {
+//            return ApiResponse.failed("未分配角色");
+//        }
+//        userDetails.setRoles(roles);
         // 更新用户token版本号
         updateVersion(userDetails, loginInfoAO.getChannel());
         // 添加登陆日志
         this.addEvent(loginInfoAO.getChannel(), userDetails.getUser());
 
         String token = jwtTokenUtil.generateToken(userDetails, loginInfoAO.getChannel());
+        List<String> roles = userDetails.getUser().getRoles().stream().map(Role::getRoleName).collect(Collectors.toList());
         AuthResponseVO authResponseVO = new AuthResponseVO(token, roles);
         return ApiResponse.success(authResponseVO);
     }

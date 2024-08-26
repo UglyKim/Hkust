@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "柜子信息")
 @RestController
-@RequestMapping("/v1/mc/cabinet")
+@RequestMapping("/v1/mc/")
 @Slf4j
 public class CabinetController {
 
     private CabinetService cabinetService;
 
     @Operation(summary = "柜子详细信息")
-    @PostMapping("/detail")
+    @PostMapping("/admin/cabinet/detail")
     public ApiResponse<CabinetDetailVO> getCabinetInfo(@RequestParam String cabinetId) {
         log.info("received cabinet ID:{}", cabinetId);
         return cabinetService.getCabinetDetails(cabinetId);
     }
 
     @Operation(summary = "柜子列表")
-    @PostMapping("/list")
+    @PostMapping("/admin/cabinet/list")
     public ApiResponse getCabinetList() {
         return cabinetService.getCabinetList();
     }
@@ -43,7 +43,7 @@ public class CabinetController {
     }
 
     @Operation(summary = "智能柜更新")
-    @PostMapping("/update")
+    @PostMapping("/admin/cabinet/update")
     public ApiResponse updateCabinet(@RequestBody CabinetAO cabinetAO) {
         log.info("received add cabinet_info:{}", JSONUtil.toJsonPrettyStr(cabinetAO));
         return cabinetService.updateCabinet(cabinetAO);
@@ -51,26 +51,26 @@ public class CabinetController {
 
     @Deprecated
     @Operation(summary = "删除智能柜")
-    @PostMapping("/delete")
+    @PostMapping("/admin/cabinet/delete")
     public ApiResponse delCabinet() {
         return ApiResponse.success();
     }
 
     @Operation(summary = "智能柜状态")
-    @PostMapping("/stat")
+    @PostMapping("/common/cabinet/stat")
     public ApiResponse getCabinetStat() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(StatEnum.class));
     }
 
     @Operation(summary = "柜门开启模式")
-    @PostMapping("/open-mode")
+    @PostMapping("/common/cabinet/open-mode")
     public ApiResponse getOpenMode() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OpenModeEnum.class));
     }
 
     @Deprecated
     @Operation(summary = "统计")
-    @PostMapping("/statistics")
+    @PostMapping("/common/cabinet/statistics")
     public ApiResponse reagentStatistics() {
 
         return ApiResponse.success();

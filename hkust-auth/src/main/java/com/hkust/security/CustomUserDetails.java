@@ -1,34 +1,28 @@
 package com.hkust.security;
 
+import com.hkust.entity.Role;
 import com.hkust.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
     private User user;
 
-    private List<String> roles;
-
     public CustomUserDetails(User user) {
         this.user = user;
     }
 
-    public CustomUserDetails(User user, List<String> roles) {
-        this.user = user;
-        this.roles = roles;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        return this.user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toSet());
     }
 
     @Override
@@ -69,11 +63,11 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
+//    public List<String> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(List<String> roles) {
+//        this.roles = roles;
+//    }
 }

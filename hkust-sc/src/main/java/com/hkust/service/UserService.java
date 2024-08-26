@@ -46,17 +46,17 @@ public class UserService {
         return users;
     }
 
-    public List<Map> getRoles() {
-        List<Role> roles = roleMapper.selectAll();
-        List<Map> mapList = new ArrayList<>();
-        for (Role role : roles) {
-            Map<String, String> roleMap = new HashMap<>();
-            roleMap.put("code", role.getRoleId());
-            roleMap.put("name", role.getRoleName());
-            mapList.add(roleMap);
-        }
-        return mapList;
-    }
+//    public List<Map> getRoles() {
+//        List<Role> roles = roleMapper.selectAll();
+//        List<Map> mapList = new ArrayList<>();
+//        for (Role role : roles) {
+//            Map<String, String> roleMap = new HashMap<>();
+//            roleMap.put("code", role.getRoleId());
+//            roleMap.put("name", role.getRoleName());
+//            mapList.add(roleMap);
+//        }
+//        return mapList;
+//    }
 
     public ApiResponse getUserInfo() {
 

@@ -17,14 +17,14 @@ import java.util.List;
 
 @Tag(name = "柜门信息")
 @RestController
-@RequestMapping("/v1/mc/cabinet")
+@RequestMapping("/v1/mc/")
 @Slf4j
 public class CabinetDoorController {
 
     private CabinetDoorService cabinetDoorService;
 
     @Operation(summary = "柜门列表")
-    @PostMapping("/door/list")
+    @PostMapping("/common/door/list")
     public ApiResponse<List<DoorVO>> getCabinetInfo(@RequestParam String cabinetId) {
         log.info("received cabinet_id is:{}", cabinetId);
         return cabinetDoorService.getDoorList(cabinetId);
@@ -32,7 +32,7 @@ public class CabinetDoorController {
 
     //    @Hidden
     @Operation(summary = "柜门详细信息")
-    @PostMapping("/door/detail")
+    @PostMapping("/common/door/detail")
     public ApiResponse getDoorInfo(@RequestParam String doorId) {
         log.info("received door_id is:{}", doorId);
         return cabinetDoorService.getDoorDetail(doorId);

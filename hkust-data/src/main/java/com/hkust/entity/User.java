@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @TableName("hkust_user")
@@ -55,4 +56,6 @@ public class User {
 //    private int version;
 
     private String add_ch;
+
+    private Set<Role> roles;
 }

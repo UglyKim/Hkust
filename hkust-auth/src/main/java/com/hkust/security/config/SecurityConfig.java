@@ -1,13 +1,18 @@
 package com.hkust.security.config;
 
+import com.hkust.security.CustomAccessDecisionManager;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -58,14 +63,19 @@ public class SecurityConfig {
                         {
                             try {
                                 authorizeRequests
-                                        .antMatchers("/v1/sc/admin/*").hasRole("admin")
-                                        .antMatchers("/v1/sc/*").hasAnyRole("admin", "student")
+//                                        .antMatchers("/v1/sc/admin/**").hasRole("admin")
+//                                        .antMatchers("/v1/mc/admin/**").hasRole("admin")
+//                                        .antMatchers("/v1/sc/common/**").hasAnyRole("admin", "student")
+//                                        .antMatchers("/v1/mc/common/**").hasAnyRole("admin", "student")
                                         .antMatchers(
                                                 "/v3/api-docs/**",
                                                 "/swagger-ui/**",
-                                                "/api/v1/auth/login"
+                                                "/api/v1/auth/login",
+                                                "/v1/mc/",
+                                                "/v1/sc/"
                                         ).permitAll()
                                         .anyRequest().authenticated()
+                                        .accessDecisionManager(accessDecisionManager())
                                         .and()
                                         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                                         .and()
@@ -87,5 +97,10 @@ public class SecurityConfig {
     @Bean
     public GrantedAuthorityDefaults grantedAuthorityDefaults() {
         return new GrantedAuthorityDefaults("");
+    }
+
+    @Bean
+    public AccessDecisionManager accessDecisionManager() {
+        return new CustomAccessDecisionManager();
     }
 }

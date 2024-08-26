@@ -5,13 +5,17 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 @TableName("hkust_role")
 public class Role {
 
     @TableId("role_id")
-    private String roleId;
+    private int roleId;
 
     @TableField("role_name")
     private String roleName;
+
+    private Set<Permission> permissions;
 }
