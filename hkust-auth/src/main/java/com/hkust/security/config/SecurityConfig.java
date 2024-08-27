@@ -1,7 +1,9 @@
 package com.hkust.security.config;
 
-import com.hkust.security.CustomAccessDecisionManager;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import com.hkust.exception.CustomAccessDeniedHandler;
+import com.hkust.security.HkustAccessDecisionManager;
+import com.hkust.security.HkustSecurityMetadataSource;
+import com.hkust.security.interceptor.HkustFilterSecurityInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
@@ -11,13 +13,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.hkust.security.CustomUserDetailsService;
+import com.hkust.security.HkustUserDetailsService;
 import com.hkust.security.jwt.JwtAuthenticationEntryPoint;
 import com.hkust.security.jwt.JwtFilter;
 
@@ -25,13 +26,18 @@ import com.hkust.security.jwt.JwtFilter;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    private final JwtFilter jwtFilter;
+    private JwtFilter jwtFilter;
 
-    private final CustomUserDetailsService customUserDetailsService;
+    private HkustUserDetailsService customUserDetailsService;
 
-    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtFilter jwtFilter, CustomUserDetailsService customUserDetailsService) {
+//    private HkustAccessDecisionManager hkustAccessDecisionManager;
+
+//    private HkustSecurityMetadataSource hkustSecurityMetadataSource;
+
+
+    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtFilter jwtFilter, HkustUserDetailsService customUserDetailsService) {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtFilter = jwtFilter;
         this.customUserDetailsService = customUserDetailsService;
@@ -49,6 +55,10 @@ public class SecurityConfig {
         return authenticationManagerBuilder.build();
     }
 
+    @Bean
+    public AccessDeniedHandler customAccessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -63,22 +73,22 @@ public class SecurityConfig {
                         {
                             try {
                                 authorizeRequests
-//                                        .antMatchers("/v1/sc/admin/**").hasRole("admin")
-//                                        .antMatchers("/v1/mc/admin/**").hasRole("admin")
-//                                        .antMatchers("/v1/sc/common/**").hasAnyRole("admin", "student")
-//                                        .antMatchers("/v1/mc/common/**").hasAnyRole("admin", "student")
                                         .antMatchers(
                                                 "/v3/api-docs/**",
                                                 "/swagger-ui/**",
-                                                "/api/v1/auth/login",
-                                                "/v1/mc/",
-                                                "/v1/sc/"
+                                                "/swagger-ui.html",
+                                                "/swagger-resources/**",
+                                                "/webjars/**",
+                                                "/v1/auth/login"
                                         ).permitAll()
                                         .anyRequest().authenticated()
-                                        .accessDecisionManager(accessDecisionManager())
                                         .and()
                                         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                                        .accessDeniedHandler(customAccessDeniedHandler())
                                         .and()
+                                        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                                        .addFilterAfter(hkustFilterSecurityInterceptor(), UsernamePasswordAuthenticationFilter.class)
+//                                        .addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
                                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                                         .and()
                                         .formLogin()
@@ -90,7 +100,8 @@ public class SecurityConfig {
                             }
                         }
                 );
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
         return http.build();
     }
 
@@ -101,6 +112,22 @@ public class SecurityConfig {
 
     @Bean
     public AccessDecisionManager accessDecisionManager() {
-        return new CustomAccessDecisionManager();
+        return new HkustAccessDecisionManager();
     }
+
+    @Bean
+    public HkustFilterSecurityInterceptor hkustFilterSecurityInterceptor() {
+        return new HkustFilterSecurityInterceptor(hkustSecurityMetadataSource(), hkustAccessDecisionManager());
+    }
+
+    @Bean
+    public HkustSecurityMetadataSource hkustSecurityMetadataSource() {
+        return new HkustSecurityMetadataSource();
+    }
+
+    @Bean
+    public HkustAccessDecisionManager hkustAccessDecisionManager() {
+        return new HkustAccessDecisionManager();
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.hkust.security;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.hkust.entity.Role;
 import com.hkust.entity.User;
 import com.hkust.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -11,23 +10,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Service
 @Slf4j
-public class CustomUserDetailsService implements UserDetailsService {
+public class HkustUserDetailsService implements UserDetailsService {
 
     private UserMapper userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String studentId) throws UsernameNotFoundException {
-//        User user = userMapper.selectByStudentId(studentId);
-        User user = userMapper.selectUserDetailByStudentId(studentId);
+        User user = userMapper.selectUserRoleByStudentId(studentId);
         if (ObjectUtil.isEmpty(user)) {
             throw new UsernameNotFoundException("user is null!");
         }
-        if (ObjectUtil.isEmpty(user.getRoles())) {
+        if (ObjectUtil.isEmpty(user.getRoleList())) {
             throw new UsernameNotFoundException("role is null!");
         }
 //        Collection<GrantedAuthority> authorities = user.getRoles().stream()
@@ -37,9 +32,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 //        roles.stream().flatMap(role->role)
 
-        CustomUserDetails customUserDetails = new CustomUserDetails(user);
         if (user.getStudentId().equals(studentId)) {
-            return customUserDetails;
+            return new HkustUserDetails(user);
         } else {
             throw new UsernameNotFoundException("User not found with student_id: " + studentId);
         }

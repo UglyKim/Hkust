@@ -12,6 +12,10 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
+    User selectUserRoleByStudentId(String studentId);
+
+    List<User> selectUserListPage(boolean enabled, int limit);
+
     List<User> selectAll();
 
     User selectByUserName(String userName);
@@ -28,6 +32,7 @@ public interface UserMapper extends BaseMapper<User> {
             "inner join hkust_role r on ur.role_id = r.role_id \n" +
             "inner join hkust_role_permissions rp on r.role_id=rp.role_id\n" +
             "inner join hkust_permissions p on rp.permission_id = p.permission_id\n" +
+            "inner join hkust_url_permissions up on rp.permission_id = up.permission_id\n" +
             "where u.student_id = #{studentId}")
     User selectUserDetailByStudentId(String studentId);
 }

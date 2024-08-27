@@ -7,7 +7,7 @@ import com.hkust.dto.ao.OperationAO;
 import com.hkust.entity.Event;
 import com.hkust.entity.User;
 import com.hkust.mapper.EventMapper;
-import com.hkust.security.CustomUserDetails;
+import com.hkust.security.HkustUserDetails;
 import com.hkust.struct.structmapper.EventStructMapper;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
@@ -25,7 +25,7 @@ public class OperateService {
 
     public ApiResponse optSynchronize(OperationAO operationAO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+        User user = ((HkustUserDetails) authentication.getPrincipal()).getUser();
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }

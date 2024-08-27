@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hkust.mapper.RoleMapper">
-    <select id="selectAll" resultType="com.hkust.entity.Role">
-        SELECT role_id, role_name
-        FROM hkust_role
+    <!-- 自定义 SQL 查询 -->
+    <select id="selectAll" resultMap="RolePermission">
+        select *
+        from hkust_role r
+                 inner join hkust_role_permissions rp on r.role_id = rp.role_id
+                 inner join hkust_permissions p on rp.permission_id = p.permission_id
+                 inner join hkust_url_permissions up on rp.permission_id = up.permission_id
     </select>
+    <resultMap id="RolePermission" type="com.hkust.entity.Role">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <collection property="permissionList" ofType="com.hkust.entity.Permission" javaType="java.util.ArrayList">
+            <id column="permission_id" property="permissionId"/>
+            <result column="permission_name" property="permissionName"/>
+            <collection property="urlPermissionList" ofType="com.hkust.entity.UrlPermissions"
+                        javaType="java.util.ArrayList">
+                <id column="url_id" property="urlId"/>
+                <result column="url_pattern" property="urlPattern"/>
+                <result column="http_method" property="httpMethod"/>
+                <result column="describe" property="describe"/>
+            </collection>
+        </collection>
+    </resultMap>
 </mapper>

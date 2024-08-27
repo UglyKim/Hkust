@@ -19,27 +19,27 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "用户")
 @RestController
-@RequestMapping("/v1/mc")
+@RequestMapping("/v1/mc/user")
 @Slf4j
 public class UserController {
 
     private UserService userService;
 
     @Operation(summary = "查看当前用户信息")
-    @PostMapping("/info")
+    @PostMapping("/alter/info")
     public ApiResponse getUserInfo() {
         return userService.getUserInfo();
     }
 
     @Operation(summary = "管理员查看其他学员个人基本信息")
-    @PostMapping("/admin/info")
+    @PostMapping("/info")
     public ApiResponse getUserInfoById(@RequestParam String studentId) {
         log.info("received studentId is:{}", studentId);
         return userService.getUserInfo(studentId);
     }
 
     @Operation(summary = "用户列表")
-    @PostMapping("/admin/list")
+    @PostMapping("/list")
     public ApiResponse<PageResponse> getAllUser(@RequestBody UserQueryAO userQueryAO) {
         log.info("received user query info:{}", JSONUtil.toJsonPrettyStr(userQueryAO));
         return userService.getAllUser(userQueryAO);

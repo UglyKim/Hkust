@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.List;
+import java.util.Set;
+
 @Data
 @TableName("hkust_permissions")
 public class Permission {
@@ -12,12 +15,11 @@ public class Permission {
     @TableId("permission_id")
     private int permissionId;
 
-    @TableField("permissionName")
-    private String permission_name;
+    @TableField("permission_name")
+    private String permissionName;
 
-    @TableField("urlPattern")
-    private String url_pattern;
+    @TableField("describe")
+    private String describe;
 
-    @TableField("httpMethod")
-    private String http_method;
+    private List<UrlPermissions> urlPermissionList;
 }

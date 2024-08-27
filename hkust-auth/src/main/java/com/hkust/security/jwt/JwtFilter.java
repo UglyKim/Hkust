@@ -7,8 +7,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.hkust.security.CustomUserDetails;
-import com.hkust.security.CustomUserDetailsService;
+import com.hkust.security.HkustUserDetails;
+import com.hkust.security.HkustUserDetailsService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -20,11 +20,11 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private CustomUserDetailsService customUserDetailsService;
+    private HkustUserDetailsService customUserDetailsService;
 
     private JwtTokenUtil jwtTokenUtil;
 
-    public JwtFilter(CustomUserDetailsService customUserDetailsService, JwtTokenUtil jwtTokenUtil) {
+    public JwtFilter(HkustUserDetailsService customUserDetailsService, JwtTokenUtil jwtTokenUtil) {
         this.customUserDetailsService = customUserDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
     }
@@ -55,9 +55,8 @@ public class JwtFilter extends OncePerRequestFilter {
             String requestURI = request.getRequestURI();
             log.info("uri:{}", requestURI);
             log.info("studentId:{}", studentId);
-            CustomUserDetails userDetails = (CustomUserDetails) this.customUserDetailsService.loadUserByUsername(studentId);
+            HkustUserDetails userDetails = (HkustUserDetails) this.customUserDetailsService.loadUserByUsername(studentId);
 
-            userDetails.getUser().getRoles();
             if (jwtTokenUtil.validateToken(jwtToken, requestURI, userDetails)) {
 //                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
 //                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

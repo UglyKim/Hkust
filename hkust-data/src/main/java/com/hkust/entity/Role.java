@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,5 +18,5 @@ public class Role {
     @TableField("role_name")
     private String roleName;
 
-    private Set<Permission> permissions;
+    private List<Permission> permissionList;
 }

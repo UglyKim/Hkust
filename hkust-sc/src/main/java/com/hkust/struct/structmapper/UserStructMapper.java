@@ -18,7 +18,7 @@ public interface UserStructMapper {
 
 //    UserVO toVO(User user);
 
-    @Mapping(target = "add_ch", source = "addCh")
+//    @Mapping(target = "add_ch", source = "addCh")
     User UserAOToUser(UserInfoAO userInfoAO);
 
 }

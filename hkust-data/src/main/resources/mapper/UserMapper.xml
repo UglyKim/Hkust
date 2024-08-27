@@ -22,4 +22,59 @@
         WHERE student_id = #{studentId}
           AND password = #{password}
     </select>
+    <select id="selectUserRoleByStudentId" resultMap="UserRole">
+        SELECT *
+        FROM hkust_user u
+                 INNER JOIN hkust_user_role ur ON u.student_id = ur.student_id
+                 INNER JOIN hkust_role r ON ur.role_id = r.role_id
+        WHERE u.student_id = #{student_id}
+    </select>
+    <resultMap id="UserRole" type="com.hkust.entity.User">
+        <id column="student_id" property="studentId"/>
+        <result column="password" property="password"/>
+        <result column="user_name" property="username"/>
+        <result column="real_name" property="realName"/>
+        <result column="address" property="address"/>
+        <result column="office_location" property="officeLocation"/>
+        <result column="phone" property="phone"/>
+        <result column="fixed_tel" property="fixedTel"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <result column="enabled" property="enabled"/>
+        <result column="create_time" property="createTime" javaType="java.time.LocalDateTime"/>
+        <result column="update_time" property="updateTime" javaType="java.time.LocalDateTime"/>
+        <result column="add_ch" property="addCh"/>
+        <collection property="roleList" ofType="com.hkust.entity.Role">
+            <id column="role_id" property="roleId"/>
+            <id column="role_name" property="roleName"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectUserListPage" parameterType="map" resultType="com.hkust.entity.User">
+        SELECT student_id,
+        user_id,
+        user_name,
+        real_name,
+        address,
+        office_location,
+        phone,
+        fixed_tel,
+        password,
+        email,
+        gender,
+        enabled,
+        create_time,
+        update_time,
+        add_ch
+        FROM hkust_user
+        WHERE
+        1=1
+        <if test="realName != null and realName != ''">
+            AND real_name LIKE CONCAT('%', #{realName}, '%')
+        </if>
+        <if test="studentId != null and studentId != ''">
+            AND student_id LIKE CONCAT('%', #{studentId}, '%')
+        </if>
+        AND enabled = #{enabled} LIMIT #{limit}
+    </select>
 </mapper>

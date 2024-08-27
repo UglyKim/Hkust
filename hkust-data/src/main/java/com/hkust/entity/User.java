@@ -6,12 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @TableName("hkust_user")
 public class User {
-
 
     @TableField("user_id")
     private String userId;
@@ -53,9 +53,8 @@ public class User {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
-//    private int version;
+    @TableField("add_ch")
+    private String addCh;
 
-    private String add_ch;
-
-    private Set<Role> roles;
+    private List<Role> roleList;
 }

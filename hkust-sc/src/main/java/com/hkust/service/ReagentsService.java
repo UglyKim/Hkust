@@ -18,7 +18,7 @@ import com.hkust.dto.vo.OptReagentsVO;
 import com.hkust.entity.*;
 import com.hkust.enums.EventTypeEnum;
 import com.hkust.mapper.*;
-import com.hkust.security.CustomUserDetails;
+import com.hkust.security.HkustUserDetails;
 import com.hkust.struct.structmapper.ReagentsRecordStructMapper;
 import com.hkust.struct.structmapper.ReagentsStructMapper;
 import com.hkust.utils.DateUtils;
@@ -156,7 +156,7 @@ public class ReagentsService {
         // 获取操作人员名字
         String realName = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+        User user = ((HkustUserDetails) authentication.getPrincipal()).getUser();
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
@@ -205,7 +205,7 @@ public class ReagentsService {
         reagents.setBottleWeight(returnReagentsAO.getBottleWeight());
         String studentId = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+        User user = ((HkustUserDetails) authentication.getPrincipal()).getUser();
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }

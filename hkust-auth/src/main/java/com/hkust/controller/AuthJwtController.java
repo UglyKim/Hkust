@@ -1,6 +1,5 @@
 package com.hkust.controller;
 
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -28,17 +27,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.hkust.security.CustomUserDetails;
-import com.hkust.security.CustomUserDetailsService;
+import com.hkust.security.HkustUserDetails;
+import com.hkust.security.HkustUserDetailsService;
 import com.hkust.security.jwt.JwtTokenUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Tag(name = "认证")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/v1/")
 @Slf4j
 public class AuthJwtController {
 
@@ -50,7 +48,7 @@ public class AuthJwtController {
 
     private JwtTokenUtil jwtTokenUtil;
 
-    private CustomUserDetailsService userDetailsService;
+    private HkustUserDetailsService userDetailsService;
 
     private PasswordEncoder BCryptPasswordEncoder;
 
@@ -60,7 +58,7 @@ public class AuthJwtController {
     @PostMapping("/auth/login")
     public ApiResponse userAuthentication(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
         log.info("Received authentication login_info: {}", JSONUtil.toJsonPrettyStr(loginInfoAO));
-        CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(loginInfoAO.getStudentId());
+        HkustUserDetails userDetails = (HkustUserDetails) userDetailsService.loadUserByUsername(loginInfoAO.getStudentId());
 
         if (!BCryptPasswordEncoder.matches(loginInfoAO.getPassword(), userDetails.getUser().getPassword())) {
             return ApiResponse.failed(ReturnCode.PASSWD_MISMATCH);
@@ -80,12 +78,12 @@ public class AuthJwtController {
         this.addEvent(loginInfoAO.getChannel(), userDetails.getUser());
 
         String token = jwtTokenUtil.generateToken(userDetails, loginInfoAO.getChannel());
-        List<String> roles = userDetails.getUser().getRoles().stream().map(Role::getRoleName).collect(Collectors.toList());
+        List<String> roles = userDetails.getUser().getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());
         AuthResponseVO authResponseVO = new AuthResponseVO(token, roles);
         return ApiResponse.success(authResponseVO);
     }
 
-    private void updateVersion(CustomUserDetails userDetails, String channel) {
+    private void updateVersion(HkustUserDetails userDetails, String channel) {
         User user = userDetails.getUser();
 
         QueryWrapper<UserExts> wrapper = new QueryWrapper();
@@ -122,7 +120,7 @@ public class AuthJwtController {
     }
 
     @Autowired
-    public void setUserDetailsService(CustomUserDetailsService userDetailsService) {
+    public void setUserDetailsService(HkustUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import com.hkust.security.CustomUserDetails;
+import com.hkust.security.HkustUserDetails;
 
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
@@ -37,7 +37,7 @@ public class JwtTokenUtil {
 
     private UserExtsMapper userExtsMapper;
 
-    public String generateToken(CustomUserDetails userDetails, String channel) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public String generateToken(HkustUserDetails userDetails, String channel) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecretKey secretKey = Keys.hmacShaKeyFor(Base64.getUrlDecoder().decode(secret));
         Map<String, Object> claims = new HashMap<>();
 
@@ -66,7 +66,7 @@ public class JwtTokenUtil {
         return token;
     }
 
-    public Boolean validateToken(String token, String requestURI, CustomUserDetails userDetails) {
+    public Boolean validateToken(String token, String requestURI, HkustUserDetails userDetails) {
         // 找到第一个和第二个斜杠的位置
         int firstSlash = requestURI.indexOf('/', 1); // 从第一个字符开始找
         int secondSlash = requestURI.indexOf('/', firstSlash + 1);
