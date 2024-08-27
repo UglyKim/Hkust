@@ -1,5 +1,6 @@
 package com.hkust.security.jwt;
 
+import cn.hutool.json.JSONUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -56,20 +57,16 @@ public class JwtFilter extends OncePerRequestFilter {
             log.info("uri:{}", requestURI);
             log.info("studentId:{}", studentId);
             HkustUserDetails userDetails = (HkustUserDetails) this.customUserDetailsService.loadUserByUsername(studentId);
-
+            log.info("userDetails is:{}", JSONUtil.toJsonPrettyStr(userDetails));
+            log.info("getUser:{}", userDetails.getUser());
             if (jwtTokenUtil.validateToken(jwtToken, requestURI, userDetails)) {
-//                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-//                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
         chain.doFilter(request, response);
-        SecurityContextHolder.clearContext();
+//        SecurityContextHolder.clearContext();
     }
 }

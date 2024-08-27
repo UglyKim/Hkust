@@ -13,6 +13,7 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,6 @@ public class HkustSecurityMetadataSource implements FilterInvocationSecurityMeta
 
     @PostConstruct
     private void loadResourceDefine() {
-
         if (resourceMap != null) {
             return;
         }
@@ -56,7 +56,6 @@ public class HkustSecurityMetadataSource implements FilterInvocationSecurityMeta
             log.info("role is:{}", configAttribute.getAttribute());
         }
         log.info("configAttributes:{}", JSONUtil.toJsonPrettyStr(configAttributes));
-        log.info("permissions:{}", JSONUtil.toJsonPrettyStr(resourceMap));
     }
 
     @Override
@@ -68,7 +67,6 @@ public class HkustSecurityMetadataSource implements FilterInvocationSecurityMeta
         if (uri.startsWith("/swagger-ui.html") ||
                 uri.equals("/v1/auth/login") ||
                 uri.contains("swagger") ||
-                uri.startsWith("/v2/api-docs") ||
                 uri.contains("/v3/api-docs") ||
                 uri.startsWith("/favicon.ico") ||
                 uri.startsWith("/webjars/**")) {
@@ -79,7 +77,8 @@ public class HkustSecurityMetadataSource implements FilterInvocationSecurityMeta
     }
 
     private Collection<ConfigAttribute> getAttributesForUrl(String uri) {
-        for (Map.Entry<String, Collection<ConfigAttribute>> entry : resourceMap.entrySet()) {
+        Set<Map.Entry<String, Collection<ConfigAttribute>>> entrySet = resourceMap.entrySet();
+        for (Map.Entry<String, Collection<ConfigAttribute>> entry : entrySet) {
             if (entry.getKey().equals(uri)) {
                 return entry.getValue();
             }

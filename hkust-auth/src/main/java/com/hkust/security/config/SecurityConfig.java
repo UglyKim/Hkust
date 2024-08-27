@@ -1,5 +1,6 @@
 package com.hkust.security.config;
 
+import com.hkust.entity.User;
 import com.hkust.exception.CustomAccessDeniedHandler;
 import com.hkust.security.HkustAccessDecisionManager;
 import com.hkust.security.HkustSecurityMetadataSource;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.hkust.security.HkustUserDetailsService;
 import com.hkust.security.jwt.JwtAuthenticationEntryPoint;
@@ -31,11 +33,6 @@ public class SecurityConfig {
     private JwtFilter jwtFilter;
 
     private HkustUserDetailsService customUserDetailsService;
-
-//    private HkustAccessDecisionManager hkustAccessDecisionManager;
-
-//    private HkustSecurityMetadataSource hkustSecurityMetadataSource;
-
 
     public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtFilter jwtFilter, HkustUserDetailsService customUserDetailsService) {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
@@ -62,47 +59,63 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/swagger-resources/**",
+                        "/webjars/**",
+                        "/v1/auth/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .formLogin()
+                .usernameParameter("studentId")
+                .permitAll();
+        return http.build();
+//                .authorizeRequests(authorizeRequests ->
+//                        {
+//                            try {
+//                                authorizeRequests
+//                                        .antMatchers(
+//                                                "/v3/api-docs/**",
+//                                                "/swagger-ui/**",
+//                                                "/swagger-ui.html",
+//                                                "/swagger-resources/**",
+//                                                "/webjars/**",
+//                                                "/v1/auth/login"
+//                                        ).permitAll()
+//                                        .anyRequest().authenticated()
+//                                        .and()
+//                                        .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//                                        .accessDeniedHandler(customAccessDeniedHandler())
+//                                        .and()
+//                                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                                        .and()
+//                                        .formLogin()
+//                                        .usernameParameter("studentId")
+//                                        .permitAll();
+//
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                );
+//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
+//        return http.build();
         // 测试使用，不做验证
        /* http
                 .authorizeRequests().anyRequest().permitAll() // 允许所有请求
                 .and().csrf().disable(); // 禁用 CSRF 保护
 
         return http.build();*/
-        http.csrf().disable()
-                .authorizeRequests(authorizeRequests ->
-                        {
-                            try {
-                                authorizeRequests
-                                        .antMatchers(
-                                                "/v3/api-docs/**",
-                                                "/swagger-ui/**",
-                                                "/swagger-ui.html",
-                                                "/swagger-resources/**",
-                                                "/webjars/**",
-                                                "/v1/auth/login"
-                                        ).permitAll()
-                                        .anyRequest().authenticated()
-                                        .and()
-                                        .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                                        .accessDeniedHandler(customAccessDeniedHandler())
-                                        .and()
-                                        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                                        .addFilterAfter(hkustFilterSecurityInterceptor(), UsernamePasswordAuthenticationFilter.class)
-//                                        .addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
-                                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                                        .and()
-                                        .formLogin()
-                                        .usernameParameter("studentId")
-                                        .permitAll();
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                );
-//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-//        http.addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
-        return http.build();
     }
 
     @Bean
@@ -118,6 +131,10 @@ public class SecurityConfig {
     @Bean
     public HkustFilterSecurityInterceptor hkustFilterSecurityInterceptor() {
         return new HkustFilterSecurityInterceptor(hkustSecurityMetadataSource(), hkustAccessDecisionManager());
+//        FilterSecurityInterceptor filter = new FilterSecurityInterceptor();
+//        filter.setSecurityMetadataSource(hkustSecurityMetadataSource());
+//        filter.setAccessDecisionManager(hkustAccessDecisionManager());
+//        return (HkustFilterSecurityInterceptor) filter;
     }
 
     @Bean
