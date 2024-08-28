@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "柜子信息")
 @RestController
-@RequestMapping("/v1/cabinet")
+@RequestMapping("/v1/sc/cabinet")
 @Slf4j
 public class CabinetController {
 

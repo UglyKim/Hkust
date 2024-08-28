@@ -23,14 +23,14 @@ public class CabinetController {
     private CabinetService cabinetService;
 
     @Operation(summary = "柜子详细信息")
-    @PostMapping("/admin/cabinet/detail")
+    @PostMapping("/cabinet/detail")
     public ApiResponse<CabinetDetailVO> getCabinetInfo(@RequestParam String cabinetId) {
         log.info("received cabinet ID:{}", cabinetId);
         return cabinetService.getCabinetDetails(cabinetId);
     }
 
     @Operation(summary = "柜子列表")
-    @PostMapping("/admin/cabinet/list")
+    @PostMapping("/cabinet/list")
     public ApiResponse getCabinetList() {
         return cabinetService.getCabinetList();
     }
@@ -43,7 +43,7 @@ public class CabinetController {
     }
 
     @Operation(summary = "智能柜更新")
-    @PostMapping("/admin/cabinet/update")
+    @PostMapping("/cabinet/update")
     public ApiResponse updateCabinet(@RequestBody CabinetAO cabinetAO) {
         log.info("received add cabinet_info:{}", JSONUtil.toJsonPrettyStr(cabinetAO));
         return cabinetService.updateCabinet(cabinetAO);
@@ -51,26 +51,26 @@ public class CabinetController {
 
     @Deprecated
     @Operation(summary = "删除智能柜")
-    @PostMapping("/admin/cabinet/delete")
+    @PostMapping("/cabinet/delete")
     public ApiResponse delCabinet() {
         return ApiResponse.success();
     }
 
     @Operation(summary = "智能柜状态")
-    @PostMapping("/common/cabinet/stat")
+    @PostMapping("/cabinet/stat")
     public ApiResponse getCabinetStat() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(StatEnum.class));
     }
 
     @Operation(summary = "柜门开启模式")
-    @PostMapping("/common/cabinet/open-mode")
+    @PostMapping("/cabinet/open-mode")
     public ApiResponse getOpenMode() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OpenModeEnum.class));
     }
 
     @Deprecated
     @Operation(summary = "统计")
-    @PostMapping("/common/cabinet/statistics")
+    @PostMapping("/cabinet/statistics")
     public ApiResponse reagentStatistics() {
 
         return ApiResponse.success();

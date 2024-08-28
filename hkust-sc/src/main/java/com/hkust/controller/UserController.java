@@ -32,14 +32,14 @@ public class UserController {
     }
 
     @Operation(summary = "管理员查看其他学员个人基本信息")
-    @PostMapping("/admin/info")
+    @PostMapping("/info")
     public ApiResponse getUserInfoById(@RequestParam String studentId) {
         log.info("received studentId is:{}", studentId);
         return userService.getUserInfo(studentId);
     }
 
     @Operation(summary = "用户列表")
-    @PostMapping("/admin/list/")
+    @PostMapping("/list/")
     public ApiResponse<PageResponse> getAllUser(@RequestBody UserQueryAO userQueryAO) {
         log.info("received user query info:{}", JSONUtil.toJsonPrettyStr(userQueryAO));
         return userService.getAllUser(userQueryAO);
@@ -47,7 +47,7 @@ public class UserController {
 
     @Deprecated
     @Operation(summary = "新增用户")
-    @PostMapping("/admin/add")
+    @PostMapping("/add")
     public ApiResponse addUser(@RequestBody UserInfoAO userInfoAO) {
         log.info("Received user_info:{}", JSONUtil.toJsonPrettyStr(userInfoAO));
         return userService.addUser(userInfoAO);
@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @Operation(summary = "管理员修改学员信息")
-    @PostMapping("/admin/update")
+    @PostMapping("/update")
     public ApiResponse updateUserById(@RequestBody UserAlterInfoAO userAlterInfoAO) {
         log.info("Received user_info:{}", StrUtil.toString(userAlterInfoAO));
         return userService.updateUserById(userAlterInfoAO);

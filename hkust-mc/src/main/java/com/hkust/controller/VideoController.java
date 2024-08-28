@@ -13,7 +13,7 @@ import java.util.List;
 
 @Tag(name = "录像列表")
 @RestController
-@RequestMapping("/v1/mc/manage/")
+@RequestMapping("/v1/mc/")
 @Slf4j
 public class VideoController {
 
