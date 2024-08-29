@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- 自定义日志格式 -->
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %cyan(%thread) %logger{36} - %msg%n%rEx
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 文件输出（可选） -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder>
+            <!-- 自定义日志格式 -->
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n%rEx
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 设置触发策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize> <!-- 文件大小达到10MB时轮换 -->
+        </rollingPolicy>
+        <!-- 保持一定数量的历史日志 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>logs/app-%d{yyyy-MM-dd}.%i.log</fileNamePattern> <!-- 滚动文件的命名模式 -->
+            <minIndex>1</minIndex>
+            <maxIndex>10</maxIndex> <!-- 保留10个文件 -->
+        </rollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <!-- <appender-ref ref="FILE" /> -->
+    </root>
+
+</configuration>
