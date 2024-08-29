@@ -23,7 +23,7 @@ public class CabinetController {
     private CabinetService cabinetService;
 
     @Operation(summary = "柜子详细信息")
-    @PostMapping("/detail")
+    @PostMapping("/info")
     public ApiResponse<CabinetDetailVO> getCabinetInfo(@RequestParam String cabinetId) {
         log.info("received cabinet ID:{}", cabinetId);
         return cabinetService.getCabinetDetails(cabinetId);
@@ -43,7 +43,7 @@ public class CabinetController {
     }
 
     @Operation(summary = "智能柜更新")
-    @PostMapping("/update")
+    @PostMapping("/alter")
     public ApiResponse updateCabinet(@RequestBody CabinetAO cabinetAO) {
         log.info("received add cabinet_info:{}", JSONUtil.toJsonPrettyStr(cabinetAO));
         return cabinetService.updateCabinet(cabinetAO);
@@ -63,7 +63,7 @@ public class CabinetController {
     }
 
     @Operation(summary = "柜门开启模式")
-    @PostMapping("/open-mode")
+    @PostMapping("/mode")
     public ApiResponse getOpenMode() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OpenModeEnum.class));
     }

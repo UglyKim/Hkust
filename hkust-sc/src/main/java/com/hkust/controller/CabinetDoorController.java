@@ -32,7 +32,7 @@ public class CabinetDoorController {
 
     //    @Hidden
     @Operation(summary = "柜门详细信息")
-    @PostMapping("/door/detail")
+    @PostMapping("/door/info")
     public ApiResponse getDoorInfo(@RequestParam String doorId) {
         log.info("received door_id is:{}", doorId);
         return cabinetDoorService.getDoorDetail(doorId);

@@ -53,19 +53,19 @@ public class ReagentsController {
         return reagentsService.getReagentsRecordList(accessReagentsAO);
     }
 
-    @Operation(summary = "取试剂")
+    /*@Operation(summary = "取试剂")
     @PostMapping("/take")
     public ApiResponse takeReagents(@RequestParam String barCode) {
         log.info("received barcode:{}", barCode);
         return reagentsService.takeReagents(barCode);
-    }
+    }*/
 
-    @Operation(summary = "还试剂")
+   /* @Operation(summary = "还试剂")
     @PostMapping("/return")
     public ApiResponse returnReagents(@RequestBody ReturnReagentsAO returnReagentsAO) {
         log.info("received return reagents:{}", returnReagentsAO);
         return reagentsService.returnReagents(returnReagentsAO);
-    }
+    }*/
 
     @Operation(summary = "删除试剂")
     @PostMapping("/delete")

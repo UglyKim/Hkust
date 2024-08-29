@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "日志")
-@RestController
-@RequestMapping("/v1/sc/log")
+//@Tag(name = "日志")
+//@RestController
+//@RequestMapping("/v1/sc/log")
 @Slf4j
 public class CabinetLogController {
 
     private EventService eventService;
 
-    @Operation(summary = "日志列表")
-    @PostMapping("/list")
+//    @Operation(summary = "日志列表")
+//    @PostMapping("/list")
     public ApiResponse getLogList(@RequestBody EventQueryAO eventQueryAO) {
         log.info("received event_query_info:{}", StrUtil.toString(eventQueryAO));
         return eventService.getAllEventList(eventQueryAO);
