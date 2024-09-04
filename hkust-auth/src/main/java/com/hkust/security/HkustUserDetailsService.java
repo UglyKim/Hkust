@@ -27,7 +27,7 @@ public class HkustUserDetailsService implements UserDetailsService {
         }
 //        Collection<GrantedAuthority> authorities = user.getRoles().stream()
 //                .flatMap(role -> role.getPermissions().stream())
-//                .map(Permission -> new SimpleGrantedAuthority(Permission.getPermissionName()))
+//                .map(Perm -> new SimpleGrantedAuthority(Perm.getPermissionName()))
 //                .collect(Collectors.toList());
 
 //        roles.stream().flatMap(role->role)

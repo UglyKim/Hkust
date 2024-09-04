@@ -78,6 +78,13 @@ public class UserController {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonArray(GenderEnum.class));
     }
 
+
+    @Operation(summary = "角色列表")
+    @PostMapping("/roles")
+    public ApiResponse getRoles() {
+        return userService.getRoles();
+    }
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;

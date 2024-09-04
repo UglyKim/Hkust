@@ -25,6 +25,11 @@ public class User {
     @TableField("real_name")
     private String realName;
 
+    @TableField("dept")
+    private String dept;
+
+    private String position;
+
     @TableField("address")
     private String address;
 

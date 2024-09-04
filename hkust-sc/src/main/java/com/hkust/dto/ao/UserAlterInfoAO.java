@@ -45,4 +45,8 @@ public class UserAlterInfoAO implements Serializable {
 
     @Schema(description = "性别")
     private GenderEnum gender;
+
+    @Schema(description = "职位")
+    private String position;
+
 }

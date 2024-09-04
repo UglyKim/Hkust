@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-@TableName("hkust_url_permissions")
-@Data
-public class UrlPermissions {
+//@TableName("hkust_url_permissions")
+//@Data
+public class PermDetail {
 
     @TableId("url_id")
     private int urlId;
@@ -22,7 +22,6 @@ public class UrlPermissions {
     @TableField("http_method")
     private String httpMethod;
 
-    @TableField("describe")
     private String describe;
 }
 

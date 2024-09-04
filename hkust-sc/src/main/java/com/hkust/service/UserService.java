@@ -1,6 +1,10 @@
 package com.hkust.service;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.lang.hash.Hash;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
@@ -25,12 +29,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -41,22 +47,35 @@ public class UserService {
 
     private PasswordEncoder BCryptPasswordEncoder;
 
+    public ApiResponse getRoles() {
+        QueryWrapper<Role> wrapper = new QueryWrapper<>();
+        List<Role> roles = roleMapper.selectList(wrapper);
+//        List<Role> roles = roleMapper.selectAll("sc");
+        if (CollUtil.isEmpty(roles)) {
+            return ApiResponse.failed(ReturnCode.ROLL_IS_NULL);
+        }
+        List<Map<String, String>> roleList = new ArrayList<>();
+        for (Role role : roles) {
+            Map<String, String> roleMap = new HashMap<>();
+            Field[] fields = Role.class.getDeclaredFields();
+            for (Field field : fields) {
+                if (field.getName().equals("roleId")) {
+                    roleMap.put("code", String.valueOf(role.getRoleId()));
+                }
+                if (field.getName().equals("roleName")) {
+                    roleMap.put("name", role.getRoleName());
+                }
+
+            }
+            roleList.add(roleMap);
+        }
+        return ApiResponse.success(roleList);
+    }
+
     public List<User> getAllUsers() {
         List<User> users = userMapper.selectAll();
         return users;
     }
-
-//    public List<Map> getRoles() {
-//        List<Role> roles = roleMapper.selectAll();
-//        List<Map> mapList = new ArrayList<>();
-//        for (Role role : roles) {
-//            Map<String, String> roleMap = new HashMap<>();
-//            roleMap.put("code", role.getRoleId());
-//            roleMap.put("name", role.getRoleName());
-//            mapList.add(roleMap);
-//        }
-//        return mapList;
-//    }
 
     public ApiResponse getUserInfo() {
 
@@ -109,7 +128,7 @@ public class UserService {
         // 查询学生是否存在
         User user = userMapper.selectByStudentId(userAlterInfoAO.getStudentId());
         if (ObjectUtil.isEmpty(user)) {
-            throw new NullPointerException("学生不存在!");
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         user.setUpdateTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
@@ -139,15 +158,16 @@ public class UserService {
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPhone())) {
             chainWrapper.set("phone", userAlterInfoAO.getPhone());
         }
-        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPassword())) {
-            chainWrapper.set("password", BCryptPasswordEncoder.encode(userAlterInfoAO.getPassword()));
-        }
+//        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPassword())) {
+//            chainWrapper.set("password", BCryptPasswordEncoder.encode(userAlterInfoAO.getPassword()));
+//        }
         chainWrapper.update();
         return ApiResponse.success();
     }
 
     /**
-     * 管理员修改学院信息
+     * 管理员修改学员信息
+     *
      * @param userAlterInfoAO
      * @return
      */
@@ -156,7 +176,7 @@ public class UserService {
         // 查询学生是否存在
         User user = userMapper.selectByStudentId(userAlterInfoAO.getStudentId());
         if (ObjectUtil.isEmpty(user)) {
-            throw new NullPointerException("学生不存在!");
+            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         user.setUpdateTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
@@ -186,9 +206,9 @@ public class UserService {
         if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPhone())) {
             chainWrapper.set("phone", userAlterInfoAO.getPhone());
         }
-        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPassword())) {
-            chainWrapper.set("password", BCryptPasswordEncoder.encode(userAlterInfoAO.getPassword()));
-        }
+//        if (ObjectUtil.isNotEmpty(userAlterInfoAO.getPassword())) {
+//            chainWrapper.set("password", BCryptPasswordEncoder.encode(userAlterInfoAO.getPassword()));
+//        }
         chainWrapper.update();
         return ApiResponse.success();
     }

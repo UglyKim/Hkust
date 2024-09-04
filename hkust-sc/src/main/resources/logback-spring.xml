@@ -14,7 +14,7 @@
 
     <!-- 文件输出（可选） -->
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/app.log</file>
+        <file>logs/sc.log</file>
         <encoder>
             <!-- 自定义日志格式 -->
             <pattern>
@@ -22,20 +22,12 @@
             </pattern>
             <charset>UTF-8</charset>
         </encoder>
-        <!-- 设置触发策略 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>100MB</maxFileSize> <!-- 文件大小达到10MB时轮换 -->
-        </rollingPolicy>
-        <!-- 保持一定数量的历史日志 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>logs/app-%d{yyyy-MM-dd}.%i.log</fileNamePattern> <!-- 滚动文件的命名模式 -->
-            <minIndex>1</minIndex>
-            <maxIndex>10</maxIndex> <!-- 保留10个文件 -->
-        </rollingPolicy>
     </appender>
 
+    <!-- 根日志配置 -->
     <root level="info">
         <appender-ref ref="STDOUT" />
+        <!-- 如果需要文件输出，可以添加以下行 -->
         <!-- <appender-ref ref="FILE" /> -->
     </root>
 

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@ComponentScan(basePackages = {"com.hkust.controller.CabinetVO","com.hkust.controller.management"})
 public class HkustScApplication {
     public static void main(String[] args) {
+        System.setProperty("channel", "sc");
         SpringApplication.run(HkustScApplication.class, args);
     }
 }

@@ -37,6 +37,12 @@ public class UserInfoAO implements Serializable {
     @Schema(required = true, description = "手机号")
     private String phone;
 
+    @Schema(description = "部门")
+    private String dept;
+
+    @Schema(description = "职位")
+    private String position;
+
     @Schema(description = "固定电话")
     private String fixedTel;
 

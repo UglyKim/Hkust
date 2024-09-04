@@ -28,4 +28,10 @@ public class UserQueryAO implements Serializable {
 
     @Schema(description = "学员姓名")
     private String realName;
+
+    @Schema(description = "部门")
+    private String dept;
+
+    @Schema(description = "职位")
+    private String position;
 }

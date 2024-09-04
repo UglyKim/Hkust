@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @TableName("hkust_role")
@@ -18,5 +17,5 @@ public class Role {
     @TableField("role_name")
     private String roleName;
 
-    private List<Permission> permissionList;
+//    private List<Perm> permList;
 }

@@ -6,20 +6,21 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
-@TableName("hkust_permissions")
-public class Permission {
+@TableName("hkust_perm")
+public class Perm {
 
-    @TableId("permission_id")
-    private int permissionId;
+    @TableId("perm_id")
+    private int permId;
 
-    @TableField("permission_name")
-    private String permissionName;
+    @TableField("perm_name")
+    private String permName;
 
     @TableField("describe")
     private String describe;
 
-    private List<UrlPermissions> urlPermissionList;
+    private String channel;
+
+    private List<PermDetail> urlPermissionList;
 }

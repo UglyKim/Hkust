@@ -11,6 +11,7 @@ public enum ReturnCode {
     PASSWD_MISMATCH("96", "密码不正确"),
     BAD_CREDENTIAL("98", "用户名密码错误"),
     USER_ALREADY_EXISTS("95", "用户已存在"),
+    ROLL_IS_NULL("91","角色不存在"),
 
     FILE_IS_EMPTY("11", "请选择正确的操作录像"),
     FILE_NOT_MP4("12", "录像格式不正确"),

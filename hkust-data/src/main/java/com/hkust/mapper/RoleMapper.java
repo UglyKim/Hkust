@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface RoleMapper extends BaseMapper<Role> {
 
-    List<Role> selectAll();
+    List<Role> selectAll(String channel);
 
 //    @Select("select * from hkust_role r inner join hkust_role_permissions rp on r.role_id = rp.role_id\n" +
 //            "inner join hkust_permissions p on rp.permission_id = p.permission_id\n" +

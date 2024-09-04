@@ -7,6 +7,7 @@ import com.hkust.dto.PageResponse;
 import com.hkust.dto.ao.UserAlterInfoAO;
 import com.hkust.dto.ao.UserInfoAO;
 import com.hkust.dto.ao.query.UserQueryAO;
+import com.hkust.entity.User;
 import com.hkust.enums.EnableEnum;
 import com.hkust.enums.GenderEnum;
 import com.hkust.service.UserService;
@@ -16,6 +17,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Tag(name = "用户")
 @RestController
@@ -77,6 +83,12 @@ public class UserController {
     @PostMapping("/gender")
     public ApiResponse getGender() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonArray(GenderEnum.class));
+    }
+
+    @Operation(summary = "角色列表")
+    @PostMapping("/roles")
+    public ApiResponse getRoles() {
+        return userService.getRoles();
     }
 
     @Autowired
