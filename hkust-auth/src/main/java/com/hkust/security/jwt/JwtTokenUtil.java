@@ -89,6 +89,8 @@ public class JwtTokenUtil {
         UserExts userExts = userExtsMapper.selectOne(wrapper);
 
         final int version = extractVersion(token);
+//        if (studentId.equals(user.getStudentId())) {
+//        }
         return studentId.equals(user.getStudentId()) && !isTokenExpired(token)
                 && userExts.getVersion() == version && channel.equals(userExts.getChannel());
     }

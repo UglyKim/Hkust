@@ -1,8 +1,11 @@
 package com.hkust.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.ChainUpdate;
+import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.hkust.dto.ApiResponse;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.AuthResponseVO;
@@ -15,6 +18,7 @@ import com.hkust.enums.EventTypeEnum;
 import com.hkust.mapper.EventMapper;
 import com.hkust.mapper.UserExtsMapper;
 import com.hkust.mapper.UserMapper;
+import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +42,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/v1/")
 @Slf4j
-public class AuthJwtController {
+public class AuthController {
 
     private UserMapper userMapper;
 
@@ -54,6 +58,29 @@ public class AuthJwtController {
 
     private EventMapper eventMapper;
 
+    @Operation(summary = "登出")
+    @PostMapping("/auth/logout")
+    public ApiResponse userLogOut() {
+        User user = SecurityUtils.getCurrentUser();
+        if (ObjectUtil.isEmpty(user)) {
+            return ApiResponse.failed("用户未登陆");
+        }
+        QueryWrapper<UserExts> wrapper = new QueryWrapper<>();
+        wrapper.eq("student_id", user.getStudentId());
+        wrapper.eq("channel", System.getProperty("channel"));
+        UserExts userExts = userExtsMapper.selectOne(wrapper);
+        if (ObjectUtil.isEmpty(userExts)) {
+            return ApiResponse.failed("Invalid token");
+        }
+        // 更新token版本
+        UpdateChainWrapper<UserExts> chainWrapper = new UpdateChainWrapper(userExtsMapper);
+        chainWrapper.eq("student_id", userExts.getStudentId());
+        chainWrapper.set("version", userExts.getVersion() + 1);
+        chainWrapper.update();
+
+        return ApiResponse.success();
+    }
+
     @Operation(summary = "登陆认证")
     @PostMapping("/auth/login")
     public ApiResponse userAuthentication(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
@@ -67,11 +94,6 @@ public class AuthJwtController {
         if (!userDetails.isEnabled()) {
             return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
         }
-//        List<String> roles = userMapper.selectRolesByStudentId(loginInfoAO.getStudentId());
-//        if (ObjectUtil.isEmpty(roles)) {
-//            return ApiResponse.failed("未分配角色");
-//        }
-//        userDetails.setRoles(roles);
         // 更新用户token版本号
         updateVersion(userDetails, loginInfoAO.getChannel());
         // 添加登陆日志
@@ -97,6 +119,7 @@ public class AuthJwtController {
         updateWrapper.eq("channel", channel);
         userExtsMapper.update(userExts, updateWrapper);
     }
+
 
     private void addEvent(String channel, User user) {
         Event event = new Event();

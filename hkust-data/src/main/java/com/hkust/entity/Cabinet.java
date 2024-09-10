@@ -33,4 +33,7 @@ public class Cabinet {
 
     private String remark;
 
+    // 智能柜类型编号
+    private String code;
+
 }
