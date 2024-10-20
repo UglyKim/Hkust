@@ -14,6 +14,7 @@
         <module>hkust-data</module>
         <module>hkust-auth</module>
         <module>hkust-common</module>
+        <module>hkust-wmsc</module>
     </modules>
 
     <properties>
