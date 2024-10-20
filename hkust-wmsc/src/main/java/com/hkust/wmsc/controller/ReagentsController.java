@@ -53,6 +53,12 @@ public class ReagentsController {
         return reagentsService.outboundReagents(outReagentsAOList);
     }
 
+    @Operation(summary = "出入库日志查询")
+    @PostMapping("/logs")
+    public ApiResponse getLogList() {
+        return reagentsService.getLogList();
+    }
+
     @Operation(summary = "查看出入库试剂详情")
     @PostMapping("/outbound/detail")
     public ApiResponse inOutboundDetail(@RequestParam String reagentsId) {

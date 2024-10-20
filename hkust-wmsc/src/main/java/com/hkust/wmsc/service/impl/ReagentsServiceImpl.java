@@ -8,7 +8,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.User;
 import com.hkust.entity.wms.WmsInOutRecord;
+import com.hkust.entity.wms.WmsOptLog;
 import com.hkust.entity.wms.WmsReagents;
+import com.hkust.enums.OptTypeEnum;
+import com.hkust.mapper.wmsc.WmsOptLogMapper;
 import com.hkust.mapper.wmsc.WmsReagentsMapper;
 import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
@@ -17,7 +20,11 @@ import com.hkust.wmsc.dto.ao.InReagentsAO;
 import com.hkust.wmsc.dto.ao.OutReagentsAO;
 import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmsc.dto.vo.ReagentsVO;
+import com.hkust.wmsc.dto.vo.WmsInOutRecordVO;
+import com.hkust.wmsc.dto.vo.WmsOptLogVO;
 import com.hkust.wmsc.service.ReagentsService;
+import com.hkust.wmsc.struct.structmapper.WmsInOutRecordStructMapper;
+import com.hkust.wmsc.struct.structmapper.WmsOptLogStructMapper;
 import com.hkust.wmsc.struct.structmapper.WmscReagentsStructMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +32,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -34,6 +42,8 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
     private WmsReagentsMapper wmsReagentsMapper;
 
     private InOutRecordServiceImpl inOutRecordService;
+
+    private WmsOptLogMapper wmsOptLogMapper;
 
     public ApiResponse findReagents(String reagentsId) {
         WmsReagents reagents = wmsReagentsMapper.selectById(reagentsId);
@@ -84,8 +94,8 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecord.setGhs(reagents.getGhs());
             wmsInOutRecord.setReagentsName(reagents.getName());
             wmsInOutRecord.setReagentsId(reagents.getId());
-            wmsInOutRecord.setInTime(currentDateTime);
-            wmsInOutRecord.setType("1"); // 入库
+            wmsInOutRecord.setOptTime(currentDateTime);
+            wmsInOutRecord.setType(OptTypeEnum.INBOUND.getCode()); // 入库
             wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
             // 添加操作人
             wmsInOutRecord.setOperator_id(user.getUserId());
@@ -93,7 +103,16 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecordList.add(wmsInOutRecord);
         }
         inOutRecordService.saveBatch(wmsInOutRecordList);
-        // TODO: 记录日志
+        // 添加日志
+        WmsOptLog wmsOptLog = new WmsOptLog();
+        wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
+        User user = SecurityUtils.getCurrentUser();
+        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
+        wmsOptLog.setOpt_time(currentDateTime);
+        wmsOptLogMapper.insert(wmsOptLog);
+
         return ApiResponse.success();
     }
 
@@ -119,8 +138,8 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecord.setGhs(reagents.getGhs());
             wmsInOutRecord.setReagentsName(reagents.getName());
             wmsInOutRecord.setReagentsId(reagents.getId());
-            wmsInOutRecord.setInTime(currentDateTime);
-            wmsInOutRecord.setType("2"); // 出库
+            wmsInOutRecord.setOptTime(currentDateTime);
+            wmsInOutRecord.setType(OptTypeEnum.OUTBOUND.getCode()); // 出库
             wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
             // 添加操作人
             wmsInOutRecord.setOperator_id(user.getUserId());
@@ -128,7 +147,16 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecordList.add(wmsInOutRecord);
         }
         inOutRecordService.saveBatch(wmsInOutRecordList);
-        // TODO: 记录日志
+
+        // 添加日志
+        WmsOptLog wmsOptLog = new WmsOptLog();
+        wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
+        User user = SecurityUtils.getCurrentUser();
+        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
+        wmsOptLog.setOpt_time(currentDateTime);
+        wmsOptLogMapper.insert(wmsOptLog);
         return ApiResponse.success();
 
     }
@@ -140,6 +168,19 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         return ApiResponse.success(reagentsVO);
     }
 
+    public ApiResponse getLogList() {
+        List<WmsInOutRecord> optLogList = inOutRecordService.getLogs();
+        if (CollUtil.isNotEmpty(optLogList)) {
+            List<WmsInOutRecordVO> wmsOptLogVOList = new ArrayList<>();
+            for (WmsInOutRecord wmsInOutRecord : optLogList) {
+                WmsInOutRecordVO wmsInOutRecordVO = WmsInOutRecordStructMapper.INSTANCE.WmsInOutRecordToWmsInOutRecordVO(wmsInOutRecord);
+                wmsOptLogVOList.add(wmsInOutRecordVO);
+            }
+            return ApiResponse.success(wmsOptLogVOList);
+        }
+        return ApiResponse.success();
+    }
+
     @Autowired
     public void setWmsReagentsMapper1(WmsReagentsMapper wmsReagentsMapper1) {
         this.wmsReagentsMapper = wmsReagentsMapper1;
@@ -148,5 +189,15 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
     @Autowired
     public void setInOutRecordService(InOutRecordServiceImpl inOutRecordService) {
         this.inOutRecordService = inOutRecordService;
+    }
+
+    @Autowired
+    public void setWmsOptLogMapper(WmsOptLogMapper wmsOptLogMapper) {
+        this.wmsOptLogMapper = wmsOptLogMapper;
+    }
+
+    @Autowired
+    public void setWmsReagentsMapper(WmsReagentsMapper wmsReagentsMapper) {
+        this.wmsReagentsMapper = wmsReagentsMapper;
     }
 }

@@ -25,9 +25,6 @@ public class WmsInOutRecord {
     @TableField("reagents_name")
     private String reagentsName;
 
-    @TableField("in_time")
-    private LocalDateTime inTime;
-
     /**
      * 规格
      */
@@ -35,8 +32,11 @@ public class WmsInOutRecord {
 
     private String ghs;
 
-    @TableField("out_time")
-    private LocalDateTime outTime;
+    /**
+     * 出入库时间
+     */
+    @TableField("opt_time")
+    private LocalDateTime optTime;
 
     @TableField("operatorId")
     private String operator_id;
