@@ -37,7 +37,8 @@ public class OpenApiConfig {
     public GroupedOpenApi wmscApi() {
         return GroupedOpenApi.builder()
                 .group("仓储智能柜")
-                .packagesToScan("com.hkust.wmsc.controller")
+//                .packagesToScan("com.hkust.wmsc.controller")
+                .packagesToScan("com.hkust")
 //                .pathsToMatch("/cabinet/**")
                 .build();
     }

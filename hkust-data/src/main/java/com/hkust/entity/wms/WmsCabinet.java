@@ -81,7 +81,7 @@ public class WmsCabinet {
      * 楼栋
      */
     @TableField("teaching_building")
-   private String  teaching_building;
+   private String  teachingBuilding;
     /**
      * 容量
      */

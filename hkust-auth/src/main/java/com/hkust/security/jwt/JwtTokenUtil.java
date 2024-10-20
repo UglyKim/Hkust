@@ -71,10 +71,6 @@ public class JwtTokenUtil {
         int firstSlash = requestURI.indexOf('/', 1); // 从第一个字符开始找
         int secondSlash = requestURI.indexOf('/', firstSlash + 1);
 
-        // 提取两个斜杠之间的部分
-        String requestChannel = requestURI.substring(firstSlash + 1, secondSlash);
-        log.info("request_channel:{}", requestChannel);
-
         User user = userDetails.getUser();
         // 从token获取studentId
         final String studentId = getUsernameFromToken(token);
@@ -85,7 +81,7 @@ public class JwtTokenUtil {
         // 数据库查询user_exts
         QueryWrapper<UserExts> wrapper = new QueryWrapper<>();
         wrapper.eq("student_id", user.getStudentId());
-        wrapper.eq("channel", requestChannel);
+        wrapper.eq("channel", channel);
         UserExts userExts = userExtsMapper.selectOne(wrapper);
 
         final int version = extractVersion(token);

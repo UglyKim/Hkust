@@ -48,8 +48,10 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         QueryWrapper wrapper = new QueryWrapper();
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getName())) {
             wrapper.like("name", reagentsQueryAO.getName());
+            wrapper.orderByAsc("expiration_date");
         }
         List<WmsReagents> wmsReagentsList = wmsReagentsMapper.selectList(wrapper);
+
         if (CollUtil.isEmpty(wmsReagentsList)) {
             return ApiResponse.success();
         }
@@ -68,7 +70,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.InReagentsAOToReagents(inReagentsAO);
             wmsReagents.setId(UUIDUtils.generateUUIDWithoutHyphens());
             wmsReagents.setCreateTime(currentDateTime);
-            wmsReagents.setInout("in");
+            wmsReagents.setInOut("in");
             wmsReagentsList.add(wmsReagents);
         }
         super.saveBatch(wmsReagentsList);
@@ -102,7 +104,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
 
         for (OutReagentsAO outReagentsAO : outReagentsAOListList) {
             WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.OutReagentsAOToReagents(outReagentsAO);
-            wmsReagents.setInout("out");
+            wmsReagents.setInOut("out");
             wmsReagents.setUpdateTime(currentDateTime);
             wmsReagentsList.add(wmsReagents);
         }
@@ -131,12 +133,11 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
 
     }
 
-    public ApiResponse getReagentsInfo(String reagentsId) {
-        log.info("received reagentsId:{}", reagentsId);
+    public ApiResponse getInOutboundReagentsDetail(String reagentsId) {
         WmsReagents reagents = wmsReagentsMapper.selectById(reagentsId);
         Assert.notNull(reagents);
-
-        return null;
+        ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
+        return ApiResponse.success(reagentsVO);
     }
 
     @Autowired

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "统计")
 @RestController
-@RequestMapping("/v1/wmsc/statistics")
+@RequestMapping("/v1/statistics")
 @Slf4j
 public class StatisticsController {
 
@@ -40,6 +40,20 @@ public class StatisticsController {
     public ApiResponse outboundStatistics(@RequestBody InOutboundAO inOutboundAO) {
         log.info("received inOutboundAO:{}", JSONUtil.toJsonPrettyStr(inOutboundAO));
         return statisticsService.inboundRecord(inOutboundAO);
+    }
+
+    @Operation(summary = "入库列表查询")
+    @PostMapping("/inbound/list")
+    public ApiResponse inboundListStatistics(){
+
+        return null;
+    }
+
+    @Operation(summary = "出库列表查询")
+    @PostMapping("/outbound/list")
+    public ApiResponse outboundListStatistics(){
+
+        return null;
     }
 
     @Autowired

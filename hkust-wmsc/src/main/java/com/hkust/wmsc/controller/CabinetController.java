@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "智能柜")
 @RestController
-@RequestMapping("/v1/wmsc/cabinet")
+@RequestMapping("/v1/cabinet")
 @Slf4j
 public class CabinetController {
 
@@ -23,15 +23,14 @@ public class CabinetController {
     @Operation(summary = "智能柜列表")
     @PostMapping("/list")
     public ApiResponse getCabinetList() {
-
-        return null;
+        return cabinetService.getCabinetList();
     }
 
     @Operation(summary = "智能柜详情")
     @PostMapping("/info")
     public ApiResponse getCabinetInfo(@RequestParam String cabinetId) {
-
-        return null;
+        log.info("received cabinet ID:{}", cabinetId);
+        return cabinetService.getCabinetDetail(cabinetId);
     }
 
     @Autowired

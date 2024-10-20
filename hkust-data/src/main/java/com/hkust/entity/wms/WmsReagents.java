@@ -1,6 +1,7 @@
 package com.hkust.entity.wms;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @TableName("wms_reagents")
 public class WmsReagents {
 
+    @TableId
     private String id;
 
     @TableField("cas_no")
@@ -27,14 +29,15 @@ public class WmsReagents {
 
     private String brand;
 
-    private String inout;
+    @TableField("in_out")
+    private String inOut;
 
     private String price;
 
     @TableField("storage_location")
     private String storageLocation;
 
-    private String  ghs;
+    private String ghs;
 
     @TableField("research_group")
     private String researchGroup;
@@ -47,7 +50,7 @@ public class WmsReagents {
     private String modifier;
 
     @TableField("update_time")
-   private LocalDateTime updateTime;
+    private LocalDateTime updateTime;
 
     private String state;
 
@@ -63,13 +66,13 @@ public class WmsReagents {
     private String physicalState;
 
     /**
-     *'特殊存储条件'
+     * '特殊存储条件'
      */
     @TableField("special_storage_conditions")
     private String specialStorageConditions;
 
     /**
-     *'危险和危害特性类别'
+     * '危险和危害特性类别'
      */
     @TableField("hazard_classification")
     private String hazardClassification;

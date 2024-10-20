@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "操作日志")
 @RestController
-@RequestMapping("/v1/wmsc/opt")
+@RequestMapping("/v1/opt")
 public class OptLogController {
 
 

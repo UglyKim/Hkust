@@ -17,7 +17,7 @@ import java.util.List;
 
 @Tag(name = "试剂")
 @RestController
-@RequestMapping("/v1/wmsc/reagents")
+@RequestMapping("/v1/reagents")
 @Slf4j
 public class ReagentsController {
 
@@ -53,16 +53,11 @@ public class ReagentsController {
         return reagentsService.outboundReagents(outReagentsAOList);
     }
 
-    @Operation(summary = "出入库事件列表")
-    @PostMapping("/event/list")
-    public ApiResponse eventList() {
-        return null;
-    }
-
-    @Operation(summary = "出入库事件详情")
-    @PostMapping("/event/info")
-    public ApiResponse eventInfo(@RequestParam String eventId) {
-        return null;
+    @Operation(summary = "查看出入库试剂详情")
+    @PostMapping("/outbound/detail")
+    public ApiResponse inOutboundDetail(@RequestParam String reagentsId) {
+        log.info("received reagents ID:{}", reagentsId);
+        return reagentsService.getInOutboundReagentsDetail(reagentsId);
     }
 
     @Operation(summary = "临期查询")

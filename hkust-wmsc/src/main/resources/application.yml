@@ -4,7 +4,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: cabinet
+    name: wmsc
   servlet:
     multipart:
       enabled: true
