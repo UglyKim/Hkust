@@ -2,6 +2,8 @@ package com.hkust.wmsc.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
+import com.hkust.enums.OptTypeEnum;
+import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmsc.dto.ao.InReagentsAO;
 import com.hkust.wmsc.dto.ao.OutReagentsAO;
 import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
@@ -17,11 +19,17 @@ import java.util.List;
 
 @Tag(name = "试剂")
 @RestController
-@RequestMapping("/v1/reagents")
+@RequestMapping("/wmsc/v1/reagents")
 @Slf4j
 public class ReagentsController {
 
     private ReagentsServiceImpl reagentsService;
+
+    @Operation(summary = "出入库类型")
+    @PostMapping("/inoutbound/type")
+    public ApiResponse getInOutBoundType() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OptTypeEnum.class));
+    }
 
     @Operation(summary = "试剂详细信息查询-基于试剂编号")
     @PostMapping("/info")

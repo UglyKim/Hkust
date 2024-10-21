@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Tag(name = "录像")
 @RestController
-@RequestMapping("/v1/video")
+@RequestMapping("/wmsc/v1/video")
 @Slf4j
 public class VideoController {
 

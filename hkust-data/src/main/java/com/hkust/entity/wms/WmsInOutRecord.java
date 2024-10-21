@@ -38,8 +38,8 @@ public class WmsInOutRecord {
     @TableField("opt_time")
     private LocalDateTime optTime;
 
-    @TableField("operatorId")
-    private String operator_id;
+    @TableField("operator_id")
+    private String operatorId;
 
     private String operator;
 }

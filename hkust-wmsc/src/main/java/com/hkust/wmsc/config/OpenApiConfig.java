@@ -27,7 +27,7 @@ public class OpenApiConfig {
                                         .bearerFormat("JWT")))
                 .addSecurityItem(new SecurityRequirement()
                         .addList("bearerAuth"))
-                .info(new Info().title("HKUST WMS API")
+                .info(new Info().title("HKUST WMSC API")
                         .description("仓储智能柜")
                         .version("v1.0.0")
                         .license(new License()));

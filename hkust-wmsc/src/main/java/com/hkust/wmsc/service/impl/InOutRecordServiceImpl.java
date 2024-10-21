@@ -1,13 +1,21 @@
 package com.hkust.wmsc.service.impl;
 
+import cn.hutool.core.util.ObjUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hkust.entity.wms.WmsInOutRecord;
+import com.hkust.enums.OptTypeEnum;
 import com.hkust.mapper.wmsc.WmsInOutRecordMapper;
+import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmsc.service.WmsInOutRecordService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,5 +29,49 @@ public class InOutRecordServiceImpl extends ServiceImpl<WmsInOutRecordMapper, Wm
         wrapper.orderByAsc("opt_time");
         List<WmsInOutRecord> wmsInOutRecordList = wmsInOutRecordMapper.selectList(wrapper);
         return wmsInOutRecordList;
+    }
+
+    /**
+     * 当月总入库
+     *
+     * @return
+     */
+    public Long getThisMonthInbound() {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("type", OptTypeEnum.INBOUND.getCode());
+        // 获取当前日期
+        LocalDate today = LocalDate.now();
+        // 获取当前月的第一天
+        LocalDateTime startOfMonth = today.withDayOfMonth(1).atStartOfDay(); // 当月第一天的开始时间
+        // 获取当前月的最后一天
+        LocalDateTime endOfMonth = today.withDayOfMonth(today.lengthOfMonth()).atTime(23, 59, 59); // 当月最后一天的结束时间
+        wrapper.between("opt_time", startOfMonth, endOfMonth);
+        Long count = wmsInOutRecordMapper.selectCount(wrapper);
+
+        return count;
+    }
+
+    /**
+     * 当月总出库
+     *
+     * @return
+     */
+    public Long getThisMonthOutbound() {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("type", OptTypeEnum.OUTBOUND.getCode());
+        // 获取当前日期
+        LocalDate today = LocalDate.now();
+        // 获取当前月的第一天
+        LocalDateTime startOfMonth = today.withDayOfMonth(1).atStartOfDay(); // 当月第一天的开始时间
+        // 获取当前月的最后一天
+        LocalDateTime endOfMonth = today.withDayOfMonth(today.lengthOfMonth()).atTime(23, 59, 59); // 当月最后一天的结束时间
+        wrapper.between("opt_time", startOfMonth, endOfMonth);
+        Long count = wmsInOutRecordMapper.selectCount(wrapper);
+        return count;
+    }
+
+    @Autowired
+    public void setWmsInOutRecordMapper(WmsInOutRecordMapper wmsInOutRecordMapper) {
+        this.wmsInOutRecordMapper = wmsInOutRecordMapper;
     }
 }

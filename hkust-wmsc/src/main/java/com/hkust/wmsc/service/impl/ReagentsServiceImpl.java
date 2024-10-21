@@ -11,6 +11,7 @@ import com.hkust.entity.wms.WmsInOutRecord;
 import com.hkust.entity.wms.WmsOptLog;
 import com.hkust.entity.wms.WmsReagents;
 import com.hkust.enums.OptTypeEnum;
+import com.hkust.enums.YNEnum;
 import com.hkust.mapper.wmsc.WmsOptLogMapper;
 import com.hkust.mapper.wmsc.WmsReagentsMapper;
 import com.hkust.security.SecurityUtils;
@@ -80,7 +81,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.InReagentsAOToReagents(inReagentsAO);
             wmsReagents.setId(UUIDUtils.generateUUIDWithoutHyphens());
             wmsReagents.setCreateTime(currentDateTime);
-            wmsReagents.setInOut("in");
+            wmsReagents.setInOut(YNEnum.YES.getCode());
             wmsReagentsList.add(wmsReagents);
         }
         super.saveBatch(wmsReagentsList);
@@ -98,7 +99,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecord.setType(OptTypeEnum.INBOUND.getCode()); // 入库
             wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
             // 添加操作人
-            wmsInOutRecord.setOperator_id(user.getUserId());
+            wmsInOutRecord.setOperatorId(user.getUserId());
             wmsInOutRecord.setOperator(user.getRealName());
             wmsInOutRecordList.add(wmsInOutRecord);
         }
@@ -122,10 +123,12 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         LocalDateTime currentDateTime = DateUtils.getCurrentDateTime();
 
         for (OutReagentsAO outReagentsAO : outReagentsAOListList) {
-            WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.OutReagentsAOToReagents(outReagentsAO);
-            wmsReagents.setInOut("out");
-            wmsReagents.setUpdateTime(currentDateTime);
-            wmsReagentsList.add(wmsReagents);
+            WmsReagents reagents = wmsReagentsMapper.selectById(outReagentsAO.getReagentsId());
+            if (ObjectUtil.isNotEmpty(reagents)) {
+                reagents.setInOut(YNEnum.NO.getCode());
+                reagents.setUpdateTime(currentDateTime);
+                wmsReagentsList.add(reagents);
+            }
         }
         updateBatchById(wmsReagentsList);
 
@@ -135,14 +138,18 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             User user = SecurityUtils.getCurrentUser();
             WmsInOutRecord wmsInOutRecord = new WmsInOutRecord();
             wmsInOutRecord.setId("O" + recordId);
-            wmsInOutRecord.setGhs(reagents.getGhs());
+            if (ObjectUtil.isNotEmpty(reagents.getGhs())){
+                wmsInOutRecord.setGhs(reagents.getGhs());
+            }
             wmsInOutRecord.setReagentsName(reagents.getName());
             wmsInOutRecord.setReagentsId(reagents.getId());
             wmsInOutRecord.setOptTime(currentDateTime);
             wmsInOutRecord.setType(OptTypeEnum.OUTBOUND.getCode()); // 出库
-            wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
+            if (ObjectUtil.isNotEmpty(reagents.getSpecification())){
+                wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
+            }
             // 添加操作人
-            wmsInOutRecord.setOperator_id(user.getUserId());
+            wmsInOutRecord.setOperatorId(user.getUserId());
             wmsInOutRecord.setOperator(user.getRealName());
             wmsInOutRecordList.add(wmsInOutRecord);
         }

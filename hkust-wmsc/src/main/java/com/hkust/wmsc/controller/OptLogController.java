@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Deprecated
 @Tag(name = "操作日志")
 @RestController
-@RequestMapping("/v1/opt")
+@RequestMapping("/wmsc/v1/opt")
 @Slf4j
 public class OptLogController {
 

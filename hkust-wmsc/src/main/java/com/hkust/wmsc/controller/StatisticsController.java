@@ -3,6 +3,7 @@ package com.hkust.wmsc.controller;
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.wmsc.dto.ao.InOutboundAO;
+import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmsc.dto.vo.MainPageStaticsVO;
 import com.hkust.wmsc.service.StatisticsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "统计")
 @RestController
-@RequestMapping("/v1/statistics")
+@RequestMapping("/wmsc/v1/statistics")
 @Slf4j
 public class StatisticsController {
 
@@ -30,30 +31,28 @@ public class StatisticsController {
 
     @Operation(summary = "入库统计")
     @PostMapping("/inbound")
-    public ApiResponse inboundStatistics(@RequestBody InOutboundAO inOutboundAO) {
-        log.info("received inOutboundAO:{}", JSONUtil.toJsonPrettyStr(inOutboundAO));
-        return statisticsService.inboundRecord(inOutboundAO);
+    public ApiResponse inboundStatistics() {
+        return statisticsService.inboundRecordStats();
     }
 
     @Operation(summary = "出库统计")
     @PostMapping("/outbound")
-    public ApiResponse outboundStatistics(@RequestBody InOutboundAO inOutboundAO) {
-        log.info("received inOutboundAO:{}", JSONUtil.toJsonPrettyStr(inOutboundAO));
-        return statisticsService.inboundRecord(inOutboundAO);
+    public ApiResponse outboundStatistics() {
+        return statisticsService.outboundRecordStats();
     }
 
     @Operation(summary = "入库列表查询")
     @PostMapping("/inbound/list")
-    public ApiResponse inboundListStatistics(){
-
+    public ApiResponse inboundListStatistics(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+        log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return null;
     }
 
     @Operation(summary = "出库列表查询")
     @PostMapping("/outbound/list")
-    public ApiResponse outboundListStatistics(){
-
-        return null;
+    public ApiResponse outboundListStatistics(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+        log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
+        return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }
 
     @Autowired
