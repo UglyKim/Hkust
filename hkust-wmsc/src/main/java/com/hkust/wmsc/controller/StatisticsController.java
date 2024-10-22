@@ -25,7 +25,7 @@ public class StatisticsController {
 
     @Operation(summary = "首页-试剂统计")
     @PostMapping("/reagents/")
-    public ApiResponse<MainPageStaticsVO> reagentsStatistics() {
+    public ApiResponse reagentsStatistics() {
         return statisticsService.totalStats();
     }
 

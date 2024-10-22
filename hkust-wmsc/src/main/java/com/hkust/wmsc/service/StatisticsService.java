@@ -154,4 +154,9 @@ public class StatisticsService {
     public void setInOutRecordMapper(WmsInOutRecordMapper inOutRecordMapper) {
         this.inOutRecordMapper = inOutRecordMapper;
     }
+
+    @Autowired
+    public void setInOutRecordService(InOutRecordServiceImpl inOutRecordService) {
+        this.inOutRecordService = inOutRecordService;
+    }
 }

@@ -3,14 +3,13 @@ package com.hkust.wmsc.dto.vo;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @JsonPropertyOrder({"total", "inThisMonthTotal", "outThisMonthTotal"})
 public class MainPageStaticsVO implements Serializable {
 

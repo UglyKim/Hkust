@@ -1,2 +1,4 @@
-package com.hkust.wmc.struct;public interface MapStruct {
+package com.hkust.wmc.struct;
+
+public interface MapStruct {
 }
