@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InOutBoundDetailVO {
+public class InOutBoundDetailVO implements Serializable {
 
     private static final long serialVersionUID = 9087666550988930109L;
 

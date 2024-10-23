@@ -20,16 +20,16 @@ import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import com.hkust.wmsc.dto.PageResponse;
-import com.hkust.wmsc.dto.ao.InReagentsAO;
-import com.hkust.wmsc.dto.ao.OutReagentsAO;
-import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
+import com.hkust.wmsc.dto.ao.*;
 import com.hkust.wmsc.dto.vo.ReagentsVO;
+import com.hkust.wmsc.dto.vo.StocktakingVO;
 import com.hkust.wmsc.dto.vo.WmsInOutRecordVO;
 import com.hkust.wmsc.service.ReagentsService;
 import com.hkust.wmsc.struct.structmapper.WmsInOutRecordStructMapper;
 import com.hkust.wmsc.struct.structmapper.WmscReagentsStructMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -38,6 +38,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -64,8 +65,9 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         QueryWrapper wrapper = new QueryWrapper();
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getName())) {
             wrapper.like("name", reagentsQueryAO.getName());
-            wrapper.orderByAsc("expiration_date");
         }
+        wrapper.gt("expiration_date", DateUtils.getCurrentDate());
+        wrapper.orderByAsc("expiration_date");
         IPage<WmsReagents> reagentsIPage = wmsReagentsMapper.selectPage(page, wrapper);
 
         if (CollUtil.isEmpty(reagentsIPage.getRecords())) {
@@ -202,6 +204,54 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             return ApiResponse.success(wmsOptLogVOList);
         }
         return ApiResponse.success();
+    }
+
+    public ApiResponse<PageResponse> getExpReagentsList(ExpReagentsQueryAO expReagentsQueryAO) {
+        QueryWrapper<WmsReagents> wrapper = new QueryWrapper<>();
+        LocalDate conditionDate = DateUtils.getCurrentDate().plusDays(30);
+        wrapper.le("expiration_date", conditionDate);
+        wrapper.orderByAsc("expiration_date");
+        Page page = new Page(expReagentsQueryAO.getPageNum(), expReagentsQueryAO.getPageSize());
+        IPage iPage = wmsReagentsMapper.selectPage(page, wrapper);
+        if (CollUtil.isEmpty(iPage.getRecords())) {
+            return ApiResponse.success();
+        }
+        List<ReagentsVO> reagentsVOList = new ArrayList<>();
+        List<WmsReagents> wmsReagentsList = iPage.getRecords();
+        for (WmsReagents reagents : wmsReagentsList) {
+            ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
+            reagentsVOList.add(reagentsVO);
+        }
+        PageResponse pageResponse = new PageResponse(expReagentsQueryAO.getPageNum(), expReagentsQueryAO.getPageSize(), iPage.getTotal(), reagentsVOList);
+        return ApiResponse.success(pageResponse);
+    }
+
+    public ApiResponse<PageResponse> stocktakingReagents(StocktakingAO stocktakingAO) {
+
+        Long total = wmsReagentsMapper.selectCount(new QueryWrapper<>());
+        LocalDate startDate = stocktakingAO.getStartDate();
+        LocalDate endDate = stocktakingAO.getEndDate(); // 当前时间
+        int limit = stocktakingAO.getPageSize(); // 每页记录数
+        int offset = stocktakingAO.getPageSize() * (stocktakingAO.getPageNum() - 1); // 起始位置
+
+        List<Map<String, Object>> list = wmsReagentsMapper.selectReagentsGroupedByNameAndSpecification(startDate, endDate, limit, offset);
+        if (CollUtil.isEmpty(list)) {
+            return ApiResponse.success();
+        }
+        List<StocktakingVO> stocktakingVOList = new ArrayList<>();
+        for (Map<String, Object> map : list) {
+            StocktakingVO vo = new StocktakingVO();
+            String name = (String) map.get("name");
+            String specification = (String) map.get("specification");
+            Integer totalCount = (Integer) map.get("total_count"); // 确保类型匹配
+            System.out.println("Name: " + name + ", Specification: " + specification + ", Total Count: " + totalCount);
+            vo.setName(name);
+            vo.setSpecification(specification);
+            vo.setTotalCount(String.valueOf(totalCount));
+            stocktakingVOList.add(vo);
+        }
+        PageResponse pageResponse = new PageResponse(stocktakingAO.getPageNum(), stocktakingAO.getPageSize(), total, stocktakingVOList);
+        return ApiResponse.success(pageResponse);
     }
 
     @Autowired

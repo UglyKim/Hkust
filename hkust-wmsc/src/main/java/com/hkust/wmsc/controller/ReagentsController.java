@@ -4,9 +4,8 @@ import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.utils.EnumToJsonUtils;
-import com.hkust.wmsc.dto.ao.InReagentsAO;
-import com.hkust.wmsc.dto.ao.OutReagentsAO;
-import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
+import com.hkust.wmsc.dto.PageResponse;
+import com.hkust.wmsc.dto.ao.*;
 import com.hkust.wmsc.service.impl.ReagentsServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,7 +39,7 @@ public class ReagentsController {
 
     @Operation(summary = "试剂列表查询")
     @PostMapping("/search")
-    public ApiResponse searchReagents(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse> searchReagents(@RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received form reagent params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return reagentsService.findReagentsList(reagentsQueryAO);
     }
@@ -76,8 +75,16 @@ public class ReagentsController {
 
     @Operation(summary = "临期查询")
     @PostMapping("/expiration_list")
-    public ApiResponse expirationList() {
-        return null;
+    public ApiResponse<PageResponse> expirationList(@RequestBody ExpReagentsQueryAO expReagentsQueryAO) {
+        log.info("received exp reagents query info:{}", JSONUtil.toJsonPrettyStr(expReagentsQueryAO));
+        return reagentsService.getExpReagentsList(expReagentsQueryAO);
+    }
+
+    @Operation(summary = "盘点")
+    @PostMapping("/stocktaking")
+    public ApiResponse<PageResponse> stocktakingReagents(@RequestBody StocktakingAO stocktakingAO) {
+        log.info("received stocktaking query info:{}", JSONUtil.toJsonPrettyStr(stocktakingAO));
+        return reagentsService.stocktakingReagents(stocktakingAO);
     }
 
     @Autowired
