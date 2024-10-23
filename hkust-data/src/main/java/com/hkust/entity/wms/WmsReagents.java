@@ -82,5 +82,8 @@ public class WmsReagents {
      */
     @TableField("expiration_date")
     private LocalDate expirationDate;
+
+    @TableField("cabinet_id")
+    private String cabinetId;
 }
 

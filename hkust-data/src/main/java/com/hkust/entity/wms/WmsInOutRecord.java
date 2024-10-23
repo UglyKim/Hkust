@@ -42,4 +42,7 @@ public class WmsInOutRecord {
     private String operatorId;
 
     private String operator;
+
+    @TableField("cabinet_id")
+    private String cabinetId;
 }

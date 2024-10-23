@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.dto.ao.CabinetAO;
 import com.hkust.dto.vo.CabinetDetailVO;
-import com.hkust.enums.CabinetTypeEnum;
+import com.hkust.enums.CabinetStateEnum;
 import com.hkust.enums.OpenModeEnum;
 import com.hkust.enums.StatEnum;
 import com.hkust.service.CabinetService;
@@ -72,7 +72,7 @@ public class CabinetController {
     @Operation(summary = "智能柜类型")
     @PostMapping("/type")
     public ApiResponse getCabinetType() {
-        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(CabinetTypeEnum.class));
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(CabinetStateEnum.class));
     }
 
     @Deprecated

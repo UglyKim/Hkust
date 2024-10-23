@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "统计")
 @RestController
@@ -25,8 +22,8 @@ public class StatisticsController {
 
     @Operation(summary = "首页-试剂统计")
     @PostMapping("/reagents/")
-    public ApiResponse reagentsStatistics() {
-        return statisticsService.totalStats();
+    public ApiResponse reagentsStatistics(@RequestParam String cabinetId) {
+        return statisticsService.totalStats(cabinetId);
     }
 
     @Operation(summary = "入库统计")
@@ -45,7 +42,7 @@ public class StatisticsController {
     @PostMapping("/inbound/list")
     public ApiResponse inboundListStatistics(@RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
-        return null;
+        return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }
 
     @Operation(summary = "出库列表查询")

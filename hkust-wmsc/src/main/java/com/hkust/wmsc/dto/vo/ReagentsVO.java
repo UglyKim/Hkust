@@ -1,10 +1,13 @@
 package com.hkust.wmsc.dto.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Data
 @Schema(description = "查询试剂列表")
@@ -61,4 +64,11 @@ public class ReagentsVO implements Serializable {
 
     @Schema(description = "危险和危害特性类别")
     private String hazardClassification;
+
+    @Schema(description = "有效期")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private LocalDate expirationDate;
+
+    @Schema(description = "是否临期")
+    private Boolean isExp;
 }

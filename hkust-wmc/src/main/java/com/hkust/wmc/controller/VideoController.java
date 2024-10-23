@@ -1,0 +1,29 @@
+package com.hkust.wmc.controller;
+
+import com.hkust.dto.ApiResponse;
+import com.hkust.wmc.service.VideoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = "日志管理")
+@RestController
+@RequestMapping("/wmc/v1/video")
+@Slf4j
+public class VideoController {
+
+    private VideoService videoService;
+
+    @Operation(description = "查询录像列表")
+    @PostMapping("/list")
+    public ApiResponse getVideoList() {
+        return videoService.getVideoList();
+    }
+
+    public void setVideoService(VideoService videoService) {
+        this.videoService = videoService;
+    }
+}

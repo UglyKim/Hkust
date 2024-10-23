@@ -33,7 +33,7 @@ public class ReagentsQueryAO implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate endDate;
 
-    @Schema(description = "出入库 in:入库 out:出库")
+    @Schema(description = "出入库 in:1 out:2")
     private String type;
 
 }

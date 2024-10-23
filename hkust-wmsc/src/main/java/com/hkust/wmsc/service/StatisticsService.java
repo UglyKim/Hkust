@@ -33,7 +33,7 @@ public class StatisticsService {
 
     private InOutRecordServiceImpl inOutRecordService;
 
-    public ApiResponse totalStats() {
+    public ApiResponse totalStats(String cabinetId) {
         // 试剂总数
         QueryWrapper queryWrapper = new QueryWrapper();
         Long total = reagentsMapper.selectCount(queryWrapper);
@@ -122,7 +122,7 @@ public class StatisticsService {
     public ApiResponse<PageResponse> inOutBoundRecordList(ReagentsQueryAO reagentsQueryAO) {
         QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         if (ObjUtil.isNotEmpty(reagentsQueryAO.getName())) {
-            wrapper.like("name", reagentsQueryAO.getName());
+            wrapper.like("reagents_name", reagentsQueryAO.getName());
         }
         wrapper.eq("type", reagentsQueryAO.getType());
         Page<WmsInOutRecord> page = new Page(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize());

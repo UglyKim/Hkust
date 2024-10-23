@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "用户")
+@Tag(name = "用户管理")
 @RestController
 @RequestMapping("/wmc/v1/user")
 @Slf4j
