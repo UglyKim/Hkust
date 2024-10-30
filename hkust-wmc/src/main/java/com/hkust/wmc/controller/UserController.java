@@ -21,6 +21,12 @@ public class UserController {
 
     private UserService userService;
 
+    @Operation(summary = "角色列表")
+    @PostMapping("/roles")
+    public ApiResponse getRoles() {
+        return userService.getRoles();
+    }
+
     @Operation(summary = "新增学员")
     @PostMapping("/add")
     public ApiResponse addUSer(@RequestBody AddUserAO addUserAO) {

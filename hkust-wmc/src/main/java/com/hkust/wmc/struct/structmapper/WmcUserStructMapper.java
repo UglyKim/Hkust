@@ -18,5 +18,9 @@ public interface WmcUserStructMapper {
     })
     UserVO userToUserVO(User user);
 
+
+//////    @Mappings({
+////            @Mapping(target = "studentId", ignore = true)
+//    })
     User userAOToUser(AddUserAO addUserAO);
 }

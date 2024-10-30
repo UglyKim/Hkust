@@ -11,9 +11,13 @@ import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.Role;
 import com.hkust.entity.User;
+import com.hkust.entity.UserRole;
 import com.hkust.enums.StatEnum;
+import com.hkust.mapper.RoleMapper;
 import com.hkust.mapper.UserMapper;
+import com.hkust.mapper.UserRoleMapper;
 import com.hkust.utils.DateUtils;
+import com.hkust.utils.UUIDUtils;
 import com.hkust.wmc.dto.PageResponse;
 import com.hkust.wmc.dto.ao.AddUserAO;
 import com.hkust.wmc.dto.ao.AlterUserAO;
@@ -24,7 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -35,20 +41,46 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 public class UserService {
 
     private UserMapper userMapper;
 
+    private RoleMapper roleMapper;
+
     private PasswordEncoder BCryptPasswordEncoder;
+
+    private UserRoleMapper userRoleMapper;
+
+    public ApiResponse getRoles() {
+        QueryWrapper<Role> wrapper = new QueryWrapper<>();
+        List<Role> roles = roleMapper.selectList(wrapper);
+//        List<Role> roles = roleMapper.selectAll("sc");
+        if (CollUtil.isEmpty(roles)) {
+            return ApiResponse.failed(ReturnCode.ROLL_IS_NULL);
+        }
+        List<Map<String, String>> roleList = new ArrayList<>();
+        for (Role role : roles) {
+            Map<String, String> roleMap = new HashMap<>();
+            Field[] fields = Role.class.getDeclaredFields();
+            for (Field field : fields) {
+                if (field.getName().equals("roleId")) {
+                    roleMap.put("roleId", String.valueOf(role.getRoleId()));
+                }
+                if (field.getName().equals("roleName")) {
+                    roleMap.put("name", role.getRoleName());
+                }
+            }
+            roleList.add(roleMap);
+        }
+        return ApiResponse.success(roleList);
+    }
 
     public ApiResponse addUSer(AddUserAO addUserAO) {
 
-        User user = userMapper.selectByStudentId(addUserAO.getStudentId());
-        if (ObjectUtil.isNotEmpty(user)) {
-            return ApiResponse.failed(ReturnCode.USER_ALREADY_EXISTS);
-        }
-        user = WmcUserStructMapper.INSTANCE.userAOToUser(addUserAO);
+        User user = WmcUserStructMapper.INSTANCE.userAOToUser(addUserAO);
         try {
+            user.setUserId(UUIDUtils.generateUUIDWithoutHyphens());
             user.setEnabled(true);
             user.setStat(StatEnum.NORMAL.getCode());
             LocalDateTime now = LocalDateTime.now();
@@ -58,6 +90,12 @@ public class UserService {
             user.setCreateTime(nowDateTime);
             user.setPassword(BCryptPasswordEncoder.encode(addUserAO.getPassword()));
             userMapper.insert(user);
+
+            // 添加用户角色关系
+            UserRole userRole = new UserRole();
+            userRole.setStudentId(user.getStudentId());
+            userRole.setRoleId(addUserAO.getRoleId());
+            userRoleMapper.insert(userRole);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -181,5 +219,15 @@ public class UserService {
     @Autowired
     public void setBCryptPasswordEncoder(PasswordEncoder BCryptPasswordEncoder) {
         this.BCryptPasswordEncoder = BCryptPasswordEncoder;
+    }
+
+    @Autowired
+    public void setRoleMapper(RoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
+    }
+
+    @Autowired
+    public void setUserRoleMapper(UserRoleMapper userRoleMapper) {
+        this.userRoleMapper = userRoleMapper;
     }
 }

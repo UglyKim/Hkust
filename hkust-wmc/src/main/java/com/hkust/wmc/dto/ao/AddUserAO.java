@@ -19,9 +19,11 @@ public class AddUserAO implements Serializable {
     private String studentId;
 
     @Schema(required = true, description = "用户名")
+    @NotNull
     private String username;
 
     @Schema(required = true, description = "密码")
+    @NotNull
     private String password;
 
     @Schema(required = true, description = "真实姓名")
@@ -53,5 +55,9 @@ public class AddUserAO implements Serializable {
 
     @Schema(required = true, description = "渠道 MC:管理控制台 SC:仓储智能柜")
     private String addCh;
+
+    @Schema(required = true)
+    @NotNull
+    private String roleId;
 
 }
