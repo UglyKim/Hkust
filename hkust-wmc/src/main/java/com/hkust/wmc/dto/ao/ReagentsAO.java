@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -19,6 +20,10 @@ public class ReagentsAO implements Serializable {
     @NotNull
     private String reagentsId;
 
+    @Schema(description = "智能柜ID")
+    @NotNull
+    private String cabinetId;
+
     @Schema(description = "casNo")
     private String casNo;
 
@@ -30,6 +35,7 @@ public class ReagentsAO implements Serializable {
     private String enName;
 
     @Schema(description = "类型")
+    @Size(min = 1, max = 1)
     private String type;
 
     @Schema(description = "二维码")

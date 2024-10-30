@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 public enum OptTypeEnum {
 
     INBOUND("1", "入库"),
-    OUTBOUND("2", "入库");
+    OUTBOUND("2", "出库");
 
     private String code;
 

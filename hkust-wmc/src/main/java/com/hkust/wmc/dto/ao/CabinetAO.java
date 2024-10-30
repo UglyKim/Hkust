@@ -3,6 +3,7 @@ package com.hkust.wmc.dto.ao;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Getter
@@ -11,7 +12,8 @@ public class CabinetAO implements Serializable {
 
     private static final long serialVersionUID = 892099988998330109L;
 
-    @Schema(description = "安全柜类型")
+    @Schema(description = "安全柜类型, 具体类型暂时不知道是多少，先填写1个长度的字符串")
+    @Size(min = 1,max = 1)
     private String type;
 
     @Schema(description = "名称")

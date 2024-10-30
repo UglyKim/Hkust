@@ -37,6 +37,7 @@ public class ReagentsController {
     }
 
     @Operation(summary = "添加试剂")
+    @PostMapping("/add")
     public ApiResponse addReagents(@RequestBody ReagentsAO reagentsAO) {
         log.info("received reagents info:{}", JSONUtil.toJsonPrettyStr(reagentsAO));
         return reagentsService.addReagents(reagentsAO);

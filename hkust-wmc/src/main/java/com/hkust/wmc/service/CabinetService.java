@@ -16,6 +16,8 @@ import com.hkust.wmc.struct.structmapper.WmsCabinetStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +32,13 @@ public class CabinetService {
         User user = SecurityUtils.getCurrentUser();
         wmsCabinet.setCreator(user.getUsername());
         wmsCabinet.setState(CabinetStateEnum.ACTIVE.getCode());
-        wmsCabinet.setCreateTime(DateUtils.getCurrentDateTime());
+        // 日期
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String strDateTime = now.format(formatter);
+        LocalDateTime nowDateTime = LocalDateTime.parse(strDateTime, formatter);
 
+        wmsCabinet.setCreateTime(nowDateTime);
         wmsCabinetMapper.insert(wmsCabinet);
         return ApiResponse.success();
     }

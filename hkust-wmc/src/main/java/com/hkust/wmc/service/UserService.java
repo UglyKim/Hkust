@@ -11,11 +11,14 @@ import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.Role;
 import com.hkust.entity.User;
+import com.hkust.entity.UserExts;
 import com.hkust.entity.UserRole;
 import com.hkust.enums.StatEnum;
 import com.hkust.mapper.RoleMapper;
+import com.hkust.mapper.UserExtsMapper;
 import com.hkust.mapper.UserMapper;
 import com.hkust.mapper.UserRoleMapper;
+import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import com.hkust.wmc.dto.PageResponse;
@@ -52,6 +55,8 @@ public class UserService {
 
     private UserRoleMapper userRoleMapper;
 
+    private UserExtsMapper userExtsMapper;
+
     public ApiResponse getRoles() {
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
         List<Role> roles = roleMapper.selectList(wrapper);
@@ -77,7 +82,12 @@ public class UserService {
     }
 
     public ApiResponse addUSer(AddUserAO addUserAO) {
-
+        List<Role> roleList = SecurityUtils.getCurrentUser().getRoleList();
+        boolean containsAdmin = roleList.stream()
+                .anyMatch(role -> "admin".equals(role.getRoleName()));
+        if (!containsAdmin) {
+            return ApiResponse.failed(ReturnCode.NO_PERMISSION);
+        }
         User user = WmcUserStructMapper.INSTANCE.userAOToUser(addUserAO);
         try {
             user.setUserId(UUIDUtils.generateUUIDWithoutHyphens());
@@ -90,7 +100,17 @@ public class UserService {
             user.setCreateTime(nowDateTime);
             user.setPassword(BCryptPasswordEncoder.encode(addUserAO.getPassword()));
             userMapper.insert(user);
-
+            // 添加版本
+            UserExts userExts = new UserExts();
+            userExts.setChannel("mc");
+            userExts.setStudentId(user.getStudentId());
+            userExts.setVersion(1);
+            userExtsMapper.insert(userExts);
+            UserExts userExts1 = new UserExts();
+            userExts1.setVersion(1);
+            userExts1.setChannel("sc");
+            userExts1.setStudentId(user.getStudentId());
+            userExtsMapper.insert(userExts1);
             // 添加用户角色关系
             UserRole userRole = new UserRole();
             userRole.setStudentId(user.getStudentId());
@@ -229,5 +249,10 @@ public class UserService {
     @Autowired
     public void setUserRoleMapper(UserRoleMapper userRoleMapper) {
         this.userRoleMapper = userRoleMapper;
+    }
+
+    @Autowired
+    public void setUserExtsMapper(UserExtsMapper userExtsMapper) {
+        this.userExtsMapper = userExtsMapper;
     }
 }
