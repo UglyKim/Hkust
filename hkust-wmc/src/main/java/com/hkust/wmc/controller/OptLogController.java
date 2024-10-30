@@ -7,6 +7,7 @@ import com.hkust.wmc.service.OptLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,10 @@ public class OptLogController {
     public ApiResponse getOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received opt query info:{}", JSONUtil.toJsonPrettyStr(optLogQueryAO));
         return optLogService.getOptLogList(optLogQueryAO);
+    }
+
+    @Autowired
+    public void setOptLogService(OptLogService optLogService) {
+        this.optLogService = optLogService;
     }
 }

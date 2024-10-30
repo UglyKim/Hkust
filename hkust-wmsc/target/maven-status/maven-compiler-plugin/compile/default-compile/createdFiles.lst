@@ -1,6 +1,8 @@
 com/hkust/wmsc/dto/vo/ReagentsVO.class
+com/hkust/wmsc/dto/ao/ExpReagentsQueryAO.class
 com/hkust/wmsc/dto/ao/ReagentsQueryAO.class
 com/hkust/wmsc/dto/vo/WmsOptLogVO.class
+com/hkust/wmsc/dto/ao/StocktakingAO.class
 com/hkust/wmsc/controller/StatisticsController.class
 com/hkust/wmsc/controller/ReagentsController.class
 com/hkust/wmsc/struct/structmapper/WmsInOutRecordStructMapper.class
@@ -23,6 +25,7 @@ com/hkust/wmsc/struct/structmapper/WmscReagentsStructMapperImpl.class
 com/hkust/wmsc/struct/structmapper/WmsCabinetStructMapperImpl.class
 com/hkust/wmsc/dto/vo/InOutBoundDetailVO.class
 com/hkust/wmsc/dto/vo/InOutBoundStatisticsVO.class
+com/hkust/wmsc/dto/vo/StocktakingVO.class
 com/hkust/wmsc/controller/CabinetController.class
 com/hkust/wmsc/dto/vo/WmsInOutRecordVO.class
 com/hkust/wmsc/struct/structmapper/WmsInOutRecordStructMapperImpl.class

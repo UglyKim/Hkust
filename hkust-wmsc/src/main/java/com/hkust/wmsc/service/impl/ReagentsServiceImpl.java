@@ -29,7 +29,6 @@ import com.hkust.wmsc.struct.structmapper.WmsInOutRecordStructMapper;
 import com.hkust.wmsc.struct.structmapper.WmscReagentsStructMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -128,7 +127,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         wmsOptLog.setOperatorId(user.getUserId());
         wmsOptLog.setOperator(user.getRealName());
         wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
-        wmsOptLog.setOpt_time(currentDateTime);
+        wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
 
         return ApiResponse.success();
@@ -180,7 +179,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         wmsOptLog.setOperatorId(user.getUserId());
         wmsOptLog.setOperator(user.getRealName());
         wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
-        wmsOptLog.setOpt_time(currentDateTime);
+        wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
         return ApiResponse.success();
 

@@ -2,6 +2,7 @@ package com.hkust.wmsc.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
+import com.hkust.enums.HazardPropsEnum;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmsc.dto.PageResponse;
@@ -28,6 +29,12 @@ public class ReagentsController {
     @PostMapping("/inoutbound/type")
     public ApiResponse getInOutBoundType() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OptTypeEnum.class));
+    }
+
+    @Operation(summary = "化学品危险属性类型")
+    @PostMapping("/hazard_props")
+    public ApiResponse getHazardProps() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(HazardPropsEnum.class));
     }
 
     @Operation(summary = "试剂详细信息查询-基于试剂编号")

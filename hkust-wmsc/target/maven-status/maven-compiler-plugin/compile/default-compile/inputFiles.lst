@@ -2,6 +2,7 @@
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/structmapper/WmsOptLogStructMapper.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/ao/ReagentsQueryAO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/MapStruct.java
+/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/ao/ExpReagentsQueryAO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/controller/CabinetController.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/InOutBoundDetailVO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/controller/VideoController.java
@@ -21,8 +22,10 @@
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/MainPageStaticsVO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/service/impl/ReagentsServiceImpl.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/ReagentsVO.java
+/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/ao/StocktakingAO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/service/VideoService.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/InOutboundVO.java
+/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/StocktakingVO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/service/CabinetService.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/WmscApplication.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/ao/InReagentsAO.java

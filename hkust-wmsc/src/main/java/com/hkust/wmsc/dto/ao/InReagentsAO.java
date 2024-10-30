@@ -70,4 +70,7 @@ public class InReagentsAO implements Serializable {
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate expiration_date;
+
+    @Schema(description = "化学品危险属性")
+    private String hazardProps;
 }

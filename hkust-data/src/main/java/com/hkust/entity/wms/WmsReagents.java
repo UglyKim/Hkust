@@ -85,5 +85,11 @@ public class WmsReagents {
 
     @TableField("cabinet_id")
     private String cabinetId;
+
+    /**
+     * 危险品属性 1 易燃 2 易爆
+     */
+    @TableField("hazard_props")
+    private String hazardProps;
 }
 

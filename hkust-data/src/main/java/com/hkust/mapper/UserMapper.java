@@ -8,9 +8,17 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+
+    /**
+     * 用户列表查询分页 用户名
+     * @param params
+     * @return
+     */
+    List<User> selectUserRoleListByCondition(Map<String,Object> params);
 
     User selectUserRoleByStudentId(String studentId);
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-22T23:05:50+0800",
+    date = "2024-10-30T19:13:34+0800",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 1.8.0_391 (Oracle Corporation)"
 )
 @Component
@@ -39,6 +39,7 @@ public class WmscReagentsStructMapperImpl implements WmscReagentsStructMapper {
         wmsReagents.setSpecialStorageConditions( inReagentsAO.getSpecialStorageConditions() );
         wmsReagents.setHazardClassification( inReagentsAO.getHazardClassification() );
         wmsReagents.setCabinetId( inReagentsAO.getCabinetId() );
+        wmsReagents.setHazardProps( inReagentsAO.getHazardProps() );
 
         return wmsReagents;
     }
@@ -93,6 +94,7 @@ public class WmscReagentsStructMapperImpl implements WmscReagentsStructMapper {
         reagentsVO.setPhysicalState( wmsReagents.getPhysicalState() );
         reagentsVO.setSpecialStorageConditions( wmsReagents.getSpecialStorageConditions() );
         reagentsVO.setHazardClassification( wmsReagents.getHazardClassification() );
+        reagentsVO.setExpirationDate( wmsReagents.getExpirationDate() );
 
         return reagentsVO;
     }

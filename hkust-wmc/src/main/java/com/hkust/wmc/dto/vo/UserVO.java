@@ -1,11 +1,13 @@
 package com.hkust.wmc.dto.vo;
 
+import com.hkust.entity.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Schema(description = "用户")
 @Data
@@ -50,4 +52,6 @@ public class UserVO implements Serializable {
     private LocalDateTime updateTime;
 
     private String addCh;
+
+    private List<String> roleList;
 }
