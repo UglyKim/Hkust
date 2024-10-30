@@ -40,7 +40,7 @@ public class WmsCabinet {
     @TableField("storage_room")
     private String storageRoom;
 
- private String brand;
+    private String brand;
 
     /**
      * 规格
@@ -51,7 +51,7 @@ public class WmsCabinet {
      * 层数
      */
     @TableField("layer_count")
-    private  int layerCount;
+    private int layerCount;
 
     /**
      * 创建人
@@ -75,13 +75,13 @@ public class WmsCabinet {
      * '阈值比例'
      */
     @TableField("threshold_ratio")
-    private  String thresholdRatio;
+    private String thresholdRatio;
 
     /**
      * 楼栋
      */
     @TableField("teaching_building")
-   private String  teachingBuilding;
+    private String teachingBuilding;
     /**
      * 容量
      */
