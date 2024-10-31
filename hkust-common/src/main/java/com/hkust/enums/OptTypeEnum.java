@@ -6,7 +6,11 @@ import lombok.AllArgsConstructor;
 public enum OptTypeEnum {
 
     INBOUND("1", "入库"),
-    OUTBOUND("2", "出库");
+    OUTBOUND("2", "出库"),
+    OPEN("3", "开柜门"),
+    CLOSE("4", "关柜门"),
+    LOGIN("5", "登陆"),
+    LOGOUT("6", "登出");
 
     private String code;
 

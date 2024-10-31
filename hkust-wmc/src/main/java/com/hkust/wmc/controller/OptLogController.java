@@ -2,6 +2,9 @@ package com.hkust.wmc.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
+import com.hkust.enums.CabinetStateEnum;
+import com.hkust.enums.OptTypeEnum;
+import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmc.dto.ao.OptLogQueryAO;
 import com.hkust.wmc.service.OptLogService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,9 +24,23 @@ public class OptLogController {
 
     private OptLogService optLogService;
 
-    @Operation(summary = "用户操作日志")
+    @Deprecated
+    @Operation(summary = "日志类型")
+    @PostMapping("/type")
+    public ApiResponse getCabinetType() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OptTypeEnum.class));
+    }
+
+    @Operation(summary = "用户操作日志列表")
     @PostMapping("/list")
     public ApiResponse getOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
+        log.info("received opt query info:{}", JSONUtil.toJsonPrettyStr(optLogQueryAO));
+        return optLogService.getOptLogList(optLogQueryAO);
+    }
+
+    @Operation(summary = "试剂日志列表")
+    @PostMapping("/list")
+    public ApiResponse getReagentsOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received opt query info:{}", JSONUtil.toJsonPrettyStr(optLogQueryAO));
         return optLogService.getOptLogList(optLogQueryAO);
     }

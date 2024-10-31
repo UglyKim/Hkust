@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hkust.mapper.wmsc.WmsInOutRecordMapper">
-
+    <resultMap id="StatisticsMap" type="java.util.HashMap">
+        <result property="month" column="month"/>
+        <result property="type" column="type"/>
+        <result property="quantity" column="quantity"/>
+    </resultMap>
+    <select id="selectInventorySummary" resultMap="StatisticsMap">
+        SELECT DATE_FORMAT(opt_time, '%Y-%m') AS month,    -- 格式化日期为 "YYYY-MM" 格式，按月份分组
+	        type,
+            SUM(count) AS quantity
+        FROM
+            wms_in_out_record
+        WHERE
+            opt_time >= DATE_ADD(CURRENT_DATE ()
+            , INTERVAL -6 MONTH) -- 筛选近6个月的数据
+        GROUP BY
+            month, type
+        ORDER BY
+            month DESC;
+    </select>
 </mapper>

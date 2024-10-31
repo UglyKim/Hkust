@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-30T19:13:34+0800",
+    date = "2024-10-31T19:55:07+0800",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 1.8.0_391 (Oracle Corporation)"
 )
 @Component
@@ -38,7 +38,6 @@ public class WmsCabinetStructMapperImpl implements WmsCabinetStructMapper {
         cabinetVO.setMaterial( wmsCabinet.getMaterial() );
         cabinetVO.setThresholdRatio( wmsCabinet.getThresholdRatio() );
         cabinetVO.setTeachingBuilding( wmsCabinet.getTeachingBuilding() );
-        cabinetVO.setCapacity( wmsCabinet.getCapacity() );
         cabinetVO.setWasteContainerName( wmsCabinet.getWasteContainerName() );
         cabinetVO.setWasteLiquidsType( wmsCabinet.getWasteLiquidsType() );
 

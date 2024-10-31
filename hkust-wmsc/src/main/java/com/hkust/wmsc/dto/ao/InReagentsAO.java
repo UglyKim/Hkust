@@ -14,6 +14,10 @@ public class InReagentsAO implements Serializable {
 
     private static final long serialVersionUID = 892955555998330109L;
 
+    @Schema(description = "试剂ID， 读取二维码获取")
+    @NotNull
+    private String reagentsId;
+
     @Schema(description = "设备号")
     @NotNull
     private String cabinetId;

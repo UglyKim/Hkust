@@ -26,6 +26,11 @@ public class WmsInOutRecord {
     private String reagentsName;
 
     /**
+     * 数量
+     */
+    private int count;
+
+    /**
      * 规格
      */
     private String specification;

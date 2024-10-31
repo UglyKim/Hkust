@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.User;
 import com.hkust.entity.wms.WmsInOutRecord;
@@ -52,7 +53,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
     public ApiResponse findReagents(String reagentsId) {
         WmsReagents reagents = wmsReagentsMapper.selectById(reagentsId);
         if (ObjectUtil.isNotEmpty(reagents)) {
-            return ApiResponse.failed("此试剂不存在");
+            return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
         }
         ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
         return ApiResponse.success(reagentsVO);
@@ -92,9 +93,15 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
     public ApiResponse inboundReagents(List<InReagentsAO> inReagentsAOList) {
         List<WmsReagents> wmsReagentsList = new ArrayList<>();
         LocalDateTime currentDateTime = DateUtils.getCurrentDateTime();
+        List<String> failedReagentsList = new ArrayList<>();
         for (InReagentsAO inReagentsAO : inReagentsAOList) {
+            WmsReagents reagents = wmsReagentsMapper.selectById(inReagentsAO.getReagentsId());
+            if (ObjectUtil.isNotEmpty(reagents)) {
+                failedReagentsList.add(reagents.getId());
+                continue;
+            }
             WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.InReagentsAOToReagents(inReagentsAO);
-            wmsReagents.setId(UUIDUtils.generateUUIDWithoutHyphens());
+            wmsReagents.setId(inReagentsAO.getReagentsId());
             wmsReagents.setCreateTime(currentDateTime);
             wmsReagents.setInOut(YNEnum.YES.getCode());
             wmsReagents.setCabinetId(inReagentsAO.getCabinetId());
@@ -114,6 +121,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecord.setOptTime(currentDateTime);
             wmsInOutRecord.setType(OptTypeEnum.INBOUND.getCode()); // 入库
             wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
+            wmsInOutRecord.setCount(1);
             // 添加操作人
             wmsInOutRecord.setOperatorId(user.getUserId());
             wmsInOutRecord.setOperator(user.getRealName());
@@ -130,20 +138,21 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
 
-        return ApiResponse.success();
+        return ApiResponse.success(failedReagentsList);
     }
 
     public ApiResponse outboundReagents(List<OutReagentsAO> outReagentsAOListList) {
-
+        List<String> outFailedReagentsList = new ArrayList<>();
         List<WmsReagents> wmsReagentsList = new ArrayList<>();
         LocalDateTime currentDateTime = DateUtils.getCurrentDateTime();
-
         for (OutReagentsAO outReagentsAO : outReagentsAOListList) {
             WmsReagents reagents = wmsReagentsMapper.selectById(outReagentsAO.getReagentsId());
-            if (ObjectUtil.isNotEmpty(reagents)) {
+            if (ObjectUtil.isNotEmpty(reagents) && reagents.getInOut() == YNEnum.NO.getCode()) {
                 reagents.setInOut(YNEnum.NO.getCode());
                 reagents.setUpdateTime(currentDateTime);
                 wmsReagentsList.add(reagents);
+            } else {
+                outFailedReagentsList.add(reagents.getId());
             }
         }
         updateBatchById(wmsReagentsList);
@@ -178,10 +187,11 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         User user = SecurityUtils.getCurrentUser();
         wmsOptLog.setOperatorId(user.getUserId());
         wmsOptLog.setOperator(user.getRealName());
-        wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
+        wmsOptLog.setType(OptTypeEnum.OUTBOUND.getCode());
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
-        return ApiResponse.success();
+
+        return ApiResponse.success(outFailedReagentsList);
 
     }
 

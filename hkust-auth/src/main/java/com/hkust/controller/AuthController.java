@@ -14,10 +14,13 @@ import com.hkust.entity.Event;
 import com.hkust.entity.Role;
 import com.hkust.entity.User;
 import com.hkust.entity.UserExts;
+import com.hkust.entity.wms.WmsOptLog;
 import com.hkust.enums.EventTypeEnum;
+import com.hkust.enums.OptTypeEnum;
 import com.hkust.mapper.EventMapper;
 import com.hkust.mapper.UserExtsMapper;
 import com.hkust.mapper.UserMapper;
+import com.hkust.mapper.wmsc.WmsOptLogMapper;
 import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
@@ -58,6 +61,8 @@ public class AuthController {
 
     private EventMapper eventMapper;
 
+    private WmsOptLogMapper wmsOptLogMapper;
+
     @Operation(summary = "登出")
     @PostMapping("/auth/logout")
     public ApiResponse userLogOut() {
@@ -77,6 +82,17 @@ public class AuthController {
         chainWrapper.eq("student_id", userExts.getStudentId());
         chainWrapper.set("version", userExts.getVersion() + 1);
         chainWrapper.update();
+
+
+        // 添加操作日志
+        WmsOptLog wmsOptLog = new WmsOptLog();
+        wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
+//        User user = SecurityUtils.getCurrentUser();
+        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setType(OptTypeEnum.LOGOUT.getCode());
+        wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());
+        wmsOptLogMapper.insert(wmsOptLog);
 
         return ApiResponse.success();
     }
@@ -98,6 +114,17 @@ public class AuthController {
         updateVersion(userDetails, loginInfoAO.getChannel());
         // 添加登陆日志
         this.addEvent(loginInfoAO.getChannel(), userDetails.getUser());
+
+        // 添加操作日志
+        // 添加操作日志
+        WmsOptLog wmsOptLog = new WmsOptLog();
+        wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
+        User user = SecurityUtils.getCurrentUser();
+        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setType(OptTypeEnum.LOGIN.getCode());
+        wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());
+        wmsOptLogMapper.insert(wmsOptLog);
 
         String token = jwtTokenUtil.generateToken(userDetails, loginInfoAO.getChannel());
         List<String> roles = userDetails.getUser().getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());

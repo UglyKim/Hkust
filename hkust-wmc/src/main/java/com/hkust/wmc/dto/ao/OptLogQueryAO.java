@@ -5,11 +5,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
-@Schema(description = "试剂存取日志查询")
+@Schema(description = "日志查询")
 public class OptLogQueryAO implements Serializable {
 
     private static final long serialVersionUID = 899000087700005679L;
@@ -21,6 +22,11 @@ public class OptLogQueryAO implements Serializable {
     @Schema(description = "显示条数")
     @NotNull
     private int pageSize;
+
+    @Schema(description = "操作类型, 1:操作日志 2:试剂日志")
+    @NotNull
+    @Size(min = 1, max = 1)
+    private String type;
 
     @Schema(description = "操作人")
     private String operator;
