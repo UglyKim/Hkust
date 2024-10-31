@@ -16,11 +16,11 @@ public class MainPageStaticsVO implements Serializable {
     private static final long serialVersionUID = 8926400000988930109L;
 
     @Schema(description = "总数")
-    private String total;
+    private int total;
 
     @Schema(description = "本月入库")
-    private String inThisMonthTotal;
+    private int inThisMonthTotal;
 
     @Schema(description = "本月出库")
-    private String outThisMonthTotal;
+    private int outThisMonthTotal;
 }

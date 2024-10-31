@@ -18,9 +18,9 @@ public class InOutBoundStatisticsVO implements Serializable {
     private static final long serialVersionUID = 9087666550000098109L;
 
     @Schema(description = "总数")
-    private String totalCount;
+    private int totalCount;
 
     @Schema(description = "本月出库/入库总数")
-    private String inOutCount;
+    private int inOutCount;
 
 }

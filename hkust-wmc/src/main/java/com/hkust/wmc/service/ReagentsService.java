@@ -8,11 +8,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.wms.WmsReagents;
+import com.hkust.enums.OptTypeEnum;
+import com.hkust.mapper.wmsc.WmsInOutRecordMapper;
 import com.hkust.mapper.wmsc.WmsReagentsMapper;
 import com.hkust.utils.DateUtils;
 import com.hkust.wmc.dto.PageResponse;
 import com.hkust.wmc.dto.ao.ReagentsAO;
 import com.hkust.wmc.dto.ao.ReagentsQueryAO;
+import com.hkust.wmc.dto.vo.ReagentsStatisticsVO;
 import com.hkust.wmc.dto.vo.ReagentsVO;
 import com.hkust.wmc.struct.structmapper.WmcReagentsStructMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +32,34 @@ import java.util.List;
 public class ReagentsService {
 
     private WmsReagentsMapper wmsReagentsMapper;
+
+    private WmsInOutRecordMapper wmsInOutRecordMapper;
+
+    public ApiResponse reagentsStat() {
+        // 当前总库存
+        QueryWrapper wrapper = new QueryWrapper();
+        Long count = wmsInOutRecordMapper.selectCount(wrapper);
+        // 本月出库
+        QueryWrapper wrapper_in = new QueryWrapper();
+        LocalDate today = LocalDate.now(); // 当前日期
+        LocalDate firstDayOfMonth = today.withDayOfMonth(1); // 当月第一天
+        LocalDate lastDayOfMonth = today.withDayOfMonth(today.lengthOfMonth()); // 当月最后一天
+        wrapper_in.eq("type", OptTypeEnum.INBOUND.getCode());
+        wrapper_in.between("opt_time", firstDayOfMonth, lastDayOfMonth);
+        Long thisMonthInCount = wmsReagentsMapper.selectCount(wrapper);
+
+        // 本月出库
+        QueryWrapper wrapper_out = new QueryWrapper();
+        wrapper_out.eq("type", OptTypeEnum.OUTBOUND.getCode());
+        wrapper_out.between("opt_time", firstDayOfMonth, lastDayOfMonth);
+        Long thisMonthOutCount = wmsReagentsMapper.selectCount(wrapper);
+
+        ReagentsStatisticsVO vo = new ReagentsStatisticsVO();
+        vo.setCount(count.intValue());
+        vo.setInThisMonthTotal(thisMonthInCount.intValue());
+        vo.setOutThisMonthTotal(thisMonthOutCount.intValue());
+        return ApiResponse.success(vo);
+    }
 
     public ApiResponse addReagents(ReagentsAO reagentsAO) {
         WmsReagents reagents = WmcReagentsStructMapper.INSTANCE.reagentsAOToReagents(reagentsAO);
@@ -75,5 +106,10 @@ public class ReagentsService {
     @Autowired
     public void setWmsReagentsMapper(WmsReagentsMapper wmsReagentsMapper) {
         this.wmsReagentsMapper = wmsReagentsMapper;
+    }
+
+    @Autowired
+    public void setWmsInOutRecordMapper(WmsInOutRecordMapper wmsInOutRecordMapper) {
+        this.wmsInOutRecordMapper = wmsInOutRecordMapper;
     }
 }

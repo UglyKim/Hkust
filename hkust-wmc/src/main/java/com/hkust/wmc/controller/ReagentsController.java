@@ -27,7 +27,7 @@ public class ReagentsController {
     @Operation(summary = "试剂列表-顶部统计")
     @PostMapping("/statistics")
     public ApiResponse statistics() {
-        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OptTypeEnum.class));
+        return reagentsService.reagentsStat();
     }
 
     @Operation(summary = "出入库类型")

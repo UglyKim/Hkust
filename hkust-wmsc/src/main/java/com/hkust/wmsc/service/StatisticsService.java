@@ -42,9 +42,9 @@ public class StatisticsService {
 
         // return
         MainPageStaticsVO mainPageStaticsVO = new MainPageStaticsVO();
-        mainPageStaticsVO.setTotal(String.valueOf(total));
-        mainPageStaticsVO.setInThisMonthTotal(String.valueOf(inThisMonthTotal));
-        mainPageStaticsVO.setOutThisMonthTotal(String.valueOf(outThisMonthTotal));
+        mainPageStaticsVO.setTotal(total.intValue());
+        mainPageStaticsVO.setInThisMonthTotal(inThisMonthTotal.intValue());
+        mainPageStaticsVO.setOutThisMonthTotal(outThisMonthTotal.intValue());
         return ApiResponse.success(mainPageStaticsVO);
     }
 
@@ -54,7 +54,7 @@ public class StatisticsService {
         Long total = reagentsMapper.selectCount(queryWrapper);
         // 本月入库总数
         Long inThisMonthTotal = inOutRecordService.getThisMonthOutbound();
-        InOutBoundStatisticsVO vo = InOutBoundStatisticsVO.builder().totalCount(String.valueOf(total)).inOutCount(String.valueOf(inThisMonthTotal)).build();
+        InOutBoundStatisticsVO vo = InOutBoundStatisticsVO.builder().totalCount(total.intValue()).inOutCount(inThisMonthTotal.intValue()).build();
         return ApiResponse.success(vo);
     }
 
@@ -64,7 +64,7 @@ public class StatisticsService {
         Long total = reagentsMapper.selectCount(queryWrapper);
         // 本月入库总数
         Long inThisMonthTotal = inOutRecordService.getThisMonthInbound();
-        InOutBoundStatisticsVO vo = InOutBoundStatisticsVO.builder().totalCount(String.valueOf(total)).inOutCount(String.valueOf(inThisMonthTotal)).build();
+        InOutBoundStatisticsVO vo = InOutBoundStatisticsVO.builder().totalCount(total.intValue()).inOutCount(inThisMonthTotal.intValue()).build();
         return ApiResponse.success(vo);
         /*
         QueryWrapper<WmsInOutRecord> warpper = new QueryWrapper<>();
