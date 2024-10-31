@@ -1,7 +1,10 @@
 package com.hkust.wmc.service;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
+import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.User;
 import com.hkust.entity.wms.WmsCabinet;
@@ -11,8 +14,10 @@ import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import com.hkust.wmc.dto.ao.CabinetAO;
+import com.hkust.wmc.dto.ao.EditCabinetAO;
 import com.hkust.wmc.dto.vo.CabinetVO;
 import com.hkust.wmc.struct.structmapper.WmsCabinetStructMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CabinetService {
 
     private WmsCabinetMapper wmsCabinetMapper;
@@ -40,6 +46,55 @@ public class CabinetService {
 
         wmsCabinet.setCreateTime(nowDateTime);
         wmsCabinetMapper.insert(wmsCabinet);
+        return ApiResponse.success();
+    }
+
+    public ApiResponse edieCabinet(EditCabinetAO editCabinetAO) {
+        if (ObjectUtil.isEmpty(editCabinetAO.getCabinetId())) {
+            return ApiResponse.failed(ReturnCode.CABINET_ID_NOT_NULL);
+        }
+        WmsCabinet wmsCabinet = wmsCabinetMapper.selectById(editCabinetAO.getCabinetId());
+        if (ObjectUtil.isEmpty(wmsCabinet)) {
+            return ApiResponse.failed(ReturnCode.CABINET_IS_NULL);
+        }
+        UpdateChainWrapper<WmsCabinet> wrapper = new UpdateChainWrapper<>(wmsCabinetMapper);
+        wrapper.eq("id", editCabinetAO.getCabinetId());
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getBarcode())) {
+            wrapper.set("barcode", editCabinetAO.getBarcode());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getBrand())) {
+            wrapper.set("brand", editCabinetAO.getBrand());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getCapacity())) {
+            wrapper.set("capacity", editCabinetAO.getCapacity());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getName())) {
+            wrapper.set("name", editCabinetAO.getName());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getLayerCount())) {
+            wrapper.set("layerCount", editCabinetAO.getLayerCount());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getState())) {
+            wrapper.set("state", editCabinetAO.getState());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getStorageRoom())) {
+            wrapper.set("storageRoom", editCabinetAO.getStorageRoom());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getSpecification())) {
+            wrapper.set("specification", editCabinetAO.getSpecification());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getRemark())) {
+            wrapper.set("remark", editCabinetAO.getRemark());
+        }
+        if (ObjectUtil.isNotEmpty(editCabinetAO.getThresholdRatio())) {
+            wrapper.set("thresholdRatio", editCabinetAO.getThresholdRatio());
+        }
+        try {
+            wrapper.update();
+        } catch (Exception e) {
+            log.error("update cabinet_info failed!");
+            return ApiResponse.failed(ReturnCode.DB_UPDATE_ERROR);
+        }
         return ApiResponse.success();
     }
 

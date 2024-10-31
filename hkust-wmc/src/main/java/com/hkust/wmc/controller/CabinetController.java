@@ -5,6 +5,7 @@ import com.hkust.dto.ApiResponse;
 import com.hkust.enums.CabinetStateEnum;
 import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmc.dto.ao.CabinetAO;
+import com.hkust.wmc.dto.ao.EditCabinetAO;
 import com.hkust.wmc.service.CabinetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,6 +42,13 @@ public class CabinetController {
     @PostMapping("/list")
     public ApiResponse getCabinetList() {
         return cabinetService.getCabinetList();
+    }
+
+    @Operation(summary = "编辑智能柜")
+    @PostMapping("/edit")
+    public ApiResponse editCabinet(@RequestBody EditCabinetAO editCabinetAO) {
+        log.info("received alter cabinet info:{}", JSONUtil.toJsonPrettyStr(editCabinetAO));
+        return cabinetService.edieCabinet(editCabinetAO);
     }
 
     @Autowired

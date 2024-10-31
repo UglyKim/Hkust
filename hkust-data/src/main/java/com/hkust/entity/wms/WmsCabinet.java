@@ -85,7 +85,7 @@ public class WmsCabinet {
     /**
      * 容量
      */
-    private String capacity;
+    private String capaccapacityity;
 
     /**
      * 废液桶名称
