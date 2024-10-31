@@ -28,13 +28,15 @@ public class OptLogService {
         Page<WmsOptLog> page = new Page<>(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize());
 
         QueryWrapper<WmsOptLog> wrapper = new QueryWrapper<>();
-        wrapper.in("type", Arrays.asList(OptTypeEnum.LOGIN.getCode(), OptTypeEnum.LOGOUT.getCode()));
+        if ("1".equals(optLogQueryAO.getType())) {
+            wrapper.in("type", Arrays.asList(OptTypeEnum.LOGIN.getCode(), OptTypeEnum.LOGOUT.getCode()));
+        }
         if (ObjectUtil.isNotEmpty(optLogQueryAO.getOperator())) {
             wrapper.like("operator", optLogQueryAO.getOperator());
         }
         if (ObjectUtil.isNotEmpty(optLogQueryAO.getStartDate()) && ObjectUtil.isNotEmpty(optLogQueryAO.getEndDate())) {
-            wrapper.ge("opt_time", optLogQueryAO.getStartDate());
-            wrapper.le("opt_time", optLogQueryAO.getEndDate());
+            wrapper.apply("DATE(opt_time) >= {0}", optLogQueryAO.getStartDate());
+            wrapper.apply("DATE(opt_time) >= {0}", optLogQueryAO.getEndDate());
         }
         wrapper.orderByAsc("opt_time");
         Page<WmsOptLog> wmsOptLogPage = wmsOptLogMapper.selectPage(page, wrapper);
@@ -55,13 +57,15 @@ public class OptLogService {
         Page<WmsOptLog> page = new Page<>(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize());
 
         QueryWrapper<WmsOptLog> wrapper = new QueryWrapper<>();
-        wrapper.notIn("type", Arrays.asList(OptTypeEnum.LOGIN.getCode(), OptTypeEnum.LOGOUT.getCode()));
+        if ("2".equals(optLogQueryAO.getType())) {
+            wrapper.notIn("type", Arrays.asList(OptTypeEnum.LOGIN.getCode(), OptTypeEnum.LOGOUT.getCode()));
+        }
         if (ObjectUtil.isNotEmpty(optLogQueryAO.getOperator())) {
             wrapper.like("operator", optLogQueryAO.getOperator());
         }
         if (ObjectUtil.isNotEmpty(optLogQueryAO.getStartDate()) && ObjectUtil.isNotEmpty(optLogQueryAO.getEndDate())) {
-            wrapper.ge("opt_time", optLogQueryAO.getStartDate());
-            wrapper.le("opt_time", optLogQueryAO.getEndDate());
+            wrapper.apply("DATE(opt_time) >= {0}", optLogQueryAO.getStartDate());
+            wrapper.apply("DATE(opt_time) >= {0}", optLogQueryAO.getEndDate());
         }
         wrapper.orderByAsc("opt_time");
         Page<WmsOptLog> wmsOptLogPage = wmsOptLogMapper.selectPage(page, wrapper);

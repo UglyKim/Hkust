@@ -1,8 +1,7 @@
-package com.hkust.wmc.dto.ao;
+package com.hkust.wmsc.dto.ao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
@@ -10,11 +9,12 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+
 @Getter
 @Schema(description = "日志查询")
 public class OptLogQueryAO implements Serializable {
 
-    private static final long serialVersionUID = 899000087700005679L;
+    private static final long serialVersionUID = 892955550987630109L;
 
     @Schema(description = "页码")
     @NotNull
@@ -24,7 +24,7 @@ public class OptLogQueryAO implements Serializable {
     @NotNull
     private int pageSize;
 
-    @Schema(description = "操作类型, 1:操作日志 2:试剂日志", defaultValue = "1")
+    @Schema(description = "操作类型 1:操作日志 2:试剂日志 3.全部")
     @NotNull
     @Size(min = 1, max = 1)
     private String type;

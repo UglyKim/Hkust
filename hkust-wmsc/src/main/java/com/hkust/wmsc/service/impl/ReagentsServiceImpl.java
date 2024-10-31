@@ -133,7 +133,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
         wmsOptLog.setOperatorId(user.getUserId());
-        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
@@ -186,7 +186,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
         wmsOptLog.setOperatorId(user.getUserId());
-        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.OUTBOUND.getCode());
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);

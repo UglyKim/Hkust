@@ -89,7 +89,7 @@ public class AuthController {
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
 //        User user = SecurityUtils.getCurrentUser();
         wmsOptLog.setOperatorId(user.getUserId());
-        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.LOGOUT.getCode());
         wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());
         wmsOptLogMapper.insert(wmsOptLog);
@@ -119,9 +119,9 @@ public class AuthController {
         // 添加操作日志
         WmsOptLog wmsOptLog = new WmsOptLog();
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
-        User user = SecurityUtils.getCurrentUser();
+        User user = userMapper.selectByStudentId(loginInfoAO.getStudentId());
         wmsOptLog.setOperatorId(user.getUserId());
-        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.LOGIN.getCode());
         wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());
         wmsOptLogMapper.insert(wmsOptLog);
@@ -192,5 +192,10 @@ public class AuthController {
     @Autowired
     public void setUserExtsMapper(UserExtsMapper userExtsMapper) {
         this.userExtsMapper = userExtsMapper;
+    }
+
+    @Autowired
+    public void setWmsOptLogMapper(WmsOptLogMapper wmsOptLogMapper) {
+        this.wmsOptLogMapper = wmsOptLogMapper;
     }
 }

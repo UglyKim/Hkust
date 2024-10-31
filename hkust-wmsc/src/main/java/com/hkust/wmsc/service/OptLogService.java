@@ -1,21 +1,23 @@
 package com.hkust.wmsc.service;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.json.JSONUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.wms.WmsOptLog;
+import com.hkust.enums.OptTypeEnum;
 import com.hkust.mapper.wmsc.WmsOptLogMapper;
-import com.hkust.wmsc.dto.vo.CabinetVO;
+import com.hkust.wmsc.dto.PageResponse;
+import com.hkust.wmsc.dto.ao.OptLogQueryAO;
 import com.hkust.wmsc.dto.vo.WmsOptLogVO;
-import com.hkust.wmsc.struct.structmapper.WmsCabinetStructMapper;
 import com.hkust.wmsc.struct.structmapper.WmsOptLogStructMapper;
-import com.nimbusds.jose.util.JSONObjectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,20 +33,31 @@ public class OptLogService {
         return ApiResponse.success(wmsOptLogVO);
     }
 
-    public ApiResponse optLostList() {
-        QueryWrapper<WmsOptLog> wrapper = new QueryWrapper<>();
-        wrapper.orderByAsc("opt_time");
-        List<WmsOptLog> wmsOptLogList = wmsOptLogMapper.selectList(wrapper);
+    public ApiResponse<PageResponse> getReagentsOptLogList(OptLogQueryAO optLogQueryAO) {
+        Page<WmsOptLog> page = new Page<>(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize());
 
-        List<WmsOptLogVO> wmsOptLogVOList = new ArrayList<>();
-        if (CollUtil.isNotEmpty(wmsOptLogList)) {
-            for (WmsOptLog wmsOptLog : wmsOptLogList) {
-                WmsOptLogVO wmsOptLogVO = WmsOptLogStructMapper.INSTANCE.WmsOptLogToWmsOptLogVO(wmsOptLog);
-                wmsOptLogVOList.add(wmsOptLogVO);
-            }
+        QueryWrapper<WmsOptLog> wrapper = new QueryWrapper<>();
+        wrapper.notIn("type", Arrays.asList(OptTypeEnum.LOGIN.getCode(), OptTypeEnum.LOGOUT.getCode()));
+        if (ObjectUtil.isNotEmpty(optLogQueryAO.getOperator())) {
+            wrapper.like("operator", optLogQueryAO.getOperator());
         }
-        log.info("operation log list:{}", JSONUtil.toJsonPrettyStr(wmsOptLogVOList));
-        return ApiResponse.success(wmsOptLogList);
+        if (ObjectUtil.isNotEmpty(optLogQueryAO.getStartDate()) && ObjectUtil.isNotEmpty(optLogQueryAO.getEndDate())) {
+            wrapper.apply("DATE(opt_time) >= {0}", optLogQueryAO.getStartDate());
+            wrapper.apply("DATE(opt_time) >= {0}", optLogQueryAO.getEndDate());
+        }
+        wrapper.orderByAsc("opt_time");
+        Page<WmsOptLog> wmsOptLogPage = wmsOptLogMapper.selectPage(page, wrapper);
+        List<WmsOptLog> wmsOptLogList = wmsOptLogPage.getRecords();
+        if (CollUtil.isEmpty(wmsOptLogList)) {
+            return ApiResponse.success();
+        }
+        List<WmsOptLogVO> optLogVOList = new ArrayList<>();
+        for (WmsOptLog wmsOptLog : wmsOptLogList) {
+            WmsOptLogVO wmsOptLogVO = WmsOptLogStructMapper.INSTANCE.WmsOptLogToWmsOptLogVO(wmsOptLog);
+            optLogVOList.add(wmsOptLogVO);
+        }
+        PageResponse pageResponse = new PageResponse(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize(), wmsOptLogPage.getTotal(), optLogVOList);
+        return ApiResponse.success(pageResponse);
     }
 
     @Autowired

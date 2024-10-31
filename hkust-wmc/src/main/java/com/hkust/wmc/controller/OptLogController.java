@@ -32,17 +32,17 @@ public class OptLogController {
     }
 
     @Operation(summary = "用户操作日志列表")
-    @PostMapping("/list")
+    @PostMapping("/opt_list")
     public ApiResponse getOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received opt query info:{}", JSONUtil.toJsonPrettyStr(optLogQueryAO));
         return optLogService.getOptLogList(optLogQueryAO);
     }
 
     @Operation(summary = "试剂日志列表")
-    @PostMapping("/list")
+    @PostMapping("/inoutbount_list")
     public ApiResponse getReagentsOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received opt query info:{}", JSONUtil.toJsonPrettyStr(optLogQueryAO));
-        return optLogService.getOptLogList(optLogQueryAO);
+        return optLogService.getReagentsOptLogList(optLogQueryAO);
     }
 
     @Autowired

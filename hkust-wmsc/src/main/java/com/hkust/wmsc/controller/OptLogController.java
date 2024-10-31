@@ -4,17 +4,15 @@ package com.hkust.wmsc.controller;
 import com.hkust.dto.ApiResponse;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.utils.EnumToJsonUtils;
+import com.hkust.wmsc.dto.ao.OptLogQueryAO;
 import com.hkust.wmsc.service.OptLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Deprecated
+//@Deprecated
 @Tag(name = "操作日志")
 @RestController
 @RequestMapping("/wmsc/v1/opt")
@@ -39,8 +37,9 @@ public class OptLogController {
 
     @Operation(summary = "操作日志列表")
     @PostMapping("/list")
-    public ApiResponse optList() {
-        return optLogService.optLostList();
+    public ApiResponse optList(@RequestBody OptLogQueryAO optLogQueryAO) {
+        log.info("received query operation log params:{}", optLogQueryAO);
+        return optLogService.getReagentsOptLogList(optLogQueryAO);
     }
 
 //    @Operation(summary = "操作日志查询")

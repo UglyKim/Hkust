@@ -164,7 +164,7 @@ public class ReagentsService {
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         user = SecurityUtils.getCurrentUser();
         wmsOptLog.setOperatorId(user.getUserId());
-        wmsOptLog.setOperator(user.getRealName());
+        wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
         wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());
         wmsOptLogMapper.insert(wmsOptLog);
