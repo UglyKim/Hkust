@@ -1,7 +1,9 @@
 com/hkust/wmsc/dto/vo/ReagentsVO.class
+com/hkust/wmsc/dto/ao/OptLogQueryAO.class
 com/hkust/wmsc/dto/ao/ExpReagentsQueryAO.class
 com/hkust/wmsc/dto/ao/ReagentsQueryAO.class
 com/hkust/wmsc/dto/vo/WmsOptLogVO.class
+com/hkust/wmsc/dto/vo/OptLogVO.class
 com/hkust/wmsc/dto/ao/StocktakingAO.class
 com/hkust/wmsc/controller/StatisticsController.class
 com/hkust/wmsc/controller/ReagentsController.class

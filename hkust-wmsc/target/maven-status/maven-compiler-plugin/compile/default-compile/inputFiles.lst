@@ -1,4 +1,5 @@
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/ao/OutReagentsAO.java
+/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/ao/OptLogQueryAO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/structmapper/WmsOptLogStructMapper.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/ao/ReagentsQueryAO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/MapStruct.java
@@ -8,6 +9,7 @@
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/controller/VideoController.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/WmsOptLogVO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/controller/OptLogController.java
+/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/OptLogVO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/controller/ReagentsController.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/structmapper/WmsInOutRecordStructMapper.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/service/impl/InOutRecordServiceImpl.java

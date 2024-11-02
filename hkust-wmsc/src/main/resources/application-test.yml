@@ -9,4 +9,6 @@ spring:
     pathmatch:
       matching-strategy: path_pattern_parser
 uplaod:
-  dir: /opt/hkust/upload
+  dir: /opt/hkust/video/
+  server_address: http://47.100.40.77:10003/video/
+#  dir: /Users/kim/work/uploads/
