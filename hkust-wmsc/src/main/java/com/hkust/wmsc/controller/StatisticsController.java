@@ -21,7 +21,7 @@ public class StatisticsController {
     private StatisticsService statisticsService;
 
     @Operation(summary = "首页-试剂统计")
-    @PostMapping("/reagents/")
+    @PostMapping("/reagents")
     public ApiResponse reagentsStatistics(@RequestParam String cabinetId) {
         return statisticsService.totalStats(cabinetId);
     }

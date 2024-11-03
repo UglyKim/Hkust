@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -62,6 +63,7 @@ public class InReagentsAO implements Serializable {
     private String specification;
 
     @Schema(description = "物理状态")
+    @Size(min = 1, max = 1)
     private String physicalState;
 
     @Schema(description = "特殊存储条件")

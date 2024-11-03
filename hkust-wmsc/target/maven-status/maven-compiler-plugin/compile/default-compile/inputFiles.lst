@@ -17,8 +17,8 @@
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/structmapper/WmscReagentsStructMapper.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/WmsInOutRecordVO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/PageResponse.java
+/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/structmapper/WmscCabinetStructMapper.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/service/ReagentsService.java
-/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/struct/structmapper/WmsCabinetStructMapper.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/controller/StatisticsController.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/service/StatisticsService.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/MainPageStaticsVO.java

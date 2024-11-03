@@ -8,7 +8,7 @@ import com.hkust.dto.ApiResponse;
 import com.hkust.entity.wms.WmsCabinet;
 import com.hkust.mapper.wmsc.WmsCabinetMapper;
 import com.hkust.wmsc.dto.vo.CabinetVO;
-import com.hkust.wmsc.struct.structmapper.WmsCabinetStructMapper;
+import com.hkust.wmsc.struct.structmapper.WmscCabinetStructMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class CabinetService {
         }
         List<CabinetVO> cabinetVOList = new ArrayList<>();
         for (WmsCabinet wmsCabinet : cabinetList) {
-            CabinetVO cabinetVO = WmsCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
+            CabinetVO cabinetVO = WmscCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
             cabinetVOList.add(cabinetVO);
         }
         return ApiResponse.success(cabinetVOList);
@@ -42,7 +42,7 @@ public class CabinetService {
         if (ObjectUtil.isEmpty(wmsCabinet)) {
             return ApiResponse.success(ReturnCode.CABINET_IS_NULL);
         }
-        CabinetVO cabinetVO = WmsCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
+        CabinetVO cabinetVO = WmscCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
         return ApiResponse.success(cabinetVO);
     }
 

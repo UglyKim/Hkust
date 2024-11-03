@@ -13,6 +13,7 @@ import com.hkust.entity.Role;
 import com.hkust.entity.User;
 import com.hkust.entity.UserExts;
 import com.hkust.entity.UserRole;
+import com.hkust.enums.EnableEnum;
 import com.hkust.enums.StatEnum;
 import com.hkust.mapper.RoleMapper;
 import com.hkust.mapper.UserExtsMapper;
@@ -226,7 +227,8 @@ public class UserService {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
-        chainWrapper.set("stat", "0");
+        chainWrapper.set("student_id", studentId);
+        chainWrapper.set("stat", EnableEnum.NO.getCode());
         chainWrapper.update();
         return ApiResponse.success();
     }

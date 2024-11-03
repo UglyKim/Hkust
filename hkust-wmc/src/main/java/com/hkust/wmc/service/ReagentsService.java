@@ -216,4 +216,9 @@ public class ReagentsService {
     public void setWmsInOutRecordMapper(WmsInOutRecordMapper wmsInOutRecordMapper) {
         this.wmsInOutRecordMapper = wmsInOutRecordMapper;
     }
+
+    @Autowired
+    public void setWmsOptLogMapper(WmsOptLogMapper wmsOptLogMapper) {
+        this.wmsOptLogMapper = wmsOptLogMapper;
+    }
 }

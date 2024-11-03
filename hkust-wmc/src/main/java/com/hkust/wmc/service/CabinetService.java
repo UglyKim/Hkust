@@ -72,13 +72,13 @@ public class CabinetService {
             wrapper.set("name", editCabinetAO.getName());
         }
         if (ObjectUtil.isNotEmpty(editCabinetAO.getLayerCount())) {
-            wrapper.set("layerCount", editCabinetAO.getLayerCount());
+            wrapper.set("layer_count", editCabinetAO.getLayerCount());
         }
         if (ObjectUtil.isNotEmpty(editCabinetAO.getState())) {
             wrapper.set("state", editCabinetAO.getState());
         }
         if (ObjectUtil.isNotEmpty(editCabinetAO.getStorageRoom())) {
-            wrapper.set("storageRoom", editCabinetAO.getStorageRoom());
+            wrapper.set("storage_room", editCabinetAO.getStorageRoom());
         }
         if (ObjectUtil.isNotEmpty(editCabinetAO.getSpecification())) {
             wrapper.set("specification", editCabinetAO.getSpecification());
@@ -87,11 +87,12 @@ public class CabinetService {
             wrapper.set("remark", editCabinetAO.getRemark());
         }
         if (ObjectUtil.isNotEmpty(editCabinetAO.getThresholdRatio())) {
-            wrapper.set("thresholdRatio", editCabinetAO.getThresholdRatio());
+            wrapper.set("threshold_ratio", editCabinetAO.getThresholdRatio());
         }
         try {
             wrapper.update();
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("update cabinet_info failed!");
             return ApiResponse.failed(ReturnCode.DB_UPDATE_ERROR);
         }

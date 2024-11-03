@@ -15,7 +15,7 @@ public class CabinetVO implements Serializable {
     private static final long serialVersionUID = 892955555998876543L;
 
     @Schema(description = "仓储智能柜ID")
-    private String id;
+    private String cabinetId;
 
     @Schema(description = "使用状态")
     private String state;

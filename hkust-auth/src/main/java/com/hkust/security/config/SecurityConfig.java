@@ -63,11 +63,13 @@ public class SecurityConfig {
                 .addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/wmsc/v1/statistics/reagents/**").permitAll()
                 .antMatchers("/v3/api-docs/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
                         "/swagger-resources/**",
                         "/webjars/**",
+                        "/v1/statistics/reagents",
                         "/v1/auth/login").permitAll()
                 .anyRequest().authenticated()
                 .and()

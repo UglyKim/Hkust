@@ -42,6 +42,7 @@ public class AddUserAO implements Serializable {
     private String position;
 
     @Schema(required = true, description = "手机号")
+    @NotNull
     private String phone;
 
     @Schema(description = "固定电话")

@@ -63,6 +63,7 @@ public class AlterReagentsAO implements Serializable {
     private String specialStorageConditions;
 
     @Schema(description = "物理状态")
+    @Size(min = 1, max = 1)
     private String physicalState;
 
 }
