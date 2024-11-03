@@ -3,6 +3,7 @@ package com.hkust.wmc.service;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
@@ -83,6 +84,13 @@ public class UserService {
     }
 
     public ApiResponse addUSer(AddUserAO addUserAO) {
+        if (ObjectUtil.isEmpty(addUserAO.getStudentId())) {
+            return ApiResponse.failed(ReturnCode.STUDENT_ID_NOT_NULL);
+        }
+        User selectedUser = userMapper.selectByStudentId(addUserAO.getStudentId());
+        if (ObjectUtil.isNotEmpty(selectedUser)) {
+            return ApiResponse.failed(ReturnCode.USER_ALREADY_EXISTS);
+        }
         List<Role> roleList = SecurityUtils.getCurrentUser().getRoleList();
         boolean containsAdmin = roleList.stream()
                 .anyMatch(role -> "admin".equals(role.getRoleName()));
@@ -90,6 +98,7 @@ public class UserService {
             return ApiResponse.failed(ReturnCode.NO_PERMISSION);
         }
         User user = WmcUserStructMapper.INSTANCE.userAOToUser(addUserAO);
+        log.debug("User data to be inserted:{}", JSONUtil.toJsonPrettyStr(user));
         try {
             user.setUserId(UUIDUtils.generateUUIDWithoutHyphens());
             user.setEnabled(true);

@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Tag(name = "用户管理")
 @RestController
 @RequestMapping("/wmc/v1/user")
@@ -29,7 +31,7 @@ public class UserController {
 
     @Operation(summary = "新增学员")
     @PostMapping("/add")
-    public ApiResponse addUSer(@RequestBody AddUserAO addUserAO) {
+    public ApiResponse addUSer(@Valid @RequestBody AddUserAO addUserAO) {
         log.info("received add user info:{}", JSONUtil.toJsonPrettyStr(addUserAO));
         return userService.addUSer(addUserAO);
     }

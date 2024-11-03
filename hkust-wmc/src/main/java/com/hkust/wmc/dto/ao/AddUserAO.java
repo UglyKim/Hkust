@@ -15,7 +15,7 @@ public class AddUserAO implements Serializable {
     private static final long serialVersionUID = 665538583005150707L;
 
     @Schema(required = true, description = "学员号")
-    @NotNull
+    @NotNull(message = "学号不能空")
     private String studentId;
 
     @Schema(required = true, description = "用户名")
@@ -42,7 +42,7 @@ public class AddUserAO implements Serializable {
     private String position;
 
     @Schema(required = true, description = "手机号")
-    @NotNull
+    @NotNull(message = "请输入手机号")
     private String phone;
 
     @Schema(description = "固定电话")

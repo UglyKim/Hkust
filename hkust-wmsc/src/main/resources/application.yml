@@ -20,8 +20,6 @@ jwt:
   expirMc: 30000000
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 uplaod:
   dir: /opt/hkust/video/
   server_address: http://47.100.40.77:10003
