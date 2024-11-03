@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "试剂")
@@ -39,21 +40,21 @@ public class ReagentsController {
 
     @Operation(summary = "试剂详细信息查询-基于试剂编号")
     @PostMapping("/info")
-    public ApiResponse searchReagents(@RequestParam String reagentsId) {
+    public ApiResponse searchReagents(@Valid @RequestParam String reagentsId) {
         log.info("received id:{}", reagentsId);
         return reagentsService.findReagents(reagentsId);
     }
 
     @Operation(summary = "试剂列表查询")
     @PostMapping("/search")
-    public ApiResponse<PageResponse> searchReagents(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse> searchReagents(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received form reagent params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return reagentsService.findReagentsList(reagentsQueryAO);
     }
 
     @Operation(summary = "入库")
     @PostMapping("/inbound")
-    public ApiResponse inboundReagents(@RequestBody List<InReagentsAO> inReagentsAOList) {
+    public ApiResponse inboundReagents(@Valid @RequestBody List<InReagentsAO> inReagentsAOList) {
         Assert.notNull(inReagentsAOList);
         log.info("received reagent list:{}", JSONUtil.toJsonPrettyStr(inReagentsAOList));
         return reagentsService.inboundReagents(inReagentsAOList);
@@ -61,7 +62,7 @@ public class ReagentsController {
 
     @Operation(summary = "出库")
     @PostMapping("/outbound")
-    public ApiResponse outboundReagents(@RequestBody List<OutReagentsAO> outReagentsAOList) {
+    public ApiResponse outboundReagents(@Valid @RequestBody List<OutReagentsAO> outReagentsAOList) {
         Assert.notNull(outReagentsAOList);
         log.info("received reagent list:{}", JSONUtil.toJsonPrettyStr(outReagentsAOList));
         return reagentsService.outboundReagents(outReagentsAOList);
@@ -82,14 +83,14 @@ public class ReagentsController {
 
     @Operation(summary = "临期查询")
     @PostMapping("/expiration_list")
-    public ApiResponse<PageResponse> expirationList(@RequestBody ExpReagentsQueryAO expReagentsQueryAO) {
+    public ApiResponse<PageResponse> expirationList(@Valid @RequestBody ExpReagentsQueryAO expReagentsQueryAO) {
         log.info("received exp reagents query info:{}", JSONUtil.toJsonPrettyStr(expReagentsQueryAO));
         return reagentsService.getExpReagentsList(expReagentsQueryAO);
     }
 
     @Operation(summary = "盘点")
     @PostMapping("/stocktaking")
-    public ApiResponse<PageResponse> stocktakingReagents(@RequestBody StocktakingAO stocktakingAO) {
+    public ApiResponse<PageResponse> stocktakingReagents(@Valid @RequestBody StocktakingAO stocktakingAO) {
         log.info("received stocktaking query info:{}", JSONUtil.toJsonPrettyStr(stocktakingAO));
         return reagentsService.stocktakingReagents(stocktakingAO);
     }

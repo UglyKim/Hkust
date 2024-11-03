@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @Tag(name = "智能柜")
 @RestController
 @RequestMapping("/wmsc/v1/cabinet")
@@ -28,7 +30,7 @@ public class CabinetController {
 
     @Operation(summary = "智能柜详情")
     @PostMapping("/info")
-    public ApiResponse getCabinetInfo(@RequestParam String cabinetId) {
+    public ApiResponse getCabinetInfo(@Valid @RequestParam String cabinetId) {
         log.info("received cabinet ID:{}", cabinetId);
         return cabinetService.getCabinetDetail(cabinetId);
     }

@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 //@Deprecated
 @Tag(name = "操作日志")
 @RestController
@@ -37,7 +39,7 @@ public class OptLogController {
 
     @Operation(summary = "操作日志列表")
     @PostMapping("/list")
-    public ApiResponse optList(@RequestBody OptLogQueryAO optLogQueryAO) {
+    public ApiResponse optList(@Valid @RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received query operation log params:{}", optLogQueryAO);
         return optLogService.getReagentsOptLogList(optLogQueryAO);
     }

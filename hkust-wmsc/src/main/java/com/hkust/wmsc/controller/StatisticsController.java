@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Tag(name = "统计")
 @RestController
 @RequestMapping("/wmsc/v1/statistics")
@@ -40,14 +42,14 @@ public class StatisticsController {
 
     @Operation(summary = "入库列表查询")
     @PostMapping("/inbound/list")
-    public ApiResponse inboundListStatistics(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse inboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }
 
     @Operation(summary = "出库列表查询")
     @PostMapping("/outbound/list")
-    public ApiResponse outboundListStatistics(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse outboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }
