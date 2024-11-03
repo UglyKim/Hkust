@@ -14,7 +14,7 @@ public class AlterUserAO implements Serializable {
     private static final long serialVersionUID = 892099900008888669L;
 
     @Schema(description = "学员号")
-    @NotNull
+    @NotNull(message = "请输入学号")
     private String studentId;
 
     @Schema(description = "用户名")

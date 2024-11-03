@@ -14,7 +14,7 @@ public class EditCabinetAO implements Serializable {
     private static final long serialVersionUID = 777666588998330109L;
 
     @Schema(description = "设备ID")
-    @NotNull
+    @NotNull(message = "请输入设备编号")
     private String cabinetId;
 
     @Schema(description = "名称")
@@ -24,7 +24,7 @@ public class EditCabinetAO implements Serializable {
     private String barcode;
 
     @Schema(description = "使用状态")
-    @Size(min = 1, max = 1)
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String state;
 
     @Schema(description = "存放房间")

@@ -15,15 +15,15 @@ public class AddUserAO implements Serializable {
     private static final long serialVersionUID = 665538583005150707L;
 
     @Schema(required = true, description = "学员号")
-    @NotNull(message = "学号不能空")
+    @NotNull(message = "请填写学号")
     private String studentId;
 
     @Schema(required = true, description = "用户名")
-    @NotNull
+    @NotNull(message = "请填写用户名")
     private String username;
 
     @Schema(required = true, description = "密码")
-    @NotNull
+    @NotNull(message = "请输入密码")
     private String password;
 
     @Schema(required = true, description = "真实姓名")
@@ -57,8 +57,8 @@ public class AddUserAO implements Serializable {
     @Schema(required = true, description = "渠道 MC:管理控制台 SC:仓储智能柜")
     private String addCh;
 
-    @Schema(required = true)
-    @NotNull
+    @Schema(required = true, description = "角色")
+    @NotNull(message = "请选择角色")
     private String roleId;
 
 }

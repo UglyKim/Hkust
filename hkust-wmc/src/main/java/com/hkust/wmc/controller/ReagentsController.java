@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Tag(name = "试剂管理")
 @RestController
 @RequestMapping("/wmc/v1/reagents")
@@ -43,7 +45,7 @@ public class ReagentsController {
 
     @Operation(summary = "试剂列表")
     @PostMapping("/list")
-    public ApiResponse getReagentsList(@RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse getReagentsList(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return reagentsService.getReagentsList(reagentsQueryAO);
     }

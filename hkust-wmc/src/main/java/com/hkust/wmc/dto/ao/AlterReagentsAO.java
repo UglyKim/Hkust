@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class AlterReagentsAO implements Serializable {
 
     @Schema(description = "试剂ID")
-    @NotNull
+    @NotNull(message = "请输入试剂编号")
     private String reagentsId;
 
     @Schema(description = "智能柜ID")
@@ -37,7 +37,7 @@ public class AlterReagentsAO implements Serializable {
     private String enName;
 
     @Schema(description = "类型")
-    @Size(min = 1, max = 1)
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String type;
 
     @Schema(description = "二维码")
@@ -63,7 +63,7 @@ public class AlterReagentsAO implements Serializable {
     private String specialStorageConditions;
 
     @Schema(description = "物理状态")
-    @Size(min = 1, max = 1)
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String physicalState;
 
 }

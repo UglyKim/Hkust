@@ -17,16 +17,16 @@ public class OptLogQueryAO implements Serializable {
     private static final long serialVersionUID = 899000087700005679L;
 
     @Schema(description = "页码")
-    @NotNull
+    @NotNull(message = "请输入页码")
     private int pageNum;
 
     @Schema(description = "显示条数")
-    @NotNull
+    @NotNull(message = "请输入每页显示条数")
     private int pageSize;
 
     @Schema(description = "操作类型, 1:操作日志 2:试剂日志", defaultValue = "1")
-    @NotNull
-    @Size(min = 1, max = 1)
+    @NotNull(message = "请输入类型")
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String type;
 
     @Schema(description = "操作人")

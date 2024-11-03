@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -15,14 +16,15 @@ public class ReagentsQueryAO implements Serializable {
     private static final long serialVersionUID = 331198760000005679L;
 
     @Schema(description = "页码")
-    @NotNull
+    @NotNull(message = "请输入页码")
     private int pageNum;
 
     @Schema(description = "显示条数")
-    @NotNull
+    @NotNull(message = "请输入每页显示条数")
     private int pageSize;
 
     @Schema(description = "出入库 in:1 out:2")
+    @Size(min = 1, max = 1, message = "长度为 1")
     private String type;
 
     @Schema(description = "化学试剂名称")
