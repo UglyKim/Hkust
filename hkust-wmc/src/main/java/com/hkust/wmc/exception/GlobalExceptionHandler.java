@@ -1,5 +1,6 @@
 package com.hkust.wmc.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.stream.Collectors;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -30,8 +32,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleDataAccessException(DataAccessException ex) {
         // 可以记录异常日志以便分析
-        // log.error("Database access error: {}", ex.getMessage());
-
+        log.error("Database access error: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("数据库访问异常，请稍后重试。");
     }
@@ -40,9 +41,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
-        // log.error("SQL integrity constraint violation: {}", ex.getMessage());
-
+        log.error("SQL integrity constraint violation: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("违反数据库约束，请检查输入数据。");
+    }
+
+    // 处理空指针异常
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleNullPointerException(NullPointerException ex) {
+        // 记录日志，方便排查问题
+        log.error("Null pointer exception occurred: {}", ex.getMessage(), ex);
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("系统错误，请稍后再试。");
     }
 }
