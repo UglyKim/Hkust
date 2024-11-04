@@ -48,7 +48,7 @@ public class HkustUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getEnabled();
+        return false;
     }
 
     public User getUser() {
@@ -59,11 +59,4 @@ public class HkustUserDetails implements UserDetails {
         this.user = user;
     }
 
-//    public List<String> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(List<String> roles) {
-//        this.roles = roles;
-//    }
 }

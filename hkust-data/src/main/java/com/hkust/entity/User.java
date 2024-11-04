@@ -50,8 +50,6 @@ public class User {
 
     private String gender;
 
-    private Boolean enabled;
-
     @TableField("create_time")
     private LocalDateTime createTime;
 

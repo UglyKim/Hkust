@@ -27,7 +27,7 @@
         FROM hkust_user u
                  INNER JOIN hkust_user_role ur ON u.student_id = ur.student_id
                  INNER JOIN hkust_role r ON ur.role_id = r.role_id
-        WHERE stat = 1 and enabled = 1
+        WHERE stat = 1
         <if test="userName != null and userName != ''">
             AND real_name LIKE CONCAT('%', #{userName}, '%')
         </if>
@@ -52,7 +52,7 @@
         <result column="fixed_tel" property="fixedTel"/>
         <result column="email" property="email"/>
         <result column="gender" property="gender"/>
-        <result column="enabled" property="enabled"/>
+        <result column="stat" property="stat"/>
         <result column="create_time" property="createTime" javaType="java.time.LocalDateTime"/>
         <result column="update_time" property="updateTime" javaType="java.time.LocalDateTime"/>
         <result column="add_ch" property="addCh"/>

@@ -36,16 +36,13 @@ public class UserVO implements Serializable {
 
     private String fixedTel;
 
-//    @TableField("stat")
-//    private String stat;
-
     private String password;
 
     private String email;
 
     private String gender;
 
-    private Boolean enabled;
+    private String stat;
 
     private LocalDateTime createTime;
 

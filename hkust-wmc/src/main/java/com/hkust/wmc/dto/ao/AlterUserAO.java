@@ -1,6 +1,7 @@
 package com.hkust.wmc.dto.ao;
 
 import com.hkust.enums.GenderEnum;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
@@ -46,4 +47,7 @@ public class AlterUserAO implements Serializable {
 
     @Schema(description = "职位")
     private String position;
+
+    @Schema(description = "是否启用")
+    private Boolean enabled;
 }

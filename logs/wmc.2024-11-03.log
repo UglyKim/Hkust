@@ -1,0 +1,1217 @@
+2024-11-03 21:30:51.206 DEBUG [main] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-11-03 21:31:05.460 DEBUG [main] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-11-03 21:32:31.305 DEBUG [main] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-11-03 21:32:38.904 DEBUG [main] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-11-03 21:32:56.540 DEBUG [main] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-11-03 21:37:25.254 INFO  [main] com.hkust.WmcApplication - Starting WmcApplication using Java 1.8.0_391 on Kim-MacBook.local with PID 3018 (/Users/kim/work/hkust/hkust-wmc/target/classes started by kim in /Users/kim/work/hkust)
+2024-11-03 21:37:25.256 DEBUG [main] com.hkust.WmcApplication - Running with Spring Boot v2.7.5, Spring v5.3.23
+2024-11-03 21:37:25.256 INFO  [main] com.hkust.WmcApplication - The following 1 profile is active: "dev"
+2024-11-03 21:37:25.743 DEBUG [main] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-11-03 21:37:26.530 INFO  [main] c.h.s.HkustSecurityMetadataSource - channel:mc
+2024-11-03 21:37:26.641 DEBUG [main] c.h.mapper.RolePermMapper.selectList - ==>  Preparing: SELECT role_id,perm_id,perm_url_id,perm_url,channel FROM hkust_role_perm WHERE (channel = ?)
+2024-11-03 21:37:26.652 DEBUG [main] c.h.mapper.RolePermMapper.selectList - ==> Parameters: mc(String)
+2024-11-03 21:37:26.665 DEBUG [main] c.h.mapper.RolePermMapper.selectList - <==      Total: 33
+2024-11-03 21:37:26.668 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==>  Preparing: SELECT role_id,role_name FROM hkust_role
+2024-11-03 21:37:26.668 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==> Parameters: 
+2024-11-03 21:37:26.670 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - <==      Total: 2
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - init role permissions......
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/alter, role_list:[admin]
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/mode, role_list:[admin]
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/type, role_list:[admin]
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/list, role_list:[admin]
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/info, role_list:[admin]
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/gender, role_list:[admin]
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/add, role_list:[admin]
+2024-11-03 21:37:26.671 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/inout, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/access/list, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/other/info, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/info, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/list, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/condition, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/alter, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/log/list, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/roles, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/delete, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/video/list, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/add, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/delete, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/add, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/enabled, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/add, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/auth/logout, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/other/alter, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/info, role_list:[admin]
+2024-11-03 21:37:26.672 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/stat, role_list:[admin]
+2024-11-03 21:37:26.673 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/type, role_list:[admin]
+2024-11-03 21:37:26.673 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/alter, role_list:[admin]
+2024-11-03 21:37:26.673 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/statistics, role_list:[admin]
+2024-11-03 21:37:26.673 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/list, role_list:[admin]
+2024-11-03 21:37:26.673 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/list, role_list:[student, admin]
+2024-11-03 21:37:26.673 INFO  [main] c.h.s.HkustSecurityMetadataSource - completed role permissions......
+2024-11-03 21:37:26.677 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==>  Preparing: SELECT role_id,role_name FROM hkust_role
+2024-11-03 21:37:26.678 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==> Parameters: 
+2024-11-03 21:37:26.679 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - <==      Total: 2
+2024-11-03 21:37:26.701 DEBUG [main] com.hkust.security.jwt.JwtFilter - Filter 'jwtFilter' configured for use
+2024-11-03 21:37:27.413 INFO  [main] com.hkust.WmcApplication - Started WmcApplication in 2.408 seconds (JVM running for 2.902)
+2024-11-03 21:37:43.131 ERROR [http-nio-10002-exec-1] com.hkust.security.jwt.JwtFilter - JWT Token has expired
+2024-11-03 21:37:43.193 INFO  [http-nio-10002-exec-1] com.hkust.controller.AuthController - Received authentication login_info: {
+    "studentId": "ST001",
+    "password": "000000",
+    "channel": "mc"
+}
+2024-11-03 21:37:43.194 DEBUG [http-nio-10002-exec-1] c.h.m.U.selectUserRoleByStudentId - ==>  Preparing: SELECT * FROM hkust_user u INNER JOIN hkust_user_role ur ON u.student_id = ur.student_id INNER JOIN hkust_role r ON ur.role_id = r.role_id WHERE u.student_id = ?
+2024-11-03 21:37:43.195 DEBUG [http-nio-10002-exec-1] c.h.m.U.selectUserRoleByStudentId - ==> Parameters: ST001(String)
+2024-11-03 21:37:43.199 DEBUG [http-nio-10002-exec-1] c.h.m.U.selectUserRoleByStudentId - <==      Total: 1
+2024-11-03 21:37:43.316 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==>  Preparing: SELECT student_id,channel,version FROM hkust_user_exts WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:37:43.317 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==> Parameters: ST001(String), mc(String)
+2024-11-03 21:37:43.319 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - <==      Total: 1
+2024-11-03 21:37:43.323 DEBUG [http-nio-10002-exec-1] c.hkust.mapper.UserExtsMapper.update - ==>  Preparing: UPDATE hkust_user_exts SET student_id=?, channel=?, version=? WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:37:43.324 DEBUG [http-nio-10002-exec-1] c.hkust.mapper.UserExtsMapper.update - ==> Parameters: ST001(String), mc(String), 107(Integer), ST001(String), mc(String)
+2024-11-03 21:37:43.329 DEBUG [http-nio-10002-exec-1] c.hkust.mapper.UserExtsMapper.update - <==    Updates: 1
+2024-11-03 21:37:43.332 DEBUG [http-nio-10002-exec-1] com.hkust.mapper.EventMapper.insert - ==>  Preparing: INSERT INTO hkust_event ( type, event_id, opt_student_id, content, opt_date, channel ) VALUES ( ?, ?, ?, ?, ?, ? )
+2024-11-03 21:37:43.333 DEBUG [http-nio-10002-exec-1] com.hkust.mapper.EventMapper.insert - ==> Parameters: 5(String), c9141d71b8834b8a99586c28cffa7028(String), ST001(String), 用户登陆(String), 2024-11-03T21:37:43.330(LocalDateTime), mc(String)
+2024-11-03 21:37:43.337 DEBUG [http-nio-10002-exec-1] com.hkust.mapper.EventMapper.insert - <==    Updates: 1
+2024-11-03 21:37:43.338 DEBUG [http-nio-10002-exec-1] c.h.m.UserMapper.selectByStudentId - ==>  Preparing: SELECT * FROM hkust_user WHERE student_id = ?
+2024-11-03 21:37:43.338 DEBUG [http-nio-10002-exec-1] c.h.m.UserMapper.selectByStudentId - ==> Parameters: ST001(String)
+2024-11-03 21:37:43.339 DEBUG [http-nio-10002-exec-1] c.h.m.UserMapper.selectByStudentId - <==      Total: 1
+2024-11-03 21:37:43.340 DEBUG [http-nio-10002-exec-1] c.h.m.wmsc.WmsOptLogMapper.insert - ==>  Preparing: INSERT INTO wms_opt_log ( id, type, operator_id, operator, opt_time ) VALUES ( ?, ?, ?, ?, ? )
+2024-11-03 21:37:43.341 DEBUG [http-nio-10002-exec-1] c.h.m.wmsc.WmsOptLogMapper.insert - ==> Parameters: 4b0d2fe49eb54ef48201cb79d1d020c7(String), 5(String), 1cbed8f1624743a78b224c3392f9800a(String), root(String), 2024-11-03T21:37:43.340(LocalDateTime)
+2024-11-03 21:37:43.344 DEBUG [http-nio-10002-exec-1] c.h.m.wmsc.WmsOptLogMapper.insert - <==    Updates: 1
+2024-11-03 21:37:43.345 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==>  Preparing: SELECT student_id,channel,version FROM hkust_user_exts WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:37:43.345 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==> Parameters: ST001(String), mc(String)
+2024-11-03 21:37:43.346 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - <==      Total: 1
+2024-11-03 21:37:43.358 INFO  [http-nio-10002-exec-1] com.hkust.security.jwt.JwtTokenUtil - created token:eyJhbGciOiJIUzI1NiJ9.eyJjaGFubmVsIjoibWMiLCJ2ZXJzaW9uIjoxMDcsInN1YiI6IlNUMDAxIiwiaWF0IjoxNzMwNjQxMDYzLCJleHAiOjE3MzA2NzEwNjN9.N7aoKh9oPDBWCIIb0fOHj_7I7Ry8rTQUoLPdF1nfyjA
+2024-11-03 21:37:51.322 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - uri:/wmc/v1/user/add
+2024-11-03 21:37:51.322 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - studentId:ST001
+2024-11-03 21:37:51.323 DEBUG [http-nio-10002-exec-3] c.h.m.U.selectUserRoleByStudentId - ==>  Preparing: SELECT * FROM hkust_user u INNER JOIN hkust_user_role ur ON u.student_id = ur.student_id INNER JOIN hkust_role r ON ur.role_id = r.role_id WHERE u.student_id = ?
+2024-11-03 21:37:51.324 DEBUG [http-nio-10002-exec-3] c.h.m.U.selectUserRoleByStudentId - ==> Parameters: ST001(String)
+2024-11-03 21:37:51.327 DEBUG [http-nio-10002-exec-3] c.h.m.U.selectUserRoleByStudentId - <==      Total: 1
+2024-11-03 21:37:51.335 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - userDetails is:{
+    "user": {
+        "studentId": "ST001",
+        "username": "root",
+        "realName": "超级用户",
+        "officeLocation": "",
+        "phone": "13522223333",
+        "password": "$2a$10$18BL6Vq4WccLYe2.Z8KSXOks/uI80nT1Dj83gTdeR1EZt04hAo.SW",
+        "gender": "F",
+        "enabled": true,
+        "addCh": "MC",
+        "roleList": [
+            {
+                "roleId": 1,
+                "roleName": "admin"
+            }
+        ]
+    }
+}
+2024-11-03 21:37:51.335 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - getUser:User(userId=null, studentId=ST001, username=root, realName=超级用户, dept=null, position=null, address=null, officeLocation=, phone=13522223333, fixedTel=null, stat=null, password=$2a$10$18BL6Vq4WccLYe2.Z8KSXOks/uI80nT1Dj83gTdeR1EZt04hAo.SW, email=null, gender=F, enabled=true, createTime=null, updateTime=null, addCh=MC, roleList=[Role(roleId=1, roleName=admin)])
+2024-11-03 21:37:51.337 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtTokenUtil - channel:mc
+2024-11-03 21:37:51.338 DEBUG [http-nio-10002-exec-3] c.h.mapper.UserExtsMapper.selectList - ==>  Preparing: SELECT student_id,channel,version FROM hkust_user_exts WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:37:51.338 DEBUG [http-nio-10002-exec-3] c.h.mapper.UserExtsMapper.selectList - ==> Parameters: ST001(String), mc(String)
+2024-11-03 21:37:51.340 DEBUG [http-nio-10002-exec-3] c.h.mapper.UserExtsMapper.selectList - <==      Total: 1
+2024-11-03 21:37:51.356 INFO  [http-nio-10002-exec-3] c.h.wmc.controller.UserController - received add user info:{
+    "username": "ST006",
+    "password": "123456",
+    "realName": "你好",
+    "roleId": "1"
+}
+2024-11-03 21:37:51.368 DEBUG [http-nio-10002-exec-3] c.h.m.UserMapper.selectByStudentId - ==>  Preparing: SELECT * FROM hkust_user WHERE student_id = ?
+2024-11-03 21:37:51.368 DEBUG [http-nio-10002-exec-3] c.h.m.UserMapper.selectByStudentId - ==> Parameters: null
+2024-11-03 21:37:51.370 DEBUG [http-nio-10002-exec-3] c.h.m.UserMapper.selectByStudentId - <==      Total: 0
+2024-11-03 21:37:51.372 DEBUG [http-nio-10002-exec-3] com.hkust.wmc.service.UserService - User data to be inserted:{
+    "username": "ST006",
+    "realName": "你好",
+    "password": "123456"
+}
+2024-11-03 21:37:51.490 DEBUG [http-nio-10002-exec-3] com.hkust.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO hkust_user ( student_id, user_id, user_name, real_name, stat, password, enabled, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+2024-11-03 21:37:51.491 DEBUG [http-nio-10002-exec-3] com.hkust.mapper.UserMapper.insert - ==> Parameters: 1853069079166926849(String), 12c2324765f74cb8ac7c2579dfb13fbc(String), ST006(String), 你好(String), 1(String), $2a$10$S.uy2d1zfWicULeIxGNUqeh78ueI2W0ak8vV/jp0mLrYY48.6DWRW(String), true(Boolean), 2024-11-03T21:37:51(LocalDateTime)
+2024-11-03 21:37:51.494 DEBUG [http-nio-10002-exec-3] com.hkust.mapper.UserMapper.insert - <==    Updates: 1
+2024-11-03 21:37:51.495 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==>  Preparing: INSERT INTO hkust_user_exts ( student_id, channel, version ) VALUES ( ?, ?, ? )
+2024-11-03 21:37:51.495 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==> Parameters: 1853069079166926849(String), mc(String), 1(Integer)
+2024-11-03 21:37:51.496 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - <==    Updates: 1
+2024-11-03 21:37:51.497 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==>  Preparing: INSERT INTO hkust_user_exts ( student_id, channel, version ) VALUES ( ?, ?, ? )
+2024-11-03 21:37:51.498 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==> Parameters: 1853069079166926849(String), sc(String), 1(Integer)
+2024-11-03 21:37:51.500 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - <==    Updates: 1
+2024-11-03 21:37:51.500 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserRoleMapper.insert - ==>  Preparing: INSERT INTO hkust_user_role ( id, student_id, role_id ) VALUES ( ?, ?, ? )
+2024-11-03 21:37:51.500 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserRoleMapper.insert - ==> Parameters: 0(Integer), 1853069079166926849(String), 1(String)
+2024-11-03 21:37:51.502 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserRoleMapper.insert - <==    Updates: 1
+2024-11-03 21:41:43.004 INFO  [main] com.hkust.WmcApplication - Starting WmcApplication using Java 1.8.0_391 on Kim-MacBook.local with PID 3104 (/Users/kim/work/hkust/hkust-wmc/target/classes started by kim in /Users/kim/work/hkust)
+2024-11-03 21:41:43.006 DEBUG [main] com.hkust.WmcApplication - Running with Spring Boot v2.7.5, Spring v5.3.23
+2024-11-03 21:41:43.006 INFO  [main] com.hkust.WmcApplication - The following 1 profile is active: "dev"
+2024-11-03 21:41:43.518 DEBUG [main] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2024-11-03 21:41:43.755 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 21:41:43.760 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:41:43.760 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 21:41:43.760 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 21:41:43.842 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 21:41:43.842 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 804 ms
+2024-11-03 21:41:43.873 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 21:41:43.932 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 21:41:44.171 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 21:41:44.256 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 21:41:44.256 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:41:44.279 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 21:41:44.279 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:41:44.286 INFO  [main] c.h.s.HkustSecurityMetadataSource - channel:mc
+2024-11-03 21:41:44.398 DEBUG [main] c.h.mapper.RolePermMapper.selectList - ==>  Preparing: SELECT role_id,perm_id,perm_url_id,perm_url,channel FROM hkust_role_perm WHERE (channel = ?)
+2024-11-03 21:41:44.408 DEBUG [main] c.h.mapper.RolePermMapper.selectList - ==> Parameters: mc(String)
+2024-11-03 21:41:44.422 DEBUG [main] c.h.mapper.RolePermMapper.selectList - <==      Total: 33
+2024-11-03 21:41:44.426 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==>  Preparing: SELECT role_id,role_name FROM hkust_role
+2024-11-03 21:41:44.427 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==> Parameters: 
+2024-11-03 21:41:44.429 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - <==      Total: 2
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - init role permissions......
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/alter, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/mode, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/type, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/list, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/info, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/gender, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/add, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/inout, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/access/list, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/other/info, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/info, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/list, role_list:[admin]
+2024-11-03 21:41:44.430 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/condition, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/alter, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/log/list, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/roles, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/delete, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/video/list, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/add, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/delete, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/add, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/enabled, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/add, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/auth/logout, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/other/alter, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/info, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/stat, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/type, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/door/alter, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/cabinet/statistics, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/reagents/list, role_list:[admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - url:/v1/mc/user/list, role_list:[student, admin]
+2024-11-03 21:41:44.431 INFO  [main] c.h.s.HkustSecurityMetadataSource - completed role permissions......
+2024-11-03 21:41:44.436 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==>  Preparing: SELECT role_id,role_name FROM hkust_role
+2024-11-03 21:41:44.436 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - ==> Parameters: 
+2024-11-03 21:41:44.438 DEBUG [main] c.hkust.mapper.RoleMapper.selectList - <==      Total: 2
+2024-11-03 21:41:44.460 DEBUG [main] com.hkust.security.jwt.JwtFilter - Filter 'jwtFilter' configured for use
+2024-11-03 21:41:44.512 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 21:41:44.636 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7c112f5f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5961e92d, org.springframework.security.web.context.SecurityContextPersistenceFilter@3206174f, org.springframework.security.web.header.HeaderWriterFilter@7b6c6e70, org.springframework.security.web.authentication.logout.LogoutFilter@4a37191a, com.hkust.security.jwt.JwtFilter@22e5f96e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@36327cec, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@15eb0ae9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4098dd77, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fd05028, org.springframework.security.web.session.SessionManagementFilter@370c1968, org.springframework.security.web.access.ExceptionTranslationFilter@dd71b20, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38c9e0d6, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@7baf1f5a]
+2024-11-03 21:41:45.172 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 21:41:45.172 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:41:45.180 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 21:41:45.190 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 21:41:45.220 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:41:45.242 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 21:41:45.252 INFO  [main] com.hkust.WmcApplication - Started WmcApplication in 2.513 seconds (JVM running for 2.841)
+2024-11-03 21:42:09.292 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 21:42:09.293 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 21:42:09.294 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-03 21:42:09.365 ERROR [http-nio-10002-exec-1] com.hkust.security.jwt.JwtFilter - JWT Token has expired
+2024-11-03 21:42:09.424 INFO  [http-nio-10002-exec-1] com.hkust.controller.AuthController - Received authentication login_info: {
+    "studentId": "ST001",
+    "password": "000000",
+    "channel": "mc"
+}
+2024-11-03 21:42:09.426 DEBUG [http-nio-10002-exec-1] c.h.m.U.selectUserRoleByStudentId - ==>  Preparing: SELECT * FROM hkust_user u INNER JOIN hkust_user_role ur ON u.student_id = ur.student_id INNER JOIN hkust_role r ON ur.role_id = r.role_id WHERE u.student_id = ?
+2024-11-03 21:42:09.426 DEBUG [http-nio-10002-exec-1] c.h.m.U.selectUserRoleByStudentId - ==> Parameters: ST001(String)
+2024-11-03 21:42:09.430 DEBUG [http-nio-10002-exec-1] c.h.m.U.selectUserRoleByStudentId - <==      Total: 1
+2024-11-03 21:42:09.549 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==>  Preparing: SELECT student_id,channel,version FROM hkust_user_exts WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:42:09.549 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==> Parameters: ST001(String), mc(String)
+2024-11-03 21:42:09.551 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - <==      Total: 1
+2024-11-03 21:42:09.555 DEBUG [http-nio-10002-exec-1] c.hkust.mapper.UserExtsMapper.update - ==>  Preparing: UPDATE hkust_user_exts SET student_id=?, channel=?, version=? WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:42:09.556 DEBUG [http-nio-10002-exec-1] c.hkust.mapper.UserExtsMapper.update - ==> Parameters: ST001(String), mc(String), 108(Integer), ST001(String), mc(String)
+2024-11-03 21:42:09.561 DEBUG [http-nio-10002-exec-1] c.hkust.mapper.UserExtsMapper.update - <==    Updates: 1
+2024-11-03 21:42:09.565 DEBUG [http-nio-10002-exec-1] com.hkust.mapper.EventMapper.insert - ==>  Preparing: INSERT INTO hkust_event ( type, event_id, opt_student_id, content, opt_date, channel ) VALUES ( ?, ?, ?, ?, ?, ? )
+2024-11-03 21:42:09.565 DEBUG [http-nio-10002-exec-1] com.hkust.mapper.EventMapper.insert - ==> Parameters: 5(String), 4844b85c7fcb488da90aa84a26b011e5(String), ST001(String), 用户登陆(String), 2024-11-03T21:42:09.562(LocalDateTime), mc(String)
+2024-11-03 21:42:09.570 DEBUG [http-nio-10002-exec-1] com.hkust.mapper.EventMapper.insert - <==    Updates: 1
+2024-11-03 21:42:09.570 DEBUG [http-nio-10002-exec-1] c.h.m.UserMapper.selectByStudentId - ==>  Preparing: SELECT * FROM hkust_user WHERE student_id = ?
+2024-11-03 21:42:09.570 DEBUG [http-nio-10002-exec-1] c.h.m.UserMapper.selectByStudentId - ==> Parameters: ST001(String)
+2024-11-03 21:42:09.572 DEBUG [http-nio-10002-exec-1] c.h.m.UserMapper.selectByStudentId - <==      Total: 1
+2024-11-03 21:42:09.573 DEBUG [http-nio-10002-exec-1] c.h.m.wmsc.WmsOptLogMapper.insert - ==>  Preparing: INSERT INTO wms_opt_log ( id, type, operator_id, operator, opt_time ) VALUES ( ?, ?, ?, ?, ? )
+2024-11-03 21:42:09.574 DEBUG [http-nio-10002-exec-1] c.h.m.wmsc.WmsOptLogMapper.insert - ==> Parameters: 35634aaac3044774b2dabcc458030b78(String), 5(String), 1cbed8f1624743a78b224c3392f9800a(String), root(String), 2024-11-03T21:42:09.572(LocalDateTime)
+2024-11-03 21:42:09.577 DEBUG [http-nio-10002-exec-1] c.h.m.wmsc.WmsOptLogMapper.insert - <==    Updates: 1
+2024-11-03 21:42:09.579 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==>  Preparing: SELECT student_id,channel,version FROM hkust_user_exts WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:42:09.579 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - ==> Parameters: ST001(String), mc(String)
+2024-11-03 21:42:09.581 DEBUG [http-nio-10002-exec-1] c.h.mapper.UserExtsMapper.selectList - <==      Total: 1
+2024-11-03 21:42:09.594 INFO  [http-nio-10002-exec-1] com.hkust.security.jwt.JwtTokenUtil - created token:eyJhbGciOiJIUzI1NiJ9.eyJjaGFubmVsIjoibWMiLCJ2ZXJzaW9uIjoxMDgsInN1YiI6IlNUMDAxIiwiaWF0IjoxNzMwNjQxMzI5LCJleHAiOjE3MzA2NzEzMjl9.ofMRvGSPkJ4_lhyLWi9JmslTCc0vQVEZHpckWsF1L34
+2024-11-03 21:42:17.667 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - uri:/wmc/v1/user/add
+2024-11-03 21:42:17.667 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - studentId:ST001
+2024-11-03 21:42:17.668 DEBUG [http-nio-10002-exec-3] c.h.m.U.selectUserRoleByStudentId - ==>  Preparing: SELECT * FROM hkust_user u INNER JOIN hkust_user_role ur ON u.student_id = ur.student_id INNER JOIN hkust_role r ON ur.role_id = r.role_id WHERE u.student_id = ?
+2024-11-03 21:42:17.669 DEBUG [http-nio-10002-exec-3] c.h.m.U.selectUserRoleByStudentId - ==> Parameters: ST001(String)
+2024-11-03 21:42:17.672 DEBUG [http-nio-10002-exec-3] c.h.m.U.selectUserRoleByStudentId - <==      Total: 1
+2024-11-03 21:42:17.680 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - userDetails is:{
+    "user": {
+        "studentId": "ST001",
+        "username": "root",
+        "realName": "超级用户",
+        "officeLocation": "",
+        "phone": "13522223333",
+        "password": "$2a$10$18BL6Vq4WccLYe2.Z8KSXOks/uI80nT1Dj83gTdeR1EZt04hAo.SW",
+        "gender": "F",
+        "enabled": true,
+        "addCh": "MC",
+        "roleList": [
+            {
+                "roleId": 1,
+                "roleName": "admin"
+            }
+        ]
+    }
+}
+2024-11-03 21:42:17.680 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtFilter - getUser:User(userId=null, studentId=ST001, username=root, realName=超级用户, dept=null, position=null, address=null, officeLocation=, phone=13522223333, fixedTel=null, stat=null, password=$2a$10$18BL6Vq4WccLYe2.Z8KSXOks/uI80nT1Dj83gTdeR1EZt04hAo.SW, email=null, gender=F, enabled=true, createTime=null, updateTime=null, addCh=MC, roleList=[Role(roleId=1, roleName=admin)])
+2024-11-03 21:42:17.682 INFO  [http-nio-10002-exec-3] com.hkust.security.jwt.JwtTokenUtil - channel:mc
+2024-11-03 21:42:17.684 DEBUG [http-nio-10002-exec-3] c.h.mapper.UserExtsMapper.selectList - ==>  Preparing: SELECT student_id,channel,version FROM hkust_user_exts WHERE (student_id = ? AND channel = ?)
+2024-11-03 21:42:17.684 DEBUG [http-nio-10002-exec-3] c.h.mapper.UserExtsMapper.selectList - ==> Parameters: ST001(String), mc(String)
+2024-11-03 21:42:17.686 DEBUG [http-nio-10002-exec-3] c.h.mapper.UserExtsMapper.selectList - <==      Total: 1
+2024-11-03 21:42:17.701 INFO  [http-nio-10002-exec-3] c.h.wmc.controller.UserController - received add user info:{
+    "username": "ST006",
+    "password": "123456",
+    "realName": "你好",
+    "roleId": "1"
+}
+2024-11-03 21:42:17.712 DEBUG [http-nio-10002-exec-3] c.h.m.UserMapper.selectByStudentId - ==>  Preparing: SELECT * FROM hkust_user WHERE student_id = ?
+2024-11-03 21:42:17.713 DEBUG [http-nio-10002-exec-3] c.h.m.UserMapper.selectByStudentId - ==> Parameters: null
+2024-11-03 21:42:17.714 DEBUG [http-nio-10002-exec-3] c.h.m.UserMapper.selectByStudentId - <==      Total: 0
+2024-11-03 21:42:17.716 DEBUG [http-nio-10002-exec-3] com.hkust.wmc.service.UserService - User data to be inserted:{
+    "username": "ST006",
+    "realName": "你好",
+    "password": "123456"
+}
+2024-11-03 21:42:17.833 DEBUG [http-nio-10002-exec-3] com.hkust.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO hkust_user ( student_id, user_id, user_name, real_name, stat, password, enabled, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+2024-11-03 21:42:17.834 DEBUG [http-nio-10002-exec-3] com.hkust.mapper.UserMapper.insert - ==> Parameters: 1853070196290428929(String), 74a222d037374f778b28ac710b01898d(String), ST006(String), 你好(String), 1(String), $2a$10$Q3pzWQytqyCbUngUBzCzYOMlLOWpCmesfaiXsY.NLEJiVLDQmIr4i(String), true(Boolean), 2024-11-03T21:42:17(LocalDateTime)
+2024-11-03 21:42:17.838 DEBUG [http-nio-10002-exec-3] com.hkust.mapper.UserMapper.insert - <==    Updates: 1
+2024-11-03 21:42:17.838 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==>  Preparing: INSERT INTO hkust_user_exts ( student_id, channel, version ) VALUES ( ?, ?, ? )
+2024-11-03 21:42:17.839 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==> Parameters: 1853070196290428929(String), mc(String), 1(Integer)
+2024-11-03 21:42:17.841 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - <==    Updates: 1
+2024-11-03 21:42:17.841 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==>  Preparing: INSERT INTO hkust_user_exts ( student_id, channel, version ) VALUES ( ?, ?, ? )
+2024-11-03 21:42:17.842 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - ==> Parameters: 1853070196290428929(String), sc(String), 1(Integer)
+2024-11-03 21:42:17.843 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserExtsMapper.insert - <==    Updates: 1
+2024-11-03 21:42:17.844 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserRoleMapper.insert - ==>  Preparing: INSERT INTO hkust_user_role ( id, student_id, role_id ) VALUES ( ?, ?, ? )
+2024-11-03 21:42:17.844 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserRoleMapper.insert - ==> Parameters: 0(Integer), 1853070196290428929(String), 1(String)
+2024-11-03 21:42:17.846 DEBUG [http-nio-10002-exec-3] c.hkust.mapper.UserRoleMapper.insert - <==    Updates: 1
+2024-11-03 21:45:03.557 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 21:45:03.561 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 21:45:08.330 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 21:45:08.335 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:45:08.335 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 21:45:08.335 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 21:45:08.419 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 21:45:08.419 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 793 ms
+2024-11-03 21:45:08.452 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 21:45:08.513 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 21:45:08.763 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 21:45:08.845 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 21:45:08.846 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:45:08.865 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 21:45:08.865 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:45:09.095 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 21:45:09.212 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@244418a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4b5a078a, org.springframework.security.web.context.SecurityContextPersistenceFilter@1abebef3, org.springframework.security.web.header.HeaderWriterFilter@d5556bf, org.springframework.security.web.authentication.logout.LogoutFilter@2538bc06, com.hkust.security.jwt.JwtFilter@16e7b402, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@279dd959, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67cefd84, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1491344a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4c361f63, org.springframework.security.web.session.SessionManagementFilter@24eb65e3, org.springframework.security.web.access.ExceptionTranslationFilter@4a37191a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1c9fbb61, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@4da6d664]
+2024-11-03 21:45:09.689 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 21:45:09.689 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:45:09.697 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 21:45:09.706 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 21:45:09.734 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:45:09.756 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 21:45:14.474 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 21:45:14.474 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 21:45:14.476 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-03 21:51:15.456 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 21:51:15.459 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 21:51:18.741 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 21:51:18.745 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:51:18.746 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 21:51:18.746 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 21:51:18.826 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 21:51:18.826 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 795 ms
+2024-11-03 21:51:18.856 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 21:51:18.915 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 21:51:19.153 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 21:51:19.236 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 21:51:19.237 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:51:19.259 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 21:51:19.259 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:51:19.484 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 21:51:19.589 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7c112f5f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5961e92d, org.springframework.security.web.context.SecurityContextPersistenceFilter@3206174f, org.springframework.security.web.header.HeaderWriterFilter@7b6c6e70, org.springframework.security.web.authentication.logout.LogoutFilter@4a37191a, com.hkust.security.jwt.JwtFilter@22e5f96e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@36327cec, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@15eb0ae9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4098dd77, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fd05028, org.springframework.security.web.session.SessionManagementFilter@370c1968, org.springframework.security.web.access.ExceptionTranslationFilter@dd71b20, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38c9e0d6, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@7baf1f5a]
+2024-11-03 21:51:20.050 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 21:51:20.051 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:51:20.058 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 21:51:20.067 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 21:51:20.097 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:51:20.118 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 21:51:36.580 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 21:51:36.580 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 21:51:36.582 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-03 21:53:16.403 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 21:53:16.407 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 21:53:21.728 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 21:53:21.733 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:53:21.733 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 21:53:21.733 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 21:53:21.812 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 21:53:21.813 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 887 ms
+2024-11-03 21:53:21.849 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 21:53:21.908 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 21:53:22.157 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 21:53:22.243 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 21:53:22.243 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:53:22.262 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 21:53:22.262 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:53:22.485 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 21:53:22.590 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7c112f5f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5961e92d, org.springframework.security.web.context.SecurityContextPersistenceFilter@3206174f, org.springframework.security.web.header.HeaderWriterFilter@7b6c6e70, org.springframework.security.web.authentication.logout.LogoutFilter@4a37191a, com.hkust.security.jwt.JwtFilter@22e5f96e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@36327cec, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@15eb0ae9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4098dd77, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fd05028, org.springframework.security.web.session.SessionManagementFilter@370c1968, org.springframework.security.web.access.ExceptionTranslationFilter@dd71b20, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38c9e0d6, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@7baf1f5a]
+2024-11-03 21:53:23.082 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 21:53:23.083 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 21:53:23.090 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 21:53:23.099 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 21:53:23.127 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 21:53:23.149 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 21:53:28.749 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 21:53:28.750 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 21:53:28.751 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-03 21:59:54.347 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 21:59:54.351 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:00:03.255 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:00:04.191 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:00:04.195 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:00:04.195 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:00:04.196 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:00:04.270 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:00:04.271 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 961 ms
+2024-11-03 22:00:04.331 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:00:04.393 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:00:04.601 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:00:04.689 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:00:04.689 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:00:04.706 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:00:04.707 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:00:04.938 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:00:05.055 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@334ebcaa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5a0bef24, org.springframework.security.web.context.SecurityContextPersistenceFilter@5478ce1e, org.springframework.security.web.header.HeaderWriterFilter@6015a4a5, org.springframework.security.web.authentication.logout.LogoutFilter@770beef5, com.hkust.security.jwt.JwtFilter@f91da5e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6d60899e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4317850d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6de6faa6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6468a7b6, org.springframework.security.web.session.SessionManagementFilter@2cd62003, org.springframework.security.web.access.ExceptionTranslationFilter@490c7a83, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@708f018e, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@5dd903be]
+2024-11-03 22:00:05.610 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:00:05.610 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:00:05.619 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:00:05.630 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:00:05.662 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:00:05.683 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:00:16.651 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 22:00:16.651 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 22:00:16.652 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-03 22:00:28.030 WARN  [http-nio-10002-exec-3] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.hkust.dto.ApiResponse com.hkust.wmc.controller.UserController.addUSer(com.hkust.wmc.dto.ao.AddUserAO) with 2 errors: [Field error in object 'addUserAO' on field 'studentId': rejected value [null]; codes [NotNull.addUserAO.studentId,NotNull.studentId,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.studentId,studentId]; arguments []; default message [studentId]]; default message [学号不能空]] [Field error in object 'addUserAO' on field 'phone': rejected value [null]; codes [NotNull.addUserAO.phone,NotNull.phone,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.phone,phone]; arguments []; default message [phone]]; default message [不能为null]] ]
+2024-11-03 22:01:09.516 WARN  [http-nio-10002-exec-5] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.hkust.dto.ApiResponse com.hkust.wmc.controller.UserController.addUSer(com.hkust.wmc.dto.ao.AddUserAO): [Field error in object 'addUserAO' on field 'phone': rejected value [null]; codes [NotNull.addUserAO.phone,NotNull.phone,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.phone,phone]; arguments []; default message [phone]]; default message [不能为null]] ]
+2024-11-03 22:01:25.069 WARN  [http-nio-10002-exec-7] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.hkust.dto.ApiResponse com.hkust.wmc.controller.UserController.addUSer(com.hkust.wmc.dto.ao.AddUserAO): [Field error in object 'addUserAO' on field 'phone': rejected value [null]; codes [NotNull.addUserAO.phone,NotNull.phone,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.phone,phone]; arguments []; default message [phone]]; default message [不能为null]] ]
+2024-11-03 22:02:41.332 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:02:41.335 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:02:44.782 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:02:45.695 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:02:45.699 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:02:45.700 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:02:45.700 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:02:45.775 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:02:45.775 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 933 ms
+2024-11-03 22:02:45.837 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:02:45.895 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:02:46.100 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:02:46.187 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:02:46.187 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:02:46.205 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:02:46.205 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:02:46.432 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:02:46.538 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@28f9fedd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@17947e6d, org.springframework.security.web.context.SecurityContextPersistenceFilter@48904d5a, org.springframework.security.web.header.HeaderWriterFilter@18f55704, org.springframework.security.web.authentication.logout.LogoutFilter@5f2de715, com.hkust.security.jwt.JwtFilter@f91da5e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@536d97f8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1491344a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@a22c4d8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2e17a321, org.springframework.security.web.session.SessionManagementFilter@6add8e3f, org.springframework.security.web.access.ExceptionTranslationFilter@3ac3f6f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7343922c, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@5dd903be]
+2024-11-03 22:02:47.052 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:02:47.052 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:02:47.059 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:02:47.069 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:02:47.098 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:02:47.120 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:03:00.268 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 22:03:00.268 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 22:03:00.269 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-03 22:03:15.496 WARN  [http-nio-10002-exec-3] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.hkust.dto.ApiResponse com.hkust.wmc.controller.UserController.addUSer(com.hkust.wmc.dto.ao.AddUserAO): [Field error in object 'addUserAO' on field 'phone': rejected value [null]; codes [NotNull.addUserAO.phone,NotNull.phone,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.phone,phone]; arguments []; default message [phone]]; default message [请输入手机号]] ]
+2024-11-03 22:03:40.286 WARN  [http-nio-10002-exec-5] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.hkust.dto.ApiResponse com.hkust.wmc.controller.UserController.addUSer(com.hkust.wmc.dto.ao.AddUserAO): [Field error in object 'addUserAO' on field 'studentId': rejected value [null]; codes [NotNull.addUserAO.studentId,NotNull.studentId,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.studentId,studentId]; arguments []; default message [studentId]]; default message [学号不能空]] ]
+2024-11-03 22:03:46.779 WARN  [http-nio-10002-exec-7] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.hkust.dto.ApiResponse com.hkust.wmc.controller.UserController.addUSer(com.hkust.wmc.dto.ao.AddUserAO): [Field error in object 'addUserAO' on field 'studentId': rejected value [null]; codes [NotNull.addUserAO.studentId,NotNull.studentId,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.studentId,studentId]; arguments []; default message [studentId]]; default message [学号不能空]] ]
+2024-11-03 22:20:39.107 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:20:39.110 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:20:56.778 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:20:57.605 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:20:57.610 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:20:57.610 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:20:57.610 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:20:57.718 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:20:57.719 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 894 ms
+2024-11-03 22:20:57.749 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:20:57.806 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:20:58.005 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:20:58.090 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:20:58.090 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:20:58.108 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:20:58.108 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:20:58.341 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:20:58.462 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2aa7399c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@11eed657, org.springframework.security.web.context.SecurityContextPersistenceFilter@44784e2f, org.springframework.security.web.header.HeaderWriterFilter@61ecbee9, org.springframework.security.web.authentication.logout.LogoutFilter@7e4c72d6, com.hkust.security.jwt.JwtFilter@f91da5e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@e76b097, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@737db7f8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1cdc1bbc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@708f018e, org.springframework.security.web.session.SessionManagementFilter@61f6d381, org.springframework.security.web.access.ExceptionTranslationFilter@7c72ecc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@788ba63e, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@5dd903be]
+2024-11-03 22:20:58.940 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:20:58.940 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:20:58.948 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:20:58.958 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:20:58.986 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:20:59.008 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:21:18.564 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 22:21:18.564 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 22:21:18.566 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-03 22:21:18.902 ERROR [http-nio-10002-exec-2] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: com/hkust/constant/ReturnCode] with root cause
+java.lang.ClassNotFoundException: com.hkust.constant.ReturnCode
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:387)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:359)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	at com.hkust.dto.ApiResponse.success(ApiResponse.java:37)
+	at com.hkust.controller.AuthController.userAuthentication(AuthController.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at com.hkust.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:69)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+2024-11-03 22:21:59.578 ERROR [http-nio-10002-exec-4] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: com/hkust/constant/ReturnCode] with root cause
+java.lang.NoClassDefFoundError: com/hkust/constant/ReturnCode
+	at com.hkust.dto.ApiResponse.success(ApiResponse.java:37)
+	at com.hkust.controller.AuthController.userAuthentication(AuthController.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at com.hkust.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:69)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+2024-11-03 22:22:25.703 ERROR [http-nio-10002-exec-6] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: com/hkust/constant/ReturnCode] with root cause
+java.lang.NoClassDefFoundError: com/hkust/constant/ReturnCode
+	at com.hkust.dto.ApiResponse.success(ApiResponse.java:37)
+	at com.hkust.controller.AuthController.userAuthentication(AuthController.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at com.hkust.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:69)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+2024-11-03 22:22:31.670 ERROR [http-nio-10002-exec-8] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: com/hkust/constant/ReturnCode] with root cause
+java.lang.NoClassDefFoundError: com/hkust/constant/ReturnCode
+	at com.hkust.dto.ApiResponse.success(ApiResponse.java:37)
+	at com.hkust.controller.AuthController.userAuthentication(AuthController.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at com.hkust.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:69)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+2024-11-03 22:23:01.828 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:23:01.831 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:23:10.890 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:23:11.741 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:23:11.745 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:23:11.746 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:23:11.746 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:23:11.820 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:23:11.821 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 876 ms
+2024-11-03 22:23:11.883 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:23:11.941 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:23:12.144 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:23:12.233 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:23:12.233 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:23:12.250 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:23:12.250 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:23:12.477 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:23:12.587 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2be95d31, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@338b49d3, org.springframework.security.web.context.SecurityContextPersistenceFilter@672a1c62, org.springframework.security.web.header.HeaderWriterFilter@7d57dbb5, org.springframework.security.web.authentication.logout.LogoutFilter@14f40030, com.hkust.security.jwt.JwtFilter@6c9320c2, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@12a14b74, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@39e69ea7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2cd62003, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2aa7399c, org.springframework.security.web.session.SessionManagementFilter@1cdc1bbc, org.springframework.security.web.access.ExceptionTranslationFilter@5f2de715, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3289079a, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@56da7487]
+2024-11-03 22:23:13.064 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:23:13.064 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:23:13.072 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:23:13.081 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:23:13.110 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:23:13.131 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:23:19.444 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 22:23:19.444 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 22:23:19.445 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-03 22:23:42.355 WARN  [http-nio-10002-exec-3] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public com.hkust.dto.ApiResponse com.hkust.wmc.controller.UserController.addUSer(com.hkust.wmc.dto.ao.AddUserAO): [Field error in object 'addUserAO' on field 'studentId': rejected value [null]; codes [NotNull.addUserAO.studentId,NotNull.studentId,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [addUserAO.studentId,studentId]; arguments []; default message [studentId]]; default message [学号不能空]] ]
+2024-11-03 22:23:53.313 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:23:53.317 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:23:56.236 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:23:57.019 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:23:57.023 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:23:57.024 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:23:57.024 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:23:57.138 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:23:57.138 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 868 ms
+2024-11-03 22:23:57.222 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:23:57.294 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:23:57.505 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:23:57.597 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:23:57.597 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:23:57.615 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:23:57.615 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:23:57.849 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:23:57.967 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@58b91d57, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@61a91c9b, org.springframework.security.web.context.SecurityContextPersistenceFilter@37637a24, org.springframework.security.web.header.HeaderWriterFilter@596a7f44, org.springframework.security.web.authentication.logout.LogoutFilter@24386839, com.hkust.security.jwt.JwtFilter@79fd6f95, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2ab26378, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@770beef5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@38c9e0d6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@17092fff, org.springframework.security.web.session.SessionManagementFilter@869d87c, org.springframework.security.web.access.ExceptionTranslationFilter@4c447c09, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@33f2df51, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@4a163575]
+2024-11-03 22:23:58.495 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:23:58.495 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:23:58.503 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:23:58.512 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:23:58.542 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:23:58.564 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:24:26.912 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:24:26.915 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:24:30.551 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:24:31.321 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:24:31.326 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:24:31.326 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:24:31.326 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:24:31.432 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:24:31.432 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 846 ms
+2024-11-03 22:24:31.462 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:24:31.519 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:24:31.721 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:24:31.811 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:24:31.811 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:24:31.831 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:24:31.831 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:24:32.059 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:24:32.171 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@37d28f02, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@15efda6c, org.springframework.security.web.context.SecurityContextPersistenceFilter@43c87306, org.springframework.security.web.header.HeaderWriterFilter@3337d04c, org.springframework.security.web.authentication.logout.LogoutFilter@7c112f5f, com.hkust.security.jwt.JwtFilter@cf518cf, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6af91cc8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4c447c09, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2f3166a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6056232d, org.springframework.security.web.session.SessionManagementFilter@14998e21, org.springframework.security.web.access.ExceptionTranslationFilter@51b01550, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4d68b571, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@10f7c76]
+2024-11-03 22:24:32.674 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:24:32.674 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:24:32.682 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:24:32.691 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:24:32.719 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:24:32.741 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:24:40.422 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 22:24:40.422 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 22:24:40.424 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-03 22:35:15.762 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:35:15.767 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:35:20.105 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:35:20.881 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:35:20.886 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:35:20.886 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:35:20.887 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:35:20.964 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:35:20.964 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 823 ms
+2024-11-03 22:35:21.030 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:35:21.092 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:35:21.297 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:35:21.389 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:35:21.389 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:35:21.411 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:35:21.411 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:35:21.649 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:35:21.762 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1d247525, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@35ee466f, org.springframework.security.web.context.SecurityContextPersistenceFilter@288f173f, org.springframework.security.web.header.HeaderWriterFilter@1491344a, org.springframework.security.web.authentication.logout.LogoutFilter@672a1c62, com.hkust.security.jwt.JwtFilter@304d0259, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@35f3a22c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@45cd7bc5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@61ecbee9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@32e652b6, org.springframework.security.web.session.SessionManagementFilter@5e922647, org.springframework.security.web.access.ExceptionTranslationFilter@48904d5a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@17947e6d, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@2b680207]
+2024-11-03 22:35:22.243 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:35:22.243 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:35:22.250 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:35:22.260 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:35:22.288 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:35:22.309 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:35:42.827 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 22:35:42.827 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 22:35:42.828 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-03 22:35:43.715 INFO  [http-nio-10002-exec-8] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 285 ms
+2024-11-03 22:37:29.018 ERROR [http-nio-10002-exec-4] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'cabinetId' in 'where clause'
+### The error may exist in com/hkust/mapper/wmsc/WmsReagentsMapper.java (best guess)
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: SELECT COUNT(*) AS total FROM wms_reagents WHERE (name LIKE ? AND cabinetId = ? AND creator = ? AND create_time >= ? AND create_time <= ?)
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'cabinetId' in 'where clause'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'cabinetId' in 'where clause'] with root cause
+java.sql.SQLSyntaxErrorException: Unknown column 'cabinetId' in 'where clause'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:483)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)
+	at com.sun.proxy.$Proxy92.execute(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:64)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:64)
+	at com.sun.proxy.$Proxy90.query(Unknown Source)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:325)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor.willDoQuery(PaginationInnerInterceptor.java:135)
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:75)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62)
+	at com.sun.proxy.$Proxy89.query(Unknown Source)
+	at com.github.pagehelper.PageInterceptor.intercept(PageInterceptor.java:151)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:62)
+	at com.sun.proxy.$Proxy89.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:151)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:145)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:427)
+	at com.sun.proxy.$Proxy81.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForIPage(MybatisMapperMethod.java:121)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:85)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at com.sun.proxy.$Proxy99.selectPage(Unknown Source)
+	at com.hkust.wmc.service.ReagentsService.getReagentsList(ReagentsService.java:192)
+	at com.hkust.wmc.controller.ReagentsController.getReagentsList(ReagentsController.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:106)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at com.hkust.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:69)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+2024-11-03 22:37:45.054 WARN  [http-nio-10002-exec-5] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('}' (code 125)): expected a value; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('}' (code 125)): expected a value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 3, column: 2]]
+2024-11-03 22:39:36.444 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:39:36.447 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:39:39.202 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-03 22:39:39.963 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-03 22:39:39.967 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:39:39.967 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:39:39.968 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:39:40.043 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:39:40.043 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 805 ms
+2024-11-03 22:39:40.105 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:39:40.164 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:39:40.363 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:39:40.452 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:39:40.452 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:39:40.472 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:39:40.472 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:39:40.702 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:39:40.809 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@11eed657, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@708f018e, org.springframework.security.web.context.SecurityContextPersistenceFilter@2440022a, org.springframework.security.web.header.HeaderWriterFilter@1bb740f2, org.springframework.security.web.authentication.logout.LogoutFilter@6cd64b3f, com.hkust.security.jwt.JwtFilter@79fd6f95, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2be95d31, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5f2de715, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5f95f1e1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@19a31b9d, org.springframework.security.web.session.SessionManagementFilter@656922a0, org.springframework.security.web.access.ExceptionTranslationFilter@47406941, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@12a14b74, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@4a163575]
+2024-11-03 22:39:41.293 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:39:41.293 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:39:41.301 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:39:41.310 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:39:41.338 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-03 22:39:41.359 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-03 22:39:48.837 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-03 22:39:48.838 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-03 22:39:48.839 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-03 22:40:02.839 WARN  [http-nio-10002-exec-4] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('}' (code 125)): expected a value; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('}' (code 125)): expected a value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 3, column: 2]]
+2024-11-03 22:47:08.335 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10001 (http)
+2024-11-03 22:47:08.339 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10001"]
+2024-11-03 22:47:08.340 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-03 22:47:08.340 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-03 22:47:08.421 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-03 22:47:08.421 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1095 ms
+2024-11-03 22:47:08.452 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-03 22:47:08.511 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-03 22:47:08.740 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-03 22:47:08.823 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-03 22:47:08.823 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:47:08.845 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-03 22:47:08.845 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:47:09.198 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5a8816cc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@68565bc7, org.springframework.security.web.context.SecurityContextPersistenceFilter@7b81616b, org.springframework.security.web.header.HeaderWriterFilter@541179e7, org.springframework.security.web.authentication.logout.LogoutFilter@28f9fedd, com.hkust.security.jwt.JwtFilter@b16e202, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4f3faa70, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@279dd959, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6ed922e1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@37baddde, org.springframework.security.web.session.SessionManagementFilter@439e3cb4, org.springframework.security.web.access.ExceptionTranslationFilter@54d1608f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c017175, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@77b919a3]
+2024-11-03 22:47:09.668 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-03 22:47:09.668 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-03 22:47:09.676 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-03 22:47:09.685 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-03 22:47:09.695 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-03 22:47:09.724 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10001"]
+2024-11-03 22:47:09.746 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10001 (http) with context path ''
+2024-11-03 22:47:17.273 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:47:17.276 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-03 22:47:17.349 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-03 22:47:17.353 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

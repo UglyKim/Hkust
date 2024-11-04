@@ -36,3 +36,4 @@
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/service/OptLogService.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/InOutBoundStatisticsVO.java
 /Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/dto/vo/CabinetVO.java
+/Users/kim/work/hkust/hkust-wmsc/src/main/java/com/hkust/wmsc/exception/GlobalExceptionHandler.java

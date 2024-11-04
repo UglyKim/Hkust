@@ -101,7 +101,6 @@ public class UserService {
         log.debug("User data to be inserted:{}", JSONUtil.toJsonPrettyStr(user));
         try {
             user.setUserId(UUIDUtils.generateUUIDWithoutHyphens());
-            user.setEnabled(true);
             user.setStat(StatEnum.NORMAL.getCode());
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -163,6 +162,7 @@ public class UserService {
                         .map(Role::getRoleName)
                         .collect(Collectors.toList());
                 UserVO userVO = WmcUserStructMapper.INSTANCE.userToUserVO(user);
+                userVO.setStat(user.getStat().equals(EnableEnum.YES.getCode()) ? EnableEnum.YES.getName() : EnableEnum.NO.getName());
                 userVO.setRoleList(roleNameList);
                 userVOList.add(userVO);
             }
@@ -170,7 +170,6 @@ public class UserService {
         // 总数
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("stat", StatEnum.NORMAL.getCode());
-        wrapper.eq("enabled", StatEnum.NORMAL.getCode());
         Long total = userMapper.selectCount(wrapper);
         PageResponse pageResponse = new PageResponse(userQueryAO.getPageNum(), userQueryAO.getPageSize(), total, userVOList);
         return ApiResponse.success(pageResponse);
@@ -189,19 +188,19 @@ public class UserService {
     }
 
     public ApiResponse alterUser(AlterUserAO alterUserAO) {
-        // 查询用户是否存在
         // 查询学生是否存在
         User user = userMapper.selectByStudentId(alterUserAO.getStudentId());
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
-        if (ObjectUtil.isEmpty(user)) {
-            return ApiResponse.failed(ReturnCode.USER_IS_NULL);
-        }
-
         // 更新用户
         user.setUpdateTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
+        chainWrapper.eq("student_id", alterUserAO.getStudentId());
+        if (ObjectUtil.isNotEmpty(alterUserAO.getPassword())) {
+            String password = BCryptPasswordEncoder.encode(alterUserAO.getPassword());
+            chainWrapper.set("password", password);
+        }
         if (ObjectUtil.isNotEmpty(alterUserAO.getAddress())) {
             chainWrapper.set("address", alterUserAO.getAddress());
         }
@@ -226,6 +225,14 @@ public class UserService {
         if (ObjectUtil.isNotEmpty(alterUserAO.getPhone())) {
             chainWrapper.set("phone", alterUserAO.getPhone());
         }
+        if (ObjectUtil.isNotEmpty(alterUserAO.getEnabled())) {
+            if (alterUserAO.getEnabled()) {
+                chainWrapper.set("stat", EnableEnum.YES.getCode());
+            } else {
+                chainWrapper.set("stat", EnableEnum.NO.getCode());
+
+            }
+        }
         chainWrapper.update();
         return ApiResponse.success();
     }
@@ -236,7 +243,7 @@ public class UserService {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
-        chainWrapper.set("student_id", studentId);
+        chainWrapper.eq("student_id", studentId);
         chainWrapper.set("stat", EnableEnum.NO.getCode());
         chainWrapper.update();
         return ApiResponse.success();

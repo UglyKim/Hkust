@@ -2,6 +2,9 @@ package com.hkust.wmc.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
+import com.hkust.enums.CabinetStateEnum;
+import com.hkust.enums.EnableEnum;
+import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmc.dto.PageResponse;
 import com.hkust.wmc.dto.ao.AddUserAO;
 import com.hkust.wmc.dto.ao.AlterUserAO;
@@ -22,6 +25,12 @@ import javax.validation.Valid;
 public class UserController {
 
     private UserService userService;
+
+    @Operation(summary = "用户状态")
+    @PostMapping("/stat")
+    public ApiResponse getCabinetType() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(EnableEnum.class));
+    }
 
     @Operation(summary = "角色列表")
     @PostMapping("/roles")

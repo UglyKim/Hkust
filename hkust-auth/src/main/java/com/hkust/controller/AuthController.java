@@ -15,6 +15,7 @@ import com.hkust.entity.Role;
 import com.hkust.entity.User;
 import com.hkust.entity.UserExts;
 import com.hkust.entity.wms.WmsOptLog;
+import com.hkust.enums.EnableEnum;
 import com.hkust.enums.EventTypeEnum;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.mapper.EventMapper;
@@ -107,7 +108,9 @@ public class AuthController {
             return ApiResponse.failed(ReturnCode.PASSWD_MISMATCH);
         }
 
-        if (!userDetails.isEnabled()) {
+        userDetails.getUser().getStat();
+//        if (!userDetails.isEnabled()) {
+        if (EnableEnum.NO.getCode().equals(userDetails.getUser().getStat())) {
             return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
         }
         // 更新用户token版本号

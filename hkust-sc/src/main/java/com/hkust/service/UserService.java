@@ -88,7 +88,7 @@ public class UserService {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
-        userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getCode() : EnableEnum.NO.getCode());
+        userVO.setEnabled(user.getStat().equals(EnableEnum.YES.getCode()) ? EnableEnum.YES.getCode() : EnableEnum.NO.getCode());
         return ApiResponse.success(userVO);
     }
 
@@ -98,7 +98,7 @@ public class UserService {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
-        userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getCode() : EnableEnum.NO.getCode());
+        userVO.setEnabled(user.getStat().equals(EnableEnum.YES.getCode()) ? EnableEnum.YES.getCode() : EnableEnum.NO.getCode());
         return ApiResponse.success(userVO);
     }
 
@@ -109,7 +109,6 @@ public class UserService {
         }
         user = UserStructMapper.INSTANCE.UserAOToUser(userInfoAO);
         try {
-            user.setEnabled(true);
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String strDateTime = now.format(formatter);
@@ -230,7 +229,7 @@ public class UserService {
         List<UserVO> userVOList = new ArrayList<>();
         for (User user : userList) {
             UserVO userVO = UserStructMapper.INSTANCE.UserToUserVO(user);
-            userVO.setEnabled(user.getEnabled() ? EnableEnum.YES.getName() : EnableEnum.NO.getName());
+            userVO.setEnabled(user.getStat().equals(EnableEnum.YES.getCode()) ? EnableEnum.YES.getName() : EnableEnum.NO.getName());
             if (user.getGender().equals(GenderEnum.F.name())) {
                 userVO.setGender(GenderEnum.F.getName());
             } else {
