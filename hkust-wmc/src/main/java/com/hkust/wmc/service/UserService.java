@@ -16,6 +16,7 @@ import com.hkust.entity.UserExts;
 import com.hkust.entity.UserRole;
 import com.hkust.enums.EnableEnum;
 import com.hkust.enums.StatEnum;
+import com.hkust.enums.UserStatEnum;
 import com.hkust.mapper.RoleMapper;
 import com.hkust.mapper.UserExtsMapper;
 import com.hkust.mapper.UserMapper;
@@ -101,7 +102,8 @@ public class UserService {
         log.debug("User data to be inserted:{}", JSONUtil.toJsonPrettyStr(user));
         try {
             user.setUserId(UUIDUtils.generateUUIDWithoutHyphens());
-            user.setStat(StatEnum.NORMAL.getCode());
+            user.setEnabled(true);
+            user.setStat(UserStatEnum.ACTIVE.getCode());
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String strDateTime = now.format(formatter);

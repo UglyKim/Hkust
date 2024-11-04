@@ -29,7 +29,7 @@
                  INNER JOIN hkust_role r ON ur.role_id = r.role_id
         WHERE stat = 1
         <if test="userName != null and userName != ''">
-            AND real_name LIKE CONCAT('%', #{userName}, '%')
+            AND real_name LIKE CONCAT('%', #{userName}, '%'selectUserRoleByStudentId)
         </if>
         ORDER BY create_time DESC
         LIMIT #{pageSize} OFFSET #{offset}
@@ -43,6 +43,7 @@
     </select>
     <resultMap id="UserRole" type="com.hkust.entity.User">
         <id column="student_id" property="studentId"/>
+        <result column="enabled" property="enabled"/>
         <result column="password" property="password"/>
         <result column="user_name" property="username"/>
         <result column="real_name" property="realName"/>

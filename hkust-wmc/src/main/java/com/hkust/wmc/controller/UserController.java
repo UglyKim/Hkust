@@ -4,6 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
 import com.hkust.enums.CabinetStateEnum;
 import com.hkust.enums.EnableEnum;
+import com.hkust.enums.UserStatEnum;
 import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmc.dto.PageResponse;
 import com.hkust.wmc.dto.ao.AddUserAO;
@@ -26,10 +27,16 @@ public class UserController {
 
     private UserService userService;
 
+    @Operation(summary = "是否启用")
+    @PostMapping("/enabled")
+    public ApiResponse getUserEnabledType() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(EnableEnum.class));
+    }
+
     @Operation(summary = "用户状态")
     @PostMapping("/stat")
-    public ApiResponse getCabinetType() {
-        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(EnableEnum.class));
+    public ApiResponse getUserStatType() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(UserStatEnum.class));
     }
 
     @Operation(summary = "角色列表")

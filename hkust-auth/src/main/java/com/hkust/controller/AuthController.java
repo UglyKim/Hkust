@@ -108,9 +108,7 @@ public class AuthController {
             return ApiResponse.failed(ReturnCode.PASSWD_MISMATCH);
         }
 
-        userDetails.getUser().getStat();
-//        if (!userDetails.isEnabled()) {
-        if (EnableEnum.NO.getCode().equals(userDetails.getUser().getStat())) {
+        if (!userDetails.isEnabled()) {
             return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
         }
         // 更新用户token版本号

@@ -1,6 +1,7 @@
 package com.hkust.security;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.json.JSONUtil;
 import com.hkust.entity.User;
 import com.hkust.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ public class HkustUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String studentId) throws UsernameNotFoundException {
         User user = userMapper.selectUserRoleByStudentId(studentId);
+        log.debug("user is:{}", JSONUtil.toJsonPrettyStr(user));
         if (ObjectUtil.isEmpty(user)) {
             throw new UsernameNotFoundException("user is null!");
         }

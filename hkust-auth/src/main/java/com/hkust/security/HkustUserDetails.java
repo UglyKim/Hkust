@@ -48,7 +48,7 @@ public class HkustUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.user.getEnabled();
     }
 
     public User getUser() {
