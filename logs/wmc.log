@@ -1407,3 +1407,5 @@ java.lang.NullPointerException: null
 2024-11-04 11:00:40.129 INFO  [http-nio-10002-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-11-04 11:00:40.130 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2024-11-04 11:00:40.179 INFO  [http-nio-10002-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 48 ms
+2024-11-04 15:03:48.157 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-04 15:03:48.157 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

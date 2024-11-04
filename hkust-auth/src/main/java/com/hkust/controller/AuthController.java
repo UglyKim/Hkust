@@ -117,7 +117,6 @@ public class AuthController {
         this.addEvent(loginInfoAO.getChannel(), userDetails.getUser());
 
         // 添加操作日志
-        // 添加操作日志
         WmsOptLog wmsOptLog = new WmsOptLog();
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = userMapper.selectByStudentId(loginInfoAO.getStudentId());
