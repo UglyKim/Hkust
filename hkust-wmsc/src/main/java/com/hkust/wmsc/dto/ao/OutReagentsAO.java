@@ -13,14 +13,14 @@ public class OutReagentsAO implements Serializable {
     private static final long serialVersionUID = 892955555990000989L;
 
     @Schema(description = "试剂编号")
-    @NotNull
+    @NotNull(message = "请输入试剂编号")
     private String reagentsId;
 
     @Schema(description = "casNo")
     private String casNo;
 
     @Schema(description = "化学名称")
-    @NotNull
+    @NotNull(message = "请输入试剂信息")
     private String name;
 
     @Schema(description = "英文名称")
@@ -52,7 +52,7 @@ public class OutReagentsAO implements Serializable {
     private String state;
 
     @Schema(description = "规格")
-    @NotNull
+    @NotNull(message = "请输入规格")
     private String specification;
 
     @Schema(description = "物理状态")

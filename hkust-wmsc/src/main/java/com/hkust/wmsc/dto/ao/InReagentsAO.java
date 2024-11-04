@@ -16,18 +16,18 @@ public class InReagentsAO implements Serializable {
     private static final long serialVersionUID = 892955555998330109L;
 
     @Schema(description = "试剂ID， 读取二维码获取")
-    @NotNull
+    @NotNull(message = "请输入试剂编号")
     private String reagentsId;
 
     @Schema(description = "设备号")
-    @NotNull
+    @NotNull(message = "请输入设备编号")
     private String cabinetId;
 
     @Schema(description = "casNo")
     private String casNo;
 
     @Schema(description = "化学名称")
-    @NotNull
+    @NotNull(message = "请输入试剂名称")
     private String name;
 
     @Schema(description = "英文名称")
@@ -49,7 +49,6 @@ public class InReagentsAO implements Serializable {
     private String storageLocation;
 
     @Schema(description = "GHS")
-    @NotNull
     private String ghs;
 
     @Schema(description = "课题组")
@@ -63,7 +62,7 @@ public class InReagentsAO implements Serializable {
     private String specification;
 
     @Schema(description = "物理状态")
-    @Size(min = 1, max = 1)
+    @Size(min = 1, max = 1 ,message = "请输入正确的内容，长度不超过1")
     private String physicalState;
 
     @Schema(description = "特殊存储条件")
@@ -73,7 +72,7 @@ public class InReagentsAO implements Serializable {
     private String hazardClassification;
 
     @Schema(description = "到期日")
-    @NotNull
+    @NotNull(message = "请输入到期日期")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate expiration_date;
 

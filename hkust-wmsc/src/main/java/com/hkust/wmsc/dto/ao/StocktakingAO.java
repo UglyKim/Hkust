@@ -16,21 +16,21 @@ public class StocktakingAO implements Serializable {
 
 //    @Deprecated
     @Schema(description = "页码")
-    @NotNull
+    @NotNull(message = "请输入页码")
     private int pageNum;
 
 //    @Deprecated
     @Schema(description = "显示条数")
-    @NotNull
+    @NotNull(message = "请输入每页显示条数")
     private int pageSize;
 
     @Schema(description = "查询起始日期")
-    @NotNull
+    @NotNull(message = "请输入查询起始日期")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate startDate;
 
     @Schema(description = "查询结束日期")
-    @NotNull
+    @NotNull(message = "请输入查询结束日期")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate endDate;
 }
