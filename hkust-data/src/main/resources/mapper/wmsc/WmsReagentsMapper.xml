@@ -12,6 +12,7 @@
         WHERE
             create_time >= #{startDate}
           AND create_time <= #{endDate}
+          AND in_out = 1
         GROUP BY
             name,
             specification

@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hkust.security.HkustUserDetails;
 import com.hkust.security.HkustUserDetailsService;
 import com.hkust.security.jwt.JwtTokenUtil;
+import sun.plugin.liveconnect.SecurityContextHelper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,9 +79,11 @@ public class AuthController {
         if (ObjectUtil.isEmpty(userExts)) {
             return ApiResponse.failed("Invalid token");
         }
+
         // 更新token版本
         UpdateChainWrapper<UserExts> chainWrapper = new UpdateChainWrapper(userExtsMapper);
         chainWrapper.eq("student_id", userExts.getStudentId());
+        chainWrapper.eq("channel", userExts.getChannel());
         chainWrapper.set("version", userExts.getVersion() + 1);
         chainWrapper.update();
 

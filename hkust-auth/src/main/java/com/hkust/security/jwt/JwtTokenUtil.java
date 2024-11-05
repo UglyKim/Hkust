@@ -1,6 +1,8 @@
 package com.hkust.security.jwt;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hkust.dto.ApiResponse;
 import com.hkust.entity.User;
 import com.hkust.entity.UserExts;
 import com.hkust.mapper.UserExtsMapper;
@@ -75,20 +77,23 @@ public class JwtTokenUtil {
         // 从token获取studentId
         final String studentId = getUsernameFromToken(token);
         // 从token获取channel, 验证登陆源是否一样
-        final String channel = extractChannel(token);
-        log.info("channel:{}", channel);
-
+        final String recieved_channel = extractChannel(token);
+        log.info("recieved_channel:{}", recieved_channel);
+        String current_channel = System.getProperty("channel");
         // 数据库查询user_exts
         QueryWrapper<UserExts> wrapper = new QueryWrapper<>();
         wrapper.eq("student_id", user.getStudentId());
-        wrapper.eq("channel", channel);
+        wrapper.eq("channel", recieved_channel);
         UserExts userExts = userExtsMapper.selectOne(wrapper);
-
+        if (ObjectUtil.isEmpty(userExts)) {
+            log.error("渠道不正确");
+            return false;
+        }
         final int version = extractVersion(token);
 //        if (studentId.equals(user.getStudentId())) {
 //        }
         return studentId.equals(user.getStudentId()) && !isTokenExpired(token)
-                && userExts.getVersion() == version && channel.equals(userExts.getChannel());
+                && userExts.getVersion() == version && recieved_channel.equals(current_channel);
     }
 
     private int extractVersion(String token) {
