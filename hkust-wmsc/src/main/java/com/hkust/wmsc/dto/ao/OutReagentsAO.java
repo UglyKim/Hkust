@@ -56,13 +56,11 @@ public class OutReagentsAO implements Serializable {
     private String specification;
 
     @Schema(description = "物理状态")
-    @Size(min = 1, max = 1)
     private String physicalState;
 
     @Schema(description = "特殊存储条件")
     private String specialStorageConditions;
 
     @Schema(description = "危险和危害特性类别")
-    @Size(min = 1, max = 1)
     private String hazardClassification;
 }

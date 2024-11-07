@@ -62,7 +62,6 @@ public class InReagentsAO implements Serializable {
     private String specification;
 
     @Schema(description = "物理状态")
-    @Size(min = 1, max = 1 ,message = "请输入正确的内容，长度不超过1")
     private String physicalState;
 
     @Schema(description = "特殊存储条件")

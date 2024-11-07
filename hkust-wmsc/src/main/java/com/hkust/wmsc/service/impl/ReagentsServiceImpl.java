@@ -56,7 +56,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
 
     public ApiResponse findReagents(String reagentsId) {
         WmsReagents reagents = wmsReagentsMapper.selectById(reagentsId);
-        if (ObjectUtil.isNotEmpty(reagents)) {
+        if (ObjectUtil.isEmpty(reagents)) {
             return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
         }
         ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -16,11 +17,11 @@ public class ReagentsQueryAO implements Serializable {
     private static final long serialVersionUID = 331198760000005679L;
 
     @Schema(description = "页码")
-    @NotNull(message = "请输入页码")
+    @Min(value = 1, message = "页码必须大于0")
     private int pageNum;
 
     @Schema(description = "显示条数")
-    @NotNull(message = "请输入每页显示条数")
+    @Min(value = 1, message = "每页显示条数必须大于0")
     private int pageSize;
 
     @Schema(description = "出入库 in:1 out:2")

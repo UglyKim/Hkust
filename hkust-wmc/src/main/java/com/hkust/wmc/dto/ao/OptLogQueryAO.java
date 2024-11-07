@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -17,11 +18,11 @@ public class OptLogQueryAO implements Serializable {
     private static final long serialVersionUID = 899000087700005679L;
 
     @Schema(description = "页码")
-    @NotNull(message = "请输入页码")
+    @Min(value = 1, message = "页码显示条数必须大于0")
     private int pageNum;
 
     @Schema(description = "显示条数")
-    @NotNull(message = "请输入每页显示条数")
+    @Min(value = 1, message = "每页显示条数必须大于0")
     private int pageSize;
 
     @Schema(description = "操作类型, 1:操作日志 2:试剂日志", defaultValue = "1")
