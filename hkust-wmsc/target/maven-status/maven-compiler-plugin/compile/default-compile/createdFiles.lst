@@ -2,6 +2,7 @@ com/hkust/wmsc/dto/vo/CabinetVO.class
 com/hkust/WmscApplication.class
 com/hkust/wmsc/controller/OptLogController.class
 com/hkust/wmsc/config/OpenApiConfig.class
+com/hkust/wmsc/dto/ao/StocktakingRecordResultAO.class
 com/hkust/wmsc/service/VideoService.class
 com/hkust/wmsc/struct/MapStruct.class
 com/hkust/wmsc/controller/VideoController.class

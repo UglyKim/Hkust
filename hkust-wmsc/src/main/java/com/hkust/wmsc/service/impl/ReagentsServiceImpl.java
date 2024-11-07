@@ -1,6 +1,8 @@
 package com.hkust.wmsc.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -13,10 +15,12 @@ import com.hkust.entity.User;
 import com.hkust.entity.wms.WmsInOutRecord;
 import com.hkust.entity.wms.WmsOptLog;
 import com.hkust.entity.wms.WmsReagents;
+import com.hkust.entity.wms.WmsStocktakingRecord;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.enums.YNEnum;
 import com.hkust.mapper.wmsc.WmsOptLogMapper;
 import com.hkust.mapper.wmsc.WmsReagentsMapper;
+import com.hkust.mapper.wmsc.WmsStocktakingRecordMapper;
 import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
@@ -49,6 +53,8 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
     private InOutRecordServiceImpl inOutRecordService;
 
     private WmsOptLogMapper wmsOptLogMapper;
+
+    private WmsStocktakingRecordMapper wmsStocktakingRecordMapper;
 
     public ApiResponse findReagents(String reagentsId) {
         WmsReagents reagents = wmsReagentsMapper.selectById(reagentsId);
@@ -123,7 +129,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
             wmsInOutRecord.setCount(1);
             // 添加操作人
-            wmsInOutRecord.setOperatorId(user.getUserId());
+            wmsInOutRecord.setOperatorId(user.getStudentId());
             wmsInOutRecord.setOperator(user.getRealName());
             wmsInOutRecordList.add(wmsInOutRecord);
         }
@@ -132,7 +138,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         WmsOptLog wmsOptLog = new WmsOptLog();
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
-        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperatorId(user.getStudentId());
         wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
         wmsOptLog.setOptTime(currentDateTime);
@@ -175,7 +181,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             }
             wmsInOutRecord.setCabinetId(reagents.getCabinetId());
             // 添加操作人
-            wmsInOutRecord.setOperatorId(user.getUserId());
+            wmsInOutRecord.setOperatorId(user.getStudentId());
             wmsInOutRecord.setOperator(user.getRealName());
             wmsInOutRecordList.add(wmsInOutRecord);
         }
@@ -185,7 +191,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         WmsOptLog wmsOptLog = new WmsOptLog();
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
-        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperatorId(user.getStudentId());
         wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.OUTBOUND.getCode());
         wmsOptLog.setOptTime(currentDateTime);
@@ -263,6 +269,26 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         return ApiResponse.success(pageResponse);
     }
 
+    public ApiResponse recordResult(List<StocktakingRecordResultAO> stocktakingRecordResultAOList) {
+        if (ObjectUtil.isEmpty(stocktakingRecordResultAOList)) {
+            return ApiResponse.success(ReturnCode.NOT_NULL);
+        }
+        List<WmsStocktakingRecord> wmsStocktakingRecordList = new ArrayList<>();
+        for (StocktakingRecordResultAO ao : stocktakingRecordResultAOList) {
+            WmsStocktakingRecord record = new WmsStocktakingRecord();
+            record.setId(UUIDUtils.generateUUIDWithoutHyphens());
+            record.setName(ao.getName());
+            record.setCount(Integer.valueOf(ao.getTotalCount()));
+            User currentUser = SecurityUtils.getCurrentUser();
+            record.setOperatorId(currentUser.getStudentId());
+            record.setOperator(currentUser.getUsername());
+            record.setCreate_time(DateUtils.getCurrentDateTime());
+            wmsStocktakingRecordList.add(record);
+        }
+        wmsStocktakingRecordMapper.batchInsertStocktakingRecord(wmsStocktakingRecordList);
+        return ApiResponse.success();
+    }
+
     @Autowired
     public void setWmsReagentsMapper1(WmsReagentsMapper wmsReagentsMapper1) {
         this.wmsReagentsMapper = wmsReagentsMapper1;
@@ -281,5 +307,10 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
     @Autowired
     public void setWmsReagentsMapper(WmsReagentsMapper wmsReagentsMapper) {
         this.wmsReagentsMapper = wmsReagentsMapper;
+    }
+
+    @Autowired
+    public void setWmsStocktakingRecordMapper(WmsStocktakingRecordMapper wmsStocktakingRecordMapper) {
+        this.wmsStocktakingRecordMapper = wmsStocktakingRecordMapper;
     }
 }

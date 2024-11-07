@@ -1,6 +1,8 @@
 package com.hkust.wmsc.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
+import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.enums.HazardPropsEnum;
 import com.hkust.enums.OptTypeEnum;
@@ -11,6 +13,7 @@ import com.hkust.wmsc.service.impl.ReagentsServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +96,13 @@ public class ReagentsController {
     public ApiResponse<PageResponse> stocktakingReagents(@Valid @RequestBody StocktakingAO stocktakingAO) {
         log.info("received stocktaking query info:{}", JSONUtil.toJsonPrettyStr(stocktakingAO));
         return reagentsService.stocktakingReagents(stocktakingAO);
+    }
+
+    @Operation(summary = "盘点结果上传")
+    @PostMapping("/stocktaking/result")
+    public ApiResponse stocktakingRecordResult(@Valid @RequestBody List<StocktakingRecordResultAO> stocktakingRecordResultAOList){
+        log.info("received stocktaking query stocktakingRecordResultAOList:{}", JSONUtil.toJsonPrettyStr(stocktakingRecordResultAOList));
+        return reagentsService.recordResult(stocktakingRecordResultAOList);
     }
 
     @Autowired

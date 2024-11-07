@@ -154,7 +154,7 @@ public class ReagentsService {
         wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
         wmsInOutRecord.setCount(1);
         // 添加操作人
-        wmsInOutRecord.setOperatorId(user.getUserId());
+        wmsInOutRecord.setOperatorId(user.getStudentId());
         wmsInOutRecord.setOperator(user.getRealName());
 
         wmsInOutRecordMapper.insert(wmsInOutRecord);
@@ -163,7 +163,7 @@ public class ReagentsService {
         WmsOptLog wmsOptLog = new WmsOptLog();
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         user = SecurityUtils.getCurrentUser();
-        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperatorId(user.getStudentId());
         wmsOptLog.setOperator(user.getUsername());
         wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
         wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());

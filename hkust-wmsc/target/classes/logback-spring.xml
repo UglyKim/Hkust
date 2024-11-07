@@ -13,7 +13,7 @@
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/wmc.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/wmc.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/wmsc.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory> <!-- 保留最近30天的日志 -->
         </rollingPolicy>
         <encoder>

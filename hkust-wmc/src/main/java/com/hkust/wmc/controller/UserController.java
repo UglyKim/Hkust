@@ -60,6 +60,7 @@ public class UserController {
     }
 
     @Operation(summary = "查看用户详情")
+    @PostMapping("/detail")
     public ApiResponse getUserInfo(@RequestParam String studentId) {
         log.info("received user_id:{}", studentId);
         return userService.getUserInfoDetail(studentId);
