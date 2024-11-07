@@ -1,6 +1,9 @@
 package com.hkust.wmsc.controller;
 
 import com.hkust.dto.ApiResponse;
+import com.hkust.enums.CabinetStateEnum;
+import com.hkust.enums.OptTypeEnum;
+import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmsc.service.CabinetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,6 +24,12 @@ import javax.validation.Valid;
 public class CabinetController {
 
     private CabinetService cabinetService;
+
+    @Operation(summary = "智能柜状态")
+    @PostMapping("/state")
+    public ApiResponse getInOutBoundType() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(CabinetStateEnum.class));
+    }
 
     @Operation(summary = "智能柜列表")
     @PostMapping("/list")

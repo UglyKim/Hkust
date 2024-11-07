@@ -35,8 +35,8 @@ public class StatisticsService {
 
     public ApiResponse totalStats(String cabinetId) {
         // 试剂总数
-        QueryWrapper queryWrapper = new QueryWrapper();
-        Long total = reagentsMapper.selectCount(queryWrapper);
+        QueryWrapper wrapper = new QueryWrapper();
+        Long total = reagentsMapper.selectCount(wrapper);
         Long inThisMonthTotal = inOutRecordService.getThisMonthInbound();
         Long outThisMonthTotal = inOutRecordService.getThisMonthOutbound();
 

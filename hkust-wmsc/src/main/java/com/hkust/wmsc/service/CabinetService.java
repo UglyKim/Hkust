@@ -5,7 +5,9 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
+import com.hkust.entity.Cabinet;
 import com.hkust.entity.wms.WmsCabinet;
+import com.hkust.enums.CabinetStateEnum;
 import com.hkust.mapper.wmsc.WmsCabinetMapper;
 import com.hkust.wmsc.dto.vo.CabinetVO;
 import com.hkust.wmsc.struct.structmapper.WmscCabinetStructMapper;
@@ -32,6 +34,7 @@ public class CabinetService {
         List<CabinetVO> cabinetVOList = new ArrayList<>();
         for (WmsCabinet wmsCabinet : cabinetList) {
             CabinetVO cabinetVO = WmscCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
+            cabinetVO.setState(CabinetStateEnum.fromCode(wmsCabinet.getState()));
             cabinetVOList.add(cabinetVO);
         }
         return ApiResponse.success(cabinetVOList);
@@ -43,6 +46,7 @@ public class CabinetService {
             return ApiResponse.success(ReturnCode.CABINET_IS_NULL);
         }
         CabinetVO cabinetVO = WmscCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
+        cabinetVO.setState(CabinetStateEnum.fromCode(wmsCabinet.getState()));
         return ApiResponse.success(cabinetVO);
     }
 
