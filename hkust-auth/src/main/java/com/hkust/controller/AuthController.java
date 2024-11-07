@@ -62,7 +62,7 @@ public class AuthController {
 
     private WmsOptLogMapper wmsOptLogMapper;
 
-    @Operation(summary = "登陆", operationId = "a")
+    @Operation(summary = "登陆")
     @PostMapping("/auth/login")
     public ApiResponse userAuthentication(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
         log.info("Received authentication login_info: {}", JSONUtil.toJsonPrettyStr(loginInfoAO));
@@ -96,7 +96,7 @@ public class AuthController {
         return ApiResponse.success(authResponseVO);
     }
 
-    @Operation(summary = "登出", operationId = "b")
+    @Operation(summary = "登出")
     @PostMapping("/auth/logout")
     public ApiResponse userLogOut() {
         User user = SecurityUtils.getCurrentUser();
