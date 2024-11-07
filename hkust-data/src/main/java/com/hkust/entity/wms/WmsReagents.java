@@ -47,10 +47,11 @@ public class WmsReagents {
     @TableField("create_time")
     private LocalDateTime createTime;
 
-    private String modifier;
+    @TableField("modified_by")
+    private String modifiedBy;
 
-    @TableField("update_time")
-    private LocalDateTime updateTime;
+    @TableField("modified_time")
+    private LocalDateTime modifiedTime;
 
     private String state;
 

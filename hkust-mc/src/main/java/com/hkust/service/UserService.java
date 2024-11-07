@@ -143,7 +143,7 @@ public class UserService {
         if (ObjectUtil.isEmpty(user)) {
             throw new NullPointerException("学生不存在!");
         }
-        user.setUpdateTime(DateUtils.getCurrentDateTime());
+        user.setModifiedTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
         chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
 
@@ -191,7 +191,7 @@ public class UserService {
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
-        user.setUpdateTime(DateUtils.getCurrentDateTime());
+        user.setModifiedTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
         chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
 

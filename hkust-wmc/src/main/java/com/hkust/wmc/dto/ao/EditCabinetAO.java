@@ -24,7 +24,6 @@ public class EditCabinetAO implements Serializable {
     private String barcode;
 
     @Schema(description = "使用状态")
-    @Size(min = 1, max = 1,message = "长度为 1")
     private String state;
 
     @Schema(description = "存放房间")

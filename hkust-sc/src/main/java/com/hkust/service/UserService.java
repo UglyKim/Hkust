@@ -1,10 +1,7 @@
 package com.hkust.service;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.collection.ListUtil;
-import cn.hutool.core.lang.hash.Hash;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
@@ -36,7 +33,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -129,7 +125,7 @@ public class UserService {
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
-        user.setUpdateTime(DateUtils.getCurrentDateTime());
+        user.setModifiedTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
         chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
 
@@ -177,7 +173,7 @@ public class UserService {
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
-        user.setUpdateTime(DateUtils.getCurrentDateTime());
+        user.setModifiedTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
         chainWrapper.eq("student_id", userAlterInfoAO.getStudentId());
 

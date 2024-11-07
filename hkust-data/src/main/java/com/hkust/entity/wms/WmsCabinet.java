@@ -66,6 +66,12 @@ public class WmsCabinet {
     @TableField("audit_time")
     private LocalDateTime auditTime;
 
+    @TableField("modified_by")
+    private LocalDateTime modifiedBy;
+
+    @TableField("modified_time")
+    private LocalDateTime modifiedTime;
+
     /**
      * 材料
      */

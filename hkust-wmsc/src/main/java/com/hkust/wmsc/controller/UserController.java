@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +20,13 @@ public class UserController {
     private UserService userService;
 
     @Operation(summary = "用户详情")
-    @RequestMapping("/detail")
+    @PostMapping("/detail")
     public ApiResponse getUserInfo() {
         return userService.getUserInfo();
     }
 
     @Operation(summary = "修改密码")
-    @RequestMapping("/alter/passwd")
+    @PostMapping("/alter/passwd")
     public ApiResponse alterUserPassword(@RequestParam String passwd) {
         log.info("received passwd:{}", passwd);
         return userService.alterUserPassword(passwd);

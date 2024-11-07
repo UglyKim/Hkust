@@ -62,7 +62,41 @@ public class AuthController {
 
     private WmsOptLogMapper wmsOptLogMapper;
 
-    @Operation(summary = "登出")
+    @Operation(summary = "登陆", operationId = "a")
+    @PostMapping("/auth/login")
+    public ApiResponse userAuthentication(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
+        log.info("Received authentication login_info: {}", JSONUtil.toJsonPrettyStr(loginInfoAO));
+        HkustUserDetails userDetails = (HkustUserDetails) userDetailsService.loadUserByUsername(loginInfoAO.getStudentId());
+
+        if (!BCryptPasswordEncoder.matches(loginInfoAO.getPassword(), userDetails.getUser().getPassword())) {
+            return ApiResponse.failed(ReturnCode.PASSWD_MISMATCH);
+        }
+
+        if (!userDetails.isEnabled()) {
+            return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
+        }
+        // 更新用户token版本号
+        updateVersion(userDetails, loginInfoAO.getChannel());
+        // 添加登陆日志
+        this.addEvent(loginInfoAO.getChannel(), userDetails.getUser());
+
+        // 添加操作日志
+        WmsOptLog wmsOptLog = new WmsOptLog();
+        wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
+        User user = userMapper.selectByStudentId(loginInfoAO.getStudentId());
+        wmsOptLog.setOperatorId(user.getUserId());
+        wmsOptLog.setOperator(user.getUsername());
+        wmsOptLog.setType(OptTypeEnum.LOGIN.getCode());
+        wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());
+        wmsOptLogMapper.insert(wmsOptLog);
+
+        String token = jwtTokenUtil.generateToken(userDetails, loginInfoAO.getChannel());
+        List<String> roles = userDetails.getUser().getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());
+        AuthResponseVO authResponseVO = new AuthResponseVO(token, roles);
+        return ApiResponse.success(authResponseVO);
+    }
+
+    @Operation(summary = "登出", operationId = "b")
     @PostMapping("/auth/logout")
     public ApiResponse userLogOut() {
         User user = SecurityUtils.getCurrentUser();
@@ -96,40 +130,6 @@ public class AuthController {
         wmsOptLogMapper.insert(wmsOptLog);
 
         return ApiResponse.success();
-    }
-
-    @Operation(summary = "登陆认证")
-    @PostMapping("/auth/login")
-    public ApiResponse userAuthentication(@RequestBody LoginInfoAO loginInfoAO) throws Exception {
-        log.info("Received authentication login_info: {}", JSONUtil.toJsonPrettyStr(loginInfoAO));
-        HkustUserDetails userDetails = (HkustUserDetails) userDetailsService.loadUserByUsername(loginInfoAO.getStudentId());
-
-        if (!BCryptPasswordEncoder.matches(loginInfoAO.getPassword(), userDetails.getUser().getPassword())) {
-            return ApiResponse.failed(ReturnCode.PASSWD_MISMATCH);
-        }
-
-        if (!userDetails.isEnabled()) {
-            return ApiResponse.failed(ReturnCode.USER_IS_DISABLE);
-        }
-        // 更新用户token版本号
-        updateVersion(userDetails, loginInfoAO.getChannel());
-        // 添加登陆日志
-        this.addEvent(loginInfoAO.getChannel(), userDetails.getUser());
-
-        // 添加操作日志
-        WmsOptLog wmsOptLog = new WmsOptLog();
-        wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
-        User user = userMapper.selectByStudentId(loginInfoAO.getStudentId());
-        wmsOptLog.setOperatorId(user.getUserId());
-        wmsOptLog.setOperator(user.getUsername());
-        wmsOptLog.setType(OptTypeEnum.LOGIN.getCode());
-        wmsOptLog.setOptTime(DateUtils.getCurrentDateTime());
-        wmsOptLogMapper.insert(wmsOptLog);
-
-        String token = jwtTokenUtil.generateToken(userDetails, loginInfoAO.getChannel());
-        List<String> roles = userDetails.getUser().getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());
-        AuthResponseVO authResponseVO = new AuthResponseVO(token, roles);
-        return ApiResponse.success(authResponseVO);
     }
 
     private void updateVersion(HkustUserDetails userDetails, String channel) {

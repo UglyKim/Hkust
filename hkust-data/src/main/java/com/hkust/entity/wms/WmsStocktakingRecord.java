@@ -23,9 +23,11 @@ public class WmsStocktakingRecord {
 
     private String operator;
 
-    private LocalDateTime create_time;
+    @TableField("create_time")
+    private LocalDateTime createTime;
 
-    private LocalDateTime update_time;
+    @TableField("modified_time")
+    private LocalDateTime modifiedTime;
 
     private String remark;
 }

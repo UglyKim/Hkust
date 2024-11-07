@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "日志管理")
+@Tag(name = "日志")
 @RestController
 @RequestMapping("/wmc/v1/log")
 @Slf4j

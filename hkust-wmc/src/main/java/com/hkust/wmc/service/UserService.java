@@ -196,7 +196,7 @@ public class UserService {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         // 更新用户
-        user.setUpdateTime(DateUtils.getCurrentDateTime());
+        user.setModifiedTime(DateUtils.getCurrentDateTime());
         UpdateChainWrapper<User> chainWrapper = new UpdateChainWrapper<>(userMapper);
         chainWrapper.eq("student_id", alterUserAO.getStudentId());
         if (ObjectUtil.isNotEmpty(alterUserAO.getPassword())) {

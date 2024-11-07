@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Tag(name = "试剂管理")
+@Tag(name = "试剂")
 @RestController
 @RequestMapping("/wmc/v1/reagents")
 @Slf4j

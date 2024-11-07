@@ -1,8 +1,6 @@
 package com.hkust.wmsc.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -155,7 +153,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             WmsReagents reagents = wmsReagentsMapper.selectById(outReagentsAO.getReagentsId());
             if (ObjectUtil.isNotEmpty(reagents) && reagents.getInOut() == YNEnum.NO.getCode()) {
                 reagents.setInOut(YNEnum.NO.getCode());
-                reagents.setUpdateTime(currentDateTime);
+                reagents.setModifiedTime(currentDateTime);
                 wmsReagentsList.add(reagents);
             } else {
                 outFailedReagentsList.add(reagents.getId());
@@ -282,7 +280,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             User currentUser = SecurityUtils.getCurrentUser();
             record.setOperatorId(currentUser.getStudentId());
             record.setOperator(currentUser.getUsername());
-            record.setCreate_time(DateUtils.getCurrentDateTime());
+            record.setCreateTime(DateUtils.getCurrentDateTime());
             wmsStocktakingRecordList.add(record);
         }
         wmsStocktakingRecordMapper.batchInsertStocktakingRecord(wmsStocktakingRecordList);

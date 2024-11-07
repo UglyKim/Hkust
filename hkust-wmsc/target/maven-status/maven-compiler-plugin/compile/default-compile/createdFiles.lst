@@ -3,6 +3,7 @@ com/hkust/WmscApplication.class
 com/hkust/wmsc/controller/OptLogController.class
 com/hkust/wmsc/config/OpenApiConfig.class
 com/hkust/wmsc/dto/ao/StocktakingRecordResultAO.class
+com/hkust/wmsc/dto/ao/EditCabinetAO.class
 com/hkust/wmsc/service/VideoService.class
 com/hkust/wmsc/struct/MapStruct.class
 com/hkust/wmsc/controller/VideoController.class
@@ -10,9 +11,11 @@ com/hkust/wmsc/dto/vo/InOutBoundStatisticsVO.class
 com/hkust/wmsc/dto/vo/StocktakingVO.class
 com/hkust/wmsc/struct/structmapper/WmsInOutRecordStructMapperImpl.class
 com/hkust/wmsc/struct/structmapper/WmsOptLogStructMapper.class
+com/hkust/wmsc/dto/vo/UserVO.class
 com/hkust/wmsc/dto/vo/InOutboundVO.class
 com/hkust/wmsc/struct/structmapper/WmscReagentsStructMapper.class
 com/hkust/wmsc/struct/structmapper/WmsOptLogStructMapperImpl.class
+com/hkust/wmsc/service/UserService.class
 com/hkust/wmsc/dto/vo/ReagentsVO.class
 com/hkust/wmsc/dto/ao/OptLogQueryAO.class
 com/hkust/wmsc/dto/ao/ExpReagentsQueryAO.class
@@ -32,6 +35,7 @@ com/hkust/wmsc/service/impl/ReagentsServiceImpl.class
 com/hkust/wmsc/dto/vo/InOutBoundStatisticsVO$InOutBoundStatisticsVOBuilder.class
 com/hkust/wmsc/service/ReagentsService.class
 com/hkust/wmsc/dto/ao/InOutboundAO.class
+com/hkust/wmsc/controller/UserController.class
 com/hkust/wmsc/service/WmsInOutRecordService.class
 com/hkust/wmsc/struct/structmapper/WmscReagentsStructMapperImpl.class
 com/hkust/wmsc/struct/structmapper/WmscCabinetStructMapper.class

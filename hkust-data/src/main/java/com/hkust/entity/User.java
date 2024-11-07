@@ -55,8 +55,8 @@ public class User {
     @TableField("create_time")
     private LocalDateTime createTime;
 
-    @TableField("update_time")
-    private LocalDateTime updateTime;
+    @TableField("modified_time")
+    private LocalDateTime modifiedTime;
 
     @TableField("add_ch")
     private String addCh;

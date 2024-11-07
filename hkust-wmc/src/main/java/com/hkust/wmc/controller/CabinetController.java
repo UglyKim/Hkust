@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "仓储智能柜管理")
+import javax.validation.Valid;
+
+@Tag(name = "智能仓储柜")
 @RestController
 @RequestMapping("/wmc/v1/cabinet")
 @Slf4j
@@ -46,7 +48,7 @@ public class CabinetController {
 
     @Operation(summary = "编辑智能柜")
     @PostMapping("/edit")
-    public ApiResponse editCabinet(@RequestBody EditCabinetAO editCabinetAO) {
+    public ApiResponse editCabinet(@Valid @RequestBody EditCabinetAO editCabinetAO) {
         log.info("received alter cabinet info:{}", JSONUtil.toJsonPrettyStr(editCabinetAO));
         return cabinetService.edieCabinet(editCabinetAO);
     }

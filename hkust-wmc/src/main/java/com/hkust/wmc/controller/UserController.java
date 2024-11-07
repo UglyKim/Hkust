@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Tag(name = "用户管理")
+@Tag(name = "用户")
 @RestController
 @RequestMapping("/wmc/v1/user")
 @Slf4j
