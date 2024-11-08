@@ -1,10 +1,13 @@
 package com.hkust.wmsc.controller;
 
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.utils.EnumToJsonUtils;
+import com.hkust.wmsc.dto.PageResponse;
 import com.hkust.wmsc.dto.ao.OptLogQueryAO;
+import com.hkust.wmsc.dto.vo.WmsOptLogVO;
 import com.hkust.wmsc.service.OptLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 //@Deprecated
 @Tag(name = "操作日志")
@@ -26,29 +30,23 @@ public class OptLogController {
 
     @Operation(summary = "操作类型")
     @PostMapping("/type")
-    public ApiResponse optTypeList() {
+    private ApiResponse<List<ObjectNode>> optTypeList() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OptTypeEnum.class));
     }
 
     @Operation(summary = "操作日志详情")
     @PostMapping("/info")
-    public ApiResponse optInfo(@RequestParam String optId) {
+    private ApiResponse<WmsOptLogVO> optInfo(@RequestParam String optId) {
         log.info("received opt ID: {}", optId);
         return optLogService.optLogDetail(optId);
     }
 
     @Operation(summary = "操作日志列表")
     @PostMapping("/list")
-    public ApiResponse optList(@Valid @RequestBody OptLogQueryAO optLogQueryAO) {
+    private ApiResponse<PageResponse<WmsOptLogVO>> optList(@Valid @RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received query operation log params:{}", optLogQueryAO);
         return optLogService.getReagentsOptLogList(optLogQueryAO);
     }
-
-//    @Operation(summary = "操作日志查询")
-//    @RequestMapping("/search")
-//    public ApiResponse searchOptList() {
-//        return null;
-//    }
 
     @Autowired
     public void setOptLogService(OptLogService optLogService) {

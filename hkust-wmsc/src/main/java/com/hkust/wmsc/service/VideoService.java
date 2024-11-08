@@ -34,7 +34,7 @@ public class VideoService {
     private String serverAddress;
 
 
-    public ApiResponse videoUpload(MultipartFile file) {
+    public ApiResponse<Void> videoUpload(MultipartFile file) {
 
         if (file.isEmpty()) {
             return ApiResponse.failed(ReturnCode.FILE_IS_EMPTY);

@@ -22,27 +22,25 @@ public class ApiResponse<T> implements Serializable {
     @Schema
     private T data;
 
-
-    /**
-     * 成功
-     *
-     * @param <T>
-     * @return
-     */
-    public static <T> ApiResponse success() {
-        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), null);
+    public ApiResponse(String code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
-    public static <T> ApiResponse success(T data) {
-        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), data);
+    public static <T> ApiResponse<T> success() {
+        return new ApiResponse<>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), null);
     }
 
-    public static <T> ApiResponse failed(ReturnCode returnCode) {
-        return new ApiResponse<T>(returnCode.getCode(), returnCode.getMessage(), null);
+    public static <T> ApiResponse<T> success(T data) {
+        return new ApiResponse<>(ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getMessage(), data);
     }
 
-    public static <T> ApiResponse failed(String msg) {
-        return new ApiResponse<T>(ReturnCode.SUCCESS.getCode(), msg, null);
+    public static <T> ApiResponse<T> failed(ReturnCode returnCode) {
+        return new ApiResponse<>(returnCode.getCode(), returnCode.getMessage(), null);
+    }
+
+    public static <T> ApiResponse<T> failed(String msg) {
+        return new ApiResponse<>(ReturnCode.SUCCESS.getCode(), msg, null);
     }
 
     @Override

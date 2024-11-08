@@ -2,8 +2,10 @@ package com.hkust.wmsc.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
-import com.hkust.wmsc.dto.ao.InOutboundAO;
+import com.hkust.wmsc.dto.PageResponse;
 import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
+import com.hkust.wmsc.dto.vo.InOutBoundStatisticsVO;
+import com.hkust.wmsc.dto.vo.InOutboundVO;
 import com.hkust.wmsc.dto.vo.MainPageStaticsVO;
 import com.hkust.wmsc.service.StatisticsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,32 +26,32 @@ public class StatisticsController {
 
     @Operation(summary = "首页-试剂统计")
     @PostMapping("/reagents")
-    public ApiResponse reagentsStatistics(@RequestParam String cabinetId) {
+    private ApiResponse<MainPageStaticsVO> reagentsStatistics(@RequestParam String cabinetId) {
         return statisticsService.totalStats(cabinetId);
     }
 
     @Operation(summary = "入库统计")
     @PostMapping("/inbound")
-    public ApiResponse inboundStatistics() {
-        return statisticsService.inboundRecordStats();
+    private ApiResponse<InOutBoundStatisticsVO> inboundStatistics(@RequestParam String cabinetId) {
+        return statisticsService.inboundRecordStats(cabinetId);
     }
 
     @Operation(summary = "出库统计")
     @PostMapping("/outbound")
-    public ApiResponse outboundStatistics() {
-        return statisticsService.outboundRecordStats();
+    private ApiResponse<InOutBoundStatisticsVO> outboundStatistics(@RequestParam String cabinetId) {
+        return statisticsService.outboundRecordStats(cabinetId);
     }
 
     @Operation(summary = "入库列表查询")
     @PostMapping("/inbound/list")
-    public ApiResponse inboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
+    private ApiResponse<PageResponse<InOutboundVO>> inboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }
 
     @Operation(summary = "出库列表查询")
     @PostMapping("/outbound/list")
-    public ApiResponse outboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
+    private ApiResponse<PageResponse<InOutboundVO>> outboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }

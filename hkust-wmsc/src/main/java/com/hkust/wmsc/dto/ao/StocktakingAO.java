@@ -2,15 +2,17 @@ package com.hkust.wmsc.dto.ao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
+@Data
 @Schema(description = "盘点")
+@AllArgsConstructor
 public class StocktakingAO implements Serializable {
 
     private static final long serialVersionUID = 555533115990009989L;

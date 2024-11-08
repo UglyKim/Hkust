@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.wms.WmsInOutRecord;
-import com.hkust.enums.OptTypeEnum;
+import com.hkust.entity.wms.WmsReagents;
 import com.hkust.mapper.wmsc.WmsInOutRecordMapper;
 import com.hkust.mapper.wmsc.WmsReagentsMapper;
 import com.hkust.wmsc.dto.PageResponse;
@@ -27,16 +27,17 @@ import java.util.List;
 @Slf4j
 public class StatisticsService {
 
-    private WmsReagentsMapper reagentsMapper;
+    private WmsReagentsMapper wmsReagentsMapper;
 
-    private WmsInOutRecordMapper inOutRecordMapper;
+    private WmsInOutRecordMapper wmsInOutRecordMapper;
 
     private InOutRecordServiceImpl inOutRecordService;
 
-    public ApiResponse totalStats(String cabinetId) {
+    public ApiResponse<MainPageStaticsVO> totalStats(String cabinetId) {
         // 试剂总数
-        QueryWrapper wrapper = new QueryWrapper();
-        Long total = reagentsMapper.selectCount(wrapper);
+        QueryWrapper<WmsReagents> wrapper = new QueryWrapper<>();
+        wrapper.eq("cabinet_id", cabinetId);
+        Long total = wmsReagentsMapper.selectCount(wrapper);
         Long inThisMonthTotal = inOutRecordService.getThisMonthInbound();
         Long outThisMonthTotal = inOutRecordService.getThisMonthOutbound();
 
@@ -48,88 +49,44 @@ public class StatisticsService {
         return ApiResponse.success(mainPageStaticsVO);
     }
 
-    public ApiResponse outboundRecordStats() {
+    public ApiResponse<InOutBoundStatisticsVO> outboundRecordStats(String cabinetId) {
         // 总数
-        QueryWrapper queryWrapper = new QueryWrapper();
-        Long total = reagentsMapper.selectCount(queryWrapper);
+        QueryWrapper<WmsReagents> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("cabinet_id", cabinetId);
+        Long total = wmsReagentsMapper.selectCount(queryWrapper);
         // 本月入库总数
         Long inThisMonthTotal = inOutRecordService.getThisMonthOutbound();
         InOutBoundStatisticsVO vo = InOutBoundStatisticsVO.builder().totalCount(total.intValue()).inOutCount(inThisMonthTotal.intValue()).build();
         return ApiResponse.success(vo);
     }
 
-    public ApiResponse inboundRecordStats() {
+    public ApiResponse<InOutBoundStatisticsVO> inboundRecordStats(String cabinetId) {
         // 总数
-        QueryWrapper queryWrapper = new QueryWrapper();
-        Long total = reagentsMapper.selectCount(queryWrapper);
+        QueryWrapper<WmsReagents> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("cabinet_id", cabinetId);
+        Long total = wmsReagentsMapper.selectCount(queryWrapper);
         // 本月入库总数
         Long inThisMonthTotal = inOutRecordService.getThisMonthInbound();
         InOutBoundStatisticsVO vo = InOutBoundStatisticsVO.builder().totalCount(total.intValue()).inOutCount(inThisMonthTotal.intValue()).build();
         return ApiResponse.success(vo);
-        /*
-        QueryWrapper<WmsInOutRecord> warpper = new QueryWrapper<>();
-
-        String type = inOutboundAO.getType();
-        if (type.equals("in")) {
-            warpper.eq("type", "in");
-            warpper.between("in_time", inOutboundAO.getStartDate(), inOutboundAO.getEndDate());
-        } else {
-            warpper.eq("type", "out");
-            warpper.between("out_time", inOutboundAO.getStartDate(), inOutboundAO.getEndDate());
-        }
-        // 入库 - 时间区间
-        Long inTotal = inOutRecordMapper.selectCount(warpper);
-
-
-        //查询列表
-        if (ObjectUtil.isNotEmpty(inOutboundAO.getName())) {
-            warpper.like("reagents_name", inOutboundAO.getName());
-        }
-        warpper.groupBy("name", "specification");
-        if (type.equals("in")) {
-            warpper.orderByDesc("in_time");
-        } else {
-            warpper.orderByDesc("out_time");
-        }
-        Page<WmsInOutRecord> page = new Page(inOutboundAO.getPageNum(), inOutboundAO.getPageSize());
-        IPage iPage = inOutRecordMapper.selectPage(page, warpper);
-        List<WmsInOutRecord> records = page.getRecords();
-
-        if (CollUtil.isEmpty(records)) {
-            PageResponse pageResponse = new PageResponse(inOutboundAO.getPageNum(), inOutboundAO.getPageSize(), iPage.getTotal(), null);
-            return ApiResponse.success(pageResponse);
-        }
-        List<InOutboundVO> inboundVOList = new ArrayList<>();
-        for (WmsInOutRecord record : records) {
-            InOutboundVO inboundVO = new InOutboundVO();
-            inboundVO.setName(record.getReagentsName());
-            inboundVO.setGHS(record.getGhs());
-            inboundVO.setInTime(record.getOptTime());
-            inboundVO.setCount("1");
-            inboundVOList.add(inboundVO);
-        }
-
-        PageResponse pageResponse = new PageResponse(inOutboundAO.getPageNum(), inOutboundAO.getPageSize(), iPage.getTotal(), inboundVOList);
-        */
     }
 
     /**
      * 出入库列表查询
-     *
-     * @param reagentsQueryAO
-     * @return
+     * @param reagentsQueryAO 查询
+     * @return  ApiResponse<PageResponse>
      */
-    public ApiResponse<PageResponse> inOutBoundRecordList(ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse<InOutboundVO>> inOutBoundRecordList(ReagentsQueryAO reagentsQueryAO) {
         QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         if (ObjUtil.isNotEmpty(reagentsQueryAO.getName())) {
             wrapper.like("reagents_name", reagentsQueryAO.getName());
         }
-        wrapper.eq("type", reagentsQueryAO.getType());
-        Page<WmsInOutRecord> page = new Page(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize());
-        IPage iPage = inOutRecordMapper.selectPage(page, wrapper);
+        wrapper.eq("type", reagentsQueryAO.getInOut());
+        Page<WmsInOutRecord> page = new Page<>(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize());
+        IPage<WmsInOutRecord> iPage = wmsInOutRecordMapper.selectPage(page, wrapper);
         List<WmsInOutRecord> records = iPage.getRecords();
         if (CollUtil.isEmpty(records)) {
-            PageResponse pageResponse = new PageResponse(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize(), iPage.getTotal(), null);
+            PageResponse<InOutboundVO> pageResponse = new PageResponse<>(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize(), iPage.getTotal(), null);
             return ApiResponse.success(pageResponse);
         }
         List<InOutboundVO> inOutboundVOList = new ArrayList<>();
@@ -141,18 +98,18 @@ public class StatisticsService {
             inOutboundVO.setCount("1");
             inOutboundVOList.add(inOutboundVO);
         }
-        PageResponse pageResponse = new PageResponse(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize(), iPage.getTotal(), inOutboundVOList);
+        PageResponse<InOutboundVO> pageResponse = new PageResponse<>(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize(), iPage.getTotal(), inOutboundVOList);
         return ApiResponse.success(pageResponse);
     }
 
     @Autowired
-    public void setReagentsMapper(WmsReagentsMapper reagentsMapper) {
-        this.reagentsMapper = reagentsMapper;
+    public void setWmsReagentsMapper(WmsReagentsMapper wmsReagentsMapper) {
+        this.wmsReagentsMapper = wmsReagentsMapper;
     }
 
     @Autowired
-    public void setInOutRecordMapper(WmsInOutRecordMapper inOutRecordMapper) {
-        this.inOutRecordMapper = inOutRecordMapper;
+    public void setWmsInOutRecordMapper(WmsInOutRecordMapper wmsInOutRecordMapper) {
+        this.wmsInOutRecordMapper = wmsInOutRecordMapper;
     }
 
     @Autowired

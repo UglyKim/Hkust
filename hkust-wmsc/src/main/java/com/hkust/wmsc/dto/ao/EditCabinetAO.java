@@ -1,14 +1,15 @@
 package com.hkust.wmsc.dto.ao;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@Getter
+@Data
 @Schema(description = "智能柜编辑")
+@AllArgsConstructor
 public class EditCabinetAO implements Serializable {
 
     private static final long serialVersionUID = 888896533990009989L;

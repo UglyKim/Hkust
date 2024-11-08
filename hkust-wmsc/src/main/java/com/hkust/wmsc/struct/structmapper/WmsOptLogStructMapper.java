@@ -1,7 +1,6 @@
 package com.hkust.wmsc.struct.structmapper;
 
 import com.hkust.entity.wms.WmsOptLog;
-import com.hkust.wmsc.dto.vo.OptLogVO;
 import com.hkust.wmsc.dto.vo.WmsOptLogVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

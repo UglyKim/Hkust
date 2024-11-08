@@ -2,15 +2,16 @@ package com.hkust.wmsc.dto.ao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
+@Data
 @Schema(description = "入库试剂信息")
+@AllArgsConstructor
 public class InReagentsAO implements Serializable {
 
     private static final long serialVersionUID = 892955555998330109L;
@@ -73,7 +74,7 @@ public class InReagentsAO implements Serializable {
     @Schema(description = "到期日")
     @NotNull(message = "请输入到期日期")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    private LocalDate expiration_date;
+    private LocalDate expirationDate;
 
     @Schema(description = "化学品危险属性")
     private String hazardProps;

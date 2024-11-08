@@ -37,10 +37,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -54,7 +51,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
 
     private WmsStocktakingRecordMapper wmsStocktakingRecordMapper;
 
-    public ApiResponse findReagents(String reagentsId) {
+    public ApiResponse<ReagentsVO> findReagents(String reagentsId) {
         WmsReagents reagents = wmsReagentsMapper.selectById(reagentsId);
         if (ObjectUtil.isEmpty(reagents)) {
             return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
@@ -63,14 +60,15 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         return ApiResponse.success(reagentsVO);
     }
 
-    public ApiResponse<PageResponse> findReagentsList(ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse<ReagentsVO>> findReagentsList(ReagentsQueryAO reagentsQueryAO) {
 
         Page<WmsReagents> page = new Page<>(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize());
-        QueryWrapper wrapper = new QueryWrapper();
+        QueryWrapper<WmsReagents> wrapper = new QueryWrapper<>();
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getName())) {
             wrapper.like("name", reagentsQueryAO.getName());
         }
-        wrapper.gt("expiration_date", DateUtils.getCurrentDate());
+        wrapper.eq("in_out", reagentsQueryAO.getInOut());
+        wrapper.ge("expiration_date", DateUtils.getCurrentDate());
         wrapper.orderByAsc("expiration_date");
         IPage<WmsReagents> reagentsIPage = wmsReagentsMapper.selectPage(page, wrapper);
 
@@ -84,17 +82,17 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             LocalDate currentDate = DateUtils.getCurrentDate();
             long dayBetween = ChronoUnit.DAYS.between(expirationDate, currentDate);
             ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
-            reagentsVO.setIsExp(dayBetween < 30 ? true : false);
+            reagentsVO.setIsExp(dayBetween < 30);
             reagentsVOList.add(reagentsVO);
         }
         // 重新排序
-        reagentsVOList.sort(Comparator.comparing((ReagentsVO vo) -> !vo.getIsExp()
-        ).thenComparing(vo -> vo.getExpirationDate()));
-        PageResponse pageResponse = new PageResponse(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize(), reagentsIPage.getTotal(), reagentsVOList);
+        reagentsVOList.sort(Comparator.comparing(ReagentsVO::getIsExp, Comparator.reverseOrder())
+                .thenComparing(ReagentsVO::getExpirationDate));
+        PageResponse<ReagentsVO> pageResponse = new PageResponse<>(reagentsQueryAO.getPageNum(), reagentsQueryAO.getPageSize(), reagentsIPage.getTotal(), reagentsVOList);
         return ApiResponse.success(pageResponse);
     }
 
-    public ApiResponse inboundReagents(List<InReagentsAO> inReagentsAOList) {
+    public ApiResponse<String> inboundReagents(List<InReagentsAO> inReagentsAOList) {
         List<WmsReagents> wmsReagentsList = new ArrayList<>();
         LocalDateTime currentDateTime = DateUtils.getCurrentDateTime();
         List<String> failedReagentsList = new ArrayList<>();
@@ -102,14 +100,17 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             WmsReagents reagents = wmsReagentsMapper.selectById(inReagentsAO.getReagentsId());
             if (ObjectUtil.isNotEmpty(reagents)) {
                 failedReagentsList.add(reagents.getId());
-                continue;
+            } else {
+                WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.InReagentsAOToReagents(inReagentsAO);
+                wmsReagents.setId(inReagentsAO.getReagentsId());
+                wmsReagents.setCreateTime(currentDateTime);
+                wmsReagents.setInOut(YNEnum.YES.getCode());
+                wmsReagents.setCabinetId(inReagentsAO.getCabinetId());
+                wmsReagentsList.add(wmsReagents);
             }
-            WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.InReagentsAOToReagents(inReagentsAO);
-            wmsReagents.setId(inReagentsAO.getReagentsId());
-            wmsReagents.setCreateTime(currentDateTime);
-            wmsReagents.setInOut(YNEnum.YES.getCode());
-            wmsReagents.setCabinetId(inReagentsAO.getCabinetId());
-            wmsReagentsList.add(wmsReagents);
+        }
+        if (CollUtil.isEmpty(wmsReagentsList) && CollUtil.isNotEmpty(failedReagentsList)) {
+            return ApiResponse.failed("试剂" + failedReagentsList + "已经存在，请不要重复添加");
         }
         super.saveBatch(wmsReagentsList);
 
@@ -127,31 +128,35 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wmsInOutRecord.setSpecification(reagents.getSpecification()); //规格
             wmsInOutRecord.setCount(1);
             // 添加操作人
-            wmsInOutRecord.setOperatorId(user.getStudentId());
-            wmsInOutRecord.setOperator(user.getRealName());
+            wmsInOutRecord.setOperatorId(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
+            wmsInOutRecord.setOperator(Optional.ofNullable(user).map(User::getUsername).orElse(null));
             wmsInOutRecordList.add(wmsInOutRecord);
         }
         inOutRecordService.saveBatch(wmsInOutRecordList);
+
         // 添加日志
         WmsOptLog wmsOptLog = new WmsOptLog();
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
-        wmsOptLog.setOperatorId(user.getStudentId());
-        wmsOptLog.setOperator(user.getUsername());
+        wmsOptLog.setOperatorId(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
+        wmsOptLog.setOperator(Optional.ofNullable(user).map(User::getUsername).orElse(null));
         wmsOptLog.setType(OptTypeEnum.INBOUND.getCode());
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
 
-        return ApiResponse.success(failedReagentsList);
+        if (CollUtil.isEmpty(failedReagentsList)) {
+            return ApiResponse.success();
+        }
+        return ApiResponse.success("试剂" + failedReagentsList + "已经存在，请不要重复添加");
     }
 
-    public ApiResponse outboundReagents(List<OutReagentsAO> outReagentsAOListList) {
+    public ApiResponse<String> outboundReagents(List<OutReagentsAO> outReagentsAOListList) {
         List<String> outFailedReagentsList = new ArrayList<>();
         List<WmsReagents> wmsReagentsList = new ArrayList<>();
         LocalDateTime currentDateTime = DateUtils.getCurrentDateTime();
         for (OutReagentsAO outReagentsAO : outReagentsAOListList) {
             WmsReagents reagents = wmsReagentsMapper.selectById(outReagentsAO.getReagentsId());
-            if (ObjectUtil.isNotEmpty(reagents) && reagents.getInOut() == YNEnum.NO.getCode()) {
+            if (ObjectUtil.isNotEmpty(reagents) && reagents.getInOut().equals(YNEnum.NO.getCode())) {
                 reagents.setInOut(YNEnum.NO.getCode());
                 reagents.setModifiedTime(currentDateTime);
                 wmsReagentsList.add(reagents);
@@ -179,8 +184,8 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             }
             wmsInOutRecord.setCabinetId(reagents.getCabinetId());
             // 添加操作人
-            wmsInOutRecord.setOperatorId(user.getStudentId());
-            wmsInOutRecord.setOperator(user.getRealName());
+            wmsInOutRecord.setOperatorId(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
+            wmsInOutRecord.setOperator(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
             wmsInOutRecordList.add(wmsInOutRecord);
         }
         inOutRecordService.saveBatch(wmsInOutRecordList);
@@ -189,24 +194,24 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         WmsOptLog wmsOptLog = new WmsOptLog();
         wmsOptLog.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
-        wmsOptLog.setOperatorId(user.getStudentId());
-        wmsOptLog.setOperator(user.getUsername());
+        wmsOptLog.setOperatorId(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
+        wmsOptLog.setOperator(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
         wmsOptLog.setType(OptTypeEnum.OUTBOUND.getCode());
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
 
-        return ApiResponse.success(outFailedReagentsList);
+        return ApiResponse.success("试剂" + outFailedReagentsList + "已经存在，请不要重复添加");
 
     }
 
-    public ApiResponse getInOutboundReagentsDetail(String reagentsId) {
+    public ApiResponse<ReagentsVO> getInOutboundReagentsDetail(String reagentsId) {
         WmsReagents reagents = wmsReagentsMapper.selectById(reagentsId);
         Assert.notNull(reagents);
         ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
         return ApiResponse.success(reagentsVO);
     }
 
-    public ApiResponse getLogList() {
+    public ApiResponse<List<WmsInOutRecordVO>> getLogList() {
         List<WmsInOutRecord> optLogList = inOutRecordService.getLogs();
         if (CollUtil.isNotEmpty(optLogList)) {
             List<WmsInOutRecordVO> wmsOptLogVOList = new ArrayList<>();
@@ -219,13 +224,13 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         return ApiResponse.success();
     }
 
-    public ApiResponse<PageResponse> getExpReagentsList(ExpReagentsQueryAO expReagentsQueryAO) {
+    public ApiResponse<PageResponse<ReagentsVO>> getExpReagentsList(ExpReagentsQueryAO expReagentsQueryAO) {
         QueryWrapper<WmsReagents> wrapper = new QueryWrapper<>();
         LocalDate conditionDate = DateUtils.getCurrentDate().plusDays(30);
         wrapper.le("expiration_date", conditionDate);
         wrapper.orderByAsc("expiration_date");
-        Page page = new Page(expReagentsQueryAO.getPageNum(), expReagentsQueryAO.getPageSize());
-        IPage iPage = wmsReagentsMapper.selectPage(page, wrapper);
+        Page<WmsReagents> page = new Page<>(expReagentsQueryAO.getPageNum(), expReagentsQueryAO.getPageSize());
+        IPage<WmsReagents> iPage = wmsReagentsMapper.selectPage(page, wrapper);
         if (CollUtil.isEmpty(iPage.getRecords())) {
             return ApiResponse.success();
         }
@@ -235,11 +240,11 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
             reagentsVOList.add(reagentsVO);
         }
-        PageResponse pageResponse = new PageResponse(expReagentsQueryAO.getPageNum(), expReagentsQueryAO.getPageSize(), iPage.getTotal(), reagentsVOList);
+        PageResponse<ReagentsVO> pageResponse = new PageResponse<>(expReagentsQueryAO.getPageNum(), expReagentsQueryAO.getPageSize(), iPage.getTotal(), reagentsVOList);
         return ApiResponse.success(pageResponse);
     }
 
-    public ApiResponse<PageResponse> stocktakingReagents(StocktakingAO stocktakingAO) {
+    public ApiResponse<PageResponse<StocktakingVO>> stocktakingReagents(StocktakingAO stocktakingAO) {
 
         Long total = wmsReagentsMapper.selectCount(new QueryWrapper<>());
         LocalDate startDate = stocktakingAO.getStartDate();
@@ -263,23 +268,25 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             vo.setTotalCount(String.valueOf(totalCount));
             stocktakingVOList.add(vo);
         }
-        PageResponse pageResponse = new PageResponse(stocktakingAO.getPageNum(), stocktakingAO.getPageSize(), total, stocktakingVOList);
+        PageResponse<StocktakingVO> pageResponse = new PageResponse<>(stocktakingAO.getPageNum(), stocktakingAO.getPageSize(), total, stocktakingVOList);
         return ApiResponse.success(pageResponse);
     }
 
-    public ApiResponse recordResult(List<StocktakingRecordResultAO> stocktakingRecordResultAOList) {
+    public ApiResponse<Void> recordResult(List<StocktakingRecordResultAO> stocktakingRecordResultAOList) {
         if (ObjectUtil.isEmpty(stocktakingRecordResultAOList)) {
-            return ApiResponse.success(ReturnCode.NOT_NULL);
+            return ApiResponse.failed(ReturnCode.NOT_NULL);
         }
         List<WmsStocktakingRecord> wmsStocktakingRecordList = new ArrayList<>();
         for (StocktakingRecordResultAO ao : stocktakingRecordResultAOList) {
             WmsStocktakingRecord record = new WmsStocktakingRecord();
             record.setId(UUIDUtils.generateUUIDWithoutHyphens());
             record.setName(ao.getName());
+//            record.setCount(Integer.valueOf(ao.getTotalCount()));
             record.setCount(Integer.valueOf(ao.getTotalCount()));
             User currentUser = SecurityUtils.getCurrentUser();
-            record.setOperatorId(currentUser.getStudentId());
-            record.setOperator(currentUser.getUsername());
+//            record.setOperatorId(currentUser.getStudentId());
+            record.setOperatorId(Optional.ofNullable(currentUser).map(User::getStudentId).orElse(null));
+            record.setOperator(Optional.ofNullable(currentUser).map(User::getUsername).orElse(null));
             record.setCreateTime(DateUtils.getCurrentDateTime());
             wmsStocktakingRecordList.add(record);
         }

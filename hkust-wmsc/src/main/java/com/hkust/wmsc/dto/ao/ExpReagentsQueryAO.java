@@ -1,14 +1,15 @@
 package com.hkust.wmsc.dto.ao;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Getter
+@Data
 @Schema(description = "临期查询")
+@AllArgsConstructor
 public class ExpReagentsQueryAO implements Serializable {
 
     private static final long serialVersionUID = 666676555990009989L;

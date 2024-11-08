@@ -1,6 +1,7 @@
 package com.hkust.wmsc.controller;
 
 import com.hkust.dto.ApiResponse;
+import com.hkust.wmsc.dto.vo.UserVO;
 import com.hkust.wmsc.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,13 +22,13 @@ public class UserController {
 
     @Operation(summary = "用户详情")
     @PostMapping("/detail")
-    public ApiResponse getUserInfo() {
+    private ApiResponse<UserVO> getUserInfo() {
         return userService.getUserInfo();
     }
 
     @Operation(summary = "修改密码")
     @PostMapping("/alter/passwd")
-    public ApiResponse alterUserPassword(@RequestParam String passwd) {
+    private ApiResponse<Void> alterUserPassword(@RequestParam String passwd) {
         log.info("received passwd:{}", passwd);
         return userService.alterUserPassword(passwd);
     }

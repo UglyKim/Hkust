@@ -2,15 +2,17 @@ package com.hkust.wmsc.dto.ao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
+@Data
 @Schema(description = "查询试剂信息表单内容- 统计")
+@AllArgsConstructor
 public class ReagentsQueryAO implements Serializable {
 
     private static final long serialVersionUID = 987755555990009989L;
@@ -35,7 +37,8 @@ public class ReagentsQueryAO implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate endDate;
 
-    @Schema(description = "出入库 in:1 out:2")
-    private String type;
+    @Schema(description = "是否在库 in:1 out:2")
+    @NotNull(message = "请输入是否在库类型")
+    private String inOut;
 
 }

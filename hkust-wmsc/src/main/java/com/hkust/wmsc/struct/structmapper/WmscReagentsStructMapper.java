@@ -14,8 +14,6 @@ public interface WmscReagentsStructMapper {
 
     WmsReagents InReagentsAOToReagents(InReagentsAO inReagentsAO);
 
-    WmsReagents OutReagentsAOToReagents(OutReagentsAO outReagentsAO);
-
     ReagentsVO ReagentsToReagentsVO(WmsReagents wmsReagents);
 }
 

@@ -2,7 +2,9 @@ package com.hkust.wmc.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.hkust.dto.ApiResponse;
+import com.hkust.enums.InOutEnumType;
 import com.hkust.enums.OptTypeEnum;
+import com.hkust.enums.PhysicalStateEnum;
 import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmc.dto.ao.AddReagentsAO;
 import com.hkust.wmc.dto.ao.AlterReagentsAO;
@@ -23,6 +25,18 @@ import javax.validation.Valid;
 public class ReagentsController {
 
     private ReagentsService reagentsService;
+
+    @Operation(summary = "物理状态类型")
+    @PostMapping("/physical_state")
+    public ApiResponse getPhysicalState() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(PhysicalStateEnum.class));
+    }
+
+    @Operation(summary = "是否在库类型")
+    @PostMapping("/in_stock")
+    public ApiResponse getIsInOut() {
+        return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(InOutEnumType.class));
+    }
 
     @Operation(summary = "试剂列表-顶部统计")
     @PostMapping("/statistics")

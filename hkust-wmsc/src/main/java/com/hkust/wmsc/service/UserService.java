@@ -10,10 +10,11 @@ import com.hkust.security.SecurityUtils;
 import com.hkust.wmsc.dto.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -24,23 +25,23 @@ public class UserService {
 
     private PasswordEncoder BCryptPasswordEncoder;
 
-    public ApiResponse getUserInfo() {
+    public ApiResponse<UserVO> getUserInfo() {
         User currentUser = SecurityUtils.getCurrentUser();
         if (ObjectUtil.isEmpty(currentUser)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         UserVO userVO = new UserVO();
-        userVO.setUserName(currentUser.getUsername());
-        userVO.setStudentId(currentUser.getStudentId());
-        return ApiResponse.success(currentUser);
+        userVO.setUserName(Optional.ofNullable(currentUser).map(User::getUsername).orElse(null));
+        userVO.setStudentId(Optional.ofNullable(currentUser).map(User::getStudentId).orElse(null));
+        return ApiResponse.success(userVO);
     }
 
-    public ApiResponse alterUserPassword(String password) {
+    public ApiResponse<Void> alterUserPassword(String password) {
         User currentUser = SecurityUtils.getCurrentUser();
         if (ObjectUtil.isEmpty(currentUser)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
-        currentUser = userMapper.selectByStudentId(currentUser.getStudentId());
+        currentUser = userMapper.selectByStudentId(Optional.ofNullable(currentUser).map(User::getStudentId).orElse(null));
         currentUser.setPassword(BCryptPasswordEncoder.encode(password));
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("student_id", currentUser.getStudentId());

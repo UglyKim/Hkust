@@ -20,7 +20,7 @@ public class WmsInOutRecordVO {
     @Schema(description = "试剂编号")
     private String reagentsId;
 
-    @Schema(description = "")
+    @Schema(description = "试剂名称")
     private String reagentsName;
 
     @Schema(description = "规格")

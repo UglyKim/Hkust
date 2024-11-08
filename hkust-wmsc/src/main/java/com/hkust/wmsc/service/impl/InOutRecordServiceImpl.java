@@ -1,14 +1,10 @@
 package com.hkust.wmsc.service.impl;
 
-import cn.hutool.core.util.ObjUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hkust.entity.wms.WmsInOutRecord;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.mapper.wmsc.WmsInOutRecordMapper;
-import com.hkust.wmsc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmsc.service.WmsInOutRecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +23,15 @@ public class InOutRecordServiceImpl extends ServiceImpl<WmsInOutRecordMapper, Wm
     public List<WmsInOutRecord> getLogs() {
         QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         wrapper.orderByAsc("opt_time");
-        List<WmsInOutRecord> wmsInOutRecordList = wmsInOutRecordMapper.selectList(wrapper);
-        return wmsInOutRecordList;
+        return wmsInOutRecordMapper.selectList(wrapper);
     }
 
     /**
      * 当月总入库
-     *
-     * @return
+     * @return count
      */
     public Long getThisMonthInbound() {
-        QueryWrapper wrapper = new QueryWrapper();
+        QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         wrapper.eq("type", OptTypeEnum.INBOUND.getCode());
         // 获取当前日期
         LocalDate today = LocalDate.now();
@@ -46,18 +40,16 @@ public class InOutRecordServiceImpl extends ServiceImpl<WmsInOutRecordMapper, Wm
         // 获取当前月的最后一天
         LocalDateTime endOfMonth = today.withDayOfMonth(today.lengthOfMonth()).atTime(23, 59, 59); // 当月最后一天的结束时间
         wrapper.between("opt_time", startOfMonth, endOfMonth);
-        Long count = wmsInOutRecordMapper.selectCount(wrapper);
-
-        return count;
+        return wmsInOutRecordMapper.selectCount(wrapper);
     }
 
     /**
      * 当月总出库
      *
-     * @return
+     * @return count
      */
     public Long getThisMonthOutbound() {
-        QueryWrapper wrapper = new QueryWrapper();
+        QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         wrapper.eq("type", OptTypeEnum.OUTBOUND.getCode());
         // 获取当前日期
         LocalDate today = LocalDate.now();
@@ -66,8 +58,7 @@ public class InOutRecordServiceImpl extends ServiceImpl<WmsInOutRecordMapper, Wm
         // 获取当前月的最后一天
         LocalDateTime endOfMonth = today.withDayOfMonth(today.lengthOfMonth()).atTime(23, 59, 59); // 当月最后一天的结束时间
         wrapper.between("opt_time", startOfMonth, endOfMonth);
-        Long count = wmsInOutRecordMapper.selectCount(wrapper);
-        return count;
+        return wmsInOutRecordMapper.selectCount(wrapper);
     }
 
     @Autowired

@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum ReagentsOptTypeEnum {
 
-    TAKE("1", "取"),
-    RETURN("2", "还");
+    TAKE("1", "入库"),
+    RETURN("2", "出库");
 
     private String code;
 

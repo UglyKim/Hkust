@@ -25,9 +25,9 @@ public class CabinetService {
 
     private WmsCabinetMapper wmsCabinetMapper;
 
-    public ApiResponse getCabinetList() {
+    public ApiResponse<List<CabinetVO>> getCabinetList() {
 
-        QueryWrapper<WmsCabinet> wrapper = new QueryWrapper();
+        QueryWrapper<WmsCabinet> wrapper = new QueryWrapper<>();
         List<WmsCabinet> cabinetList = wmsCabinetMapper.selectList(wrapper);
         if (CollUtil.isEmpty(cabinetList)) {
             log.warn(ReturnCode.CABINET_IS_NULL.getMessage());
@@ -41,17 +41,17 @@ public class CabinetService {
         return ApiResponse.success(cabinetVOList);
     }
 
-    public ApiResponse getCabinetDetail(String cabinetId) {
+    public ApiResponse<CabinetVO> getCabinetDetail(String cabinetId) {
         WmsCabinet wmsCabinet = wmsCabinetMapper.selectById(cabinetId);
         if (ObjectUtil.isEmpty(wmsCabinet)) {
-            return ApiResponse.success(ReturnCode.CABINET_IS_NULL);
+            return ApiResponse.success();
         }
         CabinetVO cabinetVO = WmscCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
         cabinetVO.setState(CabinetStateEnum.fromCode(wmsCabinet.getState()));
         return ApiResponse.success(cabinetVO);
     }
 
-    public ApiResponse edieCabinet(EditCabinetAO editCabinetAO) {
+    public ApiResponse<Void> edieCabinet(EditCabinetAO editCabinetAO) {
         if (ObjectUtil.isEmpty(editCabinetAO.getCabinetId())) {
             return ApiResponse.failed(ReturnCode.CABINET_ID_NOT_NULL);
         }
