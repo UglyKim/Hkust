@@ -2,7 +2,6 @@ package com.hkust.wmsc.struct.structmapper;
 
 import com.hkust.entity.wms.WmsReagents;
 import com.hkust.wmsc.dto.ao.InReagentsAO;
-import com.hkust.wmsc.dto.ao.OutReagentsAO;
 import com.hkust.wmsc.dto.vo.ReagentsVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

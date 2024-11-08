@@ -2,16 +2,17 @@ package com.hkust.wmc.dto.ao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
+@Data
 @Schema(description = "查询试剂列表")
+@AllArgsConstructor
 public class ReagentsQueryAO implements Serializable {
 
     private static final long serialVersionUID = 331198760000005679L;

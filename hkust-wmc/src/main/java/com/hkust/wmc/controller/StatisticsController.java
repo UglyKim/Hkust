@@ -1,6 +1,7 @@
 package com.hkust.wmc.controller;
 
 import com.hkust.dto.ApiResponse;
+import com.hkust.wmc.dto.vo.StatisticsInOutBoundVO;
 import com.hkust.wmc.service.StatisticsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Tag(name = "首页")
 @RestController
@@ -20,7 +23,7 @@ public class StatisticsController {
 
     @Operation(summary = "月度出入库统计")
     @PostMapping("/inoutbound")
-    public ApiResponse monthInOutBoundStat() {
+    private ApiResponse<List<StatisticsInOutBoundVO>> monthInOutBoundStat() {
         return statisticsService.monthInoutBoundStatistics();
     }
 

@@ -1,15 +1,16 @@
 package com.hkust.wmc.dto.ao;
 
 import com.hkust.enums.GenderEnum;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Getter
+@Data
 @Schema(description = "修改用户信息")
+@AllArgsConstructor
 public class AlterUserAO implements Serializable {
 
     private static final long serialVersionUID = 892099900008888669L;

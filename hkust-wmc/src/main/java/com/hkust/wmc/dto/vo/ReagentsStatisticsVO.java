@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Schema(description = "试剂列表-顶部统计")

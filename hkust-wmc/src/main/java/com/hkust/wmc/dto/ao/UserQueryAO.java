@@ -2,15 +2,16 @@ package com.hkust.wmc.dto.ao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
+@Data
 @Schema(description = "用户列表查询")
+@AllArgsConstructor
 public class UserQueryAO implements Serializable {
 
     private static final long serialVersionUID = 233333555998330109L;

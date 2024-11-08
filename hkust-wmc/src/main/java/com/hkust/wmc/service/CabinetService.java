@@ -11,7 +11,6 @@ import com.hkust.entity.wms.WmsCabinet;
 import com.hkust.enums.CabinetStateEnum;
 import com.hkust.mapper.wmsc.WmsCabinetMapper;
 import com.hkust.security.SecurityUtils;
-import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import com.hkust.wmc.dto.ao.CabinetAO;
 import com.hkust.wmc.dto.ao.EditCabinetAO;
@@ -25,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -32,11 +32,11 @@ public class CabinetService {
 
     private WmsCabinetMapper wmsCabinetMapper;
 
-    public ApiResponse addCabinet(CabinetAO cabinetAO) {
+    public ApiResponse<Void> addCabinet(CabinetAO cabinetAO) {
         WmsCabinet wmsCabinet = WmsCabinetStructMapper.INSTANCE.cabinetAOToCabinet(cabinetAO);
         wmsCabinet.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
-        wmsCabinet.setCreator(user.getUsername());
+        wmsCabinet.setCreator(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
         wmsCabinet.setState(CabinetStateEnum.ACTIVE.getCode());
         // 日期
         LocalDateTime now = LocalDateTime.now();
@@ -49,7 +49,7 @@ public class CabinetService {
         return ApiResponse.success();
     }
 
-    public ApiResponse edieCabinet(EditCabinetAO editCabinetAO) {
+    public ApiResponse<Void> edieCabinet(EditCabinetAO editCabinetAO) {
         if (ObjectUtil.isEmpty(editCabinetAO.getCabinetId())) {
             return ApiResponse.failed(ReturnCode.CABINET_ID_NOT_NULL);
         }
@@ -99,7 +99,7 @@ public class CabinetService {
         return ApiResponse.success();
     }
 
-    public ApiResponse getCabinetList() {
+    public ApiResponse<List<CabinetVO>> getCabinetList() {
         QueryWrapper<WmsCabinet> wrapper = new QueryWrapper<>();
         List<WmsCabinet> cabinetList = wmsCabinetMapper.selectList(wrapper);
         if (CollUtil.isEmpty(cabinetList)) {

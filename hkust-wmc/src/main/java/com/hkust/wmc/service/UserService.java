@@ -1,13 +1,10 @@
 package com.hkust.wmc.service;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.Role;
@@ -39,10 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,7 +54,7 @@ public class UserService {
 
     private UserExtsMapper userExtsMapper;
 
-    public ApiResponse getRoles() {
+    public ApiResponse<List<Map<String, String>>> getRoles() {
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
         List<Role> roles = roleMapper.selectList(wrapper);
 //        List<Role> roles = roleMapper.selectAll("sc");
@@ -84,7 +78,7 @@ public class UserService {
         return ApiResponse.success(roleList);
     }
 
-    public ApiResponse addUSer(AddUserAO addUserAO) {
+    public ApiResponse<Void> addUser(AddUserAO addUserAO) {
         if (ObjectUtil.isEmpty(addUserAO.getStudentId())) {
             return ApiResponse.failed(ReturnCode.STUDENT_ID_NOT_NULL);
         }
@@ -92,7 +86,7 @@ public class UserService {
         if (ObjectUtil.isNotEmpty(selectedUser)) {
             return ApiResponse.failed(ReturnCode.USER_ALREADY_EXISTS);
         }
-        List<Role> roleList = SecurityUtils.getCurrentUser().getRoleList();
+        List<Role> roleList = Optional.ofNullable(SecurityUtils.getCurrentUser()).map(User::getRoleList).orElse(Collections.emptyList());
         boolean containsAdmin = roleList.stream()
                 .anyMatch(role -> "admin".equals(role.getRoleName()));
         if (!containsAdmin) {
@@ -133,8 +127,7 @@ public class UserService {
         return ApiResponse.success();
     }
 
-    public ApiResponse<PageResponse> getUserList(UserQueryAO userQueryAO) {
-
+    public ApiResponse<PageResponse<UserVO>> getUserList(UserQueryAO userQueryAO) {
         Map<String, Object> paramsMap = new HashMap<>();
         if (ObjectUtil.isNotEmpty(userQueryAO.getUserName())) {
             paramsMap.put("userName", userQueryAO.getUserName());
@@ -146,14 +139,6 @@ public class UserService {
         }
         paramsMap.put("offset", offset);
         List<User> userList = userMapper.selectUserRoleListByCondition(paramsMap);
-//        Page<User> page = new Page(userQueryAO.getPageNum(), userQueryAO.getPageSize());
-//        QueryWrapper<User> wrapper = new QueryWrapper<User>();
-//        wrapper.eq("stat", "1");
-//        if (ObjUtil.isNotEmpty(userQueryAO.getUserName())) {
-//            wrapper.eq("user_name", userQueryAO.getUserName());
-//        }
-//        IPage<User> userIPage = userMapper.selectPage(page, wrapper);
-//        List<User> userList = userIPage.getRecords();
         if (CollUtil.isEmpty(userList)) {
             return ApiResponse.success();
         }
@@ -170,14 +155,14 @@ public class UserService {
             }
         }
         // 总数
-        QueryWrapper wrapper = new QueryWrapper();
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("stat", StatEnum.NORMAL.getCode());
         Long total = userMapper.selectCount(wrapper);
-        PageResponse pageResponse = new PageResponse(userQueryAO.getPageNum(), userQueryAO.getPageSize(), total, userVOList);
+        PageResponse<UserVO> pageResponse = new PageResponse<>(userQueryAO.getPageNum(), userQueryAO.getPageSize(), total, userVOList);
         return ApiResponse.success(pageResponse);
     }
 
-    public ApiResponse getUserInfoDetail(String studentId) {
+    public ApiResponse<UserVO> getUserInfoDetail(String studentId) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("student_id", studentId);
 
@@ -189,7 +174,7 @@ public class UserService {
         return ApiResponse.success(userVO);
     }
 
-    public ApiResponse alterUser(AlterUserAO alterUserAO) {
+    public ApiResponse<Void> alterUser(AlterUserAO alterUserAO) {
         // 查询学生是否存在
         User user = userMapper.selectByStudentId(alterUserAO.getStudentId());
         if (ObjectUtil.isEmpty(user)) {
@@ -239,7 +224,7 @@ public class UserService {
         return ApiResponse.success();
     }
 
-    public ApiResponse disableUser(String studentId) {
+    public ApiResponse<Void> disableUser(String studentId) {
         User user = userMapper.selectByStudentId(studentId);
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);

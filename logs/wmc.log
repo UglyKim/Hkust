@@ -380,3 +380,5 @@ java.io.IOException: The server sockets created using the LocalRMIServerSocketFa
 2024-11-08 15:56:20.690 INFO  [http-nio-10001-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2024-11-08 15:56:20.691 INFO  [http-nio-10001-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
 2024-11-08 15:56:21.474 INFO  [http-nio-10001-exec-9] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 499 ms
+2024-11-08 16:27:25.848 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-08 16:27:25.848 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

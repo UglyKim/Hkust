@@ -1,13 +1,15 @@
 package com.hkust.wmc.dto.ao;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@Getter
+@Data
 @Schema(description = "仓储智能柜")
+@AllArgsConstructor
 public class CabinetAO implements Serializable {
 
     private static final long serialVersionUID = 892099988998330109L;

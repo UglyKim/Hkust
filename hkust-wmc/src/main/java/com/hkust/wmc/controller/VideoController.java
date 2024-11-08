@@ -1,6 +1,7 @@
 package com.hkust.wmc.controller;
 
 import com.hkust.dto.ApiResponse;
+import com.hkust.entity.Video;
 import com.hkust.wmc.service.VideoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Tag(name = "日志管理")
 @RestController
@@ -20,7 +23,7 @@ public class VideoController {
 
     @Operation(description = "查询录像列表")
     @PostMapping("/list")
-    public ApiResponse getVideoList() {
+    public ApiResponse<List<Video>> getVideoList() {
         return videoService.getVideoList();
     }
 

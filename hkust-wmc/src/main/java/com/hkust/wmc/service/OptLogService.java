@@ -24,7 +24,7 @@ public class OptLogService {
 
     private WmsOptLogMapper wmsOptLogMapper;
 
-    public ApiResponse<PageResponse> getOptLogList(OptLogQueryAO optLogQueryAO) {
+    public ApiResponse<PageResponse<OptLogVO>> getOptLogList(OptLogQueryAO optLogQueryAO) {
         Page<WmsOptLog> page = new Page<>(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize());
 
         QueryWrapper<WmsOptLog> wrapper = new QueryWrapper<>();
@@ -49,11 +49,11 @@ public class OptLogService {
             OptLogVO optLogVO = WmsOptLogStructMapper.INSTANCE.wmsOptLogToOptLogVO(wmsOptLog);
             optLogVOList.add(optLogVO);
         }
-        PageResponse pageResponse = new PageResponse(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize(), wmsOptLogPage.getTotal(), optLogVOList);
+        PageResponse<OptLogVO> pageResponse = new PageResponse<>(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize(), wmsOptLogPage.getTotal(), optLogVOList);
         return ApiResponse.success(pageResponse);
     }
 
-    public ApiResponse<PageResponse> getReagentsOptLogList(OptLogQueryAO optLogQueryAO) {
+    public ApiResponse<PageResponse<OptLogVO>> getReagentsOptLogList(OptLogQueryAO optLogQueryAO) {
         Page<WmsOptLog> page = new Page<>(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize());
 
         QueryWrapper<WmsOptLog> wrapper = new QueryWrapper<>();
@@ -78,7 +78,7 @@ public class OptLogService {
             OptLogVO optLogVO = WmsOptLogStructMapper.INSTANCE.wmsOptLogToOptLogVO(wmsOptLog);
             optLogVOList.add(optLogVO);
         }
-        PageResponse pageResponse = new PageResponse(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize(), wmsOptLogPage.getTotal(), optLogVOList);
+        PageResponse<OptLogVO> pageResponse = new PageResponse<>(optLogQueryAO.getPageNum(), optLogQueryAO.getPageSize(), wmsOptLogPage.getTotal(), optLogVOList);
         return ApiResponse.success(pageResponse);
     }
 

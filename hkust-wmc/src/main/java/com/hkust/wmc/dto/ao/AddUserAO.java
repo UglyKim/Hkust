@@ -3,13 +3,15 @@ package com.hkust.wmc.dto.ao;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.hkust.enums.GenderEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Getter
+@Data
 @JsonPropertyOrder({"username", "phone", "realName"})
+@AllArgsConstructor
 public class AddUserAO implements Serializable {
 
     private static final long serialVersionUID = 665538583005150707L;
