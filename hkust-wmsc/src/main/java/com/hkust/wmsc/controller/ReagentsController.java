@@ -36,86 +36,86 @@ public class ReagentsController {
 
     @Operation(summary = "物理状态类型")
     @PostMapping("/physical_state")
-    private ApiResponse<List<ObjectNode>> getPhysicalState() {
+    public ApiResponse<List<ObjectNode>> getPhysicalState() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(PhysicalStateEnum.class));
     }
 
     @Operation(summary = "是否在库类型")
     @PostMapping("/in_stock")
-    private ApiResponse<List<ObjectNode>> getIsInOut() {
+    public ApiResponse<List<ObjectNode>> getIsInOut() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(InOutEnumType.class));
     }
 
     @Operation(summary = "出入库类型")
     @PostMapping("/inoutbound/type")
-    private ApiResponse<List<ObjectNode>> getInOutBoundType() {
+    public ApiResponse<List<ObjectNode>> getInOutBoundType() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(ReagentsOptTypeEnum.class));
     }
 
     @Operation(summary = "化学品危险属性类型")
     @PostMapping("/hazard_props")
-    private ApiResponse<List<ObjectNode>> getHazardProps() {
+    public ApiResponse<List<ObjectNode>> getHazardProps() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(HazardPropsEnum.class));
     }
 
     @Operation(summary = "试剂详细信息查询-基于试剂编号")
     @PostMapping("/info")
-    private ApiResponse<ReagentsVO> searchReagents(@Valid @RequestParam String reagentsId) {
+    public ApiResponse<ReagentsVO> searchReagents(@Valid @RequestParam String reagentsId) {
         log.info("received id:{}", reagentsId);
         return reagentsService.findReagents(reagentsId);
     }
 
     @Operation(summary = "试剂列表查询")
     @PostMapping("/search")
-    private ApiResponse<PageResponse<ReagentsVO>> searchReagents(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse<ReagentsVO>> searchReagents(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received form reagent params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return reagentsService.findReagentsList(reagentsQueryAO);
     }
 
     @Operation(summary = "入库")
     @PostMapping("/inbound")
-    private ApiResponse<String> inboundReagents(@RequestBody @Valid List<InReagentsAO> inReagentsAOList) {
+    public ApiResponse<String> inboundReagents(@RequestBody @Valid List<InReagentsAO> inReagentsAOList) {
         log.info("received reagent list:{}", JSONUtil.toJsonPrettyStr(inReagentsAOList));
         return reagentsService.inboundReagents(inReagentsAOList);
     }
 
     @Operation(summary = "出库")
     @PostMapping("/outbound")
-    private ApiResponse<String> outboundReagents(@Valid @RequestBody List<OutReagentsAO> outReagentsAOList) {
+    public ApiResponse<String> outboundReagents(@Valid @RequestBody List<OutReagentsAO> outReagentsAOList) {
         log.info("received reagent list:{}", JSONUtil.toJsonPrettyStr(outReagentsAOList));
         return reagentsService.outboundReagents(outReagentsAOList);
     }
 
     @Operation(summary = "出入库日志查询")
     @PostMapping("/logs")
-    private ApiResponse<List<WmsInOutRecordVO>> getLogList() {
+    public ApiResponse<List<WmsInOutRecordVO>> getLogList() {
         return reagentsService.getLogList();
     }
 
     @Operation(summary = "查看出入库试剂详情")
     @PostMapping("/outbound/detail")
-    private ApiResponse<ReagentsVO> inOutboundDetail(@RequestParam String reagentsId) {
+    public ApiResponse<ReagentsVO> inOutboundDetail(@RequestParam String reagentsId) {
         log.info("received reagents ID:{}", reagentsId);
         return reagentsService.getInOutboundReagentsDetail(reagentsId);
     }
 
     @Operation(summary = "临期查询")
     @PostMapping("/expiration_list")
-    private ApiResponse<PageResponse<ReagentsVO>> expirationList(@Valid @RequestBody ExpReagentsQueryAO expReagentsQueryAO) {
+    public ApiResponse<PageResponse<ReagentsVO>> expirationList(@Valid @RequestBody ExpReagentsQueryAO expReagentsQueryAO) {
         log.info("received exp reagents query info:{}", JSONUtil.toJsonPrettyStr(expReagentsQueryAO));
         return reagentsService.getExpReagentsList(expReagentsQueryAO);
     }
 
     @Operation(summary = "盘点")
     @PostMapping("/stocktaking")
-    private ApiResponse<PageResponse<StocktakingVO>> stocktakingReagents(@Valid @RequestBody StocktakingAO stocktakingAO) {
+    public ApiResponse<PageResponse<StocktakingVO>> stocktakingReagents(@Valid @RequestBody StocktakingAO stocktakingAO) {
         log.info("received stocktaking query info:{}", JSONUtil.toJsonPrettyStr(stocktakingAO));
         return reagentsService.stocktakingReagents(stocktakingAO);
     }
 
     @Operation(summary = "盘点结果上传")
     @PostMapping("/stocktaking/result")
-    private ApiResponse<Void> stocktakingRecordResult(@Valid @RequestBody List<StocktakingRecordResultAO> stocktakingRecordResultAOList) {
+    public ApiResponse<Void> stocktakingRecordResult(@Valid @RequestBody List<StocktakingRecordResultAO> stocktakingRecordResultAOList) {
         log.info("received stocktaking query stocktakingRecordResultAOList:{}", JSONUtil.toJsonPrettyStr(stocktakingRecordResultAOList));
         return reagentsService.recordResult(stocktakingRecordResultAOList);
     }

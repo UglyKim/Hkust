@@ -30,20 +30,20 @@ public class OptLogController {
 
     @Operation(summary = "操作类型")
     @PostMapping("/type")
-    private ApiResponse<List<ObjectNode>> optTypeList() {
+    public ApiResponse<List<ObjectNode>> optTypeList() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OptTypeEnum.class));
     }
 
     @Operation(summary = "操作日志详情")
     @PostMapping("/info")
-    private ApiResponse<WmsOptLogVO> optInfo(@RequestParam String optId) {
+    public ApiResponse<WmsOptLogVO> optInfo(@RequestParam String optId) {
         log.info("received opt ID: {}", optId);
         return optLogService.optLogDetail(optId);
     }
 
     @Operation(summary = "操作日志列表")
     @PostMapping("/list")
-    private ApiResponse<PageResponse<WmsOptLogVO>> optList(@Valid @RequestBody OptLogQueryAO optLogQueryAO) {
+    public ApiResponse<PageResponse<WmsOptLogVO>> optList(@Valid @RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received query operation log params:{}", optLogQueryAO);
         return optLogService.getReagentsOptLogList(optLogQueryAO);
     }

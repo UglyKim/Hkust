@@ -31,20 +31,20 @@ public class OptLogController {
     @Deprecated
     @Operation(summary = "日志类型")
     @PostMapping("/type")
-    private ApiResponse<List<ObjectNode>> getCabinetType() {
+    public ApiResponse<List<ObjectNode>> getCabinetType() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(OptTypeEnum.class));
     }
 
     @Operation(summary = "用户操作日志列表")
     @PostMapping("/opt_list")
-    private ApiResponse<PageResponse<OptLogVO>> getOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
+    public ApiResponse<PageResponse<OptLogVO>> getOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received opt query info:{}", JSONUtil.toJsonPrettyStr(optLogQueryAO));
         return optLogService.getOptLogList(optLogQueryAO);
     }
 
     @Operation(summary = "试剂日志列表")
     @PostMapping("/inoutbount_list")
-    private ApiResponse<PageResponse<OptLogVO>> getReagentsOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
+    public ApiResponse<PageResponse<OptLogVO>> getReagentsOptLogList(@RequestBody OptLogQueryAO optLogQueryAO) {
         log.info("received opt query info:{}", JSONUtil.toJsonPrettyStr(optLogQueryAO));
         return optLogService.getReagentsOptLogList(optLogQueryAO);
     }

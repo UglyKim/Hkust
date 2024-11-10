@@ -27,26 +27,26 @@ public class CabinetController {
 
     @Operation(summary = "仓储智能柜使用状态")
     @PostMapping("/stat")
-    private ApiResponse<List<ObjectNode>> getInOutBoundType() {
+    public ApiResponse<List<ObjectNode>> getInOutBoundType() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(CabinetStateEnum.class));
     }
 
     @Operation(summary = "编辑智能柜")
     @PostMapping("/edit")
-    private ApiResponse<Void> alterCabinet(@Valid @RequestBody EditCabinetAO editCabinetAO) {
+    public ApiResponse<Void> alterCabinet(@Valid @RequestBody EditCabinetAO editCabinetAO) {
         log.info("received alter cabinet info:{}", JSONUtil.toJsonPrettyStr(editCabinetAO));
         return cabinetService.edieCabinet(editCabinetAO);
     }
 
     @Operation(summary = "智能柜列表")
     @PostMapping("/list")
-    private ApiResponse<List<CabinetVO>> getCabinetList() {
+    public ApiResponse<List<CabinetVO>> getCabinetList() {
         return cabinetService.getCabinetList();
     }
 
     @Operation(summary = "智能柜详情")
     @PostMapping("/info")
-    private ApiResponse<CabinetVO> getCabinetInfo(@Valid @RequestParam String cabinetId) {
+    public ApiResponse<CabinetVO> getCabinetInfo(@Valid @RequestParam String cabinetId) {
         log.info("received cabinet ID:{}", cabinetId);
         return cabinetService.getCabinetDetail(cabinetId);
     }

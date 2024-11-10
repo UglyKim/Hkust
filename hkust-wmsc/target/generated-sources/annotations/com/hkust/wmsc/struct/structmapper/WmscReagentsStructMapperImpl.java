@@ -2,14 +2,13 @@ package com.hkust.wmsc.struct.structmapper;
 
 import com.hkust.entity.wms.WmsReagents;
 import com.hkust.wmsc.dto.ao.InReagentsAO;
-import com.hkust.wmsc.dto.ao.OutReagentsAO;
 import com.hkust.wmsc.dto.vo.ReagentsVO;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-08T00:34:13+0800",
+    date = "2024-11-10T22:54:09+0800",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 1.8.0_391 (Oracle Corporation)"
 )
 @Component
@@ -41,33 +40,6 @@ public class WmscReagentsStructMapperImpl implements WmscReagentsStructMapper {
         wmsReagents.setExpirationDate( inReagentsAO.getExpirationDate() );
         wmsReagents.setCabinetId( inReagentsAO.getCabinetId() );
         wmsReagents.setHazardProps( inReagentsAO.getHazardProps() );
-
-        return wmsReagents;
-    }
-
-    @Override
-    public WmsReagents OutReagentsAOToReagents(OutReagentsAO outReagentsAO) {
-        if ( outReagentsAO == null ) {
-            return null;
-        }
-
-        WmsReagents wmsReagents = new WmsReagents();
-
-        wmsReagents.setCasNo( outReagentsAO.getCasNo() );
-        wmsReagents.setName( outReagentsAO.getName() );
-        wmsReagents.setEnName( outReagentsAO.getEnName() );
-        wmsReagents.setType( outReagentsAO.getType() );
-        wmsReagents.setBarcode( outReagentsAO.getBarcode() );
-        wmsReagents.setBrand( outReagentsAO.getBrand() );
-        wmsReagents.setPrice( outReagentsAO.getPrice() );
-        wmsReagents.setStorageLocation( outReagentsAO.getStorageLocation() );
-        wmsReagents.setGhs( outReagentsAO.getGhs() );
-        wmsReagents.setResearchGroup( outReagentsAO.getResearchGroup() );
-        wmsReagents.setState( outReagentsAO.getState() );
-        wmsReagents.setSpecification( outReagentsAO.getSpecification() );
-        wmsReagents.setPhysicalState( outReagentsAO.getPhysicalState() );
-        wmsReagents.setSpecialStorageConditions( outReagentsAO.getSpecialStorageConditions() );
-        wmsReagents.setHazardClassification( outReagentsAO.getHazardClassification() );
 
         return wmsReagents;
     }

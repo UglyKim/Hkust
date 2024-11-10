@@ -3,6 +3,7 @@ package com.hkust.wmc.dto.ao;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Data
 @Schema(description = "编辑智能柜")
 @AllArgsConstructor
+@NoArgsConstructor
 public class EditCabinetAO implements Serializable {
 
     private static final long serialVersionUID = 777666588998330109L;

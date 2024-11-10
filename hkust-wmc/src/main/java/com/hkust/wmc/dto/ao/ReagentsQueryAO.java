@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Data
 @Schema(description = "查询试剂列表")
 @AllArgsConstructor
+@NoArgsConstructor
 public class ReagentsQueryAO implements Serializable {
 
     private static final long serialVersionUID = 331198760000005679L;

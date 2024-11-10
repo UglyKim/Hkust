@@ -26,32 +26,32 @@ public class StatisticsController {
 
     @Operation(summary = "首页-试剂统计")
     @PostMapping("/reagents")
-    private ApiResponse<MainPageStaticsVO> reagentsStatistics(@RequestParam String cabinetId) {
+    public ApiResponse<MainPageStaticsVO> reagentsStatistics(@RequestParam String cabinetId) {
         return statisticsService.totalStats(cabinetId);
     }
 
     @Operation(summary = "入库统计")
     @PostMapping("/inbound")
-    private ApiResponse<InOutBoundStatisticsVO> inboundStatistics(@RequestParam String cabinetId) {
+    public ApiResponse<InOutBoundStatisticsVO> inboundStatistics(@RequestParam String cabinetId) {
         return statisticsService.inboundRecordStats(cabinetId);
     }
 
     @Operation(summary = "出库统计")
     @PostMapping("/outbound")
-    private ApiResponse<InOutBoundStatisticsVO> outboundStatistics(@RequestParam String cabinetId) {
+    public ApiResponse<InOutBoundStatisticsVO> outboundStatistics(@RequestParam String cabinetId) {
         return statisticsService.outboundRecordStats(cabinetId);
     }
 
     @Operation(summary = "入库列表查询")
     @PostMapping("/inbound/list")
-    private ApiResponse<PageResponse<InOutboundVO>> inboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse<InOutboundVO>> inboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }
 
     @Operation(summary = "出库列表查询")
     @PostMapping("/outbound/list")
-    private ApiResponse<PageResponse<InOutboundVO>> outboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse<InOutboundVO>> outboundListStatistics(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return statisticsService.inOutBoundRecordList(reagentsQueryAO);
     }

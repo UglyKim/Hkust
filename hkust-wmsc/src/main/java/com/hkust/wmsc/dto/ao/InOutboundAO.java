@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Data
 @Schema(description = "出入库统计和查询")
 @AllArgsConstructor
+@NoArgsConstructor
 public class InOutboundAO implements Serializable {
 
     private static final long serialVersionUID = 8929099809998330109L;

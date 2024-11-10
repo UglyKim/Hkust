@@ -3,6 +3,7 @@ package com.hkust.wmsc.dto.ao;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Data
 @Schema(description = "出库试剂信息")
 @AllArgsConstructor
+@NoArgsConstructor
 public class OutReagentsAO implements Serializable {
 
     private static final long serialVersionUID = 892955555990000989L;

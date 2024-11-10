@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @Schema(description = "用户列表查询")
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserQueryAO implements Serializable {
 
     private static final long serialVersionUID = 233333555998330109L;

@@ -5,6 +5,7 @@ import com.hkust.enums.GenderEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Data
 @JsonPropertyOrder({"username", "phone", "realName"})
 @AllArgsConstructor
+@NoArgsConstructor
 public class AddUserAO implements Serializable {
 
     private static final long serialVersionUID = 665538583005150707L;

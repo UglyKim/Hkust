@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Data
 @Schema(description = "试剂详情")
 @AllArgsConstructor
+@NoArgsConstructor
 public class AlterReagentsAO implements Serializable {
 
     @Schema(description = "试剂ID")

@@ -22,13 +22,13 @@ public class UserController {
 
     @Operation(summary = "用户详情")
     @PostMapping("/detail")
-    private ApiResponse<UserVO> getUserInfo() {
+    public ApiResponse<UserVO> getUserInfo() {
         return userService.getUserInfo();
     }
 
     @Operation(summary = "修改密码")
     @PostMapping("/alter/passwd")
-    private ApiResponse<Void> alterUserPassword(@RequestParam String passwd) {
+    public ApiResponse<Void> alterUserPassword(@RequestParam String passwd) {
         log.info("received passwd:{}", passwd);
         return userService.alterUserPassword(passwd);
     }

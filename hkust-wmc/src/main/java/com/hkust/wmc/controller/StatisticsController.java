@@ -23,7 +23,7 @@ public class StatisticsController {
 
     @Operation(summary = "月度出入库统计")
     @PostMapping("/inoutbound")
-    private ApiResponse<List<StatisticsInOutBoundVO>> monthInOutBoundStat() {
+    public ApiResponse<List<StatisticsInOutBoundVO>> monthInOutBoundStat() {
         return statisticsService.monthInoutBoundStatistics();
     }
 

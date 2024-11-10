@@ -31,13 +31,13 @@ public class CabinetController {
 
     @Operation(summary = "仓储智能柜使用状态")
     @PostMapping("/stat")
-    private ApiResponse<List<ObjectNode>> getCabinetType() {
+    public ApiResponse<List<ObjectNode>> getCabinetType() {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(CabinetStateEnum.class));
     }
 
     @Operation(summary = "添加仓储智能柜")
     @PostMapping("/add")
-    private ApiResponse<Valid> addCabinet(@RequestBody CabinetAO cabinetAO) {
+    public ApiResponse<Valid> addCabinet(@RequestBody CabinetAO cabinetAO) {
         log.info("received cabinet info:{}", JSONUtil.toJsonPrettyStr(cabinetAO));
         cabinetService.addCabinet(cabinetAO);
         return ApiResponse.success();
@@ -45,13 +45,13 @@ public class CabinetController {
 
     @Operation(summary = "仓储智能柜列表")
     @PostMapping("/list")
-    private ApiResponse<List<CabinetVO>> getCabinetList() {
+    public ApiResponse<List<CabinetVO>> getCabinetList() {
         return cabinetService.getCabinetList();
     }
 
     @Operation(summary = "编辑智能柜")
     @PostMapping("/edit")
-    private ApiResponse<Void> editCabinet(@Valid @RequestBody EditCabinetAO editCabinetAO) {
+    public ApiResponse<Void> editCabinet(@Valid @RequestBody EditCabinetAO editCabinetAO) {
         log.info("received alter cabinet info:{}", JSONUtil.toJsonPrettyStr(editCabinetAO));
         return cabinetService.edieCabinet(editCabinetAO);
     }

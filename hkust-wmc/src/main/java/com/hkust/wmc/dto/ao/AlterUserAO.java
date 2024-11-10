@@ -4,6 +4,7 @@ import com.hkust.enums.GenderEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Data
 @Schema(description = "修改用户信息")
 @AllArgsConstructor
+@NoArgsConstructor
 public class AlterUserAO implements Serializable {
 
     private static final long serialVersionUID = 892099900008888669L;
