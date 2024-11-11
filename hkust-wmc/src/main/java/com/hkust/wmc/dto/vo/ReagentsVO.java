@@ -69,4 +69,7 @@ public class ReagentsVO implements Serializable {
     @Schema(description = "到期日")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate expirationDate;
+
+    @Schema(description = "是否过期")
+    private Boolean isExp;
 }

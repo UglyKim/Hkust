@@ -19,15 +19,16 @@ public class AddReagentsAO implements Serializable {
 
     private static final long serialVersionUID = 892198765676545679L;
 
-    @Schema(description = "试剂编号")
+    @Schema(description = "试剂ID， 读取二维码获取")
     @NotNull(message = "请输入试剂编号")
     private String reagentsId;
 
-    @Schema(description = "智能柜ID")
-    @NotNull(message = "请输入智能柜编号")
+    @Schema(description = "设备号")
+    @NotNull(message = "请输入设备编号")
     private String cabinetId;
 
     @Schema(description = "casNo")
+    @NotNull(message = "请输入试剂CAS号")
     private String casNo;
 
     @Schema(description = "化学名称")
@@ -38,7 +39,6 @@ public class AddReagentsAO implements Serializable {
     private String enName;
 
     @Schema(description = "类型")
-    @Size(min = 1, max = 1, message = "长度为 1")
     private String type;
 
     @Schema(description = "二维码")
@@ -63,22 +63,23 @@ public class AddReagentsAO implements Serializable {
     private String state;
 
     @Schema(description = "规格")
+    @NotNull
     private String specification;
 
     @Schema(description = "物理状态")
-    @Size(min = 1, max = 1, message = "长度为 1")
     private String physicalState;
 
     @Schema(description = "特殊存储条件")
     private String specialStorageConditions;
 
     @Schema(description = "危险和危害特性类别")
-    @Size(min = 1, max = 1, message = "长度为 1")
     private String hazardClassification;
 
     @Schema(description = "到期日")
+    @NotNull(message = "请输入到期日期")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @NotNull(message = "请输入有效期")
     private LocalDate expirationDate;
 
+    @Schema(description = "化学品危险属性")
+    private String hazardProps;
 }

@@ -23,4 +23,8 @@ public class WmsOptLog {
 
     @TableField("opt_time")
     private LocalDateTime optTime;
+
+    private String content;
+
+    private String remark;
 }

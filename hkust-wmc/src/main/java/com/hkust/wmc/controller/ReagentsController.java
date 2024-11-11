@@ -14,6 +14,7 @@ import com.hkust.wmc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmc.dto.vo.ReagentsStatisticsVO;
 import com.hkust.wmc.dto.vo.ReagentsVO;
 import com.hkust.wmc.service.ReagentsService;
+import com.hkust.wmc.service.impl.ReagentsServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ import java.util.List;
 @Slf4j
 public class ReagentsController {
 
-    private ReagentsService reagentsService;
+    private ReagentsServiceImpl reagentsService;
 
     @Operation(summary = "物理状态类型")
     @PostMapping("/physical_state")
@@ -57,9 +58,9 @@ public class ReagentsController {
 
     @Operation(summary = "添加试剂")
     @PostMapping("/add")
-    public ApiResponse<Void> addReagents(@RequestBody AddReagentsAO addReagentsAO) {
-        log.info("received reagents info:{}", JSONUtil.toJsonPrettyStr(addReagentsAO));
-        return reagentsService.addReagents(addReagentsAO);
+    public ApiResponse<String> addReagents(@RequestBody @Valid List<AddReagentsAO> addReagentsAOList) {
+        log.info("received reagents info:{}", JSONUtil.toJsonPrettyStr(addReagentsAOList));
+        return reagentsService.addReagents(addReagentsAOList);
     }
 
     @Operation(summary = "试剂列表")
@@ -90,8 +91,7 @@ public class ReagentsController {
         return ApiResponse.success();
     }
 
-    @Autowired
-    public void setReagentsService(ReagentsService reagentsService) {
+    public void setReagentsService(ReagentsServiceImpl reagentsService) {
         this.reagentsService = reagentsService;
     }
 }

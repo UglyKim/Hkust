@@ -2,9 +2,11 @@ package com.hkust.security.config;
 
 import com.hkust.entity.User;
 import com.hkust.exception.CustomAccessDeniedHandler;
+import com.hkust.interceptor.LoggingInterceptor;
 import com.hkust.security.HkustAccessDecisionManager;
 import com.hkust.security.HkustSecurityMetadataSource;
 import com.hkust.security.interceptor.HkustFilterSecurityInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;

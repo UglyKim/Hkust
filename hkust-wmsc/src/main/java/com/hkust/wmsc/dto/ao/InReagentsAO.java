@@ -27,6 +27,7 @@ public class InReagentsAO implements Serializable {
     private String cabinetId;
 
     @Schema(description = "casNo")
+    @NotNull(message = "请输入试剂CAS号")
     private String casNo;
 
     @Schema(description = "化学名称")

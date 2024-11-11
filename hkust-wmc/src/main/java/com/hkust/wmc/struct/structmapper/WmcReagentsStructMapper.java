@@ -13,6 +13,9 @@ public interface WmcReagentsStructMapper {
 
     WmcReagentsStructMapper INSTANCE = Mappers.getMapper(WmcReagentsStructMapper.class);
 
+    @Mappings({
+            @Mapping(target = "reagentsId", source = "id")
+    })
     ReagentsVO reagentsToReagentsVO(WmsReagents reagents);
 
 

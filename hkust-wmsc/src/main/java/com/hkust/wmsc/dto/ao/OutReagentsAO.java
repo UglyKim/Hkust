@@ -21,6 +21,7 @@ public class OutReagentsAO implements Serializable {
     private String reagentsId;
 
     @Schema(description = "casNo")
+    @NotNull(message = "请输入试剂CAS号")
     private String casNo;
 
     @Schema(description = "化学名称")

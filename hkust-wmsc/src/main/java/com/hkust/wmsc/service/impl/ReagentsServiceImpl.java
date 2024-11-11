@@ -57,6 +57,11 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
         }
         ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
+        if (reagents.getExpirationDate().compareTo(LocalDate.now()) >= 0) {
+            reagentsVO.setIsExp(false);
+        } else {
+            reagentsVO.setIsExp(true);
+        }
         return ApiResponse.success(reagentsVO);
     }
 
@@ -78,11 +83,12 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         List<WmsReagents> wmsReagentsList = reagentsIPage.getRecords();
         List<ReagentsVO> reagentsVOList = new ArrayList<>();
         for (WmsReagents reagents : wmsReagentsList) {
-            LocalDate expirationDate = reagents.getExpirationDate();
-            LocalDate currentDate = DateUtils.getCurrentDate();
-            long dayBetween = ChronoUnit.DAYS.between(expirationDate, currentDate);
             ReagentsVO reagentsVO = WmscReagentsStructMapper.INSTANCE.ReagentsToReagentsVO(reagents);
-            reagentsVO.setIsExp(dayBetween < 30);
+            if (reagents.getExpirationDate().compareTo(LocalDate.now()) >= 0) {
+                reagentsVO.setIsExp(false);
+            } else {
+                reagentsVO.setIsExp(true);
+            }
             reagentsVOList.add(reagentsVO);
         }
         // 重新排序
@@ -93,34 +99,37 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
     }
 
     public ApiResponse<String> inboundReagents(List<InReagentsAO> inReagentsAOList) {
-        List<WmsReagents> wmsReagentsList = new ArrayList<>();
+        List<WmsReagents> inFailedReagentsList = new ArrayList<>();
         LocalDateTime currentDateTime = DateUtils.getCurrentDateTime();
-        List<String> failedReagentsList = new ArrayList<>();
+        List<String> failedReagentsIDList = new ArrayList<>();
         for (InReagentsAO inReagentsAO : inReagentsAOList) {
             WmsReagents reagents = wmsReagentsMapper.selectById(inReagentsAO.getReagentsId());
-            if (ObjectUtil.isNotEmpty(reagents)) {
-                failedReagentsList.add(reagents.getId());
-            } else {
+            if (ObjectUtil.isEmpty(reagents)) {
                 WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.InReagentsAOToReagents(inReagentsAO);
                 wmsReagents.setId(inReagentsAO.getReagentsId());
                 wmsReagents.setCreateTime(currentDateTime);
                 wmsReagents.setInOut(YNEnum.YES.getCode());
                 wmsReagents.setCabinetId(inReagentsAO.getCabinetId());
-                wmsReagentsList.add(wmsReagents);
+                inFailedReagentsList.add(wmsReagents);
+            } else {
+                failedReagentsIDList.add(reagents.getId());
             }
         }
-        if (CollUtil.isEmpty(wmsReagentsList) && CollUtil.isNotEmpty(failedReagentsList)) {
-            return ApiResponse.failed("试剂" + failedReagentsList + "已经存在，请不要重复添加");
+        if (CollUtil.isEmpty(inFailedReagentsList) && CollUtil.isNotEmpty(failedReagentsIDList)) {
+            return ApiResponse.failed("试剂[" + String.join(",", failedReagentsIDList) + "]已经存在，请不要重复添加");
         }
-        super.saveBatch(wmsReagentsList);
+        super.saveBatch(inFailedReagentsList);
 
+        // 添加入库记录
         List<WmsInOutRecord> wmsInOutRecordList = new ArrayList<>();
         String recordId = UUIDUtils.generateUUIDWithoutHyphens();
-        for (WmsReagents reagents : wmsReagentsList) {
+        for (WmsReagents reagents : inFailedReagentsList) {
             User user = SecurityUtils.getCurrentUser();
             WmsInOutRecord wmsInOutRecord = new WmsInOutRecord();
             wmsInOutRecord.setId("I" + recordId);
-            wmsInOutRecord.setGhs(reagents.getGhs());
+            if (ObjectUtil.isNotEmpty(reagents.getGhs())) {
+                wmsInOutRecord.setGhs(reagents.getGhs());
+            }
             wmsInOutRecord.setReagentsName(reagents.getName());
             wmsInOutRecord.setReagentsId(reagents.getId());
             wmsInOutRecord.setOptTime(currentDateTime);
@@ -144,10 +153,10 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
 
-        if (CollUtil.isEmpty(failedReagentsList)) {
+        if (CollUtil.isEmpty(failedReagentsIDList)) {
             return ApiResponse.success();
         }
-        return ApiResponse.success("试剂" + failedReagentsList + "已经存在，请不要重复添加");
+        return ApiResponse.success("试剂[" + String.join(",", failedReagentsIDList) + "]已经存在，请不要重复添加");
     }
 
     public ApiResponse<String> outboundReagents(List<OutReagentsAO> outReagentsAOListList) {
@@ -164,8 +173,12 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
                 outFailedReagentsList.add(reagents.getId());
             }
         }
+        if (CollUtil.isEmpty(wmsReagentsList) && CollUtil.isNotEmpty(outFailedReagentsList)) {
+            return ApiResponse.failed("试剂[" + String.join(",", outFailedReagentsList) + "]不在柜，请确认试剂是否存在");
+        }
         updateBatchById(wmsReagentsList);
 
+        // 添加出库记录
         List<WmsInOutRecord> wmsInOutRecordList = new ArrayList<>();
         String recordId = UUIDUtils.generateUUIDWithoutHyphens();
         for (WmsReagents reagents : wmsReagentsList) {
@@ -200,7 +213,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         wmsOptLog.setOptTime(currentDateTime);
         wmsOptLogMapper.insert(wmsOptLog);
 
-        return ApiResponse.success("试剂" + outFailedReagentsList + "已经存在，请不要重复添加");
+        return ApiResponse.success("试剂[" + String.join(",", outFailedReagentsList) + "]已经存在，请不要重复添加");
 
     }
 
