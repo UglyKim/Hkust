@@ -11,6 +11,7 @@ import com.hkust.entity.wms.WmsCabinet;
 import com.hkust.enums.CabinetStateEnum;
 import com.hkust.mapper.wmsc.WmsCabinetMapper;
 import com.hkust.security.SecurityUtils;
+import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import com.hkust.wmc.dto.ao.CabinetAO;
 import com.hkust.wmc.dto.ao.EditCabinetAO;
@@ -36,6 +37,7 @@ public class CabinetService {
         WmsCabinet wmsCabinet = WmsCabinetStructMapper.INSTANCE.cabinetAOToCabinet(cabinetAO);
         wmsCabinet.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
+        wmsCabinet.setCreatorId(user.getStudentId());
         wmsCabinet.setCreator(Optional.ofNullable(user).map(User::getStudentId).orElse(null));
         wmsCabinet.setState(CabinetStateEnum.ACTIVE.getCode());
         // 日期
@@ -90,6 +92,10 @@ public class CabinetService {
             wrapper.set("threshold_ratio", editCabinetAO.getThresholdRatio());
         }
         try {
+            User user = SecurityUtils.getCurrentUser();
+            wrapper.set("modified_id", user.getStudentId());
+            wrapper.set("modified_by", Optional.ofNullable(user).map(User::getUsername).orElse(null));
+            wrapper.set("modified_time", DateUtils.getCurrentDateTime());
             wrapper.update();
         } catch (Exception e) {
             e.printStackTrace();

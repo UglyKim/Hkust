@@ -1,5 +1,6 @@
 package com.hkust.wmc.dto.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,12 +52,14 @@ public class CabinetVO implements Serializable {
     private String creator;
 
     @Schema(description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 
     @Schema(description = "审核人")
     private String auditor;
 
     @Schema(description = "审核时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime auditTime;
 
     @Schema(description = "材料")
@@ -76,4 +79,10 @@ public class CabinetVO implements Serializable {
 
     @Schema(description = "盛庄废液类型")
     private String wasteLiquidsType;
+
+    @Schema(description = "修改人")
+    private LocalDateTime modifiedBy;
+
+    @Schema(description = "修改时间")
+    private LocalDateTime modifiedTime;
 }

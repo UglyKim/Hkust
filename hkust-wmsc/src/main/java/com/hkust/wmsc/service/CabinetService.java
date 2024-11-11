@@ -6,9 +6,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
+import com.hkust.entity.User;
 import com.hkust.entity.wms.WmsCabinet;
 import com.hkust.enums.CabinetStateEnum;
 import com.hkust.mapper.wmsc.WmsCabinetMapper;
+import com.hkust.security.SecurityUtils;
+import com.hkust.utils.DateUtils;
 import com.hkust.wmsc.dto.ao.EditCabinetAO;
 import com.hkust.wmsc.dto.vo.CabinetVO;
 import com.hkust.wmsc.struct.structmapper.WmscCabinetStructMapper;
@@ -16,8 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -91,6 +96,11 @@ public class CabinetService {
         if (ObjectUtil.isNotEmpty(editCabinetAO.getThresholdRatio())) {
             wrapper.set("threshold_ratio", editCabinetAO.getThresholdRatio());
         }
+        wrapper.set("modified_time", DateUtils.getCurrentDate());
+        User user = SecurityUtils.getCurrentUser();
+        wrapper.set("modified_id", user.getStudentId());
+        wrapper.set("modified_by", Optional.ofNullable(user).map(User::getUsername).orElse(null));
+        wrapper.set("modified_time", DateUtils.getCurrentDateTime());
         try {
             wrapper.update();
         } catch (Exception e) {

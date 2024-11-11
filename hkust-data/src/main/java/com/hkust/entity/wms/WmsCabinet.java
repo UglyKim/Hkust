@@ -53,6 +53,9 @@ public class WmsCabinet {
     @TableField("layer_count")
     private int layerCount;
 
+    @TableField("creator_id")
+    private String creatorId;
+
     /**
      * 创建人
      */
@@ -61,13 +64,19 @@ public class WmsCabinet {
     @TableField("create_time")
     private LocalDateTime createTime;
 
+    @TableField("auditor_id")
+    private String auditorId;
+
     private String auditor;
 
     @TableField("audit_time")
     private LocalDateTime auditTime;
 
+    @TableField("modified_id")
+    private String modifiedId;
+
     @TableField("modified_by")
-    private LocalDateTime modifiedBy;
+    private String modifiedBy;
 
     @TableField("modified_time")
     private LocalDateTime modifiedTime;
@@ -104,5 +113,7 @@ public class WmsCabinet {
      */
     @TableField("waste_liquids_type")
     private String wasteLiquidsType;
+
+    private String remark;
 
 }
