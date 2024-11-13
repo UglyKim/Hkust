@@ -18,5 +18,5 @@ public interface WmsCabinetStructMapper {
     })
     CabinetVO wmsCabinetToCabinetVO(WmsCabinet wmsCabinet);
 
-    WmsCabinet cabinetAOToCabinet(CabinetAO cabinetAO);
+    WmsCabinet wmsCabinetAOToCabinet(CabinetAO cabinetAO);
 }

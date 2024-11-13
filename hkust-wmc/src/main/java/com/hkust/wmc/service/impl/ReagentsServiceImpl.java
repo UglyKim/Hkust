@@ -109,7 +109,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         if (ObjectUtil.isEmpty(reagents)) {
             return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
         }
-        ReagentsVO reagentsVO = WmcReagentsStructMapper.INSTANCE.reagentsToReagentsVO(reagents);
+        ReagentsVO reagentsVO = WmcReagentsStructMapper.INSTANCE.wmsReagentsToReagentsVO(reagents);
         if (reagents.getExpirationDate().compareTo(LocalDate.now()) >= 0) {
             reagentsVO.setIsExp(false);
         } else {
@@ -152,7 +152,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         for (InReagentsAO inReagentsAO : inReagentsAOList) {
             WmsReagents reagents = wmsReagentsMapper.selectById(inReagentsAO.getReagentsId());
             if (ObjectUtil.isEmpty(reagents)) {
-                WmsReagents wmsReagents = WmcReagentsStructMapper.INSTANCE.reagentsAOToReagents(inReagentsAO);
+                WmsReagents wmsReagents = WmcReagentsStructMapper.INSTANCE.wmsReagentsAOToReagents(inReagentsAO);
                 wmsReagents.setId(inReagentsAO.getReagentsId());
                 wmsReagents.setCreateTime(currentDateTime);
                 wmsReagents.setInOut(YNEnum.YES.getCode());
@@ -230,7 +230,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         List<WmsReagents> wmsReagentsList = reagentsIPage.getRecords();
         List<ReagentsVO> reagentsVOList = new ArrayList<>();
         for (WmsReagents reagents : wmsReagentsList) {
-            ReagentsVO reagentsVO = WmcReagentsStructMapper.INSTANCE.reagentsToReagentsVO(reagents);
+            ReagentsVO reagentsVO = WmcReagentsStructMapper.INSTANCE.wmsReagentsToReagentsVO(reagents);
             if (reagents.getExpirationDate().compareTo(LocalDate.now()) >= 0) {
                 reagentsVO.setIsExp(false);
             } else {

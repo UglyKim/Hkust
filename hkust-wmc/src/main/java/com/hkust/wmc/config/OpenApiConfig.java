@@ -2,6 +2,7 @@ package com.hkust.wmc.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -13,45 +14,68 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @Profile({"dev","test"})
 public class OpenApiConfig {
-    private static final String SECURITY_SCHEME_NAME = "BearerAuth";
+
+    private static final String BEARER_AUTH = "bearerAuth";
+    private static final String API_TITLE = "HKUST WMC API";
+    private static final String API_DESCRIPTION = "仓储管理控制台";
+    private static final String API_VERSION = "v1.0.0";
+    private static final String TERMS_OF_SERVICE = "1.用本 API 服务即表示您同意遵守以下条款和条件。<br>" +
+            "2.我们授予您使用本 API 的有限、不可转让的授权，用于合法的、非商业性目的。<br>" +
+            "3.您的数据将严格保密，我们不会将其用于任何未经授权的用途。<br>" +
+            "4.保留随时修改 API 功能、更新文档或终止服务的权利。任何修改将提前通知您。<br>" +
+            "5.本API是按“现状”提供的。我们不对因使用 API 造成的任何间接损失负责。<br>" +
+            "6.可能会不时修改这些条款。";
 
     @Bean
     public OpenAPI hkustOpenAPI() {
         return new OpenAPI()
-                .tags(Arrays.asList(
-                        new Tag().name("认证").description("登陆登出"),
-                        new Tag().name("首页").description("首页"),
-                        new Tag().name("用户").description("用户相关操作"),
-                        new Tag().name("智能仓储柜").description("智能仓储柜相关操作"),
-                        new Tag().name("试剂").description("试剂相关操作"),
-                        new Tag().name("日志").description("日志相关操作"),
-                        new Tag().name("录像").description("录像相关操作")
-                ))
-                .components(new Components()
-                        .addSecuritySchemes("bearerAuth",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.HTTP)
-                                        .scheme("bearer")
-                                        .bearerFormat("JWT")))
-                .addSecurityItem(new SecurityRequirement()
-                        .addList("bearerAuth"))
-                .info(new Info().title("HKUST WMC API")
-                        .description("仓储管理控制台")
-                        .version("v1.0.0")
-                        .license(new License()));
+                .tags(getApiTags())  // 使用提取的方法
+                .components(new Components().addSecuritySchemes(BEARER_AUTH, createBearerSecurityItem())) // 组合并创建Bearer认证
+                .addSecurityItem(new SecurityRequirement().addList(BEARER_AUTH)) // 绑定认证方式
+                .info(createApiInfo()); // 使用提取的方法生成API信息
     }
 
     @Bean
-    public GroupedOpenApi wmscApi() {
+    public GroupedOpenApi wmcApi() {
         return GroupedOpenApi.builder()
                 .group("仓储管理控制台")
-//                .packagesToScan("com.hkust.wmc.controller")
                 .packagesToScan("com.hkust")
-//                .pathsToMatch("/cabinet/**")
                 .build();
     }
+
+    private List<Tag> getApiTags() {
+        return Arrays.asList(
+                new Tag().name("认证").description("登陆登出"),
+                new Tag().name("首页").description("首页"),
+                new Tag().name("用户").description("用户相关操作"),
+                new Tag().name("智能仓储柜").description("智能仓储柜相关操作"),
+                new Tag().name("试剂").description("试剂相关操作"),
+                new Tag().name("日志").description("日志相关操作"),
+                new Tag().name("录像").description("录像相关操作")
+        );
+    }
+
+    private Info createApiInfo() {
+        return new Info()
+                .title(API_TITLE)
+                .description(API_DESCRIPTION)
+                .termsOfService(TERMS_OF_SERVICE)
+                .version(API_VERSION)
+                .license(new License())
+                .contact(new Contact().name("HKUST Team"));
+    }
+
+    private SecurityScheme createBearerSecurityItem() {
+        return new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT")
+                .description("请输入 Bearer Token");
+    }
+
 }

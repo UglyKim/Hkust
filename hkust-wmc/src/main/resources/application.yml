@@ -22,3 +22,24 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    show-extensions: true
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: 实体类
+    home-custom-path: /wmc
+  basic:
+    enable: false
+  insight:
+    enable: false
+    namespace: knife4j-demo-openapi3
+    server: http://localhost:10086
+    secret: BudeU0urM30JTQ+YPZu1GddkG8h0fMgWuYeViSO4Y7Q=
+    service-name: knife4j-demo-openapi3

@@ -34,7 +34,7 @@ public class CabinetService {
     private WmsCabinetMapper wmsCabinetMapper;
 
     public ApiResponse<Void> addCabinet(CabinetAO cabinetAO) {
-        WmsCabinet wmsCabinet = WmsCabinetStructMapper.INSTANCE.cabinetAOToCabinet(cabinetAO);
+        WmsCabinet wmsCabinet = WmsCabinetStructMapper.INSTANCE.wmsCabinetAOToCabinet(cabinetAO);
         wmsCabinet.setId(UUIDUtils.generateUUIDWithoutHyphens());
         User user = SecurityUtils.getCurrentUser();
         wmsCabinet.setCreatorId(user.getStudentId());

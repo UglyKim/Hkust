@@ -65,13 +65,15 @@ public class SecurityConfig {
                 .addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/wmsc/v1/statistics/reagents/**").permitAll()
+//                .antMatchers("/wmsc/v1/statistics/reagents/**").permitAll()
                 .antMatchers("/v3/api-docs/**",
+                        "/doc.html",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
+                        "/favicon.ico",
                         "/swagger-resources/**",
                         "/webjars/**",
-                        "/v1/statistics/reagents",
+                        "/wmsc/v1/statistics/reagents/**",
                         "/v1/auth/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -81,7 +83,10 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                 .usernameParameter("studentId")
-                .permitAll();
+                .permitAll()
+                .and()
+                .headers()
+                .contentSecurityPolicy("script-src 'self' 'unsafe-eval'; object-src 'none';");
         return http.build();
 //                .authorizeRequests(authorizeRequests ->
 //                        {

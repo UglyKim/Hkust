@@ -25,7 +25,6 @@ import java.util.List;
 @Slf4j
 public class OptLogController {
 
-
     private OptLogService optLogService;
 
     @Operation(summary = "操作类型")

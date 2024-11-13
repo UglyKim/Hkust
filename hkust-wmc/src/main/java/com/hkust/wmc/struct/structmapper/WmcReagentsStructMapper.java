@@ -16,11 +16,11 @@ public interface WmcReagentsStructMapper {
     @Mappings({
             @Mapping(target = "reagentsId", source = "id")
     })
-    ReagentsVO reagentsToReagentsVO(WmsReagents reagents);
+    ReagentsVO wmsReagentsToReagentsVO(WmsReagents reagents);
 
 
     @Mappings({
             @Mapping(target = "id", source = "reagentsId")
     })
-    WmsReagents reagentsAOToReagents(InReagentsAO inReagentsAO);
+    WmsReagents wmsReagentsAOToReagents(InReagentsAO inReagentsAO);
 }
