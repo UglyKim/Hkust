@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Schema(description = "试剂")
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddReagentsAO implements Serializable {
+public class InReagentsAO implements Serializable {
 
     private static final long serialVersionUID = 892198765676545679L;
 

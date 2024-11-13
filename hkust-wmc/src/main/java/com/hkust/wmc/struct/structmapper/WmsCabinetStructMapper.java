@@ -16,7 +16,7 @@ public interface WmsCabinetStructMapper {
     @Mappings({
             @Mapping(target = "cabinetId", source = "id")
     })
-    CabinetVO cabinetToCabinetVO(WmsCabinet wmsCabinet);
+    CabinetVO wmsCabinetToCabinetVO(WmsCabinet wmsCabinet);
 
     WmsCabinet cabinetAOToCabinet(CabinetAO cabinetAO);
 }

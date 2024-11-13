@@ -31,6 +31,13 @@ public class CabinetController {
         return ApiResponse.success(EnumToJsonUtils.convertEnumToJsonList(CabinetStateEnum.class));
     }
 
+    @Operation(summary = "智能柜详情")
+    @PostMapping("/info")
+    public ApiResponse<CabinetVO> getCabinetInfo(@Valid @RequestParam String cabinetId) {
+        log.info("received cabinet ID:{}", cabinetId);
+        return cabinetService.getCabinetDetail(cabinetId);
+    }
+
     @Operation(summary = "编辑智能柜")
     @PostMapping("/edit")
     public ApiResponse<Void> alterCabinet(@Valid @RequestBody EditCabinetAO editCabinetAO) {
@@ -42,13 +49,6 @@ public class CabinetController {
     @PostMapping("/list")
     public ApiResponse<List<CabinetVO>> getCabinetList() {
         return cabinetService.getCabinetList();
-    }
-
-    @Operation(summary = "智能柜详情")
-    @PostMapping("/info")
-    public ApiResponse<CabinetVO> getCabinetInfo(@Valid @RequestParam String cabinetId) {
-        log.info("received cabinet ID:{}", cabinetId);
-        return cabinetService.getCabinetDetail(cabinetId);
     }
 
     @Autowired

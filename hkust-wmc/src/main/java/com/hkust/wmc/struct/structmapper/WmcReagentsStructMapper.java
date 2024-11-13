@@ -1,7 +1,7 @@
 package com.hkust.wmc.struct.structmapper;
 
 import com.hkust.entity.wms.WmsReagents;
-import com.hkust.wmc.dto.ao.AddReagentsAO;
+import com.hkust.wmc.dto.ao.InReagentsAO;
 import com.hkust.wmc.dto.vo.ReagentsVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,5 +22,5 @@ public interface WmcReagentsStructMapper {
     @Mappings({
             @Mapping(target = "id", source = "reagentsId")
     })
-    WmsReagents reagentsAOToReagents(AddReagentsAO addReagentsAO);
+    WmsReagents reagentsAOToReagents(InReagentsAO inReagentsAO);
 }

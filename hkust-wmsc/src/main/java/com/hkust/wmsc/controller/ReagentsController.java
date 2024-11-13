@@ -60,14 +60,14 @@ public class ReagentsController {
 
     @Operation(summary = "试剂详细信息查询-基于试剂编号")
     @PostMapping("/info")
-    public ApiResponse<ReagentsVO> searchReagents(@Valid @RequestParam String reagentsId) {
+    public ApiResponse<ReagentsVO> getReagentsInfo(@Valid @RequestParam String reagentsId) {
         log.info("received id:{}", reagentsId);
         return reagentsService.findReagents(reagentsId);
     }
 
     @Operation(summary = "试剂列表查询")
     @PostMapping("/search")
-    public ApiResponse<PageResponse<ReagentsVO>> searchReagents(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
+    public ApiResponse<PageResponse<ReagentsVO>> getReagentsList(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received form reagent params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return reagentsService.findReagentsList(reagentsQueryAO);
     }

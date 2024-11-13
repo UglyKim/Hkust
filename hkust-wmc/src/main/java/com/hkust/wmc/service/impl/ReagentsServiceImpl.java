@@ -23,7 +23,7 @@ import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import com.hkust.wmc.dto.PageResponse;
-import com.hkust.wmc.dto.ao.AddReagentsAO;
+import com.hkust.wmc.dto.ao.InReagentsAO;
 import com.hkust.wmc.dto.ao.AlterReagentsAO;
 import com.hkust.wmc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmc.dto.vo.ReagentsStatisticsVO;
@@ -32,7 +32,6 @@ import com.hkust.wmc.service.ReagentsService;
 import com.hkust.wmc.struct.structmapper.WmcReagentsStructMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -45,6 +44,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReagents> implements ReagentsService {
+
     private WmsReagentsMapper wmsReagentsMapper;
 
     private WmsInOutRecordMapper wmsInOutRecordMapper;
@@ -145,18 +145,18 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         return ApiResponse.success(vo);
     }
 
-    public ApiResponse<String> addReagents(List<AddReagentsAO> addReagentsAOList) {
+    public ApiResponse<String> addReagents(List<InReagentsAO> inReagentsAOList) {
         List<WmsReagents> inFailedReagentsList = new ArrayList<>();
         LocalDateTime currentDateTime = DateUtils.getCurrentDateTime();
         List<String> failedReagentsIDList = new ArrayList<>();
-        for (AddReagentsAO addReagentsAO : addReagentsAOList) {
-            WmsReagents reagents = wmsReagentsMapper.selectById(addReagentsAO.getReagentsId());
+        for (InReagentsAO inReagentsAO : inReagentsAOList) {
+            WmsReagents reagents = wmsReagentsMapper.selectById(inReagentsAO.getReagentsId());
             if (ObjectUtil.isEmpty(reagents)) {
-                WmsReagents wmsReagents = WmcReagentsStructMapper.INSTANCE.reagentsAOToReagents(addReagentsAO);
-                wmsReagents.setId(addReagentsAO.getReagentsId());
+                WmsReagents wmsReagents = WmcReagentsStructMapper.INSTANCE.reagentsAOToReagents(inReagentsAO);
+                wmsReagents.setId(inReagentsAO.getReagentsId());
                 wmsReagents.setCreateTime(currentDateTime);
                 wmsReagents.setInOut(YNEnum.YES.getCode());
-                wmsReagents.setCabinetId(addReagentsAO.getCabinetId());
+                wmsReagents.setCabinetId(inReagentsAO.getCabinetId());
                 inFailedReagentsList.add(wmsReagents);
             } else {
                 failedReagentsIDList.add(reagents.getId());

@@ -113,12 +113,22 @@ public class CabinetService {
         }
         List<CabinetVO> cabinetVOList = new ArrayList<>();
         for (WmsCabinet wmsCabinet : cabinetList) {
-            CabinetVO cabinetVO = WmsCabinetStructMapper.INSTANCE.cabinetToCabinetVO(wmsCabinet);
+            CabinetVO cabinetVO = WmsCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
             String statValue = CabinetStateEnum.fromCode(wmsCabinet.getState());
             cabinetVO.setState(statValue);
             cabinetVOList.add(cabinetVO);
         }
         return ApiResponse.success(cabinetVOList);
+    }
+
+    public ApiResponse<CabinetVO> getCabinetDetail(String cabinetId) {
+        WmsCabinet wmsCabinet = wmsCabinetMapper.selectById(cabinetId);
+        if (ObjectUtil.isEmpty(wmsCabinet)) {
+            return ApiResponse.success();
+        }
+        CabinetVO cabinetVO = WmsCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
+        cabinetVO.setState(CabinetStateEnum.fromCode(wmsCabinet.getState()));
+        return ApiResponse.success(cabinetVO);
     }
 
     @Autowired

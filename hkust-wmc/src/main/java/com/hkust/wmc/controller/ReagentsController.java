@@ -8,12 +8,11 @@ import com.hkust.enums.OptTypeEnum;
 import com.hkust.enums.PhysicalStateEnum;
 import com.hkust.utils.EnumToJsonUtils;
 import com.hkust.wmc.dto.PageResponse;
-import com.hkust.wmc.dto.ao.AddReagentsAO;
+import com.hkust.wmc.dto.ao.InReagentsAO;
 import com.hkust.wmc.dto.ao.AlterReagentsAO;
 import com.hkust.wmc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmc.dto.vo.ReagentsStatisticsVO;
 import com.hkust.wmc.dto.vo.ReagentsVO;
-import com.hkust.wmc.service.ReagentsService;
 import com.hkust.wmc.service.impl.ReagentsServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -56,18 +55,18 @@ public class ReagentsController {
         return reagentsService.reagentsStat();
     }
 
-    @Operation(summary = "添加试剂")
-    @PostMapping("/add")
-    public ApiResponse<String> addReagents(@RequestBody @Valid List<AddReagentsAO> addReagentsAOList) {
-        log.info("received reagents info:{}", JSONUtil.toJsonPrettyStr(addReagentsAOList));
-        return reagentsService.addReagents(addReagentsAOList);
-    }
-
     @Operation(summary = "试剂列表")
     @PostMapping("/list")
     public ApiResponse<PageResponse<ReagentsVO>> getReagentsList(@Valid @RequestBody ReagentsQueryAO reagentsQueryAO) {
         log.info("received query params:{}", JSONUtil.toJsonPrettyStr(reagentsQueryAO));
         return reagentsService.getReagentsList(reagentsQueryAO);
+    }
+
+    @Operation(summary = "添加试剂")
+    @PostMapping("/add")
+    public ApiResponse<String> inboundReagents(@RequestBody @Valid List<InReagentsAO> inReagentsAOList) {
+        log.info("received reagents info:{}", JSONUtil.toJsonPrettyStr(inReagentsAOList));
+        return reagentsService.addReagents(inReagentsAOList);
     }
 
     @Operation(summary = "试剂详情")
@@ -91,6 +90,7 @@ public class ReagentsController {
         return ApiResponse.success();
     }
 
+    @Autowired
     public void setReagentsService(ReagentsServiceImpl reagentsService) {
         this.reagentsService = reagentsService;
     }
