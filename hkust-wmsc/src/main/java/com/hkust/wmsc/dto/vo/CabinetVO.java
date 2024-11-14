@@ -80,8 +80,9 @@ public class CabinetVO implements Serializable {
     private String wasteLiquidsType;
 
     @Schema(description = "修改人")
-    private LocalDateTime modifiedBy;
+    private String modifiedBy;
 
     @Schema(description = "修改时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime modifiedTime;
 }

@@ -49,7 +49,7 @@ public class CabinetService {
     public ApiResponse<CabinetVO> getCabinetDetail(String cabinetId) {
         WmsCabinet wmsCabinet = wmsCabinetMapper.selectById(cabinetId);
         if (ObjectUtil.isEmpty(wmsCabinet)) {
-            return ApiResponse.success();
+            return ApiResponse.success(ReturnCode.CABINET_IS_NULL.getMessage());
         }
         CabinetVO cabinetVO = WmscCabinetStructMapper.INSTANCE.wmsCabinetToCabinetVO(wmsCabinet);
         cabinetVO.setState(CabinetStateEnum.fromCode(wmsCabinet.getState()));
