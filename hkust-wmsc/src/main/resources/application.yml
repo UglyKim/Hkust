@@ -15,15 +15,11 @@ spring:
 jwt:
   tokenHeader: X-Token
   tokenHead: Bearer
-  secret: hkustcabinetsecret7a8e18ad75bf457b9aa2714806a1bbe9 #JWT加解密使用的密钥
+  secret: hkustcabinetsecret7a8e18ad75bf457b9aa2714806a1bb99 #JWT加解密使用的密钥
   expirSc: 30000000
   expirMc: 30000000
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
-uplaod:
-  dir: /opt/hkust/video/
-  #  dir: /Users/kim/work/uploads/
-  server_address: http://47.100.40.77:10003
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -45,3 +41,7 @@ knife4j:
     server: http://localhost:10086
     secret: BudeU0urM30JTQ+YPZu1GddkG8h0fMgWuYeViSO4Y7Q=
     service-name: knife4j-demo-openapi3
+uplaod:
+  dir: /opt/hkust/video/
+  #  dir: /Users/kim/work/uploads/
+  server_address: http://47.100.40.77:10003

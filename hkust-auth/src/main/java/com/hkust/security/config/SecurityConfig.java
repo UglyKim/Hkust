@@ -88,43 +88,6 @@ public class SecurityConfig {
                 .headers()
                 .contentSecurityPolicy("script-src 'self' 'unsafe-eval'; object-src 'none';");
         return http.build();
-//                .authorizeRequests(authorizeRequests ->
-//                        {
-//                            try {
-//                                authorizeRequests
-//                                        .antMatchers(
-//                                                "/v3/api-docs/**",
-//                                                "/swagger-ui/**",
-//                                                "/swagger-ui.html",
-//                                                "/swagger-resources/**",
-//                                                "/webjars/**",
-//                                                "/v1/auth/login"
-//                                        ).permitAll()
-//                                        .anyRequest().authenticated()
-//                                        .and()
-//                                        .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                                        .accessDeniedHandler(customAccessDeniedHandler())
-//                                        .and()
-//                                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                                        .and()
-//                                        .formLogin()
-//                                        .usernameParameter("studentId")
-//                                        .permitAll();
-//
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                );
-//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-//        http.addFilterAfter(hkustFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
-//        return http.build();
-        // 测试使用，不做验证
-       /* http
-                .authorizeRequests().anyRequest().permitAll() // 允许所有请求
-                .and().csrf().disable(); // 禁用 CSRF 保护
-
-        return http.build();*/
     }
 
     @Bean

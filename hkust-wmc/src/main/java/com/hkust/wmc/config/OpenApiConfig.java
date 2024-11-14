@@ -1,5 +1,6 @@
 package com.hkust.wmc.config;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Profile;
 import java.util.Arrays;
 import java.util.List;
 
+@EnableKnife4j
 @Configuration
 @Profile({"dev","test"})
 public class OpenApiConfig {
@@ -38,14 +40,6 @@ public class OpenApiConfig {
                 .components(new Components().addSecuritySchemes(BEARER_AUTH, createBearerSecurityItem())) // 组合并创建Bearer认证
                 .addSecurityItem(new SecurityRequirement().addList(BEARER_AUTH)) // 绑定认证方式
                 .info(createApiInfo()); // 使用提取的方法生成API信息
-    }
-
-    @Bean
-    public GroupedOpenApi wmcApi() {
-        return GroupedOpenApi.builder()
-                .group("仓储管理控制台")
-                .packagesToScan("com.hkust")
-                .build();
     }
 
     private List<Tag> getApiTags() {
@@ -76,6 +70,14 @@ public class OpenApiConfig {
                 .scheme("bearer")
                 .bearerFormat("JWT")
                 .description("请输入 Bearer Token");
+    }
+
+    @Bean
+    public GroupedOpenApi wmcApi() {
+        return GroupedOpenApi.builder()
+                .group("仓储管理控制台")
+                .packagesToScan("com.hkust.wmc","com.hkust")
+                .build();
     }
 
 }

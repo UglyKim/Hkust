@@ -1,6 +1,5 @@
 package com.hkust.wmsc.config;
 
-import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.tags.Tag;
 import io.swagger.v3.oas.models.Components;
@@ -16,8 +15,6 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 import java.util.List;
-
-@EnableKnife4j
 
 @Configuration
 @Profile({"dev", "test"})
@@ -56,7 +53,6 @@ public class OpenApiConfig {
         );
     }
 
-    // 提取 API 信息配置
     private Info createApiInfo() {
         return new Info()
                 .title(API_TITLE)
@@ -67,7 +63,6 @@ public class OpenApiConfig {
                 .contact(new Contact().name("HKUST Team"));
     }
 
-    // 提取 Bearer 认证配置
     private SecurityScheme createBearerSecurityItem() {
         return new SecurityScheme()
                 .type(SecurityScheme.Type.HTTP)

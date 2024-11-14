@@ -82,3 +82,211 @@
 2024-11-13 19:56:47.328 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2024-11-13 19:56:47.330 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
 2024-11-13 19:56:48.636 INFO  [http-nio-10002-exec-6] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 439 ms
+2024-11-13 20:02:51.264 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 20:02:51.267 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-13 22:07:30.426 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-13 22:07:31.552 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-13 22:07:31.560 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:07:31.561 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-13 22:07:31.561 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-13 22:07:31.783 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-13 22:07:31.784 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1310 ms
+2024-11-13 22:07:31.851 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-13 22:07:31.979 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-13 22:07:32.305 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-13 22:07:32.412 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.mapper.wmsc.WmsStocktakingRecordMapper".
+2024-11-13 22:07:32.412 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - interface com.hkust.mapper.wmsc.WmsStocktakingRecordMapper ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:07:32.439 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-13 22:07:32.440 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:07:32.461 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-13 22:07:32.462 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:07:32.811 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-13 22:07:32.929 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3bed3315, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@119b0892, org.springframework.security.web.context.SecurityContextPersistenceFilter@2513a118, org.springframework.security.web.header.HeaderWriterFilter@f1f7db2, org.springframework.security.web.authentication.logout.LogoutFilter@1d61a348, com.hkust.security.jwt.JwtFilter@5d43409a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4fdca00a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@73ae0257, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6aa3bfc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1a3e8e24, org.springframework.security.web.session.SessionManagementFilter@2db4ad1, org.springframework.security.web.access.ExceptionTranslationFilter@31e130bf, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@656f62dc, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@6e041285]
+2024-11-13 22:07:33.246 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-13 22:07:33.246 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:07:33.254 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-13 22:07:33.264 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-13 22:07:33.295 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:07:33.317 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-13 22:07:54.093 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-13 22:07:54.094 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-13 22:07:54.095 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-13 22:07:55.426 INFO  [http-nio-10002-exec-10] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 449 ms
+2024-11-13 22:16:12.194 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 22:16:12.196 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-13 22:16:17.276 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-13 22:16:18.301 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-13 22:16:18.305 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:16:18.306 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-13 22:16:18.306 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-13 22:16:18.411 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-13 22:16:18.411 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1086 ms
+2024-11-13 22:16:18.444 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-13 22:16:18.501 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-13 22:16:18.718 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-13 22:16:18.791 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.mapper.wmsc.WmsStocktakingRecordMapper".
+2024-11-13 22:16:18.791 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - interface com.hkust.mapper.wmsc.WmsStocktakingRecordMapper ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:16:18.814 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-13 22:16:18.814 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:16:18.832 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-13 22:16:18.832 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:16:19.101 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-13 22:16:19.226 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@47ac613b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@60d6fdd4, org.springframework.security.web.context.SecurityContextPersistenceFilter@4a901445, org.springframework.security.web.header.HeaderWriterFilter@161aa04a, org.springframework.security.web.authentication.logout.LogoutFilter@67507df, com.hkust.security.jwt.JwtFilter@558756be, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1dd74143, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b0b7e5a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17ba57f0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@66f28a1f, org.springframework.security.web.session.SessionManagementFilter@149b0577, org.springframework.security.web.access.ExceptionTranslationFilter@4d6ccc97, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c386958, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@17f3eefb]
+2024-11-13 22:16:19.531 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-13 22:16:19.531 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:16:19.539 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-13 22:16:19.549 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-13 22:16:19.581 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:16:19.601 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-13 22:16:24.802 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-13 22:16:24.802 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-13 22:16:24.804 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-13 22:16:26.147 INFO  [http-nio-10002-exec-8] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 506 ms
+2024-11-13 22:21:38.468 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 22:21:38.472 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-13 22:21:42.825 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-13 22:21:43.599 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-13 22:21:43.604 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:21:43.604 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-13 22:21:43.604 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-13 22:21:43.709 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-13 22:21:43.709 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 850 ms
+2024-11-13 22:21:43.742 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-13 22:21:43.800 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-13 22:21:44.006 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-13 22:21:44.080 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.mapper.wmsc.WmsStocktakingRecordMapper".
+2024-11-13 22:21:44.080 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - interface com.hkust.mapper.wmsc.WmsStocktakingRecordMapper ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:21:44.104 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-13 22:21:44.104 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:21:44.124 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-13 22:21:44.124 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:21:44.396 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-13 22:21:44.538 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6bccd036, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4f4c88f9, org.springframework.security.web.context.SecurityContextPersistenceFilter@5626d18c, org.springframework.security.web.header.HeaderWriterFilter@52b3bf03, org.springframework.security.web.authentication.logout.LogoutFilter@50448409, com.hkust.security.jwt.JwtFilter@558756be, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@766a49c7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3dc95b8b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@29b40b3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6a756082, org.springframework.security.web.session.SessionManagementFilter@35c9a231, org.springframework.security.web.access.ExceptionTranslationFilter@6f8aba08, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7c52fc81, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@17f3eefb]
+2024-11-13 22:21:44.827 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-13 22:21:44.827 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:21:44.834 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-13 22:21:44.844 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-13 22:21:44.875 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:21:44.896 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-13 22:22:00.069 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-13 22:22:00.069 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-13 22:22:00.071 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-13 22:22:00.853 INFO  [http-nio-10002-exec-8] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 459 ms
+2024-11-13 22:22:20.798 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 22:22:20.802 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-13 22:22:24.591 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-13 22:22:25.369 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-13 22:22:25.376 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:22:25.376 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-13 22:22:25.376 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-13 22:22:25.481 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-13 22:22:25.481 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 855 ms
+2024-11-13 22:22:25.512 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-13 22:22:25.570 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-13 22:22:25.775 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-13 22:22:25.850 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.mapper.wmsc.WmsStocktakingRecordMapper".
+2024-11-13 22:22:25.850 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - interface com.hkust.mapper.wmsc.WmsStocktakingRecordMapper ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:22:25.874 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-13 22:22:25.874 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:22:25.893 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-13 22:22:25.894 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:22:26.156 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-13 22:22:26.283 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6bccd036, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4f4c88f9, org.springframework.security.web.context.SecurityContextPersistenceFilter@5626d18c, org.springframework.security.web.header.HeaderWriterFilter@52b3bf03, org.springframework.security.web.authentication.logout.LogoutFilter@50448409, com.hkust.security.jwt.JwtFilter@558756be, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@766a49c7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3dc95b8b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@29b40b3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6a756082, org.springframework.security.web.session.SessionManagementFilter@35c9a231, org.springframework.security.web.access.ExceptionTranslationFilter@6f8aba08, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7c52fc81, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@17f3eefb]
+2024-11-13 22:22:26.574 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-13 22:22:26.574 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:22:26.582 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-13 22:22:26.592 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-13 22:22:26.623 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:22:26.643 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-13 22:22:27.936 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-13 22:22:27.936 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-13 22:22:27.938 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-13 22:22:28.641 INFO  [http-nio-10002-exec-3] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 444 ms
+2024-11-13 22:27:29.696 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 22:27:29.700 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-13 22:27:35.078 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-13 22:27:36.351 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-13 22:27:36.359 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:27:36.360 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-13 22:27:36.360 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-13 22:27:36.469 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-13 22:27:36.469 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1328 ms
+2024-11-13 22:27:36.501 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-13 22:27:36.560 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-13 22:27:36.764 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-13 22:27:36.835 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.mapper.wmsc.WmsStocktakingRecordMapper".
+2024-11-13 22:27:36.835 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - interface com.hkust.mapper.wmsc.WmsStocktakingRecordMapper ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:27:36.857 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-13 22:27:36.858 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:27:36.875 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-13 22:27:36.875 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:27:37.145 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-13 22:27:37.272 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@47ac613b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@60d6fdd4, org.springframework.security.web.context.SecurityContextPersistenceFilter@4a901445, org.springframework.security.web.header.HeaderWriterFilter@161aa04a, org.springframework.security.web.authentication.logout.LogoutFilter@67507df, com.hkust.security.jwt.JwtFilter@558756be, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1dd74143, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b0b7e5a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17ba57f0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@66f28a1f, org.springframework.security.web.session.SessionManagementFilter@149b0577, org.springframework.security.web.access.ExceptionTranslationFilter@4d6ccc97, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c386958, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@17f3eefb]
+2024-11-13 22:27:37.545 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-13 22:27:37.545 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 22:27:37.552 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-13 22:27:37.562 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-13 22:27:37.593 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-13 22:27:37.614 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-13 22:27:44.380 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-13 22:27:44.380 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-13 22:27:44.382 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-13 22:27:45.705 INFO  [http-nio-10002-exec-3] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 462 ms
+2024-11-13 23:02:55.865 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 23:02:55.869 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-13 23:09:37.158 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-13 23:09:37.998 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-13 23:09:38.003 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-13 23:09:38.003 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-13 23:09:38.003 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-13 23:09:38.109 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-13 23:09:38.109 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 913 ms
+2024-11-13 23:09:38.142 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-13 23:09:38.200 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-13 23:09:38.409 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-13 23:09:38.481 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.mapper.wmsc.WmsStocktakingRecordMapper".
+2024-11-13 23:09:38.481 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - interface com.hkust.mapper.wmsc.WmsStocktakingRecordMapper ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:09:38.504 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-13 23:09:38.505 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:09:38.525 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-13 23:09:38.525 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:09:38.814 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-13 23:09:38.941 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@47ac613b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@60d6fdd4, org.springframework.security.web.context.SecurityContextPersistenceFilter@4a901445, org.springframework.security.web.header.HeaderWriterFilter@161aa04a, org.springframework.security.web.authentication.logout.LogoutFilter@67507df, com.hkust.security.jwt.JwtFilter@5fa23c, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1dd74143, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b0b7e5a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17ba57f0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@66f28a1f, org.springframework.security.web.session.SessionManagementFilter@149b0577, org.springframework.security.web.access.ExceptionTranslationFilter@4d6ccc97, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c386958, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@54e02f6a]
+2024-11-13 23:09:39.239 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-13 23:09:39.239 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:09:39.247 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-13 23:09:39.256 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-13 23:09:39.288 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-13 23:09:39.310 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-13 23:09:49.440 INFO  [http-nio-10002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-13 23:09:49.441 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-13 23:09:49.443 INFO  [http-nio-10002-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-13 23:09:50.838 INFO  [http-nio-10002-exec-4] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 432 ms
+2024-11-13 23:10:50.790 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 23:10:50.795 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-11-13 23:10:53.662 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2024-11-13 23:10:54.508 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 10002 (http)
+2024-11-13 23:10:54.513 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-10002"]
+2024-11-13 23:10:54.513 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-13 23:10:54.513 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2024-11-13 23:10:54.632 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-13 23:10:54.633 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 942 ms
+2024-11-13 23:10:54.666 INFO  [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2024-11-13 23:10:54.730 INFO  [main] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-11-13 23:10:54.941 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "roleId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Role"
+2024-11-13 23:10:55.016 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.mapper.wmsc.WmsStocktakingRecordMapper".
+2024-11-13 23:10:55.016 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - interface com.hkust.mapper.wmsc.WmsStocktakingRecordMapper ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:10:55.038 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.UserExts".
+2024-11-13 23:10:55.038 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.UserExts ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:10:55.057 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.RolePerm".
+2024-11-13 23:10:55.057 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.RolePerm ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:10:55.322 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.UserRole"
+2024-11-13 23:10:55.444 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@60a19573, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@44a085e5, org.springframework.security.web.context.SecurityContextPersistenceFilter@7be1ce6a, org.springframework.security.web.header.HeaderWriterFilter@149b0577, org.springframework.security.web.authentication.logout.LogoutFilter@71f1cc02, com.hkust.security.jwt.JwtFilter@102ecc22, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@47ac613b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6dc9da2d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@79518e00, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@134ff8f8, org.springframework.security.web.session.SessionManagementFilter@67f77f6e, org.springframework.security.web.access.ExceptionTranslationFilter@436bd4df, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1dd74143, com.hkust.security.interceptor.HkustFilterSecurityInterceptor@2dc3271b]
+2024-11-13 23:10:55.731 WARN  [main] c.b.m.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.hkust.entity.CabinetType".
+2024-11-13 23:10:55.731 WARN  [main] c.b.m.c.injector.DefaultSqlInjector - class com.hkust.entity.CabinetType ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-11-13 23:10:55.738 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "permId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.Perm"
+2024-11-13 23:10:55.748 WARN  [main] c.b.m.core.metadata.TableInfoHelper - This primary key of "urlId" is primitive !不建议如此请使用包装类 in Class: "com.hkust.entity.PermDetail"
+2024-11-13 23:10:55.779 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-10002"]
+2024-11-13 23:10:55.800 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 10002 (http) with context path ''
+2024-11-13 23:15:26.578 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-11-13 23:15:26.581 INFO  [SpringApplicationShutdownHook] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
