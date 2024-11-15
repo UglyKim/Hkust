@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "日志管理")
+@Tag(name = "录像")
 @RestController
 @RequestMapping("/wmc/v1/video")
 @Slf4j

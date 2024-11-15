@@ -29,6 +29,9 @@ public class UserQueryAO implements Serializable {
     @Schema(description = "用户名")
     private String userName;
 
+    @Schema(description = "姓名")
+    private String realName;
+
     @Schema(description = "查询起始日期")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate startDate;

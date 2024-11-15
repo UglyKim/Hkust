@@ -132,6 +132,9 @@ public class UserService {
         if (ObjectUtil.isNotEmpty(userQueryAO.getUserName())) {
             paramsMap.put("userName", userQueryAO.getUserName());
         }
+        if (ObjectUtil.isNotEmpty(userQueryAO.getRealName())) {
+            paramsMap.put("realName", userQueryAO.getRealName());
+        }
         paramsMap.put("pageSize", userQueryAO.getPageSize());
         int offset = 0;
         if (0 != userQueryAO.getPageNum()) {
@@ -163,14 +166,13 @@ public class UserService {
     }
 
     public ApiResponse<UserVO> getUserInfoDetail(String studentId) {
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("student_id", studentId);
-
-        User user = userMapper.selectOne(wrapper);
+        User user = userMapper.selectUserRoleByStudentId(studentId);
         if (ObjectUtil.isEmpty(user)) {
             return ApiResponse.failed(ReturnCode.USER_IS_NULL);
         }
         UserVO userVO = WmcUserStructMapper.INSTANCE.userToUserVO(user);
+        List<String> roleNameList = user.getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());
+        userVO.setRoleList(roleNameList);
         return ApiResponse.success(userVO);
     }
 

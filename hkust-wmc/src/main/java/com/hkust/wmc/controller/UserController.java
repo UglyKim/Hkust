@@ -57,7 +57,7 @@ public class UserController {
 
     @Operation(summary = "用户列表")
     @PostMapping("/list")
-    public ApiResponse<PageResponse<UserVO>> getUserList(@RequestBody UserQueryAO userQueryAO) {
+    public ApiResponse<PageResponse<UserVO>> getUserList(@Valid @RequestBody UserQueryAO userQueryAO) {
         log.info("received user query info:{}", JSONUtil.toJsonPrettyStr(userQueryAO));
         return userService.getUserList(userQueryAO);
     }
