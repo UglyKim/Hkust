@@ -39,6 +39,7 @@ public class InReagentsAO implements Serializable {
     private String enName;
 
     @Schema(description = "类型")
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String type;
 
     @Schema(description = "二维码")
@@ -60,6 +61,7 @@ public class InReagentsAO implements Serializable {
     private String researchGroup;
 
     @Schema(description = "状态")
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String state;
 
     @Schema(description = "规格")
@@ -67,12 +69,14 @@ public class InReagentsAO implements Serializable {
     private String specification;
 
     @Schema(description = "物理状态")
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String physicalState;
 
     @Schema(description = "特殊存储条件")
     private String specialStorageConditions;
 
     @Schema(description = "危险和危害特性类别")
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String hazardClassification;
 
     @Schema(description = "到期日")
@@ -81,5 +85,6 @@ public class InReagentsAO implements Serializable {
     private LocalDate expirationDate;
 
     @Schema(description = "化学品危险属性")
+    @Size(min = 1, max = 1,message = "长度为 1")
     private String hazardProps;
 }

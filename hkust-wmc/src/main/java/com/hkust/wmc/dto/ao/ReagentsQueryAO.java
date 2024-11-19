@@ -27,6 +27,7 @@ public class ReagentsQueryAO implements Serializable {
     @Min(value = 1, message = "每页显示条数必须大于0")
     private int pageSize;
 
+    @Deprecated
     @Schema(description = "出入库 in:1 out:2")
     @Size(min = 1, max = 1, message = "长度为 1")
     private String type;

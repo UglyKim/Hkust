@@ -14,6 +14,7 @@ import com.hkust.entity.wms.WmsInOutRecord;
 import com.hkust.entity.wms.WmsOptLog;
 import com.hkust.entity.wms.WmsReagents;
 import com.hkust.entity.wms.WmsStocktakingRecord;
+import com.hkust.enums.InOutEnumType;
 import com.hkust.enums.OptTypeEnum;
 import com.hkust.enums.YNEnum;
 import com.hkust.mapper.wmsc.WmsOptLogMapper;
@@ -108,7 +109,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
                 WmsReagents wmsReagents = WmscReagentsStructMapper.INSTANCE.InReagentsAOToReagents(inReagentsAO);
                 wmsReagents.setId(inReagentsAO.getReagentsId());
                 wmsReagents.setCreateTime(currentDateTime);
-                wmsReagents.setInOut(YNEnum.YES.getCode());
+                wmsReagents.setInOut(InOutEnumType.IN.getCode());
                 wmsReagents.setCabinetId(inReagentsAO.getCabinetId());
                 inFailedReagentsList.add(wmsReagents);
             } else {

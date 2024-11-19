@@ -14,8 +14,8 @@ import com.hkust.entity.User;
 import com.hkust.entity.wms.WmsInOutRecord;
 import com.hkust.entity.wms.WmsOptLog;
 import com.hkust.entity.wms.WmsReagents;
+import com.hkust.enums.InOutEnumType;
 import com.hkust.enums.OptTypeEnum;
-import com.hkust.enums.YNEnum;
 import com.hkust.mapper.wmsc.WmsInOutRecordMapper;
 import com.hkust.mapper.wmsc.WmsOptLogMapper;
 import com.hkust.mapper.wmsc.WmsReagentsMapper;
@@ -23,8 +23,8 @@ import com.hkust.security.SecurityUtils;
 import com.hkust.utils.DateUtils;
 import com.hkust.utils.UUIDUtils;
 import com.hkust.wmc.dto.PageResponse;
-import com.hkust.wmc.dto.ao.InReagentsAO;
 import com.hkust.wmc.dto.ao.AlterReagentsAO;
+import com.hkust.wmc.dto.ao.InReagentsAO;
 import com.hkust.wmc.dto.ao.ReagentsQueryAO;
 import com.hkust.wmc.dto.vo.ReagentsStatisticsVO;
 import com.hkust.wmc.dto.vo.ReagentsVO;
@@ -59,6 +59,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             return ApiResponse.failed(ReturnCode.REAGENTS_IS_NULL);
         }
         UpdateChainWrapper<WmsReagents> wrapper = new UpdateChainWrapper<>(wmsReagentsMapper);
+        wrapper.eq("id", reagents.getId());
         if (ObjectUtil.isNotEmpty(alterReagentsAO.getBarcode())) {
             wrapper.set("barcode", alterReagentsAO.getBarcode());
         }
@@ -124,19 +125,19 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
         QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         Long count = wmsInOutRecordMapper.selectCount(wrapper);
         // 本月出库
-        QueryWrapper<WmsReagents> wrapper_in = new QueryWrapper<>();
+        QueryWrapper<WmsInOutRecord> wrapper_in = new QueryWrapper<>();
         LocalDate today = LocalDate.now(); // 当前日期
         LocalDate firstDayOfMonth = today.withDayOfMonth(1); // 当月第一天
         LocalDate lastDayOfMonth = today.withDayOfMonth(today.lengthOfMonth()); // 当月最后一天
         wrapper_in.eq("type", OptTypeEnum.INBOUND.getCode());
         wrapper_in.between("opt_time", firstDayOfMonth, lastDayOfMonth);
-        Long thisMonthInCount = wmsReagentsMapper.selectCount(wrapper_in);
+        Long thisMonthInCount = wmsInOutRecordMapper.selectCount(wrapper_in);
 
         // 本月出库
-        QueryWrapper<WmsReagents> wrapper_out = new QueryWrapper<>();
+        QueryWrapper<WmsInOutRecord> wrapper_out = new QueryWrapper<>();
         wrapper_out.eq("type", OptTypeEnum.OUTBOUND.getCode());
         wrapper_out.between("opt_time", firstDayOfMonth, lastDayOfMonth);
-        Long thisMonthOutCount = wmsReagentsMapper.selectCount(wrapper_out);
+        Long thisMonthOutCount = wmsInOutRecordMapper.selectCount(wrapper_out);
 
         ReagentsStatisticsVO vo = new ReagentsStatisticsVO();
         vo.setCount(count.intValue());
@@ -155,7 +156,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
                 WmsReagents wmsReagents = WmcReagentsStructMapper.INSTANCE.wmsReagentsAOToReagents(inReagentsAO);
                 wmsReagents.setId(inReagentsAO.getReagentsId());
                 wmsReagents.setCreateTime(currentDateTime);
-                wmsReagents.setInOut(YNEnum.YES.getCode());
+                wmsReagents.setInOut(InOutEnumType.IN.getCode());
                 wmsReagents.setCabinetId(inReagentsAO.getCabinetId());
                 inFailedReagentsList.add(wmsReagents);
             } else {
@@ -213,7 +214,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wrapper.like("name", reagentsQueryAO.getName());
         }
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getCabinetId())) {
-            wrapper.eq("cabinetId", reagentsQueryAO.getCabinetId());
+            wrapper.eq("cabinet_id", reagentsQueryAO.getCabinetId());
         }
         if (ObjectUtil.isNotEmpty(reagentsQueryAO.getOperator())) {
             wrapper.eq("creator", reagentsQueryAO.getOperator());
@@ -222,6 +223,7 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             wrapper.ge("create_time", reagentsQueryAO.getStartDate());
             wrapper.le("create_time", reagentsQueryAO.getEndDate());
         }
+        wrapper.eq("in_out", InOutEnumType.IN.getCode());
         wrapper.orderByAsc("expiration_date");
         IPage<WmsReagents> reagentsIPage = wmsReagentsMapper.selectPage(page, wrapper);
         if (CollUtil.isEmpty(reagentsIPage.getRecords())) {

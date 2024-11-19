@@ -20,6 +20,10 @@ public class ReagentsVO implements Serializable {
     @NotNull
     private String reagentsId;
 
+    @Schema(description = "智能柜ID")
+    @NotNull
+    private String cabinetId;
+
     @Schema(description = "casNo")
     private String casNo;
 
