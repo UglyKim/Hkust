@@ -43,7 +43,6 @@ public class VideoService {
             return ApiResponse.failed(ReturnCode.FILE_NOT_MP4);
         }
 
-        // 判断录像根目录是否存在，不存在则创建
 //        String uploadDir = "/Users/kim/work/uploads/";
         File directory = new File(uploadDir);
         if (!directory.exists()) {
@@ -58,19 +57,15 @@ public class VideoService {
         try {
             // 检查文件夹是否存在
             if (!Files.exists(folderPath)) {
-                // 文件夹不存在，创建文件夹
                 Files.createDirectory(folderPath);
                 log.info("文件夹创建成功: " + folderPath.toAbsolutePath());
             } else {
-                // 文件夹已存在
                 log.info("文件夹已存在: " + folderPath.toAbsolutePath());
             }
         } catch (IOException e) {
             log.error("创建文件夹失败: " + e.getMessage());
         }
 
-
-        // 保存文件到指定文件夹
         try {
             // 构建文件保存路径
             String newFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();

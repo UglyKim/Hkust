@@ -295,10 +295,8 @@ public class ReagentsServiceImpl extends ServiceImpl<WmsReagentsMapper, WmsReage
             WmsStocktakingRecord record = new WmsStocktakingRecord();
             record.setId(UUIDUtils.generateUUIDWithoutHyphens());
             record.setName(ao.getName());
-//            record.setCount(Integer.valueOf(ao.getTotalCount()));
             record.setCount(Integer.valueOf(ao.getTotalCount()));
             User currentUser = SecurityUtils.getCurrentUser();
-//            record.setOperatorId(currentUser.getStudentId());
             record.setOperatorId(Optional.ofNullable(currentUser).map(User::getStudentId).orElse(null));
             record.setOperator(Optional.ofNullable(currentUser).map(User::getUsername).orElse(null));
             record.setCreateTime(DateUtils.getCurrentDateTime());
