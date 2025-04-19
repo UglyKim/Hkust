@@ -19,7 +19,6 @@ public class StatisticsService {
 
     public ApiResponse<List<StatisticsInOutBoundVO>> monthInoutBoundStatistics() {
         List<Map<Object, Object>> resultList = wmsInOutRecordMapper.selectInventorySummary();
-        // 转换为 VO 列表
         List<StatisticsInOutBoundVO> statisticsList = StatisticsMapper.mapToStatisticsVOList(resultList);
         return ApiResponse.success(statisticsList);
     }
