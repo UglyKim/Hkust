@@ -22,13 +22,11 @@
         </encoder>
     </appender>
 
-    <!-- 根日志配置 -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>
 
-    <!-- 特定包的日志配置 -->
     <logger name="com.hkust" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
         <!--        <appender-ref ref="FILE"/>-->

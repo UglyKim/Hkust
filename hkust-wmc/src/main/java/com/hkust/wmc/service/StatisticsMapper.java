@@ -14,12 +14,10 @@ public class StatisticsMapper {
         for (Map<Object, Object> record : records) {
             StatisticsInOutBoundVO stats = new StatisticsInOutBoundVO();
 
-            // 从 Map 中提取 month、inboundCount 和 outboundCount
             if (record.containsKey("month")) {
                 String monthStr = (String) record.get("month");
                 stats.setMonth(monthStr);
             }
-
             if (record.containsKey("type") && record.containsKey("quantity")) {
                 String type = (String) record.get("type");
                 int quantity = ((Number) record.get("quantity")).intValue();

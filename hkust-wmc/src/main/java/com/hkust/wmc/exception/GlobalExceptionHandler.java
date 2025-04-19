@@ -42,7 +42,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorMessage);
     }
 
-    // 处理数据库访问异常
     @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleDataAccessException(DataAccessException ex) {
@@ -52,7 +51,6 @@ public class GlobalExceptionHandler {
                 .body("数据库访问异常，请稍后重试。");
     }
 
-    // 处理数据库约束异常
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
@@ -61,7 +59,6 @@ public class GlobalExceptionHandler {
                 .body("违反数据库约束，请检查输入数据。");
     }
 
-    // 处理空指针异常
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleNullPointerException(NullPointerException ex) {
