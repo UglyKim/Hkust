@@ -33,11 +33,8 @@ public class InOutRecordServiceImpl extends ServiceImpl<WmsInOutRecordMapper, Wm
     public Long getThisMonthInbound() {
         QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         wrapper.eq("type", OptTypeEnum.INBOUND.getCode());
-        // 获取当前日期
         LocalDate today = LocalDate.now();
-        // 获取当前月的第一天
         LocalDateTime startOfMonth = today.withDayOfMonth(1).atStartOfDay(); // 当月第一天的开始时间
-        // 获取当前月的最后一天
         LocalDateTime endOfMonth = today.withDayOfMonth(today.lengthOfMonth()).atTime(23, 59, 59); // 当月最后一天的结束时间
         wrapper.between("opt_time", startOfMonth, endOfMonth);
         return wmsInOutRecordMapper.selectCount(wrapper);
@@ -51,11 +48,8 @@ public class InOutRecordServiceImpl extends ServiceImpl<WmsInOutRecordMapper, Wm
     public Long getThisMonthOutbound() {
         QueryWrapper<WmsInOutRecord> wrapper = new QueryWrapper<>();
         wrapper.eq("type", OptTypeEnum.OUTBOUND.getCode());
-        // 获取当前日期
         LocalDate today = LocalDate.now();
-        // 获取当前月的第一天
         LocalDateTime startOfMonth = today.withDayOfMonth(1).atStartOfDay(); // 当月第一天的开始时间
-        // 获取当前月的最后一天
         LocalDateTime endOfMonth = today.withDayOfMonth(today.lengthOfMonth()).atTime(23, 59, 59); // 当月最后一天的结束时间
         wrapper.between("opt_time", startOfMonth, endOfMonth);
         return wmsInOutRecordMapper.selectCount(wrapper);
