@@ -22,7 +22,6 @@ public class VideoController {
 
     @PostMapping("/upload")
     public ApiResponse<Void> handleFileUpload(@RequestParam("file") MultipartFile file) {
-        // 检查文件是否为空
         log.info("Received  file: {}", file.getOriginalFilename());
         if (file.isEmpty()) {
             return ApiResponse.failed(ReturnCode.FILE_IS_EMPTY);
