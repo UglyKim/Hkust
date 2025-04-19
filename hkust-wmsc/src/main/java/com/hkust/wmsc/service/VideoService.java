@@ -1,6 +1,5 @@
 package com.hkust.wmsc.service;
 
-import cn.hutool.core.date.DateUtil;
 import com.hkust.constant.ReturnCode;
 import com.hkust.dto.ApiResponse;
 import com.hkust.entity.Video;
@@ -19,7 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Service
 @Slf4j
